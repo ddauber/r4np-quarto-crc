@@ -1,0 +1,37 @@
+# Setting up *R* and RStudio {#setting-up-r-and-rstudio}
+
+Every journey starts with gathering the right equipment. This intellectual journey is not much different. The first step that every *R* novice has to face is to set everything up to get started. There are essentially two strategies:
+
+-   Install [*R*](https://www.r-project.org "R"){target="_blank"} and [RStudio](https://www.rstudio.com "RStudio"){target="_blank"}
+
+or
+
+-   Run RStudio in a browser via [RStudio Cloud](https://rstudio.cloud "RStudio Cloud"){target="_blank"}
+
+While installing *R* and RStudio requires more time and effort, I strongly recommend it, especially if you want to work offline or make good use of your computer's CPU. However, if you are unsure whether you enjoy learning *R*, you might wish to look at RStudio Cloud first. Either way, you can follow the examples of this book no matter which choice you make.
+
+## Installing R {#installing-r}
+
+The core module of our programming is *R* itself, and since it is an open-source project, it is available for free on Windows, Mac and Linux computers. So, here is what you need to do to install it properly on your computer of choice:
+
+1.  Go to [www.r-project.org](https://www.r-project.org%5D(https://www.r-project.org) "www.r-project.org"){target="_blank"}
+
+    ![](images/chapter_03_img/r_project/00_r_project_page.png)
+
+2.  Click on `CRAN` where it says `Download`.
+
+3.  Choose a server in your country (all of them work, but downloads will perform quicker if you choose your country or one that is close to where you are).
+
+    ![](images/chapter_03_img/r_project/01_r_project_cran_mirror.png)
+
+4.  Select the operating system for your computer, for example `Download R for macOS`.
+
+    ![](images/chapter_03_img/r_project/02_r_project_os_choice.png)
+
+5.  Select the version you want to install (I recommend the latest version)
+
+    ![](images/chapter_03_img/r_project/03_r_project_version_choice.png)
+
+6.  Open the downloaded file and follow the installation instructions. I recommend leaving the suggested settings as they are.
+
+This was relatively easy. You now have *R* installed. Technically you can start using *R* for your research, but there is one more tool I strongly advise installing: RStudio.

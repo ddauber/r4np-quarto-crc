@@ -1,0 +1,9 @@
+# Starting your *R* projects {#starting-your-r-projects}
+
+Every new project likely fills you with enthusiasm and excitement. And it should. You are about to find answers to your research questions, and you hopefully come out more knowledgeable due to it. However, there are likely certain aspects of data analysis that you find less enjoyable. I can think of two:
+
+-   Keeping track of all the files my project generates
+
+-   Data wrangling
+
+While we cover data wrangling in great detail in the next Chapter (Chapter \@ref(data-wrangling)), I would like to share some insights from my work that helped me stay organised and, consequently, less frustrated. The following applies to small and large research projects, which makes it very convenient no matter the situation and the scale of the project. Of course, feel free to tweak my approach to whatever suits you. However, consistency is king.

@@ -1,0 +1,136 @@
+# Descriptive Statistics {#descriptive-statistics}
+
+```{r}
+#| include: false
+
+library(tidyverse)
+library(r4np)
+library(patchwork)
+```
+
+The best way to understand how participants in your study have responded to various questions or experimental treatments is to use *descriptive statistics*. As the name indicates, their main purpose is to 'describe'. Most of the time, we want to describe the composition of our sample and how the majority (or minority) of participants performed.
+
+In contrast, we use *inferential statistics* to make predictions. In Social Sciences, we are often interested in predicting how people will behave in certain situations and scenarios. We aim to develop models that help us navigate the complexity of social interactions that we all engage in but might not fully understand. We cover *inferential statistics* in later chapters of this book.
+
+In short, descriptive statistics are an essential component to understand your data. To some extent, one could argue that we were already describing our data when we performed various data wrangling tasks (see Chapter \@ref(data-wrangling)). The following chapters focus on essential descriptive statistics, i.e. those you likely want to investigate in 99.9 out of 100 research projects.
+
+This book takes a 'visualised' approach to data analysis. Therefore, each section will entail data visualisations and statistical computing. A key learning outcome of this chapter is to plot your data using the package `ggplot2` and present your data's characteristics in different ways. Each chapter will ask questions about our dataset that we aim to answer visually and computationally. However, first, we need to understand how to create plots in *R*.
+
+## Plotting in *R* with `ggplot2` {#plotting-in-r-with-ggplot2}
+
+Plotting can appear intimidating at first but is very easy and quick once you understand the basics. The `ggplot2` package is a very popular package to generate plots in *R*, and many other packages are built upon it. This makes it a very flexible tool to create almost any data visualisation you could imagine. If you want to see what is possible with `ggplot2`, you might want to consider looking at [#tidytuesday](https://twitter.com/search?q=%23tidytuesday "#tidytuesday"){target="blank"} on Twitter, where novices and veterans share their data visualisations every week.
+
+To generate any plot, we need to define three components at least:
+
+-   a dataset,
+
+-   variables we want to plot, and
+
+-   a function to indicate how we want to plot them, e.g. as lines, bars, points, etc.
+
+Admittedly, this is a harsh oversimplification, but it will serve as a helpful guide to get us started. The function `ggplot()` is the one responsible for creating any type of data visualisation. The generic structure of a `ggplot()` looks like this:
+
+::: {#basic_ggplot_structure align="center"}
+ggplot(data, aes(x = variable_01, y = variable_02))
+:::
+
+In other words, we first need to provide the dataset `data`, and then the aesthetics (`aes()`). Think of `aes()` as the place where we define our variables (i.e. `x` and `y`). For example, we might be interested to know which movie genre is the most popular among the top 250 IMDb movies. The dataset `imdb_top_250` from the `r4np` package allows us to find an answer to this question. Therefore we define the components of the plot as follows:
+
+-   our data is `imdb_top_250`, and
+
+-   our variable of interest is `genre_01`.
+
+```{r}
+#| label: most-popular-genre-incomplete-plot
+#| echo: true
+
+ggplot(imdb_top_250, aes(x = genre_01))
+```
+
+Running this line of code will produce an empty plot. We only get labels for our x-axis since we defined it already. However, we have yet to tell `ggplot()` how we want to represent the data on this canvas. Your choice for how you want to plot your data is usually informed by the type of data you use and the statistics you want to represent. For example, plotting the mean of a factor is not meaningful, e.g. computing the mean of movie genres. On the other hand, we can count how often specific genres appear in our dataset. One way of representing a factor's count (or frequency) is to use a bar plot. To add an element to `ggplot()`, i.e. bars, we use `+` and append the function `geom_bar()`, which draws bars. The `+` operator works similar to `%>%` and allows to chain multiple functions one after the other as part of a `ggplot()`.
+
+```{r}
+#| label: most-popular-genre-with-barplot
+#| echo: true
+
+ggplot(imdb_top_250, aes(x = genre_01)) +
+  geom_bar()
+```
+
+With only two lines of coding, we created a great looking plot. We can see that `Drama` is by far the most popular genre, followed by `Action` and `Crime`. Thus, we successfully found an answer to our question. Still, there are more improvements necessary to use it in a publication.
+
+We can use `+` to add other elements to our plot, such as a title and proper axes labels. Here are some common functions to further customise our plot:
+
+```{r}
+#| label: most-popular-bar-plot-and-extras
+#| echo: true
+
+ggplot(imdb_top_250, aes(x = genre_01)) +
+  geom_bar() +
+  ggtitle("Most popular movie genres") +  # Add a title
+  xlab("movie genre") +                   # Rename x-axis
+  ylab("frequency")                       # Rename y-axis
+```
+
+When working with factors, the category names can be rather long. In this plot, we have lots of categories, and the labels `Adventure`, `Animation`, and `Biography` are a bit too close to each other for my taste. This might be an excellent opportunity to use `coord_flip()`, which rotates the entire plot by 90 degrees, i.e. turning the x-axis into the y-axis and vice versa. This makes the labels much easier to read.
+
+```{r}
+#| label: popular-genre-barplot-extras-formatted
+#| echo: true
+
+ggplot(imdb_top_250, aes(x = genre_01)) +
+  geom_bar() +
+  ggtitle("Most popular movie genres") +
+  xlab("movie genre") +
+  ylab("frequency") +
+  coord_flip()
+```
+
+Our plot is almost perfect, but we should take one more step to make reading and understanding this plot even easier. At the moment, the bars are ordered alphabetically by movie genre. Unfortunately, this is hardly ever a useful way to order your data. Instead, we might want to sort the data by frequency, showing the most popular genre at the top. To achieve this, we could either sort the movies by hand (see Chapter \@ref(reordering-factor-levels)) or slightly amend what we have coded so far.
+
+The problem you encounter when rearranging a `geom_bar()` with only one variable is that we do not have an explicit value to indicate how we want to sort the bars. Our current code is based on the fact that `ggplot` does the counting for us. So, instead, we need to do two things:
+
+-   create a table with all genres and their frequency, and
+
+-   use this table to plot the genres by the frequency we computed
+
+```{r}
+#| label: popular-genre-barplot-step-by-step
+#| echo: true
+
+# Step 1: The frequency table only
+imdb_top_250 %>%
+  count(genre_01)
+```
+
+```{r}
+# Step 2: Plotting a barplot based on the frequency table
+imdb_top_250 %>%
+  count(genre_01) %>%
+  ggplot(aes(x = genre_01, y = n)) +
+
+  # Use geom_col() instead of geom_bar()
+  geom_col() +
+  
+  # Add titles for plot
+  ggtitle("Most popular movie genres") +
+  xlab("movie genre") +
+  ylab("frequency") +
+  
+  # Rotate plot by 180 degrees
+  coord_flip()
+```
+
+```{r}
+#Step 3: reorder() genre_01 by frequency, i.e. by 'n'
+imdb_top_250 %>%
+  count(genre_01) %>%
+  ggplot(aes(x = reorder(genre_01, n), y = n)) +  # Use 'reorder()'
+  geom_col() +
+  ggtitle("Most popular movie genres") +
+  xlab("movie genre") +
+  ylab("frequency") +
+  coord_flip()
+```
+
+Step 3 is the only code you need to create the desired plot. The other two steps only demonstrate how one can slowly build this plot, step-by-step. You might have noticed that I used `dplyr` to chain all these functions together (i.e. `%>%`), and therefore, it was not necessary to specify the dataset in `ggplot()`.

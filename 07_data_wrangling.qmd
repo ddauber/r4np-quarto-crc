@@ -1,0 +1,5 @@
+# Data Wrangling {#data-wrangling}
+
+> **Data wrangling** --- also called **data cleaning**, **data remediation**, or **data munging**---refers to a variety of processes designed to transform raw data into more readily used formats. The exact methods differ from project to project depending on the data you're leveraging and the goal you're trying to achieve. [@hsbDataWrangling]
+
+You collected your data over months (and sometimes years), and all you want to know is whether your data makes sense and reveals something nobody would have ever expected. However, before we can truly go ahead with our analysis, it is essential to understand whether our data is 'tidy'. What I mean is that our data is at the quality we would expect it to be and can be reliably used for data analysis. After all, the results of our research are only as good as our data and the methods we deploy to achieve the desired insights.
