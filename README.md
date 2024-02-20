@@ -1,9 +1,7 @@
-# A Quarto book example for Chapman & Hall/CRC books
+# R4NP Book to be published by Routledge Chapman & Hall/CRC books
 
-This is a minimal example for those who plan to write books for Chapman & Hall/CRC using [Quarto](https://quarto.org/docs/books/). The rendered PDF can be found in the `_book/` directory. Credit to @yihui for his [bookdown-crc](https://github.com/yihui/bookdown-crc) example repo based on [bookdown](https://bookdown.org/).
+This is the updated, but still work-in-progress, version of the book **R For Non-Programmers: A Guide for Social Scientists**.
 
+The main difference to the current book will be updated content as well as the conversion from an RMarkdown to a Quarto book.
 
-**TODO**
-
-* Fix repeat ToC entries (i.e., Preface and References).
-
+If you wish to read the current version of the book, you can do so [here](https://bookdown.org/daniel_dauber_io/r4np_book/).
