@@ -9,7 +9,8 @@ book:
 
   chapters:
     - index.qmd
-    - intro.qmd
+    - 00_about_the_author.qmd
+    - 01_before_you_get_started.qmd
     - 02_why_start_learning_a_programming_language.qmd
     - 03_setting_up_r_rstudio.qmd
     - 04_rstudio_interface.qmd

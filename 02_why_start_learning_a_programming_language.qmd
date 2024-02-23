@@ -40,7 +40,5 @@ There are commonly known and well-established techniques regarding how you shoul
 
 Once you understand the logic of one language, you will find it relatively easy to understand new programming languages. Of course, if you wanted to, you could become the next '*Neo'* (from ['The Matrix')](https://www.imdb.com/title/tt0133093/?ref_=ext_shr_lnk "'The Matrix'"){target="_blank"} and change the reality of your research forever. On a more serious note, though, if you know any programming language already, learning *R* will be easier because you have accrued some basic understanding of these particular types of languages.
 
-</br>
-
 Having considered everything of the above, do you feel ready for your next foreign language?
 

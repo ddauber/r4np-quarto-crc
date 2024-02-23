@@ -1,5 +1,14 @@
 # *R* Basics: The very fundamentals {#r-basics-the-very-fundamentals}
 
+```{r, echo=FALSE, message=FALSE}
+#| label: load-packages
+#| echo: false
+#| message: false
+
+library(tidyverse)
+library(gt)
+```
+
 After a likely tedious installation of *R* and RStudio, as well as a somewhat detailed introduction to the RStudio interface, you are finally ready to *'do'* things. By *'doing'*, I mean *'coding'*. The term *'coding'* in itself can instil fear in some of you, but you only need one skill to do it: Writing. As mentioned earlier, learning coding or programming means learning a new language. However, once you have the basic grammar down, you already can communicate quite a bit. In this section, we will explore the fundamentals of *R*. These build the foundation for everything that follows. After that, we dive right into some analysis.
 
 ## Basic computations in *R* {#basic-computations-in-r}
@@ -9,4 +18,618 @@ The most basic computation you can do in *R* is arithmetic operations. In other 
 ```{r}
 # Addition
 10 + 5
+```
+
+```{r}
+# Subtraction
+10 - 5
+```
+
+```{r}
+# Multiplication
+10 * 5
+```
+
+```{r}
+# Division
+10 / 5
+```
+
+```{r}
+# Exponentiation
+10 ^ 2
+```
+
+```{r}
+# Square root
+sqrt(10)
+```
+
+They all look fairly straightforward except for the extraction of roots. As you probably know, extracting the root would typically mean we use the symbol $\sqrt{}$ on our calculator. To compute the square root in *R*, we have to use a function instead to perform the computation. So we first put the name of the function `sqrt` and then the value `10` within parenthesis `()`. This results in the following code: `sqrt(10)`. If we were to write this down in our report, we would write $\sqrt[2]{10}$.
+
+Functions are an essential part of *R* and programming in general. You will learn more about them in Chapter \@ref(functions). Besides arithmetic operations, there are also logical queries you can perform. Logical queries always return either the value `TRUE` or `FALSE`. Here are some examples which make this clearer:
+
+```{r}
+#| label: logical-queries
+#| echo: true
+
+#1 Is it TRUE or FALSE?
+1 == 1
+```
+
+```{r}
+#2 Is 45 bigger than 55?
+45 > 55
+```
+
+```{r}
+#3 Is 1982 bigger or equal to 1982?
+1982 >= 1982
+```
+
+```{r}
+#4 Are these two words NOT the same?
+"Friends" != "friends"
+```
+
+```{r}
+#5 Are these sentences the same?
+"I love statistics" == "I love statistícs"
+```
+
+Reflecting on these examples, you might notice three important aspects of logical queries:
+
+1.  We have to use `==` instead of `=`,
+2.  We can compare non-numerical values, i.e. text, which is also known as `character` values, with each other,
+3.  The devil is in the details (consider #5).
+
+One of the most common mistakes of *R* novices is the confusion around the `==` and `=` notation. While `==` represents `equal to`, `=` is used to assign a value to an object (for more details on assignments see Chapter \@ref(assigning-values-to-objects)). However, in practice, most *R* programmers tend to avoid `=` since it can easily lead to confusion with `==`. As such, you can strike `=` out of your R vocabulary for now.
+
+There are many different logical operations you can perform. Table \@ref(tab:logical-operators-r) lists the most frequently used logical operators for your reference. These will become important, for example when we filter our data for analysis, e.g. include only female or male participants.
+
+```{r}
+#| label: logical-operators-r
+#| tbl-cap: "Logical operators in R"
+#| echo: false
+
+logical_ops <- tibble(operator = c("==", "!=", ">=",
+                                ">", "<=", "<",
+                                "a | b", "a & b", "!a"),
+                   description = c("is equal to",
+                                   "is not equal to",
+                                   "is bigger or equal to",
+                                   "is bigger than",
+                                   "is smaller or equal to",
+                                   "is smaller than",
+                                   "a or b",
+                                   "a and b",
+                                   "is not a"))
+
+logical_ops %>%
+  gt() %>%
+  opt_stylize(style = 1) %>%
+  cols_align(
+    align = "center",
+    columns = c(operator)) %>%
+  cols_label(
+    operator = "Operator",
+    description = "Description"
+)
+
+```
+
+## Assigning values to objects: '\<-' {#assigning-values-to-objects}
+
+Another common task you will perform is assigning values to an object. An object can be many different things:
+
+-   a dataset,
+
+-   the results of a computation,
+
+-   a plot,
+
+-   a series of numbers,
+
+-   a list of names,
+
+-   a function,
+
+-   etc.
+
+In short, an object is an umbrella term for many different things which form part of your data analysis. For example, objects are handy when storing results that you want to process further in later analytical steps. We have to use the assign operator `<-` to assign a value to an object. Let's have a look at an example.
+
+```{r}
+#| label: saving-values-in-objects
+#| echo: true
+
+# I have a friend called "Fiona"
+friends <- "Fiona"
+```
+
+In this example, I created an object called `friends` and added `"Fiona"` to it. Since `"Fiona"` represents a `string`, we need to use `""`. So, if you wanted to read this line of code, you would say, '`friends` gets the value `"Fiona"`'. Alternatively, you could also say '`"Fiona"` is assigned to `friends`'.
+
+If you look into your environment pane, you will find the object `friends`. You can see it carries the value `"Fiona"`. We can also print values of an object in the console by simply typing the name of the object `friends` and hit `Return ↵`.
+
+```{r}
+#| label: printing-objects
+#| echo: true
+
+# Who are my friends?
+friends
+```
+
+Sadly, it seems I only have one friend. Luckily we can add some more, not the least to make me feel less lonely. To create objects with multiple values, we can use the function `c()`, which stands for 'concatenate'. The @concatenate-2021 defines this word as follows:
+
+> '***concatenate***',
+>
+> *to put things together as a connected series.*
+
+Let's concatenate some more friends into our `friends` object.
+
+```{r}
+#| label: concatenate-function
+#| echo: true
+
+# Adding some more friends to my life
+friends <- c("Fiona",
+             "Lukas",
+             "Ida",
+             "Georg",
+             "Daniel",
+             "Pavel",
+             "Tigger")
+
+# Here are all my friends
+friends
+```
+
+To concatenate values into a single object, we need to use a comma `,` to separate each value. Otherwise, *R* will report an error back.
+
+```{r}
+#| label: concatenate-error
+#| eval: false
+
+friends <- c("Fiona" "Ida")
+```
+
+*R*'s error messages tend to be very useful and give meaningful clues to what went wrong. In this case, we can see that something '*unexpected*' happened, and it shows where our mistake is. You can also concatenate numbers
+
+Btw, if you add `()` around your code, you can automatically print the content of the object to the console. Thus,
+
+-   `(milestones_of_my_life <- c(1982, 2006, 2011, 2018, 2020))` is the same as
+
+-   `milestones_of_my_life <- c(1982, 2006, 2011, 2018, 2020)` followed by `milestones_of_my_life`.
+
+You can copy and paste the following example to illustrate what I explained.
+
+```{r}
+#| label: concatenate-numbers
+#| echo: true
+
+# Important years in my life
+milestones_of_my_life <- c(1982, 2006, 2011, 2018, 2020)
+milestones_of_my_life
+
+# The same as above - no second line of code needed
+(milestones_of_my_life <- c(1982, 2006, 2011, 2018, 2020))
+```
+
+Finally, we can also concatenate numbers and character values into one object:
+
+```{r}
+#| label: concatenate-numbers-strings
+#| echo: true
+
+(names_and_years <- c("Fiona", 1988, "Daniel", 1982))
+```
+
+This last example is not necessarily something I would recommend to do, because it likely leads to undesirable outcomes. For example, if you look into your environment pane you currently have three objects: `friends`, `milestones_of_my_life`, and `names_and_years`.
+
+![](images/chapter_05_img/01_basic_computation_environment_objects.png){fig-alt="Screenshot of the Environemnt tab in RStudio, showing three objects: files, miletsones_f_my_life, and names_and_years."}
+
+The `friends` object shows that all the values inside the object are classified as `chr`, which denominates `character`. For this object, this is correct because it only includes the names of my friends. On the other hand, the object `milestones_of_my_life` only includes `numeric` values, and therefore it says `num` in the environment pane. However, for the object `names_and_years` we know we want to have `numeric` and `character` values included. Still, *R* recognises them as `character` values because values inside objects are meant to be of the same type. Remember that in *R,* numbers can always be interpreted as `character` and `numeric`, but text only can be considered as `character`.
+
+Consequently, mixing different types of data into one object is likely a bad idea. This is especially true if you want to use the `numeric` values for computation. We will return to data types in Chapter \@ref(change-data-types) where we learn how to change them, but for now we should ensure that our objects are all of the same data type.
+
+However, there is an exception to this rule. 'Of course', you might say. There is one object that can have values of different types: a `list`. As the name indicates, a `list` object holds several items. These items are usually other objects. In the spirit of '[Inception](https://www.imdb.com/title/tt1375666/?ref_=ext_shr_lnk)', you can have lists inside lists, which contain more lists or other objects.
+
+Let's create a `list` called `x_files` using the `list` function and place all our objects inside.
+
+```{r}
+#| label: creating-a-list
+#| echo: true
+
+# This creates our list of objects
+x_files <- list(friends,
+                milestones_of_my_life,
+                names_and_years)
+
+# Let's have a look what is hidden inside the x_files
+x_files
+```
+
+You will notice in this example that I do not use `""` for each value in the list. This is because `friends` is not a `character` value, but an object. When we refer to objects, we do not need quotation marks.
+
+We will encounter `list` objects quite frequently when we perform our analysis. Some functions return the results in the format of lists. This can be very helpful because otherwise our environment pane will be littered with objects and we would not necessarily know how they relate to each other, or worse, to which analysis they belong. Looking at the list item in the environment page (@fig-img-x-files), you can see that the object `x_files` is classified as a `List of 3,` and if you click on the blue icon, you can inspect the different objects inside.
+
+![The environment pane showing our objects and our list `x_files`](images/chapter_05_img/02_basic_computation_environment_lists.png){#fig-img-x-files fig-alt="Screenshot of the Environemnt tab in RStudio, showing three objects: files, miletsones_f_my_life, and names_and_years."}
+
+In Chapter @basic-computations-in-r , I mentioned that we should avoid using the `=` operator and explained that it is used to assign values to objects. You can, if you want, use `=` instead of `<-`. They fulfil the same purpose. However, as mentioned before, it is not wise to do so. Here is an example that shows that, in principle, it is possible.
+
+```{r}
+#| label: using-two-assignment-operators
+#| echo: true
+
+# DO
+(avengers1 <- c("Iron Man",
+                "Captain America",
+                "Black Widow",
+                "Vision"))
+
+# DON'T
+(avengers2 = c("Iron Man",
+               "Captain America",
+               "Black Widow",
+               "Vision"))
+```
+
+On a final note, naming your objects is limited. You cannot chose any name. First, every name needs to start with a letter. Second, you can only use letters, numbers `_` and `.` as valid components of the names for your objects [see also Chapter 4.2 in @wickham2016r]. I recommend to establish a naming convention that you adhere to. Personally I prefer to only user lower-case letters and `_` to separate/connect words. Ideally, you want to keep names informative, succinct and precise. Here are some examples of what some might consider good and bad choices for names.
+
+```{r}
+#| label: naming-your-objects
+#| echo: true
+#| eval: false
+
+# Good choices
+income_per_annum
+open_to_exp          # for 'openness to new experiences'
+soc_int              # for 'social integration'
+ 
+# Bad choices
+IncomePerAnnum
+measurement_of_boredom_of_watching_youtube
+Sleep.per_monthsIn.hours
+```
+
+Ultimately, you need to be able to effectively work with your data and output. Ideally, this should be true for others as well who want or need to work with your analysis and data as well, e.g. your co-investigator or supervisor. The same is applies to column names in datasets (see Chapter \@ref(colnames-cleaning)). Some more information about coding style and coding etiquette can be found in Chapter \@ref(coding-etiquette).
+
+## Functions {#functions}
+
+I used the term '*function*' multiple times, but I never thoroughly explained what they are and why we need them. In simple terms, functions are objects. They contain lines of code that someone has written for us or we have written ourselves. One could say they are code snippets ready to use. Someone else might see them as shortcuts for our programming. Functions increase the speed with which we perform our analysis and write our computations and make our code more readable and reliable. Consider computing the `mean` of values stored in the object `pocket_money`.
+
+```{r}
+#| label: mean-function-example
+#| echo: true
+
+# First we create an object that stores our desired values
+pocket_money <- c(0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89)
+
+#1 Manually compute the mean
+sum <- 0 + 1 + 1 + 2 + 3 + 5 + 8 + 13 + 21 + 34 + 55 + 89
+sum / 12 # There are 12 items in the object
+```
+
+```{r}
+#2 Use a function to compute the mean
+mean(pocket_money)
+```
+
+```{r}
+#3 Let's make sure #1 and #2 are actually the same
+sum / 12 == mean(pocket_money)
+```
+
+If we manually compute the mean, we first calculate the sum of all values in the object `pocket_money`[^05_r_basics-1]. Then we divide it by the number of values in the object, which is `12`. This is the traditional way of computing the mean as we know it from primary school. However, by simply using the function `mean()`, we not only write considerably less code, but it is also much easier to understand because the word *'mean'* does precisely what we would expect. Which approach do you find easier: Using the function `mean()` or compute it by hand?
+
+[^05_r_basics-1]: If you find the order of numbers suspicious, it is because it represents the famous [Fibonacci sequence](https://en.wikipedia.org/wiki/Fibonacci_number "Fibonacci sequence"){target="blank"}.
+
+To further illustrate how functions look like, let's create one ourselves and call it `my_mean`.
+
+```{r}
+#| label: creating-custom-function
+#| echo: true
+
+my_mean <- function(numbers){
+  # Compute the sum of all values in 'numbers'
+  sum <- sum(numbers)
+  
+  # Divide the sum by the number of items in 'numbers'
+  result <- sum/length(numbers)
+  
+  # Return the result in the console
+  return(result)
+}
+
+my_mean(pocket_money)
+```
+
+Don't worry if half of this code does not make sense to you. Writing functions is an advanced *R* skill. However, it is good to know how functions look on the 'inside'. You certainly can see the similarities between the code we have written before, but instead of using actual numbers, we work with placeholders like `numbers`. This way, we can use a function for different data and do not have to rewrite it every time. Writing and using functions relates to the skill of abstraction mentioned in Chapter \@ref(programming-languages-enhance-your-conceptual-thinking).
+
+All functions in *R* share the same structure. They have a `name` followed by `()`. Within these parentheses, we put `arguments`, which have specific `values`. For example, a generic structure of a function would look something like this:
+
+```{r}
+#| label: generic-function
+#| eval: false
+#| error: true
+#| purl: false
+#| results: hide
+
+name_of_function(argument_1 = value_1,
+                 argument_2 = value_2,
+                 argument_3 = value_3)
+```
+
+How many arguments there are and what kind of values you can provide is very much dependent on the function you use. Thus, not every function takes every value. In the case of `mean()`, the function takes an object which holds a sequence of `numeric` values. It would make very little sense to compute the mean of our `friends` object, because it only contains names. *R* would return an error message:
+
+```{r}
+#| label: mean-of-object-with-characters
+#| echo: true
+#| error: true
+#| purl: false
+
+mean(friends)
+```
+
+`NA` refers to a value that is *'not available'*. In this case, *R* tries to compute the mean, but the result is not available, because the values are not `numeric` but a `character`. In your dataset, you might find values that are `NA`, which means there is data missing. If a function attempts a computation that includes even just a single value that is `NA`, *R* will return `NA`. However, there is a way to fix this. You will learn more about how to deal with `NA` values in Chapter \@ref(dealing-with-missing-data).
+
+Sometimes you will also get a message from *R* that states `NaN`. `NaN` stands for *'not a number'* and is returned when something is not possible to compute, for example:
+
+```{r NaN example: Division by zero, echo=TRUE, error=TRUE, purl=FALSE}
+#| label: nan-example-division-zero
+#| echo: true
+#| error: true
+#| purl: false
+
+# Example 1
+0 / 0
+
+```
+
+```{r}
+# Example 2
+sqrt(-9)
+```
+
+## R packages {#r-packages}
+
+*R* has many built-in functions that we can use right away. However, some of the most interesting ones are developed by different programmers, data scientists and enthusiasts. To add more functions to your repertoire, you can install *R* packages. *R* packages are a collection of functions that you can download and use for your own analysis. Throughout this book, you will learn about and use many different *R* packages to accomplish various tasks. To give you another analogy,
+
+-   *R* is like a global supermarket where everyone can offer their products,
+
+-   RStudio is like my shopping cart where I can put the products I like, and
+
+-   *R* packages are the products I can pick from the shelves.
+
+Luckily, *R* packages are free to use, so I do not have to bring my credit card. For me, these additional functions, developed by some of the most outstanding scientists, is one of many reasons that keeps me addicted to performing my research in *R*.
+
+*R* packages do not only include functions but often include datasets and documentation of what each function does. This way, you can easily try every function right away, even without your own dataset and read through what each function in the package does. @fig-img-r-package-documentation shows the documentation of an *R* package called `ggplot2`.
+
+![The R package documentation for 'ggplot2'](images/chapter_05_img/r_package_documentation.png){#fig-img-r-package-documentation fig-alt="Screenshot of the RStudio showing the documentation for the ggplot2 package in a separate window. It shows a list of functions and other objects, like datasets that are included in this package."}
+
+
+However, how do you find those *R* packages? They are right at your fingertips. You have two options:
+
+1.  Use the function `install.packages()`, or
+
+2.  Use the packages pane in RStudio.
+
+### Installing packages using `install.packages()` {#installing-packages-using-a-function}
+
+The simplest and fastest way to install a package is calling the function `install.packages()`. You can either use it to install a single package or install a series of packages all at once using our trusty `c()` function. All you need to know is the name of the package. This approach works for all packages that are on CRAN (remember CRAN from Chapter \@ref(installing-r)?). <a id="install-packages-tidyverse-nanair-psych"></a>
+
+```{r}
+#| label: installing-r-packages-function
+#| eval: false
+#| echo: true
+#| results: hide
+
+# Install a single package
+install.packages("tidyverse")
+
+# Install multiple packages at once
+install.packages(c("tidyverse", "naniar", "psych"))
+```
+
+If a package is not available from CRAN, chances are you can find them on [GitHub](https://github.com){target="blank"}. GitHub is probably the world's largest global platform for programmers from all walks of life, and many of them develop fantastic *R* packages that make programming and data analysis not just easier but a lot more fun. As you continue to work in *R*, you should seriously consider creating your own account to keep backups of your projects (see also Chapter \@ref(next-steps-github)).
+
+<a id="install-r4np"></a>An essential companion for this book is `r4np`, which contains all datasets for this book and some useful functions to get you up and running in no time. Since it is currently only available on Github, you can use the following code snippet to install it. However, you have to install the package `devtools` first to use the function `install_github()`.
+
+```{r}
+#| label: install-r-packages-functions-github
+#| eval: false
+#| echo: true
+#| results: hide
+
+# Install the 'devtools' package first
+install.packages("devtools")
+
+# Then install the 'r4np' package from GitHub
+devtools::install_github("ddauber/r4np")
+```
+
+### Installing packages via RStudio's package pane {#installing-packages-via-rstudio}
+
+RStudio offers a very convenient way of installing packages. In the packages pane, you cannot only see your installed packages, but you have two more buttons: `Install` and `Update`. The names are very self-explanatory. To install an *R* package you can follow the following steps:
+
+1.  Click on `Install`.
+
+2.  In most cases, you want to make sure you have `Repository (CRAN)` selected.
+
+    ![](images/chapter_05_img/install_r_packages/01_install_r_packages.png){fig-alt="Screenshot of RStudio, showing the Install Packages window."}
+
+3.  Type in the name of the package you wish to install. RStudio offers an auto-complete feature to make it even easier to find the package you want.
+
+    ![](images/chapter_05_img/install_r_packages/02_install_r_packages.png){fig-alt="Screenshot of RStudio, showing the Install Pacakges window demonstrating which packages are available when typing 'nan' into the search box."}
+
+4.  I recommend NOT to change the option which says `Install to library`. The default library settings will suffice.
+
+5.  Finally, I recommend to select `Install dependencies`, because some packages need other packages to function properly. This way, you do not have to do this manually.
+
+    ![](images/chapter_05_img/install_r_packages/03_install_r_packages.png){fig-alt="Screenshot of RStudio, showing the Install Pacakges window with the box Install Dependencies ticked."}
+
+The only real downside of using the packages pane is that you cannot install packages hosted on GitHub only. However, you can download them from there and install them directly from your computer using this option. This is particularly useful if you do not have an internet connection but you already downloaded the required packages onto a hard drive. However, in 99.9% of cases it is much easier to use the function `devtools::install_github()`.
+
+### Install all necessary *R* packages for this book {#install-all-r-packages}
+
+Lastly, if you would like to install the necessary packages to follow the examples in this book, the `r4np` package comes with a handy function to install them all at once. Of course, you need to have `r4np` installed first, as shown [above](#install-r4np).
+
+```{r}
+#| label: install-all-functions
+#| eval: false
+
+# Install all R packages used in this book
+r4np::install_r4np()
+```
+
+### Using *R* Packages {#using-r-packages}
+
+Now that you have a nice collection of *R* packages, the next step would be to use them. While you only have to install *R* packages once, you have to 'activate' them every time you start a new session in RStudio. This process is also called 'loading an *R* package'. Once an *R* package is loaded, you can use all its functions. To load an *R* package, we have to use the function `library()`.
+
+```{r}
+#| label: loading-r-package
+#| echo: true
+#| warning: false
+#| message: false
+
+library(tidyverse)
+```
+
+The `tidyverse` package is a special kind of package. It contains multiple packages and loads them all at once. Almost all included packages you will use at some point when working through this book.
+
+I know what you are thinking. Can you use `c()` to load all your packages at once? Unfortunately not. However, there is a way to do this, but it goes beyond the scope of this book to fully explain this. If you are curious, you can take a peek at the code [here on stackoverflow.com](https://stackoverflow.com/questions/8175912/load-multiple-packages-at-once "Loading multiple R packages at once"){target="blank"}.
+
+Besides, it is not always advisable to load all functions of an entire package. One reason could be that two packages contain a function with the same name but with a different purpose. Two functions with the same name create a conflict between these two packages, and one of the functions would not be usable. Another reason could be that you only need to use the function once, and loading the whole package to use only one specific function seems excessive. Instead, you can explicitly call functions from packages without loading the package. For example, we might want to use the `vis_miss()` function from the `naniar` package to show where data is missing in our dataset `airquality`. Using functions without `library()` is also much quicker than loading the package and then calling the function if you don't use it repeatedly. Make sure you have `naniar` installed (see [above](#install-packages-tidyverse-nanair-psych)). We will work with this package when we explore missing data in Chapter \@ref(dealing-with-missing-data). To use a function from an *R* package without loading it, we have to use `::` between the package's name and the function we want to use. Copy the code below and try it yourself.
+
+```{r}
+#| label: explicitly-calling-functions
+#| echo: true
+
+# Here I use the dataset 'airquality', which comes with R
+naniar::vis_miss(airquality)
+```
+
+## Coding etiquette {#coding-etiquette}
+
+Now you know everything to get started, but before we jump into our first project, I would like to briefly touch upon coding etiquette. This is not something that improves your analytical or coding skills directly, but is essential in building good habbits and making your life and those of others a little easier. Consider writing code like growing plants in your garden. You want to nurture the good plants, remove the weed and add labels that tell you which plant it is that you are growing. At the end of the day, you want your garden to be well-maintained. Treat you programming code the same way.
+
+A script (see Chapter \@ref(creating-an-r-script)) of programming code should always have at least the following qualities:
+
+-   Only contains code that is necessary,
+
+-   Is easy to read and understand,
+
+-   Is self-contained.
+
+With simple code this is easily achieved. However, what about more complex and longer code representing a whole set of analytical steps?
+
+```{r}
+#| label: messy-code
+#| echo: true
+#| eval: false
+
+# Very messy code
+
+library(tidyverse)
+library(jtools)
+model1 <- lm(covid_cases_per_1m ~ idv, data = df)
+summ(model1, scale = TRUE, transform.response = TRUE, vifs = TRUE)
+df %>% ggplot(aes(x = covid_cases_per_1m, y = idv, col = europe, label = country))+
+theme_minimal()+ geom_label(nudge_y = 2) + geom_point()
+model2 <- lm(cases_per_1m ~ idv + uai + idv*europe + uai*europe, data = df)
+summ(model2, scale = TRUE, transform.response = TRUE, vifs = TRUE)
+anova(model1, model2)
+```
+
+How about the following in comparison?
+
+```{r}
+#| label: well-structured-code
+#| echo: true
+#| eval: false
+
+# Nicely structured code
+
+# Load required R packages
+library(tidyverse)
+library(jtools)
+
+# ---- Modelling COVID-19 cases ----
+
+## Specify and run a regression
+model1 <- lm(covid_cases_per_1m ~ idv, data = df)
+
+## Retrieve the summary statistics of model1
+summ(model1,
+     scale = TRUE,
+     transform.response = TRUE,
+     vifs = TRUE)
+
+# Does is matter whether a country lies in Europe?
+
+## Visualise rel. of covid cases, idv and being a European country
+df %>%
+  ggplot(aes(x = covid_cases_per_1m,
+             y = idv,
+             col = europe,
+             label = country)) +
+  theme_minimal() +
+  geom_label(nudge_y = 2) +
+  geom_point()
+
+## Specify and run a revised regression
+model2 <- lm(cases_per_1m ~ idv + uai + idv*europe + uai*europe,
+                 data = df)
+
+## Retrieve the summary statistics of model2
+summ(model2,
+     scale = TRUE,
+     transform.response = TRUE,
+     vifs = TRUE)
+
+## Test whether model2 is an improvement over model1
+anova(model1, model2)
+```
+
+I hope we can agree that the second example is much easier to read and understand even though you probably do not understand most of it yet. For once, I separated the different analytical steps from each other like paragraphs in a report. Apart from that, I added comments with `#` to provide more context to my code for someone else who wants to understand my analysis. Admittedly, this example is a little excessive. Usually, you might have fewer comments. Commenting is an integral part of programming because it allows you to remember what you did. Ideally, you want to strike a good balance between commenting on and writing your code. How many comments you need will likely change throughout your *R* programming journey. Think of comments as headers for your programming script that give it structure.
+
+We can use `#` not only to write comments but also to tell R not to run particular code. This is very helpful if you want to keep some code but do not want to use it yet. There is also a handy keyboard shortcut you can use to 'deactivate' multiple lines of code at once. Select whatever you want to 'comment out' in your script and press `Ctrl+Shift+C` (PC) or `Cmd+Shift+C` (Mac).
+
+```{r}
+#| label: commenting-out-code
+#| echo: true
+#| results: hide
+
+# mean(pocket_money) # R will NOT run this code
+mean(pocket_money)   # R will run this code
+```
+
+RStudio helps a lot with keeping your coding tidy and properly formatted. However, there are some additional aspects worth considering. If you want to find out more about coding style, I highly recommend to read through [*'The tidyverse style guide'*](https://style.tidyverse.org "'The tidyverse style guide'"){target="blank"} [@wickham-2021].\
+
+## Exercises {#exercises-r_basics}
+
+It is time to practice the newly acquired skills. The `r4np` package comes with interactive tutorials. In order to start them, you have two options. If you have installed the `r4np` package already and used the function `install_r4np()` you can use `Option 1`:
+
+```{r}
+#| label: exercises-option-1
+#| eval: false
+
+# Option 1:
+learnr::run_tutorial("ex_r_basics", package = "r4np")
+```
+
+If you have not installed the `r4np` package and/or not run the function `install_r4np()`, you will have to do this first using `Option 2`:
+
+```{r}
+#| label: exercises-option-2
+#| eval: false
+
+# Option 2:
+## Install 'r4np' package
+devtools::install_github("ddauber/r4np")
+
+## Install all relevant packages for this book
+r4np::install_r4np()
+
+## Start the tutorial for this chapter
+learnr::run_tutorial("ex_r_basics", package = "r4np")
 ```
