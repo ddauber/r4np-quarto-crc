@@ -1,7 +1,5 @@
 # Welcome {#welcome .unnumbered}
 
-Welcome to *R for Non-Programmers: A Guide for Social Scientists (R4NP)*. This book provides a helpful resource for anyone looking to use *R* for their research projects, regardless of their level of programming or statistical analysis experience. Each chapter presents essential concepts in data analysis in a concise, thorough, and user-friendly manner. *R4NP* will guide you through your first steps on a possibly endless journey full of 'awe and wonder'.
-
-This book is designed to be accessible to beginners while also providing valuable insights for experienced analysts looking to transition to *R* from other computational software. You don't need any prior knowledge or programming skills to get started. *R4NP* provides a comprehensive entry into R programming, regardless of your background.
+Welcome 
 
 \mainmatter
