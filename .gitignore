@@ -3,3 +3,5 @@
 # Most annoying file ever
 .DS_Store
 .Rproj.user
+.Rdata
+.Rhistory

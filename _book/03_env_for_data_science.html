@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.450">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Our name - 1&nbsp; Environments for Data Science</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./references.html" rel="next">
+<link href="./index.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./03_env_for_data_science.html"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Environments for Data Science</span></a></li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Our name</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Welcome</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03_env_for_data_science.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Environments for Data Science</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#choosing-different-languages" id="toc-choosing-different-languages" class="nav-link active" data-scroll-target="#choosing-different-languages"><span class="header-section-number">1.1</span> Choosing different languages</a></li>
+  <li><a href="#our-recommendations" id="toc-our-recommendations" class="nav-link" data-scroll-target="#our-recommendations"><span class="header-section-number">1.2</span> Our recommendations</a></li>
+  <li><a href="#the-future-why-choose" id="toc-the-future-why-choose" class="nav-link" data-scroll-target="#the-future-why-choose"><span class="header-section-number">1.3</span> The future: why choose?</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span id="sec-03environments" class="quarto-section-identifier"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Environments for Data Science</span></span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<p>You have data from an experiment, or perhaps have accessed data from an ecological network such as NEON. You are now ready to explore your data through visualization, conduct statistical tests, and perhaps increase the explanatory power beyond just the data collection itself. Your next step is to choose a computational environment for analysis. As described in the <span class="quarto-unresolved-ref">?sec-02data</span>, half the battle is loading in data into your computer and connecting up these datasets. A typical next step is exploratory data analysis.</p>
+<p>This chapter provides contrasts three of the most common programming languages for data science when faced with a common task. Borrowing language from ecology, an environment for data science as an interconnected system with a particular programming language as the foundation. Just like natural environments, environments for data science differ depending on the programming language. Let’s begin.</p>
+<section id="choosing-different-languages" class="level2" data-number="1.1">
+<h2 data-number="1.1" class="anchored" data-anchor-id="choosing-different-languages"><span class="header-section-number">1.1</span> Choosing different languages</h2>
+<p>We define an environment for data science as a programming language. Examples of programming languages include R, python, julia briefly described in <span class="quarto-unresolved-ref">?tbl-dst-languages</span>.</p>
+<div id="tbl-dst-languagues" class="anchored">
+<table class="table">
+<caption>Table&nbsp;1.1: Comparison of different programming languages used in data science</caption>
+<thead>
+<tr class="header">
+<th>Name</th>
+<th>First Available</th>
+<th>Description</th>
+<th>Reference</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>R</td>
+<td>First Available</td>
+<td>Started as a statistical programming language. Contributed packages allow for the extension of the base language into other data science programs.</td>
+<td>Reference</td>
+</tr>
+<tr class="even">
+<td>Python</td>
+<td>1991</td>
+<td>Started as a computer programming language that supports object oriented programmming. Similar to R, contributed modules extend the core python language to machine learning, data visualization, and other areas of science, engineering, and mathematics.</td>
+<td>Reference</td>
+</tr>
+<tr class="odd">
+<td>julia</td>
+<td>2012</td>
+<td>with the goal of combining speed and parallel language operation, essentially taking the best aspects of different programming languages and combining into one. <a href="https://julialang.org/blog/2012/02/why-we-created-julia/">LINK</a></td>
+<td>Reference</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>As data scientists we are fortunate the variety of these programming languages exist! While one programming language may be preferable in some contexts than others, we should pick the tool that is suited to gain the best insight from that for what we need in the moment.</p>
+<p>This textbook takes a neutral approach on <em>which</em> language makes the most sense (admittedly both of us have our favo<strong>R</strong>ites). Rather, let’s examine differences between common environmental data science languages using the power of chatGPT.</p>
+<p>Generative AI is an offshoot of machine learning methods from data science, and so provides a good case study to examine differences environments for data science. These artificial intelligence tools (such as <a href="https://chat.openai.com/">chatGPT</a> and others) have rapidly transformed our daily lives (especially post 2023) and how we interact with the internet. For scientific research, disclosing the use of generative AI tools is recognized as maintaining scientific integrity <span class="citation" data-cites="bocktingLivingGuidelinesGenerative2023 BestPracticesGenerative bertoloGenerativeAIScientific2024">(<a href="references.html#ref-bocktingLivingGuidelinesGenerative2023" role="doc-biblioref">Bockting et al. 2023</a>; <a href="references.html#ref-BestPracticesGenerative" role="doc-biblioref"><span>“Best <span>Practices</span> for <span>Generative AI</span> in <span>Research</span> <span></span> <span>AJE</span>”</span> n.d.</a>; <a href="references.html#ref-bertoloGenerativeAIScientific2024" role="doc-biblioref">Bertolo and Antonelli 2024</a>)</span>. Let’s use them here to contrast how the different environments in <span class="quarto-unresolved-ref">?tbl-dst-languages</span> produce output.</p>
+<p>If we chose R, a prompt to chatGPT might be the following <a href="#fig-jz-chatgpt">Figure&nbsp;<span>1.1</span></a>:</p>
+<div id="fig-jz-chatgpt" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="images/03_env_data_sci/jz_chatgpt.png" class="img-fluid figure-img" style="width:90.0%"></p>
+<figcaption class="figure-caption">Figure&nbsp;1.1: An innocent question to chatGPT.</figcaption>
+</figure>
+</div>
+<p><a href="#fig-chatgpt-r">Figure&nbsp;<span>1.2</span></a> shows its response, which (admittedly) a well-organized (and documented!) explanation of starter code:</p>
+<div id="fig-chatgpt-r" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="images/03_env_data_sci/chatgpt_r.png" class="img-fluid figure-img" style="width:90.0%"></p>
+<figcaption class="figure-caption">Figure&nbsp;1.2: How chatGPT responded to our question using R.</figcaption>
+</figure>
+</div>
+<p>The provided code loads up the correct library (tidyverse), converts the time to the POSIXct format (which makes working with dates and times easier) and generates a well-labeled plot. Not too shabby. We would also award extra credit points for using the tidyverse pipe (<code>%&gt;%</code>) in the code, but perhaps not full credit because of the adoption of the <a href="https://www.tidyverse.org/blog/2023/04/base-vs-magrittr-pipe/">base R pipe</a> (<code>|&gt;</code>).</p>
+<p>Now let’s give the same prompt with python (<span class="quarto-unresolved-ref">?fig-chatgpt-python</span>):</p>
+<p><img src="images/03_env_data_sci/chatgpt_python.png" id="fig-chatgpt-python" class="img-fluid" style="width:90.0%" alt="How chatGPT responded to our question with python."> Examining the code seems like a beat for beat rehash of the same code with R, but with just python (almost like <a href="https://www.vox.com/2015/12/26/10664834/star-force-awakens-derivative">Star Wars: The Force Awakens</a>, but don’t @ us!). There are some differences to note:</p>
+<ul>
+<li>Similar to R, in python libraries are defined at the start of the code (with import). However, those libraries need to be referred to when you wish to use a command from a particular library (e.g.&nbsp;the function to_datetime is a function in the pandas library). Thankfully in python you can abbreviate the names as pd - whichever makes sense for you. (NOTE: In R if you only want to use a particular function in a library, then refer to it with the double colon (::, e.g.&nbsp;PACKAGE::FUNCTION) ).</li>
+<li>Python doesn’t have the native pipe operator (|&gt;) like R. The assignment operator is equals (=) versus a left facing arrow (&lt;—).</li>
+</ul>
+<p>We finally asked julia, a newer language that is faster to do the same as we did with <code>R</code> and python:</p>
+<div id="fig-chatgpt-julia" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="images/03_env_data_sci/chatgpt_julia.png" class="img-fluid figure-img" style="width:90.0%"></p>
+<figcaption class="figure-caption">Figure&nbsp;1.3: How chatGPT responded to our question using julia.</figcaption>
+</figure>
+</div>
+<p>Can you spot the differences (and similarities) with the Julia output in <a href="#fig-chatgpt-julia">Figure&nbsp;<span>1.3</span></a> compared to R (<a href="#fig-chatgpt-r">Figure&nbsp;<span>1.2</span></a>) or Python (<span class="quarto-unresolved-ref">?fig-chatgpt-python</span>)? For all practical purposes, it comes down to preference - which one you are more familiar with.</p>
+<p>So which should you choose? R is good for statistics and data manipulation. There is a strong user base in ecology (point to references). At the same time, the tidyverse language (and associated packages; <span class="citation" data-cites="wickhamWelcomeTidyverse2019">(<a href="references.html#ref-wickhamWelcomeTidyverse2019" role="doc-biblioref"><strong>wickhamWelcomeTidyverse2019?</strong></a>)</span>) have been developed over the past decade with several well-supported items. It is not hard to find instances of how to do something in R using tidyverse with an ecological bent (link to the NEON webpages as well).</p>
+<p>The same case could be made for Python - which at its core is a programming language (R was initially designed for statistical analysis which has morphed into wider applications for data science). If you are familiar with C or C++, Python may feel very familiar to you.</p>
+<p>julia is a very promising language with a user base growing in biology <span class="citation" data-cites="roeschJuliaBiologists2023">(<a href="references.html#ref-roeschJuliaBiologists2023" role="doc-biblioref">Roesch et al. 2023</a>)</span>. We believe there is longevity in this language, although it has a smaller user community in the environmental sciences.</p>
+<p>A non open-source alternative to programming is MATLAB, which for the authors was the first foray into programming languages in graduate school. This software is used in engineering and industrial applications. Because it is a commercial and proprietary language, it is not as translatable for open science applications. An open source alternative (Octave) is also available, but it doesn’t have as much usable features that one might find in MATLAB.</p>
+</section>
+<section id="our-recommendations" class="level2" data-number="1.2">
+<h2 data-number="1.2" class="anchored" data-anchor-id="our-recommendations"><span class="header-section-number">1.2</span> Our recommendations</h2>
+<p>We believe that the best position to take is one of openness to learning new tools and software as your needs will invariably evolve. It is okay to dabble! John started out using Matlab, but transitioned to Octave because of the open-source capabilities, but it was hard to support sustained research projects. Making a clean break to work with R (at the same time as the tidyverse was growing in use) provided a fresh start to learn new tools and techniques for managing data.</p>
+<p>Naupaka learned C++ in high school, then didn’t program much until grad school, where I learned perl in a genomics course. When I started analyzing my own microbial community ecology data for my dissertation, I needed the statistical tools only available in R so started teaching myself. Then along the way I taught myself SQL, bash, python, and a little bit of lisp.</p>
+</section>
+<section id="the-future-why-choose" class="level2" data-number="1.3">
+<h2 data-number="1.3" class="anchored" data-anchor-id="the-future-why-choose"><span class="header-section-number">1.3</span> The future: why choose?</h2>
+<p>The future of siloing yourself in an particular programming language is becoming less relevant with the proliferation of online tools such as quarto, jupyter notebooks, and google colab. (Provide links). These alternatives borrow strengths from each language, allowing you to seamlessly integrate them all together. Although the nuances between languages will always be a challenge (especially if you do the code switching between them!), this seems like a promising future development.</p>
+
+
+<div id="refs" class="references csl-bib-body hanging-indent" role="list" style="display: none">
+<div id="ref-bertoloGenerativeAIScientific2024" class="csl-entry" role="listitem">
+Bertolo, Riccardo, and Alessandro Antonelli. 2024. <span>“Generative <span>AI</span> in Scientific Publishing: Disruptive or Destructive?”</span> <em>Nature Reviews Urology</em> 21 (1): 1–2. <a href="https://doi.org/10.1038/s41585-023-00836-w">https://doi.org/10.1038/s41585-023-00836-w</a>.
+</div>
+<div id="ref-BestPracticesGenerative" class="csl-entry" role="listitem">
+<span>“Best <span>Practices</span> for <span>Generative AI</span> in <span>Research</span> <span></span> <span>AJE</span>.”</span> n.d. https://www.aje.com/arc/best-practices-generative-ai-in-research/. Accessed February 3, 2024.
+</div>
+<div id="ref-bocktingLivingGuidelinesGenerative2023" class="csl-entry" role="listitem">
+Bockting, Claudi L., Eva A. M. van Dis, Robert van Rooij, Willem Zuidema, and Johan Bollen. 2023. <span>“Living Guidelines for Generative <span>AI</span> — Why Scientists Must Oversee Its Use.”</span> <em>Nature</em> 622 (7984): 693–96. <a href="https://doi.org/10.1038/d41586-023-03266-1">https://doi.org/10.1038/d41586-023-03266-1</a>.
+</div>
+<div id="ref-roeschJuliaBiologists2023" class="csl-entry" role="listitem">
+Roesch, Elisabeth, Joe G. Greener, Adam L. MacLean, Huda Nassar, Christopher Rackauckas, Timothy E. Holy, and Michael P. H. Stumpf. 2023. <span>“Julia for Biologists.”</span> <em>Nature Methods</em> 20 (5): 655–64. <a href="https://doi.org/10.1038/s41592-023-01832-z">https://doi.org/10.1038/s41592-023-01832-z</a>.
+</div>
+</div>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./index.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Welcome</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./references.html" class="pagination-link">
+        <span class="nav-page-text">References</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+</body></html>
