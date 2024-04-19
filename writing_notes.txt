@@ -1,0 +1,5 @@
+Use fencing for cross references / figures
+In the text separate arguments with a space --> width = 90% not allowed
+
+Need Quarto 1.4+
+Need TexLive 2024
