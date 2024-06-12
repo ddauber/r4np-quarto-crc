@@ -9,7 +9,7 @@ book:
 
   chapters:
     - index.qmd
-    - 03_env_for_data_science.qmd
+    - 02_data_for_env_science.qmd
     - references.qmd
 
 bibliography: references.bib

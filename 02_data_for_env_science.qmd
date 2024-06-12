@@ -1,0 +1,61 @@
+# Data for Environmental Science {#sec-02data}
+
+What do electrons, molecules, quarks, DNA, addition, subtraction have in common? They may be considered to be the fundamental building blocks for physics, biology, chemistry, and mathematics [@marthUnifiedVisionBuilding2008]. For environmental data science, the fundamental building block is contained in the name itself: *data*. Setting aside the broader discussion of *how* data happened [@wigginsHowDataHappened2023], this chapter introduces ways in which data are encountered, along with some simple examples of how data can be imported into a local computing environment for analysis.  Let's begin.
+
+## Data tables
+Environmental data are often presented in tables, which often represent values of an observed quantity, such as the following image in @fig-02-st-paul from a long-term dataset of daily weather observations (going back to 1871!) recorded at a [small airport in Saint Paul, Minnesota](https://www.dnr.state.mn.us/climate/historical/daily-data.html?sid=217370&sname=ST.%20PAUL%20DOWNTOWN%20AIRPORT&sdate=por&edate=por)
+
+::: {#fig-02-st-paul}
+
+![](images/02_data_env_sci/stp_airport.png){fig-alt="Daily temperature data reported at an airport in Saint Paul Minnesota."}
+Screenshot of reported daily weather data from a regional airport in St. Paul, Minnesota from the Minnesota Department of Natural Resources. 
+:::
+
+@fig-02-st-paul is a good starting off point illustrating the different types of data that can be found with environmental science.  The first column **Date** represents a timeseries varaible, and the remaining columns (temperature, snow amount, snow depth) generally represent quantitative variables.  It is interesting to note how the quantitative variables have coded values that are text (which are explained in the notes to table @fig-02-st-paul).
+
+
+As a data scientist you may want to import the data into your own statistical software program and perform subsequent analyses.  The data shown in @fig-02-st-paul is a canonical example of a data table that can be imported into a statistical software program of your choice. The data shown here is an example of a spreadsheet, or a flat file.  You may have worked with such spreadsheets programs such as Google sheets or Microsoft Excel that prescribe an organizational structure of two dimensions - each column is a variable and every row a set of observations.  Another name to qualify the data table in @fig-02-st-paul is *tidy* - which is explored more in @sec-06importing. A benefit to tidy data is that they can easily be imported into a software program with minimal effort.
+
+
+Some common formats for download are [comma separated values files (csv)](https://en.wikipedia.org/wiki/Comma-separated_values), tab delimited file, or spaces, or other characters to mark the delimited string. Of the above list, comma separate files tend to be the most common.  Excel spreadsheets (.xls or .xlsx) are also available, but because that extension name is proproietiery, it tends to not be the default used for sharing of information.
+
+Note how the webpage for @fig-02-st-paul allows you the option to export the data as an Excel (.xlsx) or [comma separated value (.csv)](https://en.wikipedia.org/wiki/Comma-separated_values) file. These two formats are some of the more common formats available. A csv file tends to be more accepted in practice  because it allows for portability across platforms, whereas Excel is a proprietary format.  
+
+Reading in a csv file into a given software program has improved.  Both R and python have functions named `read_csv` (tidyverse R and pandas python) or `read.csv` (base R). For example, when we saved this data file and imported it into R using `read_csv` we have the following output in @fig-02-read-csv-output:
+
+::: {#fig-02-read-csv-output}
+
+![](images/02_data_env_sci/read_csv_output.png){fig-alt="Sample output from using the `read_csv` function in tidyverse R."}
+Sample output from using the `read_csv` function in tidyverse R.
+:::
+
+A key thing to note in @fig-02-read-csv-output is the text below the variable name (*<date>* or *<chr>*) which specify the *type* of data that is read by the program.  We have the following common types of data:
+
+- characters: 'a', or '2' (usually enclosed in a single or double quotes)
+- integer: -3,-2,-1,0,1,2,3 ...
+- numeric: decimal numbers (3.25, 2.71, etc)
+- binary: TRUE or FALSE
+- dates: timeseries data
+
+The environmental measurements are reported a characters - most likely caused by the presence of an `M` in the dataset.  It is up to you to determine how best to modify and mutate these data (should we just exclude these measurements, set them to 0?).  This is where you begin to exercise a modicum of choice and control in a data scientist, which will undoubtedly have implications for your analysis. 
+
+::: {.callout-tip}
+## Document your assumptions
+
+If you decide to change or modify data, be sure to document your assumptions.
+:::
+
+
+be excluded? 0 for trace? etc).
+
+
+
+
+::: {.callout-tip}
+## Check files for header information
+
+It is always worthwhile to inspect the file in a text editor first to see if there is additional header information. 
+:::
+
+
+

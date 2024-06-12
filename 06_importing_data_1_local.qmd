@@ -1,0 +1,54 @@
+# Importing Data I: Local Computing {#sec-06importing}
+
+
+A first step to any data project is to survey the data at hand. Is the data in a form that is ready for analysis. This process is often referred to as "data wrangling".  It does sound fun (cowboy hats and lassos anyone?) - and admittedly could take the bulk of the time spent on a project. There are many different kinds of data and each of these may require a different software tool, programming approach, or software package to handle appropriately. 
+
+One of the major things you’ll need to determine early on in the project is the size of the datasets you want or need to work with, and if you will be able to work with them locally (on your laptop or desktop computer) or if they are large enough that you will need to process the data on a server or cloud cluster that that can handle the larger scope. In this first chapter on data importing, we’ll be focusing on datasets that you can work with locally on your laptop or desktop – that is, datasets that could fit on a reasonably sized hard drive and could potentially be loaded into memory (we'll discuss this more in Chapter XXXX).  Let's begin.
+
+## Standaridizing data
+Data may not be standardized - especially if you are pulling them from several different sources. Variable names may not be uniform - and you may need to combine these datasets together.  For example, NEON refers to the location of each of the network site with a [4 digit code](https://www.neonscience.org/field-sites/explore-field-sites). [AmeriFlux](https://ameriflux.lbl.gov/) is a related network that maintains a series of flux towers that measure exchanges of carbon dioxide and water between the atmosphere using the eddy covariance network at many of the terrestrial NEON sites. The [AmeriFlux sites](https://ameriflux.lbl.gov/sites/site-search/) use a different naming convention (state abbreviation with name).  So if you have a dataset from NEON and AmeriFlux at the same terrestrial site, then you would need to consider how to correctly the combine the datasets before you begin your analysis. We promise you that when you get all your datasets assembled and integrated together to run your statistical models or to create your visualization, it can feel amazing.
+
+Data standardization is an important step to seamlessly link multiple datasets together to expand the data provenance and use (https://edirepository.org/) + others. Data that are standardized is a first step in honoring the best practices for FAIR data (findable, accessible, interoperable?, and reusable).
+
+While it is important to talk about how thi
+https://edirepository.org/
+https://oceanservice.noaa.gov/ocean/observations/data-standards.html
+
+## Tidy data
+Before we dive into importing, let’s talk a bit more about "tidy" data [@wickhamTidyData2014]. Tidy data has been a *de facto* approach to structure a dataset for easier analysis. A dataset is considered tidy if row is an observation, every column a variable. Visually, tidy data can be called rectangular (Figure @fig-ch6-tidy-data). Generally speaking, untidy data may contain summary rows, and is usually used for viewing versus computation. Wikipedia is a great place to search for examples of untidy data tables, or from [user-provided collections](https://kwstat.github.io/untidydata2/index.html).
+
+![Examples of tidy data (Panel a) and untidy data (Panel b) ](images/06_local_computing/tidy_data_diagram.png){#fig-ch6-tidy-data}
+
+Tidy data is actually just another name for [Codd’s 3rd normal form](https://en.wikipedia.org/wiki/Third_normal_form), which is a term that comes from relational databases. It was first defined in 1971 by Edgar Codd, but has become more popular in recent years outside of the database world because of the popularity of the `tidyverse` packages in the R programming language ecosystem that expects data to be tidy. in this format. It is a form of data that not only is rectangular, but also aims to reduce data duplication and to allow for easy computation. True tidy data shares an incredible amount conceptually with the way that large relational databases are designed – in fact, R packages like `dplyr` can seamlessly connect to relational database servers using R syntax because the conceptual operations under the hood are nearly identical.  
+
+
+
+Tidy data is not necessarily the end goal - sometimes data can't (and shouldn't be tidy). See Data Feminism.
+
+Quote ‘code for humans, data for computers’ this is the kind of thing we’re talking about.
+
+
+## Approaches to loading in data
+### Spreadsheet data
+The benefit to tidy data is that entries in R are optimized to read these in - the read_csv and variants in tidyverse are key here.  I think the tricky part is that your appetite may be limited by what you can read into memory (it will be as large as your internal memory allows) and then becomes too slow.
+
+https://stackoverflow.com/questions/20175442/sample-a-csv-file-too-large-to-load-into-r?rq=4
+
+Some strategies could be to randomly sample data (see the above link) or to switch to an alternative tool that is built to handle datasets that don’t fit into memory. Two examples are SQL for relational databases and  streaming tools such as those commonly used on the Unix/Linux command line (grep/sed/awk).
+
+### Relational databases: apache Arrow, duckdb
+DISCUSS WHY THEY ARE IMPORTANT (AND WHY THEY SHOULD WORK THE WAY THEY DO)
+DO THEY CREATE SYMBOLIC LINKS THAT SET DATA UP, AND THEN LOAD IT IN WHEN READY (TO AVOID CLOGGING DATA)
+
+
+When you may want to consider finding a bigger computer to use for your analyses
+Possible constraints
+Disk space
+RAM
+CPU speed/number of cores
+GPU
+Network bandwidth
+Disk speed (read/write speed)
+Time needed to run analyses
+Think about: is it going to be easier/faster to bring the data to the compute (i.e. download the data onto your computer to to a specific server) or to bring the compute to the data (i.e. do analyses on the servers where the data already are archived so the download/transfer step can be skipped).
+

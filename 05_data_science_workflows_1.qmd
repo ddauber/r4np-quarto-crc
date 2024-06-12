@@ -1,0 +1,83 @@
+# Data Science Workflows I: Reproducibility, Reuse, and Provenance {#sec-05workflows}
+
+In 2015 the National Academy of Science issued a report on *team science*, defined as scientific research done in a group of people of teams between 2-10 [@EnhancingEffectivenessTeam2015]. Over 90% of all publications are authored by two or more people, increasing on average at a rate of 3% every five years (page 20; @EnhancingEffectivenessTeam2015 and @wuchtyIncreasingDominanceTeams2007)  One of the challenges of team science identified in the report is *high task interdependence* (page 6; @EnhancingEffectivenessTeam2015), or a reliance on all team members to accomplish tasks.  Whether or not the team of science is geographically proximate, developing workflows that support and advance the project objectives should be a high priority at the onset of a project.
+
+
+The lifecycle of an environmental data science project typically contains acquistion of data (and perhaps reshaping the data into a format suitable for analysis), analysis of the data through application of statistical or computational models, and communication of results (e.g. preparation of a report or manuscript). Independent of this process are structures that support all of these: file management, scripted code, and storage spaces (repositories). All three of these tasks requires collaborative input from team members in real-time, and all three of these structures will be utilized by team members in real-time. Unsurprisingly, conflict can occur at instances where work is done by group members unbeknownst to each other, or modifications (or overwritten) to a structure is unknown by a team member.
+
+
+(NEED A DIAGRAM HERE)
+
+It doesn't need to be this way. Whether or not you are a team of 2 to many, learning skills for reproducible data science are important because it does help build efficiency and provides time to focus more on doing science, rather than trying to track down errors.  This chapter provides examples of some hard lessons that we have learned of what can go awry and strategies to manage these effectively.
+
+
+## How not to model
+Let’s take an example from John's experience. One of the final projects of my PhD research was parameterization of an ecological model that incorporated aspects of soil carbon in a high-elevation subapline forest. I was using a process-based model SIPNET (**Si**m**p**lified **net** photosynthesis model). This model considered different pools of carbon (leaves, wood, roots, soils) and the transformations between them forced by environmental drivers [@braswellEstimatingDiurnalAnnual2005; @sacksModelDataSynthesis2006; @zobitzIntegrationProcessbasedSoil2008]. Computational complexity of ecological models were growing, allowing for the parameteization of more complex models with nearly continuous datasets model-data fusion with nearly-continuous datasets [@zobitzPrimerDataAssimilation2011].  This was a fascinating time in the infancy of machine learning algorithms - having matured from their computer science origins and making their way into a broader science literature [@richeyEvolutionMarkovChain2010].
+
+My project was to develop the soil carbon pieces to estimate components of respiraiton, using the code provided by Bill Sacks. This was the first time where I had gotten my teeth on a model that was complex - written in C (which I tried to adequately learn the best that I was able). And I spent hours making a change to the model - and then compiling the code, running - error fixing, compiling ad nauseum.  In terms of a happy intersection between mathematics, computing, and ecology I was at home.
+
+My collaborator at the time, David Moore, was pursuing a similar track with SIPNET but further developing out the water components (evapotranspiration). This was the first time we used Subversion - a code tracking software at the time (still in use, similar to Github). Turns out Dave and I had made parallel changes to our model, but when we merged them together (both working versions) - it crashed the code. Neither of our analyses worked separately. It took an in-person visit to sit down, compare versions of the code line-by-line to finally reconcile the differences between the two. What I remember of that experience was a lost afternoon exploring the foothills outside of Boulder, Colorado.
+
+Had we properly used a versioning system of subversion well, then we might not have been in that situation. You can imagine that for larger projects, with multiple contributors to a code - the problem of scale and introduction of errors becomes hard.  Fortunately computers are very good at keeping track at changes in code.
+
+Even if you are a team of one person (just you!) having versions of code and proper versioning software allows you to encounter snapshots of code (in time) where you don’t need to necessarily save multiple versions (trust me - I bet you have done code-name-v1.R use-this-code.R, and all creative names.  I still do (at times) but am working my way around it.
+
+
+## Project organizatino and management
+Organization:
+You develop your own organizational structure, but we recommend that you have separate folders for any:
+
+ - raw data: data provided to you (through downloads or sent to you) (called data-raw)
+ - processed data, or processed raw data from script files
+
+A standard data science project may consist of:
+Data
+Models
+Outputs
+Reports (or manuscripts).  May include figures
+
+Process refers to actions on any one of these items above.  Helpful to stick with one word and then go from there.
+
+data: storage of any local data files to your computer. You may want to break this up into data-raw and data-process if you need to save files that have been process from raw data
+process: files that help to process data, model, or outputs.  As above you may want to break this up into subfolders process-data, process-model, process-outputs , process-figures→
+manuscript → where you have the actual writing of files - could break this up into manuscript-figures so there is a separate location for them.
+
+When we get to writing R packages there is a defined structure of packages (R, data, outputs) that help you there.
+
+Using GitHub effectively (Naupaka: what are your strategies?)
+What is version control? - this is the specific tracking by a centralized repository and log of all the changes to a project (or set of files).  Super helpful because in the past you would have to do this on your own, so it saves you a lot of time.
+
+In a given worksession:
+Pull the code before you begin
+Make edits.
+Periodically commit your code you think is in a good state.
+At the end of the session, push your code to the repository
+
+Repeat!
+
+I know there will be times when you will need to merge, and those have been detailed in Jenny Bryan’s book - thankful!
+
+But this process works for a team based science.
+
+## Strategies for effective coding
+How should you write code?
+
+I realize the code that I wrote in the beginning of this chapter was spaghetti code, or code that is hard to maintain and change and to understand.
+
+Give yourself some grace if you write spaghetti code. But practice makes progress.
+
+I like using Hadley Wickham’s mantra that if you do something once, ok, twice, ok, but multiple times perhaps you should write a function to call the code up.  This way you can see how things all lay out together you if there is something small to change, then you can more easily track it down into manageable files.
+
+Use the indenting functions in R to make code readable.
+
+
+## Version Control and Real-time Collaboration
+Git, Github, what is the difference?
+Git → opensource versioning software
+Github → the thing that hosts git and allows you to manage all this.  Think of git is to github as R is to RStudio.  The analogy might not be perfect, but it is a start.
+
+Where do you get started? 
+https://happygitwithr.com/ → this is by far the best, cogent, and at times humorous resource to help you effectively use git with R and RStudio. Run, don’t walk to this resource. 
+rOpenSci: https://devguide.ropensci.org/index.html – Karthik Ram  [[ need more here ]]
+
+

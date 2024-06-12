@@ -1,0 +1,71 @@
+# The Ethical Environmental Data Scientist {#sec-04ethics}
+
+In early 2014 the journal *Nature* published a study that claimed advances in stem cell research which developed a technique to manipulate stem cells into different cell types [@obokataRETRACTEDARTICLEBidirectional2014]. This article attracted more public interest than usual because of the advancement and promise and progress in stem cell research. However, later that year, the journal retracted the study due to issues in replication and poor data management [@STAPRetracted2014].
+
+While we consider retraction of a paper to be a final step in a long process that could be avoided, the number of retracted papers each year continues to increase [@vannoordenMore100002023], a signal of a growing trend in retraction of studies [@fangMisconductAccountsMajority2012]. @lievoreResearchEthicsProfile2021b found that data issues are one of the main reasons for retractions.
+
+The issues surrounding the retracted study are complex, but it provides a cautionary tale to consider ethics at all levels of the study design. The Merriam-Webster dictionary defines ethics as "the principles of conduct governing an individual or a profession" [@LegalDefinitionEthics]. Along those lines, professional societies all have ethical codes of conduct (for examples, see statements by the [American Geophysical Union](https://www.agu.org/learn-about-agu/about-agu/ethics), [European Geophysical Union](https://www.egu.eu/static/dde6e8f9/about/code_of_conduct.pdf), or the [Ecological Society of America](https://www.esa.org/about/code-of-ethics/)).
+
+The ethics and the codes of conducts provided here are a good place to start. But for environmental data science in particular, what should ethics consist of?  This chapter digs into some considerations of ethics in environmental data science. Let's begin. 
+
+## The big picture
+Environmental data science, in many ways is about counting the world around us as a tool to create understanding. Data science could be viewed as an ethical act that decides who gets counted and in what ways people are counted [@dignazioDataFeminism2023]. Rooted in that concept of being counted also suggests a colonized paradigm of the scientific method [@hiraScientificColonialismEurocentric2015; @thakurColonialStoryScientific2023], ignoring the contribution of indigenous knowledge to advance scientific understanding (see studies by @mazzocchiWesternScienceTraditional2006; @wheelerInformingDecisionmakingIndigenous2020; and @jessenContributionsIndigenousKnowledge2022 as places to begin to learn more).
+
+
+One way that we should think about data is the FAIR principles, which come from work done by indigenous scholars, and is some efforts to decolonize data.  FAIR stands for Findable, Accessible, Interoperable, and Reproducible - which in some respects takes into account the entire scientific process of making things better.  But there is more to that. 
+
+While the definition is focused on conduct, Several scientific societies have provided frameworks for ethical codes of conduct (see the ESA for example, https://www.esa.org/about/code-of-ethics/). An ethical environmental data scientist should abide by these codes, but it also extends to a commitment to practicing open science: open data, open workflows, open products. The trend towards open science is supported by funcing agencies such as the [National Science Foundation](https://www.nsf.gov/data/).  Let’s dig in a little more about the value of practicing open science.
+
+
+
+
+Why bother?  
+
+
+## Operationalizing an open workflow
+Transforming to an open workflow might help avoid the unnecessary (and embarrassing) retraction of data.  We put forward a workflow broken down into three pieces: Collect → Analyze → Communicate, inspired by [Hadley Wickham](https://r4ds.hadley.nz/whole-game). Let’s investigate how this can be manifested at each step of the workflow process. In practice, an open data science can roughly be broken down into the following workflow, inspired by . .  At each of these steps open workflows can be incorporated to develop processes of an open system.
+
+
+
+
+### Collect
+Open environmental data, such as those that are provided by the National Ecological Observatory Network (NEON) have open data as a [core value](https://www.neonscience.org/about/visionandmanagement).  Theoretically, since the data are all open with NEON it reduces the barrier of replicability since anyone with an internet connection can access the data. Open data (and access to it) is what drives many environmental data science projects. A minimum standard for open data is that it should be FAIR (Findable, Accessible, Interoperable, and Reusable - cite sources). How a dataset defines each of the letters depends on their own specific user agreements and data practices (Does findable mean one does not need to register? What types of data formats are Accessible?). While there isn’t a universal standard (and perhaps Justice Potter’s definition of “I’ll know it when I see it.” [[ get link here ]] may not entirely apply, at a minimum we posit that open data are data that can be read into any computational programming language with a minimum of user fiddling.
+
+Collect also refers to the ability to acquire data from several different data streams and sources. (NASA, NEON, LTER, etc …) provide data for the public good, but also need to be harmonized for a given data project.  There is no universal community standard for metadata, although this is recognized as a high need (cite ecoforecast metadata papers?)  Harmonizing  
+
+### Analyze
+Scientific papers universally require a Methods section, where the authors should provide sufficient description of how they went about their analyses (Schimel, Writing Science). We know a challenging constraint to any methods section is journal space - and it can become a challenging balancing act to figure out what to (or not) to include.  Open environmental data science analyses are different to a tightly controlled laboratory experiment, and perhaps include more description of how data sets were accessed and wrangled to produce results. A secondary benefit is that data scientists learn from each other by sharing out their work (see for example the tidyTuesday data project, Data Feminism).   So rather than shoehorn what you did, the analyze step provides an opportunity to leverage tools such as jupyter, quarto, or colab notebooks to multiply out your impact (https://www.sciencedirect.com/science/article/pii/S2666389921003068).
+
+Methods are to scientific writing as open analyses are to pen science. The methods are the place where you detail how you did what you want to do.However this is only one tool in terms of open science - open data is the start, but open workflows are the second. The methods section is a nearly-universal section of scientific write (cite Schimel, writing science). This is the place where you get the chance to detail the how you did what you want to do, and provide a roadmap through the analysis.  that writing scientific papers is constrained both by the amount of space and the information that needs to be conveyed. When data science is included, this can be at odds with a tightly controlled laboratory experiment. https://www.sciencedirect.com/science/article/pii/S2666389921003068 argue that this is not a constraint but a chance to leverage one step of a much larger process.  Workflows and tools provided by data science (such as interactive jupyter notebooks) also provide not just the ability of the data to be available, but the same code used to generate results, providing another layer of peer review.
+
+### Communicate
+Funding agencies have also started to take note with open science. Projects funded by the National Science Foundation will be required to provide open data and science be available immediately upon publication of a study. https://new.nsf.gov/public-access. Open science is a legal requirement of the European Research Access agency LINK  (what other international bodies would help with this?)
+
+Scientific journals are also provided incentives or requirements for open data, and have requirements that data and models are archived with a digital object identifier (see examples from [Geoscientific Model Development](https://www.geoscientific-model-development.net/policies/code_and_data_policy.html), journals published by the [American Geophysical Union](https://www.agu.org/publish-with-agu/publish/author-resources/data-and-software-for-authors), or [Springer](https://www.springernature.com/gp/open-research/journals-books/journals)). We discuss how approaches to version control for data and models in Chapter XXX.
+
+Beyond the promise of this open ecosystem of science - in terms of data, process, and dissemination we do need to be cautious of positionality. Peer review has been known to be a barrier for access and representation for minoritized groups (https://www.nature.com/articles/s41559-023-01999-w) Open science may not eliminate all inequities (https://www.nature.com/articles/d41586-022-00724-0), 
+
+https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8445410/
+
+Positionality
+Our positionality plays a role. I (John) am a member of a group that has benefited from privileges in science and have not faced access barriers in science. The work represented here comes from critical thought from other scholars (cite them), of which I have benefitted from their vulnerability and sharing the stories. 
+
+
+
+In our scientific workflows we can do better. Workflows: collect data → analyze data → disseminate data.  At each step of this process we can all do better.  Here would be some guiding principles:
+
+Collect data: are there any considerations to where the data were collected? How are you referring to species and counts, geographic considerations?
+
+Analyze data: LINK In what ways are you being open, discoverable, following these principles - this is more of a question of the methodology of where things can be done.
+
+Disseminate: open data sources (that have a DOI, zenodo is a good source – ARE THERE OTHERS?
+
+
+
+Open science issues:
+https://www.nature.com/articles/d41586-022-00724-0
+Voices: https://www.nature.com/articles/s41580-021-00414-1
+
+## Moving forward
+Often times conversations that seek to broaden understanding the implicit biases rooted in the scientific method are framed as "difficult" conversationsThese should not be “difficult” conversations to have, but perhaps could be considered rather are “unpracticed” LINK.  Thinking of them in that way makes it more open to understanding how and why open science is a way to mitigate barriers in access and understanding in the sciences.
+
