@@ -1,0 +1,22 @@
+[
+  {
+    "objectID": "02_data_for_env_science.html",
+    "href": "02_data_for_env_science.html",
+    "title": "1  Data for Environmental Science",
+    "section": "",
+    "text": "1.1 Data tables\nEnvironmental data are frequently presented in tables, which often represent values of an observed quantity, such as the following image in Figure 1.1 from a long-term dataset of daily weather observations (going back to 1871!) recorded at a small airport in Saint Paul, Minnesota\nFigure 1.1 is a good starting off point illustrating the different types of data that can be found with environmental science. The first column Date represents a timeseries varaible, and the remaining columns (temperature, snow amount, snow depth) generally represent quantitative variables. It is interesting to note how the quantitative variables have coded values that are text (which are explained in the notes to table Figure 1.1).\nAs a data scientist you may want to import the data into your own statistical software program and perform subsequent analyses. The data shown in Figure 1.1 is a canonical example of a data table that can be imported into a statistical software program of your choice. The data shown here is an example of a spreadsheet, or a flat file. You may have worked with such spreadsheets programs such as Google sheets or Microsoft Excel that prescribe an organizational structure of two dimensions - each column is a variable and every row a set of observations. Another name to qualify the data table in Figure 1.1 is tidy - which is explored more in ?sec-06importing. A benefit to tidy data is that they can easily be imported into a software program with minimal effort.\nSome common formats for download are comma separated values files (csv), tab delimited file, or spaces, or other characters to mark the delimited string. Of the above list, comma separate files tend to be the most common. Excel spreadsheets (.xls or .xlsx) are also available, but because that extension name is proproietiery, it tends to not be the default used for sharing of information.\nNote how the webpage for Figure 1.1 allows you the option to export the data as an Excel (.xlsx) or comma separated value (.csv) file. These two formats are some of the more common formats available. A csv file tends to be more accepted in practice because it allows for portability across platforms, whereas Excel is a proprietary format.\nReading in a csv file into a given software program has improved. Both R and python have functions named read_csv (tidyverse R and pandas python) or read.csv (base R). For example, when we saved this data file and imported it into R using read_csv we have the following output in Figure 1.2:\nA key thing to note in Figure 1.2 is the text below the variable name ( or ) which specify the type of data that is read by the program. We have the following common types of data:\nThe environmental measurements are reported a characters - most likely caused by the presence of an M in the dataset. It is up to you to determine how best to modify and mutate these data (should we just exclude these measurements, set them to 0?). This is where you begin to exercise a modicum of choice and control in a data scientist, which will undoubtedly have implications for your analysis.\nbe excluded? 0 for trace? etc).",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Data for Environmental Science</span>"
+    ]
+  },
+  {
+    "objectID": "02_data_for_env_science.html#data-tables",
+    "href": "02_data_for_env_science.html#data-tables",
+    "title": "1  Data for Environmental Science",
+    "section": "",
+    "text": "Figure 1.1\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nFigure 1.2\n\n\n\n\n\ncharacters: ‘a’, or ‘2’ (usually enclosed in a single or double quotes)\ninteger: -3,-2,-1,0,1,2,3 …\nnumeric: decimal numbers (3.25, 2.71, etc)\nbinary: TRUE or FALSE\ndates: timeseries data\n\n\n\n\n\n\n\n\nDocument your assumptions\n\n\n\nIf you decide to change or modify data, be sure to document your assumptions.\n\n\n\n\n\n\n\n\n\nCheck files for header information\n\n\n\nIt is always worthwhile to inspect the file in a text editor first to see if there is additional header information.",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Data for Environmental Science</span>"
+    ]
+  }
+]

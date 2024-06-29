@@ -3,7 +3,7 @@
 What do electrons, molecules, quarks, DNA, addition, subtraction have in common? They may be considered to be the fundamental building blocks for physics, biology, chemistry, and mathematics [@marthUnifiedVisionBuilding2008]. For environmental data science, the fundamental building block is contained in the name itself: *data*. Setting aside the broader discussion of *how* data happened [@wigginsHowDataHappened2023], this chapter introduces ways in which data are encountered, along with some simple examples of how data can be imported into a local computing environment for analysis.  Let's begin.
 
 ## Data tables
-Environmental data are often presented in tables, which often represent values of an observed quantity, such as the following image in @fig-02-st-paul from a long-term dataset of daily weather observations (going back to 1871!) recorded at a [small airport in Saint Paul, Minnesota](https://www.dnr.state.mn.us/climate/historical/daily-data.html?sid=217370&sname=ST.%20PAUL%20DOWNTOWN%20AIRPORT&sdate=por&edate=por)
+Environmental data are frequently presented in tables, which often represent values of an observed quantity, such as the following image in @fig-02-st-paul from a long-term dataset of daily weather observations (going back to 1871!) recorded at a [small airport in Saint Paul, Minnesota](https://www.dnr.state.mn.us/climate/historical/daily-data.html?sid=217370&sname=ST.%20PAUL%20DOWNTOWN%20AIRPORT&sdate=por&edate=por)
 
 ::: {#fig-02-st-paul}
 
