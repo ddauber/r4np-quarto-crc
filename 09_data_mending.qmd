@@ -1,0 +1,54 @@
+# Tearing Down the Data Mending Wall {#sec-09data-mending}
+
+
+The poem [Mending Wall](https://poets.org/poem/mending-wall) by Robert Frost was a staple of John’s high school literature classes.  At a first read the poem is about neighbors repairing a damaged wall that, justified by the neighbor because  “Good fences make good neighbors”.
+
+But narrator also questions the need for a wall:
+
+> Before I built a wall I’d ask to know
+What I was walling in or walling out,
+And to whom I was like to give offense.
+Something there is that doesn't love a wall,
+That wants it down.
+
+This chapter is about walls in environmental data science -, and unconsciously constructed walls through the course of analysis of a data science project. The future of science is open (see Chapters @sec-03environments) - and arguably without walls between the data, analyst, and consumer of science. This chapter focuses on developing mindsets towards committing to open science. Let's begin.
+
+Where are there walls in data science?
+Data contextualization is one place where a wall can exist.  Let's take NEON data for example.  When flux measurements are made, two common units are umol m-2 s-1 or g C m-2 day-1.  Both are important measures - the first one is what is used when commonly reporting half-hourly measurements and comes from a micrometerological (eddy covariance) perspective.  The second is more commonly used in ecological models to work with.  If you just download the data without an understanding of the data dictionary, then your analysis and interpretation of it is limited.  In this case the wall decreases your initial understanding.
+
+We recommend that especially at the oneset of a project, when data are required, a commensurate amount of time is needed to understand the data dictionary and how data are used / created in this sesne.  Otherwise you won't be able to work through things, or you may pursue down a task and then have to backtrack your understanding.
+
+Another source of a wall is terminology.  NPP vs GPP - both are reported, but if you are a new data user, this can be challenging to work with and understand.
+
+Beyond the data dictionary, when working with compiled code (such as an R package) there is also challenges in working with minimal examples to get something up and running.  The MODISTools example is a nice one that acquires remote sensing data at given MODIS sites.  The challenge with MODIS is that direct acquisition to the data requires one to have some knowledge of scaling factors and other cloud based things to work with.  This pacakge eliminates the need to downscale and use.  The MODISTools package provides a nice use case scenario that can be remixed to suite your purposes.  The package maintainers provided additional description and tests to see how this code would be used in the wild.
+
+The book RPackages discusses documentation, but it is an essential part to developing and eliminating walls in your code that you write.  Perhaps you won't be working with a package, but you can share your code with others.  It is important to note that you are writing code for people, not computers (best practicies in scientific computing) - so don't be afraid to include comments and notes to make your code more human.  For the languages you are working with, comments do not slow down your code!  (The exception is MS-BaSIC - cite).  
+
+This is an an important understandinOne example of a wallProvided documentation can be less than ideal.  Sometimes when you jump into a project you may not have a strong contextual understanding about the data, or the variable names may be not immediately evident or descriptive of what they provide.  In these cases a wall is put up to decrease initial understanding, slowing efforts to get a project started.  Other types of documentation include function examples (is there a mean working example that showcases the use case? Are the inputs to the function documented well?) or for scripted files, not a good understanding of the process or actions taken steps through a code.  Programming is communication, and you want to provide enough documentation that doesn’t hide what you are trying to do.
+
+There are no standard ways where documentation can be provided - sometimes it is within a README file, or within a separate notes file.  We recommend reviewing those files first before advancing forward with an analysis - many times there is a historical timeline that you can use and adjust.
+
+Use case: NEON
+
+Data provenance
+Who owns your data? This question, while might be an innocent one is ever more important in this age of AI. Some estimates are that there are XXX exabytes of data generated per day (need to look this).  The use, re-use and distribtuion of data is another case where there is a constructed wall.
+
+FAIR Principles of data, 
+Discuss CARE principles of indigenous data governance.
+
+An interesting question is how much data should be open, but perhaps a better framing is not should it be open by default but an understanding of reciprocity.  These Care principles help guide the way to think about the community benefit.
+
+Use cases: DST 234 notes on this day
+
+Versioning (or lack thereof) is another wall.
+
+ is poor. Many times ho
+While these are good first steps to removing the mending wall in data science, we recognize that these are first steps and not necessarily the ending.  As in the poem requires mending each year due to 
+Something there is that doesn’t love a wall,
+That sends the frozen-ground-swell under it,
+And spills the upper boulders in the sun;
+And makes gaps even two can pass abreast.
+
+,  that tend to obfuscate and hide.  Data science is not a magical unicorn (Data Feminism), and we need to be wary especially in this age of AI that it is a magical toolkit.
+
+These walls can be structural, systemic, and hegemonic
