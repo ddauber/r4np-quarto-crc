@@ -3,8 +3,24 @@
 As a data scientists one of the things that you are asked to do is to transform data and extend it further than just the observations presented into a flat file, such as a spreadsheet program.  *How* you transform the data depends on the scientific questions you are exploring and will determine which operations you will use (which can include computing summary statistics, applying a mathematical model). While a spreadsheet program can do all the aforementioned tasks, data scientists typically work with multiple variables (such as the stream data presented in Chapter XXX). The number of observations is typically too large to easily view in a spreadsheet program; Microsoft Excel is limited to about a million observations and 16 thousand variables - which may seem like a lot, but can easily get swamped when you have several sites collated together. Developing skills in data wrangling helps build some efficiency of scale - and places the emphasis on *action* - what do you want to do with your data today?  This chapter is focused on data wrangling and connecting two data tables together. Let's begin.
 
 ## What's the weather like?
-Minnesota loves to talk about its weather [LINK](https://www.mprnews.org/story/2024/03/05/weatherobsessed-minnesota-leads-the-nation-in-weather-observers), which is a source of pride for many residents (some would say misplaced pride because it can be so cold ...). But the good part is that pride has produced a strong tradition in long-term, high quality datasets. 
-The context that we will be working with is the environmental dataset from Minneapolis St Paul, which is daily weather observations across an entire year.  (https://mesonet.agron.iastate.edu/request/download.phtml?network=MN_ASOS) This dataset is an ideal place to start because it contains a mixture of 30 variables.  Let's say that you have read in the dataset (as described in previous chapters).  Some good questions we could ask of these data are:
+Minnesota loves to talk about its weather [LINK](https://www.mprnews.org/story/2024/03/05/weatherobsessed-minnesota-leads-the-nation-in-weather-observers), reflected in a strong tradition of long-term, high-quality weather observations. 
+
+Weather data for Minnesota and other states are easily accessible thorugh the [Iowa Environmental Mesonet](https://mesonet.agron.iastate.edu/request/download.phtml?network=MN_ASOS). We accessed the data from 2023 from the MSP station, which provided over 10000 observations of air temperature (labeled `tmpf`), dewpoint (labeled `dwpf`), and relative humidity (labeled `relh`).
+
+```{r}
+
+#| echo: false
+
+msp_2023 <- readr::read_csv('data/msp_2023.csv') |>
+  dplyr::mutate(valid = lubridate::mdy_hm(valid)) |>
+  dplyr::select(valid,tmpf,dwpf,relh)
+
+dplyr::glimpse(msp_2023)
+```
+
+The first thing to note is that reading the documentation provided on the webpage, both the air temperature and dewpoint are provided in Fahrenheit, which is the standard way to report temperature in the United States.  The metric system reports temperature in Celsius, where $\displaystyle T_{C} =  \frac{5}{9} \cdot(T_{F}-32)$.
+
+To convert these temperature readings to Celsius, we could either open a spreadsheet program to convert each observation. While spreadsheet programs allow evaluation through formulas, but we have found that to be time consuming.  Here is where the power of data wrangling comes into focus.   Some good questions we could ask of these data are:
 
 
 - Number of observations per day?
@@ -15,7 +31,13 @@ The context that we will be working with is the environmental dataset from Minne
 - What is the average monthly temperature? [[ mean value theorem??? Because the data aren’t regular?]]
 - Difference between windchill and measured temperatures?
 
-One observation is thinking about dewpoint - because of the wide range in temperature, Minnesota can experience wide swings in heat temperature when air from the Gulf of Mexico spreads north - and sends our modestly cool temperature into muggy value.  We measure that with dewpoints, which is a function of temperature and relative humidity (show formula)
+Some of the variables in this dataset include temperature, dewpoint, Notice how this dataset containsOne observation is thinking about dewpoint -
+
+A simple rule of thumb is that dewpoint, or the temperature that water vapor is cooled to saturation decreases by one degree Celsius for every 5% decrease in relative humidity [@lawrenceRelationshipRelativeHumidity2005]. Mathematically, the formula would be $\displaystyle T_{d} = T - \frac{100-RH}{5}$, where $RH$ is the relative humidity. Dewpoints are a function of vapor pressure and temperature and are typically measured through a scientific sensor (as reported in the [documentation](https://www.weather.gov/media/asos/aum-toc.pdf)).  Let's see how our rule of thumb compares to the measured values.
+
+reports that dewpoint is measured with a sensor, let's compareIn our dataset dewpoints are measured with a   One thing that we want to see iTd = T - ((100 - RH)/5)
+
+because of the wide range in temperature, Minnesota can experience wide swings in heat temperature when air from the Gulf of Mexico spreads north - and sends our modestly cool temperature into muggy value.  We measure that with dewpoints, which is a function of temperature and relative humidity (show formula)
 
 Similar to what we did in previous chapters is to read the dataset in
 The first step is to see your data once it is imported in - this is a very important step!  In tidyverse the glimpse function provides the ability to scan your data in a neat compact way (compare this to printing out the entire dataset at once).  For larger datasets this is important - you don’t want to display all the data, just make sure it read in correctly  (alternatives are just to refer the first rows [1:10,] or info or scan (??? unsure of the equivalent).
