@@ -1,0 +1,61 @@
+# Data Science Workflows II: Managing all the pieces {#sec-10workflows2}
+
+Now that we have discussed aspects of a data science project, let's talk about management. This can be a deeply personal (and divisive) topic.  The nice part is that it is also uniquely individual to a person and a project. Project managment and workflows also increase your efficiency. In this chapter we’ll provide some behind the scenes case studies of projects that we have worked on. Let's begin.
+
+## John's dirty song of ice and fire 
+In 2020 I receive a [Fulbrght scholar opportunity](https://fulbrightscholars.org/grantee/john-zobitz) to collaborate with colleagues at the University of Eastern Finland in Kuopioe. Through a series of field campaigns, my colleagues investigated changes in soil biogeochemistry across a fire chronosequence in Canada [@aaltonen_forest_2019; @aaltonen_temperature_2019; @koster_carbon_2017; @kosterPostfireSoilCarbon2024]. Some of these data include soil carbon respiration, which showed varied changes across the century-long chronosequence. While the field work had all been completed, my task was to add more modeling aspects to understand processes affecting the soil decomposition and recovery at each site in the chronosequence [@@zobitz_comparing_2021].
+
+The field data at hand was all contained within an spreadsheet - which I also layered on additional data sources to corroborate the measurements. Some of these data included observed air temperature data as well as remote sensing MODIS data. These additional data sets helped provide circumstantial evidence of association.
+
+One the additional dataset was remote sensing data from NASA's MODIS satellite, which is accessed via a web portal called A$\rho \rho$ears A$\rho\rho$ears [@appeearsteamApplicationExtractingExploring2020]. A satellite data product I was examining gross primary producitivty ($GPP$). A $GPP$ observation is calculated from derived measurements of photosynthetic fraction of absorbed radiation [@runningDailyGPPAnnual2019]. After preparing scripts to plot the timeseries of the data, the site that was most recently burned had no reduction in $GPP$ - which is counterintuitive to a stand-replacing fire at this site.  I needed a second source of corroborating evidence to understand this pattern.
+
+
+To investigate this furthed I needed to access reported fire boundary data [@ccanadaCanadianWildlandFire] and compare it to the geographic boundaries seen by the MODIS pixel. After checking the two (FIGURE HERE)  it was appropriate to assume that the reported $GPP$ came from an unburned forest. By adjusting the pixel to within a given fire boundary then we could have a better proxy for the reported GPP.
+
+
+
+To summarize, so far for this project I needed to do the following:
+
+- Download data stored on a remote computer from a web service.
+- Some data were text data, as well as shapefile data, which is a special format (see @lovelaceGeocomputation2019)
+- Process and wrangle timeseries data then verify if they were consistent with observations.
+- Visually compare geographic boundaries between two different areas.
+
+The snapshot into this project 
+Because I had several different data sources, the organization method included the following:
+Two separate folders for data: raw data (from websites above, other field observations) and data (an Rda file for ease of computation).
+A folder for processing data (called data-process)  This contained a series of script files that processed raw data into data for modelng.
+A folder for general purpose R functions that could be used across all script files (a local library of functions)
+A folder for analysis, containing script files that processed modeling data into outputs.
+A folder for manuscript figure processing, which contained script files to generate manuscript figures.
+A folder for all manuscript figures, which contained all output figures in png format
+A folder for the manuscript drafts and text.
+
+For each of the script folders (for processing) the files were numbered in order of analysis, just in case when I needed to re-run analyses than I could do them in the correct order (at that time I was inexperienced with makefiles, but that would have been a huge help here!).
+
+I wanted to keep all manuscript outputs separate (figures, tables, etc) from the script folders.  I know that when it is time to submit a manuscript for publication, having a folder with all outputs is easiest to upload the figures separately onto the manuscript submission site.
+
+[[ Introduce a figure / workflow structure here ]]
+This organizational structure helped me keep the data science workflow into a few separate aspects (data acquisition, data analysis, modeling, and communication) rather than a mishmash of them all together.  When I wanted to come back to a part, it was easy for me to parse them all together.
+
+What could I improve upon? One thing that I am working on along the way is auditing each of the different pieces. I tend to create a lot of script files for analysis (versions upon versions). I am a packrat.  To that end I create a folder called dead-code, which is the burial ground for analyses or script files that I no longer need, but perhaps want to.  If I am along the way, I just preface a script file with a d to indicate that the file is on the way out and then move it.  Regarding the auditing, I tend to keep moving forward and not take a step back and process files (or at least synthesize parts of my code for readiness) until the very end (submission step).  I know this is a mistake - at that point my energy for a project might be flagging, or I may un-intentionally introduce an error that I then need to chase down (which makes me frustrated because I am anxious to submit the project).  Having regular auditing pieces during a project can also help see connections to the code to simplify processing worklines.
+
+I also need to adopt a github workflow pattern in real life (recommended by Jenny Bryan - link to her book).
+
+## Naupaka's example
+
+## Do that, not this
+A workflow that we would not recommend (from practice!) is the “burn it all down and have the phoenix rise from the ashes”. This type of rage-quitting is tempting (and cathartic?), but also really intrusive making productive progress on a project. John has been burned more than once on this approach and then regretted losing some key parts of the code.
+
+At a minimum, aim to have separate sub folders for data, processing files, and outputs (such as figures or text).  This parceling off then allows you to quickly take stock of different pieces of a project.
+
+What if you don't want to delete a file yet? One strategy that I use is for old code is to preface the file name with a d (for dead, dilapitaed, decayed, disrepaired - you get the idea) and move it to a folder called "dead-code" (or something to that effect). Once the project is wrapped up then these could be safely deleted.  It does take some committment to *actually* empty out that folder (I won't show you my trash bin on my computer!)
+
+We know that there is the ideal standard 
+This is where project workflow management skills with github come handy.  A good overview of why Github is a good ideal can be found in Jenny Bryan's [happygitwithr](https://happygitwithr.com/) and @bryanExcuseMeYou2017. Especially on collaborative projects, think of each worksession as a small chance to provide a tweak, test, and see if it works. As you gain proficiency (and comfort) in git, then you can use branching and merging to wall off aspects that you are developing.
+
+The bleeding edge is also [Github actions](https://docs.github.com/en/actions) which allow you to automate workflows MORE HERE
+
+In the end, start small and make a small tweak, aiming for iterative improvement.  I have found that the reticence to try new workflow processes is inertia - if something worked before in the past, why not now?  Well the challenge is that creating a small change to your workflow (using a branch and merge structure, even for a project you work on by yourself) is a small enough change that doesn’t drastically undo / alter / cause you to rework code, but also provides a fresher perspective to move things forward. Practice makes progress. 
+
+## Go further
