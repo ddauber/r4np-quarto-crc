@@ -1,0 +1,85 @@
+# Iteration without tears {#sec-13iteration}
+
+What is the best way to begin a complex project? Answers undoubtedly may vary, but a common approach is to break it down into smaller, manageable steps to complete. We tend to approach data science projects in a similar way, assembling the pieces into a large whole along the way. This type of project management workflow is an example of the computing concept of *split-apply-combine* [@wickhamSplitApplyCombineStrategyData2011]. In this chapter we examine a case study where iteration is used for aggregation. Let's begin.
+
+## Case study
+Terrestrial carbon is needed to understand XXX and YYY.  Data collected through the eddy covariance techinqiue represents the net amount of carbon exchanged between an ecosystem and the atmosphere in a defined footprint area.  NEE is a key output for terrestrial carbon models as well as important to scaling up carbon exchange from local to regional scales (Referneces HERE)
+
+NEE is measured through the eddy covariance technqiue, which applies micrometerological techinques to examine covariances between high frequency wind and carbon dioxide measurements using conservation of mass equations (REFERENCE). This measurement is averaged over a half hour, and typically NEE is reported in units of $\mu$mol CO$_{2}$ m$^{-2}$ s$^{-1}$. For biogeochemical models NEE is aggregated to a daily level and reported in gC m$^{-2}$ day$^{-1}$.
+
+Approaching this with a dataset of half-hourly values requires several smaller pieces:
+- identifying a measurements in a given day
+- converting to gC and day from
+- aggregating up to a day
+
+This should be done a site level, and NEON data are reported in a month, so let's start there in recording this ....
+Unit conversion (umol m-2 s-1, to gC day-1?) - includes a rolling up of values and then summing across - use NEE from NEON as a proxy?
+
+## Iteration goals
+This chapter focuses on the related concept of *iteration*, or the process of repeating a coding task several times. Iteration is needed to: 
+
+- reduce computational time
+- improve code readability
+- minimize coding errors
+- emphasize process
+
+## Iteration approaches
+Let's say you want to compute across different groups with a target vector
+
+### loops
+Perhaps the traditional way of teaching iteration is the for loop and variants such as while. For most programming languages the for loop requires pre-allocation of an output vector (if that is what is needed), and then the for loop "fills up" the entries of the vector as you go.
+
+### across columns
+Perhaps you want to apply the same function across similar columns of a dataframe (without changing )
+
+### grouping and summarizing
+This is particulary important if the output is a single output, rather than a single vector. Also known as "rolling up" a dataset.  The iteration here groups a dataframe on different values of a categorical variable and applies the same function to the smaller dataset, producing a single result
+
+### map
+This is the most important part of an iterative process that keeps the data frame struture intact  and applies a function across each element of the data frame.  Usually this requires an output as a list structure - which is a more flexible than a data frame itself.  The basic idea behind map is to apply a function that takes a collection of inputs and produces and output.
+
+
+Writing code is an iterative process in itself - perhaps the first time you set to accomplish a task you get to an ending point.  We have found that this is never the ending point - there is still more ways to improve upon the first edit.  We go back and then add comments, improve readability and flow, and perhaps think of an audience of the code beyond just ourselves.
+
+
+Many datasets contain a mixture of categorical and quantitative data, and we often want to summarize across a different categorical variables - let's say there we have a dataset of populations across several different sites and we want to summarize average microbial abundance.  Split-apply-combine, or the act of breaking a complex task into manageable pieces, computing the same piece across all steps, and combining them back together. This is similar to project management as described in Chapter @sec-05workflows. 
+For a data science project, at some point, you won’t be able to escape it: the dreaded loop.
+
+We thrive on a world of speed, efficiency, and sometimes waiting for code to finish running feels so 20th century. We are riding on the benefit of Moore’s law (link) - the growth in the size of datasets that can be analyzed on a personal computer astounds both of us.
+
+The advent of cloud computing tools in addition also is a benefit - the limitation is an internet connectin (and access too it).  These changes are forcing us to think better about how code is structured and created.
+
+John has a rule of thumb when it becomes necessary to iterate:
+::: {.callout-tip}
+do once → do twice → do many times
+:::
+
+If
+Each programming language has its own syntactical quirks when writing loops. For example,  `R` requires the use of curly braces (`{}`), python requires indentation for the loop body, and julia the function `end` to close off the loop. Admittedly these are annoying to keep straight in your head - but not insurmountable.
+
+The goal of iteration is to focus your code. 
+- see (try searching “which is better: for or while loop” will take you down a rabbit hole of opinions and advice.
+
+- In R the basic `for` loop is written 
+
+The challenge here is the idea of iteration - and how to efficiently manage doing the same thing several times. 
+
+When should you iterate and create a loop?  Our rule of thumb have is:
+
+
+
+
+Iteration loops also have a similar role. No one wants to rewrite code again and again
+
+- looping structures such as for loops
+- code recycling: this is when you copy and paste code after pareceling it out. This does add to the code 
+- nesting and map reduce (split-apply-combine, @wickhamSplitApplyCombineStrategyData2011)
+eyond the efficiency argument, thinking about how to streamline code with a single function also prevents errors when copy and pasting several times (speaking from experience sigh).  I think of this as iteration on data tables
+
+Iteration works really well on vectorized operations - meaning that vectors, data frames, lists, and other data structures (especially for R and python) are well tuned to work with iteration.
+
+One challenge for iteration is memory allocation - languages such as java or C (and python?) need pre-allocation of memory (VERIFY THIS) - but with language such as R that can be allocated on the fly. Philosophical differences aside (what if you use up your computer’s memory with a simple operation) - sometimes the design is important. [[ this needs refinement ]]
+
+https://nostarch.com/automate-boring-stuff-python-3rd-edition
+
+## Exercises
