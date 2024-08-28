@@ -1,4 +1,4 @@
-# Setting up *R* and RStudio {#setting-up-r-and-rstudio}
+# Setting up *R* and RStudio {#sec-setting-up-r-and-rstudio}
 
 Every journey starts with gathering the right equipment. This intellectual journey is not much different. The first step that every *R* novice has to face is to set everything up to get started. There are essentially two strategies:
 
@@ -10,7 +10,7 @@ or
 
 While installing *R* and RStudio requires more time and effort, I strongly recommend it, especially if you want to work offline or make good use of your computer's CPU. However, if you are unsure whether you enjoy learning *R*, you might wish to look at RStudio Cloud first. Either way, you can follow the examples of this book no matter which choice you make.
 
-## Installing R {#installing-r}
+## Installing R {#sec-installing-r}
 
 The core module of our programming is *R* itself, and since it is an open-source project, it is available for free on Windows, Mac and Linux computers. So, here is what you need to do to install it properly on your computer of choice:
 
@@ -36,7 +36,7 @@ The core module of our programming is *R* itself, and since it is an open-source
 
 This was relatively easy. You now have *R* installed. Technically you can start using *R* for your research, but there is one more tool I strongly advise installing: RStudio.
 
-## Installing RStudio {#installing-rstudio}
+## Installing RStudio {#sec-installing-rstudio}
 
 *R* by itself is just the '*beating heart*' of *R* programming, but it has no particular user interface. If you want buttons to click and actually '*see*' what you are doing, there is no better way than RStudio. RStudio is an *integrated development environment* (IDE) and will be our primary tool to interact with *R*. It is the only software you need to do all the fun parts and, of course, to follow along with the examples of this book. To install RStudio perform the following steps:
 
@@ -60,7 +60,7 @@ This was relatively easy. You now have *R* installed. Technically you can start 
 
 Congratulations, you are all set up to learn *R*. From now on you only need to start RStudio and not *R*. Of course, if you are the curious type, nothing shall stop you to try *R* without RStudio.
 
-## When you first start RStudio {#when-you-first-start-rstudio}
+## When you first start RStudio {#sec-when-you-first-start-rstudio}
 
 Before you start programming away, you might want to make some tweaks to your settings right away to have a better experience (in my humble opinion). To open the Rstudio settings you have to click on
 
@@ -94,13 +94,13 @@ Of course, if you wish to customise your workspace further, you can do so. The v
 
 ![](images/chapter_03_img/rstudio_preferences/03_rstudio_preferences_appearance.png){fig-alt="Screenshot of the settings window of RStudio showing the Appearance tab and its options to change the visual look of the RStudio IDE."}
 
-## Updating R and RStudio: Living at the pulse of innovation {#updating-r-and-rstudio}
+## Updating R and RStudio: Living at the pulse of innovation {#sec-updating-r-and-rstudio}
 
 While not strictly something that helps you become a better programmer, this advice might come in handy to avoid turning into a frustrated programmer. When you update your software, you need to update *R* and RStudio separately from each other. While both *R* and RStudio work closely with each other, they still constitute separate pieces of software. Thus, it is essential to keep in mind that updating RStudio will not automatically update R. This can become problematic if specific tools you installed via RStudio (like a fancy learning algorithm) might not be compatible with earlier versions of *R*. Also, additional *R* packages (see Chapter \@ref(r-packages)) developed by other developers are separate pieces which require updating too, independently from *R* and RStudio.
 
 I know what you are thinking: This already sounds complicated and cumbersome. However, rest assured, we take a look at how you can easily update all your packages with RStudio. Thus, all you need to remember is: *R* needs to be updated separately from everything else.
 
-## RStudio Cloud {#rstudio-cloud}
+## RStudio Cloud {#sec-rstudio-cloud}
 
 RStudio Cloud is an application that runs in your web browser. It allows you to write and access *R* code wherever you go. It even works on your tablet because it does not require installation. However, do expect it to run slower if your internet connection is not fast or stable. To work with RStudio Cloud, you also need an internet connection. However, there are many benefits to using RStudio in the cloud, such as running time-consuming scripts without using your own device. Also, it is much easier to collaborate with others, and since no installation is required, you can work on projects on any device as long as you are connected to the internet. However, RStudio Cloud's most significant advantage is that you can get started with programming within seconds compared to a desktop installation. Still, I prefer my locally-run offline version of RStudio, because I appreciate working offline as much as online. Nevertheless, I recommend setting up an account because you never know when you need it.
 

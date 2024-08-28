@@ -1,6 +1,6 @@
-# `Readme.` before you get started {#readme-before-you-get-started}
+# `Readme.` before you get started {#sec-readme-before-you-get-started}
 
-## A starting point and reference book {#a-starting-point-and-reference-book}
+## A starting point and reference book {#sec-a-starting-point-and-reference-book}
 
 My journey with *R* began rather suddenly one night. After many months of contemplating learning *R* and too many excuses not to get started, I put all logic aside and decided to use *R* on my most significant project to date. Admittedly, at the time, I had some knowledge of other programming languages and felt maybe overconfident learning a new tool. This is certainly not how I would recommend learning *R*. In hindsight, though, it enabled me to do things that pushed the project much further than I could have imagined. However, I invested a lot of additional time on top of my project responsibilities to learn this programming language. In many ways, *R* opened the door to research I would not have thought of a year earlier. Today, I completely changed my style of conducting research, collaborating with others, composing my blog posts and writing my research papers.
 
@@ -10,7 +10,7 @@ Thus, the aim of this book is narrowly defined: A springboard into the world of 
 
 This book likely caters to your needs irrespective of whether you are a seasoned analyst and want to learn a new tool or have barely any knowledge about data analysis. However, it would be wrong to assume that the book covers everything you possibly could know about *R* or the analytical techniques covered. There are dedicated resources available to you to dig deeper. Several of these resources are cited in this book or are covered in Chapter \@ref(next-steps). The primary focal point of the book is on learning *R* in the context of Social Sciences research projects. As such, it serves as a starting point on what hopefully becomes an enriching, enjoyable, adventurous, and lasting journey.
 
-## Download the companion R package {#download-the-companion-r-package}
+## Download the companion R package {#sec-download-the-companion-r-package}
 
 The learning approach of this book is twofold: Convey knowledge and offer opportunities to practice. Therefore, more than 50% of the book are dedicated to examples, case studies, exercises and code you can directly use yourself. To facilitate this interactive part, this book is accompanied by a so-called 'R package' (see Chapter \@ref(r-packages)), which contains all datasets used in this book and enables you to copy and paste any code snippet[^01_before_you_get_started-1] and work along with the book.
 
@@ -26,11 +26,11 @@ Once you worked through Chapter \@ref(setting-up-r-and-rstudio) you can easily d
 devtools::install_github("ddauber/r4np")
 ```
 
-## A 'tidyverse' approach with some basic R {#a-tidyverse-approach-with-some-basic-r}
+## A 'tidyverse' approach with some basic R {#sec-a-tidyverse-approach-with-some-basic-r}
 
 As you likely know, every language has its flavours in the form of dialects. This is no different to programming languages. The chosen 'dialect' of *R* in this book is the `tidyverse` approach. Not only is it a modern way of programming in *R*, but it is also a more accessible entry point. The code written with `tidyverse` reads almost like a regular sentence and, therefore, is much easier to read, understand, and remember. Unfortunately, if you want a comprehensive introduction to learning the underlying basic *R* terminology, you will have to consult other books. While it is worthwhile to learn different ways of conducting research in *R*, basic *R* syntax is much harder to learn, and I opted against covering it as an entry point for novice users. After working through this book, you will find exploring some of the *R* functions from other 'dialects' relatively easy, but you likely miss the ease of use from the `tidyverse` approach.
 
-## Understanding the formatting of this book {#formatting-of-this-book}
+## Understanding the formatting of this book {#sec-formatting-of-this-book}
 
 The formatting of this book carries special meaning. For example, you will find actual *R* code in boxes like these.
 

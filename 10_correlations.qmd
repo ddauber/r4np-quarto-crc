@@ -1,10 +1,462 @@
-# Correlations {#correlations}
+# Correlations {#sec-correlations}
 
-Sometimes counting and measuring means, medians, and standard deviations is not enough because they are all based on a single variable. Instead, we might have questions related to the relationship of two or more variables. In this section, we will explore how correlations can (and kind of cannot - see Chapter \@ref(simpsons-paradox)) provide insights into the following questions:
+```{r}
+#| label: load-packages
+#| include: false
 
--   Do movie viewers agree with movie critics regarding the rating of movies?
+library(tidyverse)
+library(correlation)
+library(r4np)
+library(patchwork)
+```
 
--   Do popular movies receive more votes from users than less popular movies?
+Sometimes, counting and measuring means, medians, and standard deviations is not enough because they are all based on a single variable. Instead, we might have questions about the relationship between two or more variables. In this section, we will explore how correlations can (and kind of cannot - see Chapter \@ref(simpsons-paradox)) provide insights into the following questions:
 
--   Do movies with more votes also make more money?
+-   Do people who eat healthier also feel happier?
 
+-   Are happier people also more satisfied with their life?
+
+-   Is eating healthier related to other health factors, such as life expectancy, blood pressure and overweight/obesity?
+
+There are many different ways to compute the correlation, and it partially depends on the type of data you want to relate to each other. The *'Pearson's correlation'* is by far the most frequently used correlation technique for normally distributed data. On the other hand, if data is not normally distributed, we can opt for the *'Spearman's rank'* correlation. One could argue that the relationship between these two correlations is like the mean (Pearson) to the median (Spearman). Both approaches require numeric values to be computed correctly. If our data is ordinal or, worse, dichotomous (like a logical variable), we have to choose different options. Table \@ref(tab:different-correlations) summarises different methods depending on the data type.
+
+| Correlation     | Used when ...                                                     |
+|-------------------|-----------------------------------------------------|
+| *Pearson*       | ... variables are numeric and parametric                          |
+| *Spearman*      | ... variables are numeric and non-parametric                      |
+| *Polychoric*    | ... investigating two ordinal variables                           |
+| *Tetrachoric*   | ... both variables are dichotomous, e.g. 'yes/no', 'True/False'.  |
+| *Rank-biserial* | ... one variable is dichotomous and the other variable is ordinal |
+
+: (#tab:different-correlations) Different ways of computing correlations
+
+There are many more variations of correlations, which you can explore on the [package's website](https://easystats.github.io/correlation/articles/types.html "website of the package"){target="blank"} we will use in this chapter: `correlation`. However, we will primarily focus on Pearson and Spearman because they are the most commonly used correlation types in academic publications to understand the relationship between two variables. In addition, we also look at *'partial correlations'*, which allow us to introduce a third variable into this mix.
+
+## Plotting correlations {#sec-plotting-correlations}
+
+Since correlations only show the relationship between two variables, we can easily put one variable on the x-axis and one on the y-axis, creating a so-called 'scatterplot'. We used two functions to plot scatterplots before, i.e. `geom_point()` and `geom_jitter`. Let’s explore our first research question: Do people who eat healthier also feel happier? One assumption might be that healthier eating habits contribute to better physical well-being, which in turn enhances happiness. However, a counter-argument could be that diet does not significantly impact happiness levels, as everyone is subject to various life circumstances that influence our mood. Either way, we first need to identify the two variables of interest, which we can find in the `hie_2021` dataset. It contains measures of national health in various areas of England collected in 2021, such as:
+
+-   `happiness`, which measures the average happiness of respondents when asked how they felt the day before on a scale from `0` (not at all) to `10` (completely), and
+
+-   `healthy_eating`, which represents the percentage of adults who report eating five or more portions of fruit and vegetables on a regular day.
+
+```{r}
+#| label: correlation-happiness-healthy-eating
+#| echo: true
+
+hie_2021 |>
+  ggplot(aes(healthy_eating, happiness)) +
+  geom_point() +
+  see::theme_modern()
+```
+
+The results from our scatterplot are, well, somewhat random. We can see that in some areas of England people report very high `happiness` scores as well as high levels of `healthy_eating`. However, some regions score high on `happiness` but low regarding `healthy_eating`. Overall, the points look like they are randomly scattered all over our canvas. The only visible pattern we can notice is that there are slightly more scores at the center of this cloud of dots than on its edges.
+
+Since correlations only explain linear relationships, a perfect correlation would be represented by a straight line. Consider the following examples of correlations:
+
+```{r}
+#| label: correlation-examples
+#| echo: false
+
+set.seed(1234)
+
+# Positive correlation of 0.89
+cm <- tribble(
+    ~a,    ~b,
+     1,   0.9,
+   0.9,     1)
+
+means <- c(2, 4)
+data <- as_tibble(MASS::mvrnorm(n = 100, mu = means, Sigma = cm)) |>
+  rename("x" = `1`,
+         "y" = `2`)
+
+p1 <- 
+  data |>
+  ggplot(aes(x, y)) + geom_point() + ggtitle("r = 0.89") +
+  see::theme_modern()
+
+# Positive correlation of 0.30
+cm <- tribble(
+    ~a,   ~b,
+     1,  0.3,
+   0.3,    1
+)
+
+means <- c(10, 4)
+data <- as_tibble(MASS::mvrnorm(n = 100, mu = means, Sigma = cm)) |>
+  rename("x" = `1`,
+         "y" = `2`)
+
+p2 <-
+  data |>
+  ggplot(aes(x, y)) + geom_point() + ggtitle("r = 0.30") +
+  see::theme_modern()
+
+# Negative correlation of -0.75
+cm <- tribble(
+    ~a,   ~b,
+     1,  -0.8,
+   -0.8,    1
+)
+
+means <- c(10, 4)
+data <- as_tibble(MASS::mvrnorm(n = 100, mu = means, Sigma = cm)) |>
+  rename("x" = `1`,
+         "y" = `2`)
+
+p3 <-
+  data |>
+  ggplot(aes(x, y)) + geom_point() + ggtitle("r = -0.75") +
+  see::theme_modern()
+
+# Negative correlation of -0.42
+cm <- tribble(
+    ~a,   ~b,
+     1,  -0.5,
+   -0.5,    1
+)
+
+means <- c(10, 4)
+data <- as_tibble(MASS::mvrnorm(n = 100, mu = means, Sigma = cm)) |>
+  rename("x" = `1`,
+         "y" = `2`)
+
+p4 <-
+  data |>
+  ggplot(aes(x, y)) + geom_point()  + ggtitle("r = -0.42") +
+  see::theme_modern()
+
+
+# Negative correlation of -1
+cm <- tribble(
+    ~a,   ~b,
+     1,  -1,
+   -1,    1
+)
+
+means <- c(10, 4)
+data <- as_tibble(MASS::mvrnorm(n = 100, mu = means, Sigma = cm)) |>
+  rename("x" = `1`,
+         "y" = `2`)
+
+p5 <-
+  data |>
+  ggplot(aes(x, y)) + geom_point()  + ggtitle("r = -1") +
+  see::theme_modern()
+
+# Negative correlation of 1
+cm <- tribble(
+    ~a,   ~b,
+     1,  1,
+     1,  1
+)
+
+means <- c(10, 4)
+data <- as_tibble(MASS::mvrnorm(n = 100, mu = means, Sigma = cm)) |>
+  rename("x" = `1`,
+         "y" = `2`)
+
+p6 <-
+  data |>
+  ggplot(aes(x, y)) + geom_point()  + ggtitle("r = 1") +
+  see::theme_modern()
+
+
+p6 + p1 + p2 + p4 + p3 + p5
+```
+
+A correlation can be either positive or negative, and its value (i.e. `r` in case of the Pearson correlation) can range from `-1` to `1`:
+
+-   `-1` defines a perfectly negative correlation,
+
+-   `0` defines no correlation (completely random), and
+
+-   `1` defines a perfectly positive correlation.
+
+In other words, the further the score is away from `0`, the stronger is the relationship between variables. We also have benchmarks that we can use to assess the strength of a relationship, for example, the one by @cohen1988statistical. The strength of the relationship is also called *'effect size'*. Table \@ref(tab:effect-size-cohen) shows the relevant benchmarks. Note that effect sizes are always provided as absolute figures. Therefore, `-0.4` would also count as a moderate relationship.
+
+| effect size         | interpretation |
+|---------------------|----------------|
+| r \< 0.1            | very small     |
+| 0.1 $\leq$ r \< 0.3 | small          |
+| 0.3 $\leq$ r \< 0.5 | moderate       |
+| r $\geq$ 0.5        | large          |
+
+: (#tab:effect-size-cohen) Assessing effect size of relationships according to Cohen (1988)
+
+## Computing correlations {#sec-computing-correlations}
+
+If we compare the plot from our data with the sample plots, we can conclude that the relationship is weak, and therefore the `r` must be close to zero. We can test this with the Pearson correlation using the function `correlation()` from the `correlation` package. By default, it will perform a Pearson correlation, which is only applicable for parametric data. As outlined before, if our data violates the assumptions for parametric tests, we can use Spearman's correlation instead. For the rest of the chapter, we assume that our data is parametric, but I will demonstrate how to compute both in the following code chunk:
+
+```{r}
+#| label: pearson-correlation-happiness-healthy-eating
+#| echo: true
+
+library(correlation)
+
+# Pearson correlation
+hie_2021 |>
+  select(happiness, healthy_eating) |>
+  correlation()
+```
+
+```{r}
+#| label: spearman-correlation
+#| echo: true
+
+# Spearman correlation
+hie_2021 |>
+  select(happiness, healthy_eating) |>
+  correlation(method = "spearman")
+```
+
+Indeed, our analysis reveals that the effect size is very small (r = 0.07 \< 0.1). Therefore, eating healthy, seems to not make us happier. In all fairness, the foods that make us smile are often not fruits and veggies, but other, more guilty, pleasures.
+
+Another question we posed at the beginning was: Are people who are happier also more satisfied with their life? Our intuition might say 'yes'. A person who consistently feels happy is more likely to assess their overall life positively, because their day-to-day experiences are enjoyable. Let's create another scatterplot to find out.
+
+```{r}
+#| label: happiness-vs-life-satisfaction
+#| echo: true
+
+hie_2021 |>
+  ggplot(aes(x = life_satisfaction, y = happiness)) +
+  geom_point()
+```
+
+The scatterplot shows a somewhat positive trend which suggests that we are right: Higher `happiness` is linked to higher `life_satisfaction`. Often, it can be tough to see the trend. To improve our plot, we can use the function `geom_smooth()`, which can help us draw a straight line that best fits our data points. We need to set the `method` for drawing the line to `lm`, which stands for 'linear model'. Remember, correlations assume a linear relationship between two variables, i.e. we model a linear relationship in our scatterplot. As mentioned before, the stronger the relationship the closer each dot in the plot will be to the red line.
+
+```{r}
+#| label: happiness-vs-life-satisfaction-regression-line
+#| echo: true
+
+hie_2021 |>
+  ggplot(aes(x = life_satisfaction, y = happiness)) +
+  geom_point() +
+  geom_smooth(method = "lm",
+              formula = y ~ x,
+              se = FALSE,
+              col = "red")
+```
+
+To find a definitive answer to this research question we can compute the correlation for both variables.
+
+```{r}
+#| label: correlation-satisfaction-happiness
+#| echo: true
+
+hie_2021 |>
+  select(life_satisfaction, happiness) |>
+  correlation()
+```
+
+With an `r` of `0.67`, we did not only find a positive relationship, but one that is considered *large*, according to Cohen (1988).
+
+## Significance: A way to help you judge your findings {#sec-significance}
+
+One of the most common pitfalls of novice statisticians is the interpretation of what counts as significant and not significant. Most basic tests offer a *'p value'*, which stands for *'probability value'*. I referred to this value multiple times in this book already. The `p`-value can range from 1 (for 100%) to 0 (for 0%) and implies:
+
+-   $p = 1$, there is a 100% chance that the result is a pure coincidence
+
+-   $p = 0$, there is a 0% chance that the result is a pure coincidence, i.e. we can be certain this is not just luck.
+
+Technically, we would not find that `p` is ever truly zero and instead denote very small `p`-values with `p < 0.01` or even `p < 0.001`.
+
+There are also commonly considered thresholds for the `p`-value:
+
+-   $p > 0.05$, the result is not significant. There is a chance of +5% that our finding is a pure coincidence.
+
+-   $p \leq 0.05$ , the result is significant.
+
+-   $p \leq 0.01$, the result is highly significant.
+
+We will cover more about the `p`-value in Chapter \@ref(comparing-groups) and Chapter \@ref(regression). For now, it is important to know that a significant correlation is one that we should look at more closely. Usually, correlations that are not significant suffer from small effect sizes. However, different samples can lead to different effect sizes and different significant levels. Consider the following examples:
+
+```{r Significance for different sample sizes, echo=FALSE}
+#| label: sig-for-diff-sample-sizes
+#| echo: false
+
+df_01 <- tribble(
+  ~x, ~y,
+  1,   1,
+  2,   3,
+  3,   3,
+  4,   3
+)
+
+df_01 |> correlation()
+
+df_02 <- tribble(
+  ~x, ~y,
+  1,   1,
+  2,   3,
+  3,   3,
+  4,   3,
+  1,   1,
+  2,   3,
+  3,   3,
+  4,   3,
+  1,   1,
+  2,   3,
+  3,   3,
+  4,   3
+)
+
+df_02 |> correlation()
+```
+
+In both examples $r = 0.77$, but the sample sizes are different (`4` vs `12`), and the `p`-values differ. In the first example, $p = 0.225$, which means the relationship is not significant, while in the second example, we find that $p < 0.01$ and is therefore highly significant. As a general rule, the bigger the sample, the more likely we find significant results, even though the effect size is small. Therefore, it is crucial to interpret correlations base on at least three factors:
+
+-   the `p`-value, i.e. significance level,
+
+-   the `r`-value, i.e. the effect size, and
+
+-   the `n`, i.e. the sample size.
+
+The interplay of all three can help determine whether a relationship is important. Therefore, when we include correlation tables in publications, we have to provide information about all three indicators.
+
+Let's put all this information into practice and investigate our one more of our research questions, which asks whether eating healthy relates to other health factors such as life expectancy, blood pressure and overweight/obesity. While we could compute three correlations independently to find an answer to our question, it is much more common to include multiple variables simultaneously and look at the results conjointly.
+
+```{r}
+#| label: correlation-list-format
+#| echo: true
+
+hie_2021 |>
+  select(healthy_eating, life_expectancy, high_blood_pressure, overweight_and_obesity_in_adults) |>
+  correlation()
+```
+
+If you have seen correlation tables before, you might find that `correlation()` does not produce the classic table by default. If you want it to look like the tables in publications, which are more compact but offer less information, you can use the function `summary()`. Which one you use it entirely up to you (or your supervisor).
+
+```{r}
+#| label: correlation-table-format
+#| echo: true
+
+hie_2021 |>
+  select(healthy_eating, life_expectancy, high_blood_pressure, overweight_and_obesity_in_adults) |>
+  correlation() |>
+  summary()
+```
+
+This table provides a clear answer to our final question. While `healthy_eating` positively relates to `life_expectancy` ($r = 0.70$, $p <0.001$) and negatively to `overweight_and_obesity_in_adults` ($r = -0.45$, $p <0.001$), it does not correlate with `high_blood_pressure` ($r = 0.05$, $p <0.395$). In the classic correlation table, you often see `*`. These stand for the different significant levels:
+
+-   `*`, i.e. $p < 0.05$
+
+-   `**`, i.e. $p < 0.01$
+
+-   `***`, i.e. $p < 0.001$ (you might find some do not use this as a separate level)
+
+In short, the more `*` there are attached to each value, the more significant a result. Therefore, we likely find the same relationships in newly collected data if there are many `*` and we can trust our findings.
+
+## Limitations of correlations {#sec-limitations-of-correlations}
+
+Correlations are helpful, but only to some extend. The three most common limitations you should be aware of are:
+
+-   Correlations are not causal relationships
+
+-   Correlations can be spurious
+
+-   Correlations might only appear in sub-samples of your data
+
+### Correlations are not causal relationships {#sec-correlations-are-not-causal-relationships}
+
+Correlations do not offer insights into causality, i.e. whether a change in one variable causes change in the other variable. Correlations only provide insights into whether these two variables tend to change when one of them changes. Still, sometimes we can infer such causality by the nature of the variables. For example, in countries with heavy rain, more umbrellas are sold. Buying more umbrellas will not cause more rain, but if there is more rain in a country, we rightly assume a higher demand for umbrellas. If we can theorise the relationship between variables, we would rather opt for a regression model instead of a correlation (see Chapter \@ref(regression)).
+
+### Correlations can be spurious {#sec-correlations-can-be-spurious}
+
+Just because we find a relationship between two variables does not necessarily mean that they are truly related. Instead, it might be possible that a third variable is the reason for the relationship. We call relationships between variables that are caused by a third variable *'spurious correlations'*. This third variable can either be part of our dataset or even something we have not measured at all. The latter case would make it impossible to investigate the relationship further. However, we can always test whether some of our variables affect the relationship between the two variables of interest. This can be done by using *partial correlations*. A *partial correlation* returns the relationship between two variables minus the relationship to a third variable. Figure \@ref(fig:illustration-spurious-correlation) depicts this visually. While `a` and `b` appear to be correlated, the correlation might only exist because they correlate with `x`.
+
+![Illustration of a spurious correlation](/images/chapter_09_img/spurious-correlation.png){#fig-illustration-spurious-correlation}
+
+Let's return to our first research questions. We found that `healthy_eating` is not related to `happiness`, but to `life_satisfaction`. `Life_satisfaction`, however, is related to `happiness`.
+
+```{r}
+#| label: regular-correlation
+#| echo: true
+
+# Correlation between variables
+hie_2021 |>
+  select(healthy_eating, happiness, life_satisfaction) |>
+  correlation()
+```
+
+However, if we consider the impact of `life_satisfaction` on the relationship between `heathly_eating` and `happiness` when we compute the correlation, we retrieve a very different result.
+
+```{r}
+#| label: partial-correlation
+#| echo: true
+
+# Correlation between variables, considering partial correlations
+hie_2021 |>
+  select(healthy_eating, happiness, life_satisfaction) |>
+  correlation(partial = TRUE)
+```
+
+Suddenly, `eating_healthy` and `happiness` show a slight negative correlation ($r = -0.11$). In other words, by controlling for the effect of `life_satisfaction` on both variables, we reversed the relationship from positive to negative. You might wonder whether this implies that eating healthily makes us less happy. If we were to take this result superficiously, it would indicate exactly this. However, as mentioned before, when we look at correlations we have to consider not only `r` but also the p-value and the sample size. While sample size seems less problematic ($n = 307$), the p-value is only $p = 0.053$, which is just shy of the required minimum significance level of `0.05`. If we strictly applied the rules, this relationship would not be classified as 'significant'. Thus, the relationship would not be strong enough to derive meaningful conclusions. Even if the p-value were slightly lower, the effect size would still be very small.
+
+### Simpson's Paradox: When correlations betray you {#sec-simpsons-paradox}
+
+The final limitation is so important that it even has its own name: the *'Simpson's Paradox'*. Let's find out what is so paradoxical about some correlations. For this demonstration, we have to make use of a different dataset: `simpson` of the `r4np` package. It contains information about changes in student `performance` and changes in `happiness`. The dataset includes responses from three different groups: `Teachers`, `Students` and `Parents`.
+
+We would assume that an increase in students' `performance` will likely increase the `happiness` of participants. After all, all three have stakes in students' `performance`.
+
+```{r}
+#| label: simpson-paradox-plot
+#| echo: true
+
+simpson |>
+  ggplot(aes(x = performance,
+             y = happiness)) +
+  geom_point() +
+  geom_smooth(method = "lm",
+              formula = y ~ x,
+              se = FALSE,
+              color = "red")
+```
+
+```{r}
+#| label: simpson-paradox-correlation
+#| echo: true
+
+simpson |>
+  select(performance, happiness) |>
+  correlation()
+```
+
+It appears we were terribly wrong. It seems as if `performance` and `happiness` are moderately negatively correlated with each other. Thus, the more a student improves their `performance`, the less happy teachers, parents, and students are. I hope you agree that this is quite counter-intuitive. However, what could be the cause for such a finding?
+
+If you have the instincts of a [true detective](https://www.imdb.com/title/tt2356777/episodes?season=1 "True Detective"){traget="blank"}, you would think that maybe we should look at each group of participants separately. So, let's plot the same scatterplot again but colour the responses of each participant `group` differently and also compute the correlation for each subset of our data.
+
+```{r}
+#| label: simpson-paradox-plot-groups
+#| echo: true
+
+simpson |>
+  ggplot(aes(x = performance,
+             y = happiness,
+             group = group,
+             col = group)) +
+  geom_point() +
+  geom_smooth(method = "lm",
+              formula = y ~ x,
+              se = FALSE,
+              col = "black") +
+
+  # Choose custom colours for the dots
+  scale_color_manual(values = c("#42BDFF", "#FF5C67", "#B3AF25"))
+```
+
+```{r}
+#| label: simpson-paradox-correlation-groups
+#| echo: true
+
+simpson |>
+  group_by(group) |>
+  correlation()
+```
+
+The results have magically been inverted. Instead of a negative correlation, we now find a strong positive correlation among all groups. This result seems to make much more sense.
+
+When computing correlations, we need to be aware that subsets of our data might show different directions of correlations. Sometimes insignificant correlations might suddenly become significant. This is what the *Simpson's paradox* postulates.
+
+If your study relies solely on correlations to detect relationships between variables, which it hopefully does not, it is essential to investigate whether the detected (or undetected) correlations exist. Of course, such an investigation can only be based on the data you obtained. The rest remains pure speculation. Nevertheless, correlations are beneficial to review the bilateral relationship of your variables. It is often used as a pre-test for regressions (see Chapter \@ref(regression)) and similarly more advanced computations. As a technique to make inferences, correlations are a good starting point but should be complemented by other steps, if possible.

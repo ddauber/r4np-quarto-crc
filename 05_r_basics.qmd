@@ -1,4 +1,4 @@
-# *R* Basics: The very fundamentals {#r-basics-the-very-fundamentals}
+# *R* Basics: The very fundamentals {#sec-r-basics-the-very-fundamentals}
 
 ```{r, echo=FALSE, message=FALSE}
 #| label: load-packages
@@ -11,36 +11,54 @@ library(gt)
 
 After a likely tedious installation of *R* and RStudio, as well as a somewhat detailed introduction to the RStudio interface, you are finally ready to *'do'* things. By *'doing'*, I mean *'coding'*. The term *'coding'* in itself can instil fear in some of you, but you only need one skill to do it: Writing. As mentioned earlier, learning coding or programming means learning a new language. However, once you have the basic grammar down, you already can communicate quite a bit. In this section, we will explore the fundamentals of *R*. These build the foundation for everything that follows. After that, we dive right into some analysis.
 
-## Basic computations in *R* {#basic-computations-in-r}
+## Basic computations in *R* {#sec-basic-computations-in-r}
 
 The most basic computation you can do in *R* is arithmetic operations. In other words, addition, subtraction, multiplication, division, exponentiation and extraction of roots. In short, *R* can be used like your pocket calculator, or more likely the one you have on your phone. For example, in Chapter \@ref(the-console-window) we already performed an addition. Thus, it might not come as a surprise how their equivalents work in *R*. Let's take a look at the following examples:
 
 ```{r}
+#| label: addition
+#| echo: true
+
 # Addition
 10 + 5
 ```
 
 ```{r}
+#| label: subtraction
+#| echo: true
+
 # Subtraction
 10 - 5
 ```
 
 ```{r}
+#| label: multiplication
+#| echo: true
+
 # Multiplication
 10 * 5
 ```
 
 ```{r}
+#| label: division
+#| echo: true
+
 # Division
 10 / 5
 ```
 
 ```{r}
+#| label: exponentiation
+#| echo: true
+
 # Exponentiation
 10 ^ 2
 ```
 
 ```{r}
+#| label: square-root
+#| echo: true
+
 # Square root
 sqrt(10)
 ```
@@ -50,7 +68,7 @@ They all look fairly straightforward except for the extraction of roots. As you 
 Functions are an essential part of *R* and programming in general. You will learn more about them in Chapter \@ref(functions). Besides arithmetic operations, there are also logical queries you can perform. Logical queries always return either the value `TRUE` or `FALSE`. Here are some examples which make this clearer:
 
 ```{r}
-#| label: logical-queries
+#| label: logical-queries-equal
 #| echo: true
 
 #1 Is it TRUE or FALSE?
@@ -58,21 +76,33 @@ Functions are an essential part of *R* and programming in general. You will lear
 ```
 
 ```{r}
+#| label: logical-queries-bigger
+#| echo: true
+
 #2 Is 45 bigger than 55?
 45 > 55
 ```
 
 ```{r}
+#| label: logical-queries-bigger-equal
+#| echo: true
+
 #3 Is 1982 bigger or equal to 1982?
 1982 >= 1982
 ```
 
 ```{r}
+#| label: logical-queries-not-equal
+#| echo: true
+
 #4 Are these two words NOT the same?
 "Friends" != "friends"
 ```
 
 ```{r}
+#| label: logical-queries-equal-text
+#| echo: true
+
 #5 Are these sentences the same?
 "I love statistics" == "I love statistícs"
 ```
@@ -105,12 +135,12 @@ logical_ops <- tibble(operator = c("==", "!=", ">=",
                                    "a and b",
                                    "is not a"))
 
-logical_ops %>%
-  gt() %>%
-  opt_stylize(style = 1) %>%
+logical_ops |>
+  gt() |>
+  opt_stylize(style = 1) |>
   cols_align(
     align = "center",
-    columns = c(operator)) %>%
+    columns = c(operator)) |>
   cols_label(
     operator = "Operator",
     description = "Description"
@@ -118,7 +148,7 @@ logical_ops %>%
 
 ```
 
-## Assigning values to objects: '\<-' {#assigning-values-to-objects}
+## Assigning values to objects: '\<-' {#sec-assigning-values-to-objects}
 
 Another common task you will perform is assigning values to an object. An object can be many different things:
 
@@ -187,7 +217,7 @@ To concatenate values into a single object, we need to use a comma `,` to separa
 
 ```{r}
 #| label: concatenate-error
-#| eval: false
+#| error: true
 
 friends <- c("Fiona" "Ida")
 ```
@@ -293,7 +323,7 @@ Sleep.per_monthsIn.hours
 
 Ultimately, you need to be able to effectively work with your data and output. Ideally, this should be true for others as well who want or need to work with your analysis and data as well, e.g. your co-investigator or supervisor. The same is applies to column names in datasets (see Chapter \@ref(colnames-cleaning)). Some more information about coding style and coding etiquette can be found in Chapter \@ref(coding-etiquette).
 
-## Functions {#functions}
+## Functions {#sec-functions}
 
 I used the term '*function*' multiple times, but I never thoroughly explained what they are and why we need them. In simple terms, functions are objects. They contain lines of code that someone has written for us or we have written ourselves. One could say they are code snippets ready to use. Someone else might see them as shortcuts for our programming. Functions increase the speed with which we perform our analysis and write our computations and make our code more readable and reliable. Consider computing the `mean` of values stored in the object `pocket_money`.
 
@@ -310,11 +340,17 @@ sum / 12 # There are 12 items in the object
 ```
 
 ```{r}
+#| label: use-function-mean
+#| echo: true
+
 #2 Use a function to compute the mean
 mean(pocket_money)
 ```
 
 ```{r}
+#| label: compare-results-function-no-function
+#| echo: true
+
 #3 Let's make sure #1 and #2 are actually the same
 sum / 12 == mean(pocket_money)
 ```
@@ -386,11 +422,14 @@ Sometimes you will also get a message from *R* that states `NaN`. `NaN` stands f
 ```
 
 ```{r}
+#| label: nan-example-negative-sqrt
+#| echo: true
+
 # Example 2
 sqrt(-9)
 ```
 
-## R packages {#r-packages}
+## R packages {#sec-r-packages}
 
 *R* has many built-in functions that we can use right away. However, some of the most interesting ones are developed by different programmers, data scientists and enthusiasts. To add more functions to your repertoire, you can install *R* packages. *R* packages are a collection of functions that you can download and use for your own analysis. Throughout this book, you will learn about and use many different *R* packages to accomplish various tasks. To give you another analogy,
 
@@ -413,7 +452,7 @@ However, how do you find those *R* packages? They are right at your fingertips. 
 
 2.  Use the packages pane in RStudio.
 
-### Installing packages using `install.packages()` {#installing-packages-using-a-function}
+### Installing packages using `install.packages()` {#sec-installing-packages-using-a-function}
 
 The simplest and fastest way to install a package is calling the function `install.packages()`. You can either use it to install a single package or install a series of packages all at once using our trusty `c()` function. All you need to know is the name of the package. This approach works for all packages that are on CRAN (remember CRAN from Chapter \@ref(installing-r)?). <a id="install-packages-tidyverse-nanair-psych"></a>
 
@@ -447,7 +486,7 @@ install.packages("devtools")
 devtools::install_github("ddauber/r4np")
 ```
 
-### Installing packages via RStudio's package pane {#installing-packages-via-rstudio}
+### Installing packages via RStudio's package pane {#sec-installing-packages-via-rstudio}
 
 RStudio offers a very convenient way of installing packages. In the packages pane, you cannot only see your installed packages, but you have two more buttons: `Install` and `Update`. The names are very self-explanatory. To install an *R* package you can follow the following steps:
 
@@ -469,7 +508,7 @@ RStudio offers a very convenient way of installing packages. In the packages pan
 
 The only real downside of using the packages pane is that you cannot install packages hosted on GitHub only. However, you can download them from there and install them directly from your computer using this option. This is particularly useful if you do not have an internet connection but you already downloaded the required packages onto a hard drive. However, in 99.9% of cases it is much easier to use the function `devtools::install_github()`.
 
-### Install all necessary *R* packages for this book {#install-all-r-packages}
+### Install all necessary *R* packages for this book {#sec-install-all-r-packages}
 
 Lastly, if you would like to install the necessary packages to follow the examples in this book, the `r4np` package comes with a handy function to install them all at once. Of course, you need to have `r4np` installed first, as shown [above](#install-r4np).
 
@@ -481,7 +520,7 @@ Lastly, if you would like to install the necessary packages to follow the exampl
 r4np::install_r4np()
 ```
 
-### Using *R* Packages {#using-r-packages}
+### Using *R* Packages {#sec-using-r-packages}
 
 Now that you have a nice collection of *R* packages, the next step would be to use them. While you only have to install *R* packages once, you have to 'activate' them every time you start a new session in RStudio. This process is also called 'loading an *R* package'. Once an *R* package is loaded, you can use all its functions. To load an *R* package, we have to use the function `library()`.
 
@@ -508,7 +547,7 @@ Besides, it is not always advisable to load all functions of an entire package. 
 naniar::vis_miss(airquality)
 ```
 
-## Coding etiquette {#coding-etiquette}
+## Coding etiquette {#sec-coding-etiquette}
 
 Now you know everything to get started, but before we jump into our first project, I would like to briefly touch upon coding etiquette. This is not something that improves your analytical or coding skills directly, but is essential in building good habbits and making your life and those of others a little easier. Consider writing code like growing plants in your garden. You want to nurture the good plants, remove the weed and add labels that tell you which plant it is that you are growing. At the end of the day, you want your garden to be well-maintained. Treat you programming code the same way.
 
@@ -533,7 +572,7 @@ library(tidyverse)
 library(jtools)
 model1 <- lm(covid_cases_per_1m ~ idv, data = df)
 summ(model1, scale = TRUE, transform.response = TRUE, vifs = TRUE)
-df %>% ggplot(aes(x = covid_cases_per_1m, y = idv, col = europe, label = country))+
+df |> ggplot(aes(x = covid_cases_per_1m, y = idv, col = europe, label = country))+
 theme_minimal()+ geom_label(nudge_y = 2) + geom_point()
 model2 <- lm(cases_per_1m ~ idv + uai + idv*europe + uai*europe, data = df)
 summ(model2, scale = TRUE, transform.response = TRUE, vifs = TRUE)
@@ -567,7 +606,7 @@ summ(model1,
 # Does is matter whether a country lies in Europe?
 
 ## Visualise rel. of covid cases, idv and being a European country
-df %>%
+df |>
   ggplot(aes(x = covid_cases_per_1m,
              y = idv,
              col = europe,
@@ -605,7 +644,7 @@ mean(pocket_money)   # R will run this code
 
 RStudio helps a lot with keeping your coding tidy and properly formatted. However, there are some additional aspects worth considering. If you want to find out more about coding style, I highly recommend to read through [*'The tidyverse style guide'*](https://style.tidyverse.org "'The tidyverse style guide'"){target="blank"} [@wickham-2021].\
 
-## Exercises {#exercises-r_basics}
+## Exercises {#sec-exercises-r_basics}
 
 It is time to practice the newly acquired skills. The `r4np` package comes with interactive tutorials. In order to start them, you have two options. If you have installed the `r4np` package already and used the function `install_r4np()` you can use `Option 1`:
 

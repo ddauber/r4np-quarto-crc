@@ -25,6 +25,9 @@ book:
     - 13_regressions.qmd
     - 14_mixed_methods.qmd
     - 15_next_steps.qmd
+    - 16_case_studies.qmd
+    - 18_epilogue.qmd
+    - 99_appendix.qmd
     - references.qmd
 
 bibliography: references.bib

@@ -1,4 +1,4 @@
-# Sources of bias: Outliers, normality and other 'conundrums' {#sources-of-bias}
+# Sources of bias: Outliers, normality and other 'conundrums' {#sec-sources-of-bias}
 
 ```{r}
 #| label: load-packages
@@ -23,7 +23,7 @@ Most *parametric tests* require that all assumptions are met. If this is not the
 
 Lastly, @field2013discovering also mentions outliers as an important source of bias. Irrespective of whether your data fulfils the assumptions for parametric tests, outliers tend to be a significant problem. They usually lead to wrong results and, consequently, to misinterpretations of our findings. We will also cover how we can identify and handle such outliers in our data at the end of this chapter.
 
-## Linearity and additivity {#additivity-and-linearity}
+## Linearity and additivity {#sec-additivity-and-linearity}
 
 The assumption of linearity postulates that the relationship of variables represents a straight line and not a curve or any other shape. Figure \@ref(fig:linear-nonlinear-relationships) depicts examples of how two variables could be related to each other. Only the first one demonstrates a linear relationship, and all other plots would represent a violation of linearity.
 
@@ -36,7 +36,7 @@ data <- tibble(x = seq(from = -10,
                        to = 10))
 
 p1 <-
-  data %>%
+  data |>
   ggplot(aes(x = x, y = x)) +
   geom_point() +
   geom_smooth(method = "lm",
@@ -49,8 +49,8 @@ p1 <-
   ggtitle("y = x")
 
 p2 <-
-  data %>%
-  mutate(zz = x^2) %>%
+  data |>
+  mutate(zz = x^2) |>
   ggplot(aes(x = x, y = zz)) +
   geom_point() +
   geom_smooth(method = "lm",
@@ -64,8 +64,8 @@ p2 <-
 
 
 p3 <-
-  data %>%
-  mutate(zz = x^3) %>%
+  data |>
+  mutate(zz = x^3) |>
   ggplot(aes(x = x, y = zz)) +
   geom_point() +
   geom_smooth(method = "lm",
@@ -78,8 +78,8 @@ p3 <-
   ggtitle("y = x^3")
 
 p4 <-
-  data %>%
-  mutate(zz = x^4) %>%
+  data |>
+  mutate(zz = x^4) |>
   ggplot(aes(x = x, y = zz)) +
   geom_point() +
   geom_smooth(method = "lm",
@@ -107,13 +107,13 @@ $Y = \beta_{1} * X_1 + \beta_{2} * X_{2} + ... + \beta_{n} * X_{n}$
 
 The $\beta$ (beta) stands for the degree of change in a variable $X$ causes in $Y$. Or, in simpler terms, $\beta$ reflects the impact an independent variable has on the dependent variable. We will return to this equation in Chapter \@ref(regression), where we create a linear model via regression.
 
-## Independence
+## Independence {sec-independence}
 
 The notion of independence is an important one. It assumes that each observation in our dataset is independent of other observations. For example, imagine my wife Fiona and I take part in a study that asks us to rank movies by how much we like them. Each of us has to complete the ranking by ourselves, but since we both sit in the same living room, we start chatting about these movies. By doing so, we influence each other's rankings and might even agree on the same ranking. Thus, our scores are not independent from each other. On the other hand, suppose we were both sitting in our respective offices and rank these movies. In that case, the rankings could potentially still be very similar, but this time the observations are independent of each other.
 
 There is no statistical measurement or plot that can tell us whether observations are independent or not. Ensuring independence is a matter of data collection and not data analysis. Thus, it depends on how you, for example, designed your experiment, or when and where you ask participants to complete a survey, etc. Still, this criterion should not be downplayed as being a 'soft' one, just because there is no statistical test, but should remain on your radar throughout the planning and data collection stage of your research.
 
-## Normality {#normality}
+## Normality {#sec-normality}
 
 We touched upon the notion of *'normality'* and *'normal distributions'* before in Chapter \@ref(spread-of-data) because it refers to the spread of our data. Figure \@ref(fig:normal-distribution2) should look familiar by now.
 
@@ -124,7 +124,7 @@ We touched upon the notion of *'normality'* and *'normal distributions'* before 
 
 data <- tribble(~x, -5, 5)
 
-data %>% ggplot(aes(x)) +
+data |> ggplot(aes(x)) +
   geom_hline(yintercept = 0) +
   geom_vline(xintercept = c(0), col = "red") +
   stat_function(fun = dnorm, n = 200, args = list(mean = 0, sd = 1.5)) +
@@ -157,7 +157,7 @@ data <- tribble(
   )
 
 p1 <-
-  data %>%
+  data |>
   ggplot(aes(income)) +
   geom_density(bw = 80) +
   geom_vline(aes(xintercept = mean(income), color = "red")) +
@@ -197,7 +197,7 @@ data2 <- tribble(
   )
 
 p2 <-
-  data2 %>%
+  data2 |>
   ggplot(aes(income)) +
   geom_density(bw = 80) +
   geom_vline(aes(xintercept = mean(income), color = "red")) +
@@ -235,7 +235,7 @@ data3 <- tribble(
   )
 
 p3 <-
-  data3 %>%
+  data3 |>
   ggplot(aes(income)) +
   geom_density(bw = 80) +
   geom_vline(aes(xintercept = mean(income), color = "red")) +
@@ -291,22 +291,22 @@ data4 <- tribble(
   2058,    "female",
   2160,    "female",
   2340,    "female"
-  ) %>%
+  ) |>
   mutate(gender = as_factor(gender))
 
 p1 <-
-  data4 %>%
+  data4 |>
   ggplot(aes(income)) +
   geom_density(bw = 80) +
   ggtitle("Bimodal distribution")
 
 group_means <-
-  data4 %>%
-  group_by(gender) %>%
+  data4 |>
+  group_by(gender) |>
   summarise(mean = mean(income))
 
 p2 <-
-  data4 %>%
+  data4 |>
   ggplot(aes(income, group = gender, color = gender)) +
   geom_density(bw = 80) +
   ggtitle("Normal distribution for each group") +
@@ -349,7 +349,7 @@ In conclusion, the normality of data is an essential pre-test for any of our stu
 
 Admittedly, this raises the question: Can I ignore normality and move on with my analysis if my sample is large enough or I use bootstrapping? In short: Yes. This fact probably also explains why we hardly ever find results from normality tests in journal publications since most Social Science research involves more than 30 participants. However, if you find yourself in a situation where the sample size is smaller, all of the above needs to be check and thoroughly considered. However, the sample size also has implications with regards to the power of your test/findings (see Chapter \@ref(power-analysis)). Ultimately, the answer to the above questions remains, unsatisfyingly: 'It depends'.
 
-## Homogeneity of variance (homoscedasticity) {#homogeneity-of-variance}
+## Homogeneity of variance (homoscedasticity) {#sec-homogeneity-of-variance}
 
 The term *'variance'* should sound familiar, because we mentioned it in Chapter \@ref(standard-deviation) where we looked at the standard deviation derived from the variance.
 
@@ -359,7 +359,7 @@ The term *'variance'* should sound familiar, because we mentioned it in Chapter 
 #| label: homogeneity-variance
 #| echo: true
 
-data4 %>%
+data4 |>
   ggplot(aes(x = gender, y = income, col = gender)) +
   geom_jitter(width = 0.1) +
   geom_hline(yintercept = group_means$mean[1], color = "red") +
@@ -372,7 +372,7 @@ Judging by eye, we could argue that most values lie around the mean for each res
 #| label: homogeneity-variance-alt-vis
 #| echo: true
 
-data4 %>%
+data4 |>
   ggplot(aes(x = gender, y = income, group = gender)) +
   ggdist::stat_interval(aes(y = income),
                         .width = c(0.25, 0.5, 0.75, 1)) +
@@ -387,8 +387,8 @@ If we compare the bars, we can tell that the variance in both groups looks very 
 #| label: iqr-both-groups
 #| echo: true
 
-data4 %>%
-  group_by(gender) %>%
+data4 |>
+  group_by(gender) |>
   summarise(iqr = IQR(income))
 ```
 
@@ -404,7 +404,7 @@ car::leveneTest(gep$age ~ gep$gender)
 
 The Levene's test shows that our variances are similar and not different from each other because $p > 0.05$. This is good news if we wanted to continue and perform a group comparison, like in Chapter \@ref(comparing-groups).
 
-## Outliers and how to deal with them {#dealing-with-outliers}
+## Outliers and how to deal with them {#sec-dealing-with-outliers}
 
 In Chapter \@ref(descriptive-statistics), I referred to outliers many times but never eluded to the aspects of handling them. Dealing with outliers is similar to dealing with missing data. However, it is not quite as straightforward as one might think.
 
@@ -414,7 +414,7 @@ In a first step, we need to determine which values count as an outlier. @aguinis
 
 -   The inter-quartile range (IQR).
 
-### Detecting outliers using the standard deviation {#ouliers-standard_deviation}
+### Detecting outliers using the standard deviation {#sec-ouliers-standard_deviation}
 
 A very frequently used approach to detecting outliers is the use of the standard deviation. Usually, scholars use multiples of the standard deviation to determine thresholds. For example, a value that lies 3 standard deviations above or below the mean could be categorised as an outlier. Unfortunately, there is quite some variability regarding how many multiples of the standard deviation counts as an outlier. Some authors might use `3`, and others might settle for `2` (see also @leys2013detecting). Let's stick with the definition of `3` standard deviations to get us started. We can revisit our previous plot regarding `runtime_min` (see Figure \@ref(fig:runtime-movies-deviation)) and add lines that show the thresholds above and below the mean. As before, I will create a base plot `outlier_plot` first so that we do not have to repeat the same code over and over again. We then use `outlier_plot` and add more layers as we see fit.
 
@@ -429,8 +429,8 @@ sd_lower <- runtime_mean - 3 * sd(imdb_top_250$runtime_min)
 
 # Create the base plot
 outlier_plot <-
-  imdb_top_250 %>%
-  select(title, runtime_min) %>%
+  imdb_top_250 |>
+  select(title, runtime_min) |>
   ggplot(aes(x = reorder(title, runtime_min),
              y = runtime_min)) +
   geom_point(shape = 124) +
@@ -526,7 +526,7 @@ outlier_plot +
 
 Which approach to choose very much depends on the nature of your data. For example, one consideration could be that if the median and the mean of a variable are dissimilar, choosing the median might be the better option. However, we should not forget that the outliers we need to identify will affect the mean. Hence, it appears that in many cases, the median could be the better choice. Luckily, there is yet another highly popular method based on two quartiles (rather than one, i.e. the median).
 
-### Detecting outliers using the interquartile range (IQR) {#outliers-iqr}
+### Detecting outliers using the interquartile range (IQR) {#sec-outliers-iqr}
 
 Another approach to classifying outliers is the use of the *interquartile range (IQR)*. The IQR is used in boxplots and creates the dots at its ends to indicate any outliers. This approach is straightforward to implement because the computation of the IQR is simple:
 
@@ -559,7 +559,7 @@ outlier_plot +
 
 As we can tell, the IQR method detects about the same outliers for our data as the median absolute deviation (MAD) approach. The outliers we find here are the same as shown in Figure \@ref(fig:a-boxplot). For our data, I would argue that the IQR and MAD method by @leys2013detecting produced the 'best' selection of outliers. However, we have to acknowledge that these classifications will always be subjective because how we position the thresholds depends on the researcher's choice. Still, the computation is standardised, and we can plausibly explain the process of identifying outliers, we just have to make it explicit to the audience of our research.
 
-### Removing or replacing outliers {#removing-or-replacing-outliers}
+### Removing or replacing outliers {#sec-removing-or-replacing-outliers}
 
 Now that we have identified our outliers, we are confronted with the question of what we should do with them. Like missing data (see Chapter \@ref(dealing-with-missing-data)), we can either remove them or replace them with other values. While removal is a relatively simple task, replacing it with other 'reasonable' values implies finding techniques to create such values. As you may remember, we were confronted with a similar problem before when we looked into missing data (Chapter \@ref(dealing-with-missing-data)). The same techniques, especially multiple imputation [see @cousineau2010outliers], can be used for such scenarios.
 
@@ -592,7 +592,7 @@ We already know from Chapter \@ref(basic-computations-in-r) how to use logical a
 #| echo: true
 
 imdb_top_250 <-
-  imdb_top_250 %>%
+  imdb_top_250 |>
   mutate(outlier = ifelse(runtime_min > iqr_upper |
                             runtime_min < iqr_lower,
                           TRUE, FALSE))
@@ -604,9 +604,9 @@ Since we have now a classification, we can more thoroughly inspect our outliers 
 #| label: list-outliers
 #| echo: true
 
-imdb_top_250 %>%
-  filter(outlier == "TRUE") %>%
-  select(title, runtime_min, outlier) %>%
+imdb_top_250 |>
+  filter(outlier == "TRUE") |>
+  select(title, runtime_min, outlier) |>
   arrange(runtime_min)
 ```
 
@@ -620,8 +620,8 @@ From here, it is simple to remove these movies (i.e. keep the movies that are no
 #| results: hide
 
 # Keep all observations but outliers
-imdb_top_250 %>%
-  filter(outlier == "FALSE") %>%
+imdb_top_250 |>
+  filter(outlier == "FALSE") |>
   select(title, outlier)
 ```
 
@@ -630,14 +630,14 @@ imdb_top_250 %>%
 #| echo: true
 
 # Replace values with NA
-imdb_top_250 %>%
-  mutate(runtime_min = replace(runtime_min, outlier == "TRUE", NA)) %>%
+imdb_top_250 |>
+  mutate(runtime_min = replace(runtime_min, outlier == "TRUE", NA)) |>
   select(title, runtime_min)
 ```
 
 The `replace()` function is very intuitive to use. It first needs to know where you want to replace a value (`runtime_min`), then what the condition for replacing is (`outlier == "TRUE"`), and lastly, which value should be put instead of the original one (`NA`).
 
-### Concluding remarks about outliers {#concluding-remarks-outliers}
+### Concluding remarks about outliers {#sec-concluding-remarks-outliers}
 
 As you hopefully noticed, understanding your data requires some effort, but it is important to know your data well before proceeding to any further analysis. You can experiment with different data visualisations and design them in a way that best reflects the message you want to get across. For example, because we have added a new variable that classifies outliers, we can do more with our data visualisation than before and highlight them more clearly.
 
@@ -645,7 +645,7 @@ As you hopefully noticed, understanding your data requires some effort, but it i
 #| label: plot-outliers-different-format
 #| echo: true
 
-imdb_top_250 %>%
+imdb_top_250 |>
   ggplot(aes(x = reorder(genre_01, runtime_min),
              y = runtime_min,
              col = outlier,
@@ -667,7 +667,7 @@ To round things off, let me share with you one more visualisation, which demonst
 # 'Wes Anderson'
 colour_pal <- wesanderson::wes_palette("Darjeeling1", 11, type = "continuous")
 
-imdb_top_250 %>%
+imdb_top_250 |>
   ggplot(aes(x = reorder(genre_01, runtime_min),
              y = runtime_min,
              col = genre_01)

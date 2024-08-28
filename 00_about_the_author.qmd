@@ -1,4 +1,4 @@
-# About the author {#about-the-author .unnumbered}
+# About the author {#sec-about-the-author .unnumbered}
 
 I am an Associate Professor at the University of Warwick. My research interfaces with multiple disciplines, such as International Management, Organisational Behaviour, Cross-cultural Psychology and Intercultural Communication. Most of my research investigates real-life issues in organisational contexts using a diagnostic angle with an emphasis to help improve organisational members' experiences and organisational performance.
 

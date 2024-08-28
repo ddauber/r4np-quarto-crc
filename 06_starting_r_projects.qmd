@@ -1,4 +1,4 @@
-# Starting your *R* projects {#starting-your-r-projects}
+# Starting your *R* projects {#sec-starting-your-r-projects}
 
 Every new project likely fills you with enthusiasm and excitement. And it should. You are about to find answers to your research questions, and you hopefully come out more knowledgeable due to it. However, there are likely certain aspects of data analysis that you find less enjoyable. I can think of two:
 
@@ -8,7 +8,7 @@ Every new project likely fills you with enthusiasm and excitement. And it should
 
 While we cover data wrangling in great detail in the next Chapter (Chapter \@ref(data-wrangling)), I would like to share some insights from my work that helped me stay organised and, consequently, less frustrated. The following applies to small and large research projects, which makes it very convenient no matter the situation and the scale of the project. Of course, feel free to tweak my approach to whatever suits you. However, consistency is king.
 
-## Creating an *R* Project file {#creating-an-r-project}
+## Creating an *R* Project file {#sec-creating-an-r-project}
 
 When working on a project, you likely create many different files for various purposes, especially *R* Scripts (see Chapter \@ref(creating-an-r-script)). If you are not careful, this file is stored in your system's default location, which might not be where you want them to be. RStudio allows you to manage your entire project intuitively and conveniently through *R* Project files. Using *R* Project files comes with a couple of perks, for example:
 
@@ -50,7 +50,7 @@ To create an R Project, you need to perform the following steps:
 
 If you look carefully, you can see that your RStudio is now 'branded' with your project name. At the top of the window, you see the project name, the files pane shows the root directory where all your files will be, and even the console shows on top the file path of your project. You could set all this up manually, but I would not recommend it, not the least because it is easy and swift to work with *R* Projects.
 
-## Organising your projects {#organising-your-projects}
+## Organising your projects {#sec-organising-your-projects}
 
 This section is not directly related to RStudio, *R* or data analysis in general. Instead, I want to convey to you that a good folder structure can go a long way. It is an excellent habit to start thinking about folder structures before you start working on your project. Placing your files into dedicated folders, rather than keeping them loosely in one container, will speed up your work and save you from the frustration of not finding the files you need. I have a template that I use regularly. You can either create it from scratch in RStudio or open your file browser and create the folders there. RStudio does not mind which way you do it. If you want to spend less time setting this up, you might want to use the function `create_project_folder()` from the `r4np` package. It creates all the folders as shown in Figure \@ref(fig:folder-structure).
 
@@ -87,7 +87,7 @@ Thus, in RStudio, it would look something like this:
 
 You probably noticed that my folders have numbers in front of them. I do this to ensure that all folders are in the order I want them to be, which is usually not the alphabetical order my computer suggests. I use two digits because I may have more than nine folders for a project, and folder ten would otherwise be listed as the third folder in this list. With this filing strategy in place, it will be easy to find whatever I need. Even others can easily understand what I stored where. It is simply 'tidy', similar to how we want our data to be.
 
-## Creating an *R* Script {#creating-an-r-script}
+## Creating an *R* Script {#sec-creating-an-r-script}
 
 Code quickly becomes long and complex. Thus, it is not very convenient to write it in the console. So, instead, we can write code into an *R* Script. An *R* Script is a document that RStudio recognises as *R* programming code. Files that are not *R* Scripts, like `.txt`, `.rtf` or `.md`, can also be opened in RStudio, but any code written in it will not be automatically recognised.
 
@@ -104,7 +104,7 @@ All examples in this book can easily be copied and pasted into your own *R* scri
 
 library(tidyverse)
 
-mpg %>% ggplot(aes(x = reorder(manufacturer, desc(hwy), FUN = median),
+mpg |> ggplot(aes(x = reorder(manufacturer, desc(hwy), FUN = median),
                    y = hwy,
                    fill = manufacturer)) +
   geom_boxplot() +
@@ -130,7 +130,7 @@ Lastly, the console and the *R* script editor both feature code completion. This
 
 Not only does RStudio show you all the available options, but it also tells you which package this function is from. In this case, all listed functions are from the `ggplot2` package. Furthermore, when you select one of the options but have not pressed `Return ↵` yet, you also get to see a yellow box, which provides you with a quick reference of all the arguments that this function accepts. So you do not have to memorise all the functions and their arguments.
 
-## Using *R* Markdown {#r-markdown-and-r-notebooks}
+## Using *R* Markdown {#sec-r-markdown-and-r-notebooks}
 
 There is too much to say about *R* Markdown, which is why I only will highlight that it exists and point out the one feature that might convince you to choose this format over plain *R* scripts: They look like a Word document (almost).
 
