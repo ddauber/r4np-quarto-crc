@@ -1,0 +1,80 @@
+# Documentation: for your current self, future Self, and Others {#sec-16documentation}
+Alternative titles: documentation to go the distance 
+How documentation makes sharing easier
+Tips for making sharing easy with good documentation practices
+README files
+Good directory structure
+Good file naming
+Good commenting and code organization
+Vignettes in R or Jupyter notebooks for demonstrating code in python
+
+Computer code is instructions written in an interpretable language for a computer to evaluate. Writing effective code takes practice, understanding of the nuance of a particular coding language, and a commitment to continuous improvement using a growth mindset. This chapter focuses on documentation. @wilsonBestPracticesScientific2014 urges that documentation should focus on documenting design and purpose, not mechanics.  How can that be done? This chapter focuses on the mechanics and various stages of coding both as an organizational tool, and the continuous refinement as you move throughout the coding process.  Much like programming means a commitment to continuous improvement, so does writing effective documentation.  Let's begin.
+
+Coding takes practice and an ounce of Two of the best practices for scientific computing  
+Who is your audience for writing code? You, others, and the bigger world (in that order).  Documentation of what you are doing, what you did, and what you plan to do is an essential step to the data science workflow. Poor documentation is a sign of a lack of intellectual creativity on the process (Tufte).
+
+There are various stages of documentation, which we roughly prescribe to the order of completeness for a project.
+
+## Stage 1: The sandbox
+When you initially begin programming you are writing code that will eventually become refined and a finished product.  It could be simple steps of reading in data, some exploratory data analysis (REFER BACK TO PREVIOUS CHAPTERS). Mainly you are working out the contours of what you are going to do and how you plan to accomplish a specific objective. The code is a sandbox of possibilities you will explore.
+
+Documentation in this stage reflects the sandbox nature of your project. Documentation is usually left as comments in the text, perhaps with specific reminders of what you are trying to accomplish, web links to helpful websites, or different explanations and aspirations of what a function or code structure accomplishes. In the sandboxing stage, *you* are the audience. See @fig-16-sandbox for an example of documentation in this stage.  Usually the first bit of code contains information for what this particular function or script files wants to accomplish, a to-do list of helpful things to accomplish, goals for the code. 
+
+::: {#fig-16-sandbox}
+
+![](images/16_documentation/16-sandbox-code.png){fig-alt="Example of a sandboxed code with documentation written in R. Comments are denoted with hashtags and colored in green text."}
+Example of a sandboxed code with documentation written in R. Comments are denoted with hashtags and colored in green text. Notice the documentation is written as primarily notes and reminders.
+:::
+
+
+
+When working collaboratively on a team (or through version control with git), the audience is still you and your teammembers. Having good documentation is especially important when working with others so they can very quickly jump in and try to understand what you are working to accomplish with this particular task. 
+
+::: {.callout-tip}
+In the sandbox stage, document to organize your thoughts and priorities as you develop code.
+:::
+
+## Stage 2: Editing
+At some point in the code you will have landed on an analysis or series of analyses that you are happy with, or perhaps want to save and move onto the next task.  At this point you might have lines of code that are loosely connected, but perhaps need to be more readable in terms of what they do.  It is worth the time now to go back through your code, remove any dead ends (code that isn’t needed for further analysis), providing descriptive names to variables (John’s weakness is to name everything “yoop” in the sandboxing stage).  Your goal should be to create code that if you had to leave it for a length of time, you could come back to it and then quickly pick up where you had left off.
+
+It isn’t bad to follow some conventions to styling, naming, etc (link tidyverse style guide).  The styler add-on to RStudio is super useful because it reorganizes and indents code in a consistent, readable manner.  Congratulations! You are ready to move forward onto the next stage of code.
+
+If you are happy with the version of code you have, then it is useful (especially for scripted files) to include some explanatory information at the top of the code, in comments.  One helpful structure is to: (1) include the author of the code (2) when it was last modified, and (3) a brief description what it does.  Any libraries needed for the code should be included up at the beginning - especially when a user may need to download and install the libraries, this helps identify them rather than what they could be on the fly.
+
+At this point, the code has some minimal documentation, underscores the different purposes of the code, and perhaps be handed off to another person with some effort on their behalf to reproduce the analysis.  This is a good baseline state of code, but then you can definitely take it to the next step.
+
+
+## Stage 3: 
+If the code is a scripted function, it is helpful to include additional use case scenarios, especially when you write an R function 
+[[ Including an example of the code, identifying possible outputs. ]]  This information - when you write an R package is needed to provide additional help and analyes. [[[ MORE HERE ]]]
+
+By this point, sometimes the use of a scripted code falls into the trap of replicating code more than once (let’s say you want to create the same plot for multiple groups and then save it).  While it would be super easy to copy and paste that code, hold yourself back for a minute.  Yes - you are making progress in advancing towards your desired goal, but at the same time you are adding additional lines of code to your file.  Perhaps you could develop a function that could stand in a place, and then call instances of that function?  This is particularly useful if you are copying and pasting code that is more than a few lines long [[ and a few can be subjective, but if you are doing something more than once - think about writing a function!
+
+Functions should make your life easier - and they are a good way to standardize what you are doing, avoiding messy and embarrassing errors.  Plus the cognitive load on the user reviewing your code is a lot easier - they can unpack a function and then see the different use cases where it is applied.
+
+(have a cute Marie Kondo quote here ?0
+Perhaps your projects has a series of analysis codes (as scripted files) and data files.  A good organization structure to your project is developing subfolders for your work.  One project has the following:
+
+There are several files in each subfolder, but they are organized for the purpose of the task.  At a minimum you would have a .README, data, and analysis files.
+Data should have files of data that you are processing
+Analysis should contain your scripted files
+
+If your project is producing different plots, than having a folder for figures is helpful.  Other folders can include manuscripts (and the different versions), and other information.  If you are writing a memo using quarto or github or other forms of version control, you might not need this structure, but it is helpfu.  The ultimate goal is to avoid a folder with file upon file, creating chaos.
+
+The second important thing once you have the organization structure is organization of the scripted files. Your naming convention (`snake_case`, `camelCase`) etc is up to you.  Just not SCREAMING_SNAKE_CASE - anything but that!  But the most important part is to organize the files by the order of analysis - especially if you want the person to move through them in a logical way (i.e. the results from 1 scripted file need to be used in the next scripted file, etc). As an example of this:
+
+This organizational approach may mirror how a paper is structured, or it just refers to the historical ordering through a project. Use the sub letters (03a, 4.1, 4.2) sparingly - but these are unavoidable if you need to go back and add onto an analysis.  They can always be renumbered at the end, but the reordering helps.
+
+
+## Stage 4: Sticking the landing
+ README files: [[[ need to add here ]]]
+Congratulations! Your code is developed, plays well with other functions, and perhaps is part of a large collection of related files. You are ready to share your code with the world.
+
+The audience of documentation here are novice users that are in the sandbox of the first stage. What would they need to very quickly get up to speed with your project and out of the sandbox?
+
+Some of the options you have at this stage are writing a README file, which is a simple markdown or text file that provides more in depth information about the project, authors, codes of conduct, citation, and other information that is best served there and not embedded within script files. If your code is a book, the README file could be considered the preface.
+
+Another option to consider is writting up a vignette - or short pieces of long form writing that describe instructions for how to run a basic analysis or example. Vignettes are easy to write in RStudio ....  cover page to th
+At some point you may want to intersperse short examples that showcase your code - which doesn’t rise to the level of a paper, but at the same point, do provide some additional textual instruction beyond just a few simple lines of explanation.  In fact, if in your scripted files you find yourself writing many lines of commented code to describe something, then it is time to write a vignette.
+
+A good vignette should very quickly introduce an idea or concept to a reader, provide some use examples, and then also point to future work to include.  A vignette is in the “in-between” stages of not quite a paper, but something more.  Knowledge of markdown and other tools (Quarto) is and advantage here.
