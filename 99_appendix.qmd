@@ -1,0 +1,50 @@
+# Appendix {#sec-appendix .unnumbered}
+
+# Comparing groups {#sec-appendix-comparing-groups}
+
+## Comparing two unpaired groups {#sec-comparing-two-unpaired-groups}
+
++----------------+----------------+-------------------------------+-----------------+-------------------+
+| Assumption     | Test           | Function                      | Effect size     | Function          |
++================+================+===============================+=================+===================+
+| Parametric     | T-Test         | `t.test(var.equal = TRUE)`    | Cohen's d       | `cohens_d()`      |
+|                |                |                               |                 |                   |
+|                | Welch T-Test   | `t.test(var.equal = FALSE)`   |                 |                   |
++----------------+----------------+-------------------------------+-----------------+-------------------+
+| Non-parametric | Mann-Whitney U | `wilcox.test(paired = FALSE)` | Rank-biserial r | `rank_biserial()` |
+|                |                |                               |                 |                   |
+|                |                |                               | or              | or                |
+|                |                |                               |                 |                   |
+|                |                |                               | Wilcoxon R      | `wilcoxonR()`     |
++----------------+----------------+-------------------------------+-----------------+-------------------+
+
+: Comparing two unpaired groups (effect size functions from package `effectsize`, except for `wilcoxonR()` from `rcompanion` {#tbl-comparing-two-groups-unpaired-baser}
+
+## Comparing two paired groups {#sec-comparing-two-paired-groups}
+
++----------------+---------------------------+------------------------------+-----------------+--------------------------+
+| Assumption     | Test                      | Function for test            | Effect size     | Function for effect size |
++================+===========================+==============================+=================+==========================+
+| Parametric     | T-Test                    | `t.test(paired = TRUE)`      | Cohen's d       | `cohens_d()`             |
++----------------+---------------------------+------------------------------+-----------------+--------------------------+
+| Non-parametric | Wilcoxon Signed Rank Test | `wilcox.test(paired = TRUE)` | Rank biserial r | `rank_biserial()`        |
+|                |                           |                              |                 |                          |
+|                |                           |                              | or              | or                       |
+|                |                           |                              |                 |                          |
+|                |                           |                              | Wilcoxon r      | `wilcoxonPairedR()`      |
++----------------+---------------------------+------------------------------+-----------------+--------------------------+
+
+: Comparing two unpaired groups (effect size functions from package `effectsize`, except for `wilcoxonPairedR()` from `rcompanion`) {#tbl-comparing-two-groups-paired-baser}
+
+## Comparing multiple unpaired groups {#sec-comparing-multiple-unpaired-groups}
+
++----------------+----------------------+-------------------------------------------+------------------------+--------------------------+
+| Assumption     | Test                 | Function for test                         | Effect size            | Function for effect size |
++================+======================+===========================================+========================+==========================+
+| Parametric     | ANOVA                | -   `aov()` (assumes equal variances)     | Epsilon squared        | `eta_squared()`          |
+|                |                      | -   `oneway.test(var.equal = TRUE/FALSE)` |                        |                          |
++----------------+----------------------+-------------------------------------------+------------------------+--------------------------+
+| Non-parametric | Kruskall-Wallis test | `kruskal.test()`                          | Epsilon squared (rank) | `rank_epsilon_squared()` |
++----------------+----------------------+-------------------------------------------+------------------------+--------------------------+
+
+: Comparing multiple unpaired groups (effect size functions from package `effectsize`) {#tbl-comparing-multiple-groups-unpaired-baser}
