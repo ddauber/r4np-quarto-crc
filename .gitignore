@@ -1,4 +1,6 @@
 /.quarto/
+/_site/
+/_book/
 
 # Most annoying file ever
 .DS_Store
