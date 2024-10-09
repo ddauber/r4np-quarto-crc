@@ -1,0 +1,1284 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.4.549">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>R for Non-Programmers: A Guide for Social Scientists - 10&nbsp; Correlations</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./11_group_comparison.html" rel="next">
+<link href="./09_sources_of_bias.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./10_correlations.html"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Correlations</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">R for Non-Programmers: A Guide for Social Scientists</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Welcome</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./00_about_the_author.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">About the author</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./00_acknowledgements.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Acknowledgements</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01_before_you_get_started.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title"><code>Readme.</code> before you get started</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02_why_start_learning_a_programming_language.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Why learn a programming language as a non-programmer?</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03_setting_up_r_rstudio.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Setting up <em>R</em> and RStudio</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04_rstudio_interface.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">The RStudio Interface</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05_r_basics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title"><em>R</em> Basics: The very fundamentals</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./06_starting_r_projects.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Starting your <em>R</em> projects</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./07_data_wrangling.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Data Wrangling</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./08_descriptive_statistics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Descriptive Statistics</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./09_sources_of_bias.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Sources of bias: Sampling, outliers, normality and other ‘conundrums’</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./10_correlations.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Correlations</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./11_group_comparison.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Comparing groups</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./12_power_analysis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Power: You either have it or you don’t</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./13_regressions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Regression: Creating models to predict future observations</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./14_mixed_methods.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Mixed-methods research: Analysing qualitative data in <em>R</em></span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./15_next_steps.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Where to go from here: The next steps in your <em>R</em> journey</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./18_epilogue.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Epilogue</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./99_appendix.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Appendix</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#sec-plotting-correlations" id="toc-sec-plotting-correlations" class="nav-link active" data-scroll-target="#sec-plotting-correlations"><span class="header-section-number">10.1</span> Plotting correlations</a></li>
+  <li><a href="#sec-computing-correlations" id="toc-sec-computing-correlations" class="nav-link" data-scroll-target="#sec-computing-correlations"><span class="header-section-number">10.2</span> Computing correlations</a></li>
+  <li><a href="#sec-significance" id="toc-sec-significance" class="nav-link" data-scroll-target="#sec-significance"><span class="header-section-number">10.3</span> Significance: A way to help you judge your findings</a></li>
+  <li><a href="#sec-limitations-of-correlations" id="toc-sec-limitations-of-correlations" class="nav-link" data-scroll-target="#sec-limitations-of-correlations"><span class="header-section-number">10.4</span> Limitations of correlations</a>
+  <ul class="collapse">
+  <li><a href="#sec-correlations-are-not-causal-relationships" id="toc-sec-correlations-are-not-causal-relationships" class="nav-link" data-scroll-target="#sec-correlations-are-not-causal-relationships"><span class="header-section-number">10.4.1</span> Correlations are not causal relationships</a></li>
+  <li><a href="#sec-correlations-can-be-spurious" id="toc-sec-correlations-can-be-spurious" class="nav-link" data-scroll-target="#sec-correlations-can-be-spurious"><span class="header-section-number">10.4.2</span> Correlations can be spurious</a></li>
+  <li><a href="#sec-simpsons-paradox" id="toc-sec-simpsons-paradox" class="nav-link" data-scroll-target="#sec-simpsons-paradox"><span class="header-section-number">10.4.3</span> Simpson’s Paradox: When correlations betray you</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span id="sec-correlations" class="quarto-section-identifier"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Correlations</span></span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>Sometimes, counting and measuring means, medians, and standard deviations is not enough because they are all based on a single variable. Instead, we might have questions about the relationship between two or more variables. In this section, we will explore how correlations can (and kind of cannot - see <a href="#sec-simpsons-paradox" class="quarto-xref"><span>Section 10.4.3</span></a>) provide insights into the following questions:</p>
+<ul>
+<li><p>Do people who eat healthier also feel happier?</p></li>
+<li><p>Are happier people also more satisfied with their life?</p></li>
+<li><p>Is eating healthier related to other health factors, such as life expectancy, blood pressure and overweight/obesity?</p></li>
+</ul>
+<p>There are many different ways to compute the correlation, and it partially depends on the type of data you want to relate to each other. The <em>‘Pearson’s correlation’</em> is by far the most frequently used correlation technique for normally distributed data. On the other hand, if data is not normally distributed, we can opt for the <em>‘Spearman’s rank’</em> correlation. One could argue that the relationship between these two correlations is like the mean (Pearson) to the median (Spearman). Both approaches require numeric values to be computed correctly. If our data is ordinal or, worse, dichotomous (like a logical variable), we have to choose different options. <a href="#tbl-different-correlations" class="quarto-xref">Table&nbsp;<span>10.1</span></a> summarises different methods depending on the data type.</p>
+<div id="tbl-different-correlations" class="quarto-float anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-different-correlations-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;10.1: Different ways of computing correlations
+</figcaption>
+<div aria-describedby="tbl-different-correlations-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Correlation</th>
+<th>Used when …</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><em>Pearson</em></td>
+<td>… variables are numeric and parametric</td>
+</tr>
+<tr class="even">
+<td><em>Spearman</em></td>
+<td>… variables are numeric and non-parametric</td>
+</tr>
+<tr class="odd">
+<td><em>Polychoric</em></td>
+<td>… investigating two ordinal variables</td>
+</tr>
+<tr class="even">
+<td><em>Tetrachoric</em></td>
+<td>… both variables are dichotomous, e.g.&nbsp;‘yes/no’, ‘True/False’.</td>
+</tr>
+<tr class="odd">
+<td><em>Rank-biserial</em></td>
+<td>… one variable is dichotomous and the other variable is ordinal</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p>There are many more variations of correlations, which you can explore on the <a href="https://easystats.github.io/correlation/articles/types.html" target="blank" title="website of the package">package’s website</a> we will use in this chapter: <code>correlation</code>. However, we will primarily focus on Pearson and Spearman because they are the most commonly used correlation types in academic publications to understand the relationship between two variables. In addition, we also look at <em>‘partial correlations’</em>, which allow us to introduce a third variable into this mix.</p>
+<section id="sec-plotting-correlations" class="level2" data-number="10.1">
+<h2 data-number="10.1" class="anchored" data-anchor-id="sec-plotting-correlations"><span class="header-section-number">10.1</span> Plotting correlations</h2>
+<p>Since correlations only show the relationship between two variables, we can easily put one variable on the x-axis and one on the y-axis, creating a so-called ‘scatterplot’. We used two functions to plot scatterplots before, i.e.&nbsp;<code>geom_point()</code> and <code>geom_jitter</code>. Let’s explore our first research question: Do people who eat healthier also feel happier? One assumption might be that healthier eating habits contribute to better physical well-being, which in turn enhances happiness. However, a counter-argument could be that diet does not significantly impact happiness levels, as everyone is subject to various life circumstances that influence our mood. Either way, we first need to identify the two variables of interest, which we can find in the <code>hie_2021</code> dataset. It contains measures of national health in various areas of England collected in 2021, such as:</p>
+<ul>
+<li><p><code>happiness</code>, which measures the average happiness of respondents when asked how they felt the day before on a scale from <code>0</code> (not at all) to <code>10</code> (completely), and</p></li>
+<li><p><code>healthy_eating</code>, which represents the percentage of adults who report eating five or more portions of fruit and vegetables on a regular day.</p></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>hie_2021 <span class="sc">|&gt;</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(healthy_eating, happiness)) <span class="sc">+</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  see<span class="sc">::</span><span class="fu">theme_modern</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="10_correlations_files/figure-html/correlation-happiness-healthy-eating-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>The results from our scatterplot are, well, somewhat random. We can see that in some areas of England people report very high <code>happiness</code> scores as well as high levels of <code>healthy_eating</code>. However, some regions score high on <code>happiness</code> but low regarding <code>healthy_eating</code>. Overall, the points look like they are randomly scattered all over our canvas. The only visible pattern we can notice is that there are slightly more scores at the center of this cloud of dots than on its edges.</p>
+<p>Since correlations only explain linear relationships, a perfect correlation would be represented by a straight line. Consider the following examples of correlations:</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="10_correlations_files/figure-html/correlation-examples-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>A correlation can be either positive or negative, and its value (i.e.&nbsp;<code>r</code> in case of the Pearson correlation) can range from <code>-1</code> to <code>1</code>:</p>
+<ul>
+<li><p><code>-1</code> defines a perfectly negative correlation,</p></li>
+<li><p><code>0</code> defines no correlation (completely random), and</p></li>
+<li><p><code>1</code> defines a perfectly positive correlation.</p></li>
+</ul>
+<p>In other words, the further the score is away from <code>0</code>, the stronger is the relationship between variables. We also have benchmarks that we can use to assess the strength of a relationship, for example, the one by <span class="citation" data-cites="cohen1988statistical">Cohen (<a href="references.html#ref-cohen1988statistical" role="doc-biblioref">1988</a>)</span>. The strength of the relationship is also called <em>‘effect size’</em>. <a href="#tbl-effect-size-cohen" class="quarto-xref">Table&nbsp;<span>10.2</span></a> shows the relevant benchmarks. Note that effect sizes are always provided as absolute figures. Therefore, <code>-0.4</code> would also count as a moderate relationship.</p>
+<div id="tbl-effect-size-cohen" class="quarto-float anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-effect-size-cohen-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;10.2: Assessing effect size of relationships according to <span class="citation" data-cites="cohen1988statistical">Cohen (<a href="references.html#ref-cohen1988statistical" role="doc-biblioref">1988</a>)</span>.
+</figcaption>
+<div aria-describedby="tbl-effect-size-cohen-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="table">
+<thead>
+<tr class="header">
+<th>effect size</th>
+<th>interpretation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>r &lt; 0.1</td>
+<td>very small</td>
+</tr>
+<tr class="even">
+<td>0.1 <span class="math inline">\(\leq\)</span> r &lt; 0.3</td>
+<td>small</td>
+</tr>
+<tr class="odd">
+<td>0.3 <span class="math inline">\(\leq\)</span> r &lt; 0.5</td>
+<td>moderate</td>
+</tr>
+<tr class="even">
+<td>r <span class="math inline">\(\geq\)</span> 0.5</td>
+<td>large</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+</section>
+<section id="sec-computing-correlations" class="level2" data-number="10.2">
+<h2 data-number="10.2" class="anchored" data-anchor-id="sec-computing-correlations"><span class="header-section-number">10.2</span> Computing correlations</h2>
+<p>If we compare the plot from our data with the sample plots, we can conclude that the relationship is weak, and therefore the <code>r</code> must be close to zero. We can test this with the Pearson correlation using the function <code>correlation()</code> from the <code>correlation</code> package. By default, it will perform a Pearson correlation, which is only applicable for parametric data. As outlined before, if our data violates the assumptions for parametric tests, we can use Spearman’s correlation instead. For the rest of the chapter, we assume that our data is parametric, but I will demonstrate how to compute both in the following code chunk:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(correlation)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Pearson correlation</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>hie_2021 <span class="sc">|&gt;</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(happiness, healthy_eating) <span class="sc">|&gt;</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">correlation</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># Correlation Matrix (pearson-method)
+
+Parameter1 |     Parameter2 |    r |        95% CI | t(305) |     p
+-------------------------------------------------------------------
+happiness  | healthy_eating | 0.07 | [-0.04, 0.18] |   1.24 | 0.215
+
+p-value adjustment method: Holm (1979)
+Observations: 307</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Spearman correlation</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>hie_2021 <span class="sc">|&gt;</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(happiness, healthy_eating) <span class="sc">|&gt;</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">correlation</span>(<span class="at">method =</span> <span class="st">"spearman"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># Correlation Matrix (spearman-method)
+
+Parameter1 |     Parameter2 |  rho |        95% CI |        S |     p
+---------------------------------------------------------------------
+happiness  | healthy_eating | 0.09 | [-0.03, 0.20] | 4.41e+06 | 0.135
+
+p-value adjustment method: Holm (1979)
+Observations: 307</code></pre>
+</div>
+</div>
+<p>Indeed, our analysis reveals that the effect size is very small (r = 0.07 &lt; 0.1). Therefore, <code>healthy_eating</code>, seems to not make us happier. In all fairness, the foods that make us smile are often not fruits and veggies, but other, more guilty, pleasures.</p>
+<p>Another question we posed at the beginning was: Are people who are happier also more satisfied with their life? Our intuition might say ‘yes’. A person who consistently feels happy is more likely to assess their overall life positively, because their day-to-day experiences are enjoyable. Let’s create another scatterplot to find out.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>hie_2021 <span class="sc">|&gt;</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> life_satisfaction, <span class="at">y =</span> happiness)) <span class="sc">+</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="10_correlations_files/figure-html/happiness-vs-life-satisfaction-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>The scatterplot shows a somewhat positive trend which suggests that we are right: Higher <code>happiness</code> is linked to higher <code>life_satisfaction</code>. Often, it can be tough to see the trend. To improve our plot, we can use the function <code>geom_smooth()</code>, which can help us draw a straight line that best fits our data points. We need to set the <code>method</code> for drawing the line to <code>lm</code>, which stands for ‘linear model’. Remember, correlations assume a linear relationship between two variables, i.e.&nbsp;we model a linear relationship in our scatterplot. As mentioned before, the stronger the relationship the closer each dot in the plot will be to the red line.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>hie_2021 <span class="sc">|&gt;</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> life_satisfaction, <span class="at">y =</span> happiness)) <span class="sc">+</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>,</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>              <span class="at">formula =</span> y <span class="sc">~</span> x,</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>              <span class="at">se =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>              <span class="at">col =</span> <span class="st">"red"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="10_correlations_files/figure-html/happiness-vs-life-satisfaction-regression-line-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>To find a definitive answer to this research question we can compute the correlation for both variables.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>hie_2021 <span class="sc">|&gt;</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(life_satisfaction, happiness) <span class="sc">|&gt;</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">correlation</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># Correlation Matrix (pearson-method)
+
+Parameter1        | Parameter2 |    r |       95% CI | t(305) |         p
+-------------------------------------------------------------------------
+life_satisfaction |  happiness | 0.67 | [0.60, 0.73] |  15.73 | &lt; .001***
+
+p-value adjustment method: Holm (1979)
+Observations: 307</code></pre>
+</div>
+</div>
+<p>With an <code>r</code> of <code>0.67</code>, we did not only find a positive relationship, but one that is considered <em>large</em>, according to Cohen (1988).</p>
+</section>
+<section id="sec-significance" class="level2" data-number="10.3">
+<h2 data-number="10.3" class="anchored" data-anchor-id="sec-significance"><span class="header-section-number">10.3</span> Significance: A way to help you judge your findings</h2>
+<p>One of the most common pitfalls of novice statisticians is the interpretation of what counts as significant and not significant. Most basic tests offer a <em>‘p value’</em>, which stands for <em>‘probability value’</em>. I have referred to this value multiple times in this book already, but did not thoroughly explain why it is important.</p>
+<p>To understand p-values and significance, we need to briefly discuss <em>hypotheses</em>. A hypothesis is an assumption we make about the data, such as whether <code>healthy_eating</code> leads to more <code>happiness</code> (as in <a href="#sec-computing-correlations" class="quarto-xref"><span>Section 10.2</span></a>). In contrast, the null hypothesis is a special type of hypothesis that assumes that no effect or relationship exists between variables, i.e.&nbsp;the opposite of what we are testing. When you read that a hypothesis has been “rejected” or “accepted,” it is often the null hypothesis being tested. The p-value helps determine whether we should reject or retain the null hypothesis based on the data.</p>
+<p>The <code>p</code>-value can range from 1 (for 100%) to 0 (for 0%) and helps us assess whether to accept or reject the null hypothesis:</p>
+<ul>
+<li><p><span class="math inline">\(p = 1\)</span>, there is a 100% probability that the result is due to pure chance, supporting (accepting) the null hypothesis.</p></li>
+<li><p><span class="math inline">\(p = 0\)</span>, there is a 0% probability that the result is due to pure chance, suggesting that the null hypothesis has to be rejected.</p></li>
+</ul>
+<p>Technically, we would not find that <code>p</code> is ever truly zero and instead denote very small <code>p</code>-values with <code>p &lt; 0.01</code> or even <code>p &lt; 0.001</code>, indicating that our null hypothesis is unlikely to be true.</p>
+<p>There are also commonly considered and accepted thresholds for the <code>p</code>-value:</p>
+<ul>
+<li><p><span class="math inline">\(p &gt; 0.05\)</span>, the result is not significant.</p></li>
+<li><p><span class="math inline">\(p \leq 0.05\)</span>, the result is significant, i.e.&nbsp;there is less than a 5% chance that the null hypothesis should have been accepted.</p></li>
+<li><p><span class="math inline">\(p \leq 0.01\)</span>, the result is highly significant.</p></li>
+</ul>
+<p>Most frequently, confusion about the p-value emerges because we test FOR the null hypothesis and not what we are actually interested in.Returning to our example of eating healthy and its impact on happiness, we would first formulate our hypothesis and the null hypothesis:</p>
+<ul>
+<li><p>Hypothesis (<span class="math inline">\(H_1\)</span>): Healthy eating and happiness are significantly positively related to each other.</p></li>
+<li><p>Null Hypothesis (<span class="math inline">\(H_0\)</span>): There is no significant relationship between healthy eating and happiness.</p></li>
+</ul>
+<p>Based on our research question, we hope to accept our hypothesis and, therefore, reject the null hypothesis. Hardly ever will you find that researchers are interested in not finding relationships/effects in their data. Consequently, a <em>significant</em> p-value would tell us to reject the null hypothesis and accept our hypothesis.</p>
+<p>Let’s revisit the results from our earlier analysis where we performed a Pearson correlation to test our assumption.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Pearson correlation</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>hie_2021 <span class="sc">|&gt;</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(happiness, healthy_eating) <span class="sc">|&gt;</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">correlation</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># Correlation Matrix (pearson-method)
+
+Parameter1 |     Parameter2 |    r |        95% CI | t(305) |     p
+-------------------------------------------------------------------
+happiness  | healthy_eating | 0.07 | [-0.04, 0.18] |   1.24 | 0.215
+
+p-value adjustment method: Holm (1979)
+Observations: 307</code></pre>
+</div>
+</div>
+<p>Besides the correlation coefficient (<code>r</code>), we also find <span class="math inline">\(t_{(305)} = 1.24\)</span>, which is the test statistic. The test statistic helps us determine if our data shows something unusual based on our hypothesis. A test statistic close to <code>0</code> suggests that our data is consistent with the null hypothesis, i.e.&nbsp;no effect/relationship. The further the test statistic moves from <code>0</code>, the more evidence we have against the null hypothesis.</p>
+<p>In our analysis of the relationship between <code>happiness</code> and <code>healthy_eating</code>, we obtained a p-value of <code>0.215</code>. This indicates that there is a 21.5% probability of finding a t-value of <code>1.24</code> or or larger if the null hypothesis is true. You probably agree that these are not good odds. Since this p-value is greater than the conventional significance level of <span class="math inline">\(p \leq 0.05\)</span> we do not reject the null hypothesis. This means we do not have sufficient evidence to conclude that a significant relationship exists between <code>happiness</code> and <code>healthy_eating</code>.</p>
+<p>Lastly, I also want to visually explain what the test statistic is and how it relates to p-values. We already learned about the normal distribution, as such, the visualisation in <a href="#fig-null-hypothesis-testing-plot" class="quarto-xref">Figure&nbsp;<span>10.1</span></a> will look familiar.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-null-hypothesis-testing-plot" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-null-hypothesis-testing-plot-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="10_correlations_files/figure-html/fig-null-hypothesis-testing-plot-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-null-hypothesis-testing-plot-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;10.1: t-Distribution with test statistic
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>What we can see here is the distribution of test statistic scores (t-values) related to our correlation analysis. We can see that all t-values that fall within the blue area of the distribution would not count as significantly different from the null hypothesis, which means we have to accept that there is no effect/relationship to be found. However, if the t-value falls into one of the two red areas, we can reject the null hypothesis and be excited that the effect/relationship we found is <em>significant</em>.</p>
+<p>While we clarified how the t-value is related to the p-value, you might still be confused how these two values relate to the correlation coefficient (<code>r</code>) in our correlation results. The answer is fairly simple: we need <code>r</code> to compute our t-value. The mathematical formula is as follows:</p>
+<p><span class="math display">\[
+t = \frac{r \sqrt{n - 2}}{\sqrt{1 - r^2}}
+\]</span></p>
+<p>With this knowledge, we can reproduce <span class="math inline">\(t_{(305)} = 1.24\)</span> writing the following lines of code:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Define the correlation coefficient and sample size</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>r <span class="ot">&lt;-</span> <span class="fl">0.07099542</span> <span class="co"># not rounded</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">307</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate the t-value</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>t_value <span class="ot">&lt;-</span> (r <span class="sc">*</span> <span class="fu">sqrt</span>(n <span class="sc">-</span> <span class="dv">2</span>)) <span class="sc">/</span> <span class="fu">sqrt</span>(<span class="dv">1</span> <span class="sc">-</span> r<span class="sc">^</span><span class="dv">2</span>)</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>t_value</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1.243018</code></pre>
+</div>
+</div>
+<p>We will cover more about the <code>p</code>-value in <a href="11_group_comparison.html" class="quarto-xref"><span>Chapter 11</span></a> and <a href="13_regressions.html" class="quarto-xref"><span>Chapter 13</span></a>. For now, it is important to know that a significant correlation is one that we should look at more closely. Usually, correlations that are not significant suffer from small effect sizes. However, different samples can lead to different effect sizes and significance levels. Consider the following examples:</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code># Correlation Matrix (pearson-method)
+
+Parameter1 | Parameter2 |    r |        95% CI | t(2) |     p
+-------------------------------------------------------------
+x          |          y | 0.77 | [-0.73, 0.99] | 1.73 | 0.225
+
+p-value adjustment method: Holm (1979)
+Observations: 4</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code># Correlation Matrix (pearson-method)
+
+Parameter1 | Parameter2 |    r |       95% CI | t(10) |       p
+---------------------------------------------------------------
+x          |          y | 0.77 | [0.36, 0.93] |  3.87 | 0.003**
+
+p-value adjustment method: Holm (1979)
+Observations: 12</code></pre>
+</div>
+</div>
+<p>In both examples <span class="math inline">\(r = 0.77\)</span>, but the sample sizes are different (<code>4</code> vs <code>12</code>), and the <code>p</code>-values differ. In the first example, <span class="math inline">\(p = 0.225\)</span>, which means the relationship is not significant, while in the second example, we find that <span class="math inline">\(p &lt; 0.01\)</span> and is, therefore, highly significant. As a general rule, the bigger the sample, the more likely we find significant results, even though the effect size is small. Therefore, it is crucial to interpret correlations based on at least three factors:</p>
+<ul>
+<li><p>the <code>p</code>-value, i.e.&nbsp;significance level,</p></li>
+<li><p>the <code>r</code>-value, i.e.&nbsp;the effect size, and</p></li>
+<li><p>the <code>n</code>, i.e.&nbsp;the sample size</p></li>
+</ul>
+<p>The interplay of all three can help determine whether a relationship is important. Therefore, when we include correlation tables in publications, we have to provide information about all three indicators.</p>
+<p>Let’s put all this information into practice and investigate our third research question, which asks whether eating healthy relates to other health factors such as life expectancy, blood pressure and overweight/obesity. While we could compute three correlations independently to find an answer to our question, it is much more common to include multiple variables simultaneously and look at the results conjointly.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>hie_2021 <span class="sc">|&gt;</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(healthy_eating, life_expectancy, high_blood_pressure, overweight_and_obesity_in_adults) <span class="sc">|&gt;</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">correlation</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># Correlation Matrix (pearson-method)
+
+Parameter1          |                       Parameter2 |     r |         95% CI | t(305) |         p
+----------------------------------------------------------------------------------------------------
+healthy_eating      |                  life_expectancy |  0.70 | [ 0.64,  0.75] |  17.14 | &lt; .001***
+healthy_eating      |              high_blood_pressure | -0.05 | [-0.16,  0.06] |  -0.85 | 0.395    
+healthy_eating      | overweight_and_obesity_in_adults | -0.45 | [-0.54, -0.36] |  -8.85 | &lt; .001***
+life_expectancy     |              high_blood_pressure | -0.08 | [-0.19,  0.03] |  -1.45 | 0.295    
+life_expectancy     | overweight_and_obesity_in_adults | -0.56 | [-0.63, -0.48] | -11.81 | &lt; .001***
+high_blood_pressure | overweight_and_obesity_in_adults |  0.10 | [-0.01,  0.21] |   1.76 | 0.237    
+
+p-value adjustment method: Holm (1979)
+Observations: 307</code></pre>
+</div>
+</div>
+<p>If you have seen correlation tables before, you might find that <code>correlation()</code> does not produce the classic table by default. If you want it to look like the tables in publications, which are more compact but offer less information, you can use the function <code>summary()</code>. Which one you use it entirely up to you (or your supervisor).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>hie_2021 <span class="sc">|&gt;</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(healthy_eating, life_expectancy, high_blood_pressure, overweight_and_obesity_in_adults) <span class="sc">|&gt;</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">correlation</span>() <span class="sc">|&gt;</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summary</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># Correlation Matrix (pearson-method)
+
+Parameter           | overweight_and_obesity_in_adults | high_blood_pressure | life_expectancy
+----------------------------------------------------------------------------------------------
+healthy_eating      |                         -0.45*** |               -0.05 |         0.70***
+life_expectancy     |                         -0.56*** |               -0.08 |                
+high_blood_pressure |                             0.10 |                     |                
+
+p-value adjustment method: Holm (1979)</code></pre>
+</div>
+</div>
+<p>This table provides a clear answer to our final question. While <code>healthy_eating</code> positively relates to <code>life_expectancy</code> (<span class="math inline">\(r = 0.70\)</span>, <span class="math inline">\(p &lt;0.001\)</span>) and negatively to <code>overweight_and_obesity_in_adults</code> (<span class="math inline">\(r = -0.45\)</span>, <span class="math inline">\(p &lt;0.001\)</span>), it does not correlate with <code>high_blood_pressure</code> (<span class="math inline">\(r = 0.05\)</span>, <span class="math inline">\(p &lt;0.395\)</span>). In the classic correlation table, you often see <code>*</code>. These stand for the different significant levels:</p>
+<ul>
+<li><p><code>*</code>, i.e.&nbsp;<span class="math inline">\(p &lt; 0.05\)</span></p></li>
+<li><p><code>**</code>, i.e.&nbsp;<span class="math inline">\(p &lt; 0.01\)</span></p></li>
+<li><p><code>***</code>, i.e.&nbsp;<span class="math inline">\(p &lt; 0.001\)</span> (you might find some do not use this as a separate level)</p></li>
+</ul>
+<p>In short, the more <code>*</code> there are attached to each value, the more significant a result. Therefore, we likely find the same relationships in newly collected data if there are many <code>*</code> and we can trust our findings.</p>
+</section>
+<section id="sec-limitations-of-correlations" class="level2" data-number="10.4">
+<h2 data-number="10.4" class="anchored" data-anchor-id="sec-limitations-of-correlations"><span class="header-section-number">10.4</span> Limitations of correlations</h2>
+<p>Correlations are helpful, but only to some extend. The three most common limitations you should be aware of are:</p>
+<ul>
+<li><p>Correlations are not causal relationships</p></li>
+<li><p>Correlations can be spurious</p></li>
+<li><p>Correlations might only appear in sub-samples of your data</p></li>
+</ul>
+<section id="sec-correlations-are-not-causal-relationships" class="level3" data-number="10.4.1">
+<h3 data-number="10.4.1" class="anchored" data-anchor-id="sec-correlations-are-not-causal-relationships"><span class="header-section-number">10.4.1</span> Correlations are not causal relationships</h3>
+<p>Correlations do not offer insights into causality, i.e.&nbsp;whether a change in one variable causes change in the other variable. Correlations only provide insights into whether these two variables tend to change when one of them changes. Still, sometimes we can infer such causality by the nature of the variables. For example, in countries with heavy rain, more umbrellas are sold. Buying more umbrellas will not cause more rain, but if there is more rain in a country, we rightly assume a higher demand for umbrellas. If we can theorise the relationship between variables, we would rather opt for a regression model instead of a correlation (see <a href="13_regressions.html" class="quarto-xref"><span>Chapter 13</span></a>).</p>
+</section>
+<section id="sec-correlations-can-be-spurious" class="level3" data-number="10.4.2">
+<h3 data-number="10.4.2" class="anchored" data-anchor-id="sec-correlations-can-be-spurious"><span class="header-section-number">10.4.2</span> Correlations can be spurious</h3>
+<p>Just because we find a relationship between two variables does not necessarily mean that they are truly related. Instead, it might be possible that a third variable is the reason for the relationship. We call relationships between variables that are caused by a third variable <em>‘spurious correlations’</em>. This third variable can either be part of our dataset or even something we have not measured at all. The latter case would make it impossible to investigate the relationship further. However, we can always test whether some of our variables affect the relationship between the two variables of interest. This can be done by using <em>partial correlations</em>. A <em>partial correlation</em> returns the relationship between two variables minus the relationship to a third variable. <a href="#fig-illustration-spurious-correlation" class="quarto-xref">Figure&nbsp;<span>10.2</span></a> depicts this visually. While <code>a</code> and <code>b</code> appear to be correlated, the correlation might only exist because they correlate with <code>x</code>.</p>
+<div id="fig-illustration-spurious-correlation" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-illustration-spurious-correlation-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="./images/chapter_09_img/spurious-correlation.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-illustration-spurious-correlation-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;10.2: Illustration of a spurious correlation
+</figcaption>
+</figure>
+</div>
+<p>Let’s return to our first research questions. We found that <code>healthy_eating</code> is not related to <code>happiness</code>, but to <code>life_satisfaction</code>. <code>Life_satisfaction</code>, however, is related to <code>happiness</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Correlation between variables</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>hie_2021 <span class="sc">|&gt;</span></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(healthy_eating, happiness, life_satisfaction) <span class="sc">|&gt;</span></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">correlation</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># Correlation Matrix (pearson-method)
+
+Parameter1     |        Parameter2 |    r |        95% CI | t(305) |         p
+------------------------------------------------------------------------------
+healthy_eating |         happiness | 0.07 | [-0.04, 0.18] |   1.24 | 0.215    
+healthy_eating | life_satisfaction | 0.23 | [ 0.12, 0.33] |   4.05 | &lt; .001***
+happiness      | life_satisfaction | 0.67 | [ 0.60, 0.73] |  15.73 | &lt; .001***
+
+p-value adjustment method: Holm (1979)
+Observations: 307</code></pre>
+</div>
+</div>
+<p>However, if we consider the impact of <code>life_satisfaction</code> on the relationship between <code>heathly_eating</code> and <code>happiness</code> when we compute the correlation, we retrieve a very different result.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Correlation between variables, considering partial correlations</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>hie_2021 <span class="sc">|&gt;</span></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(healthy_eating, happiness, life_satisfaction) <span class="sc">|&gt;</span></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">correlation</span>(<span class="at">partial =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># Correlation Matrix (pearson-method)
+
+Parameter1     |        Parameter2 |     r |        95% CI | t(305) |         p
+-------------------------------------------------------------------------------
+healthy_eating |         happiness | -0.11 | [-0.22, 0.00] |  -1.95 | 0.053    
+healthy_eating | life_satisfaction |  0.24 | [ 0.13, 0.34] |   4.33 | &lt; .001***
+happiness      | life_satisfaction |  0.67 | [ 0.61, 0.73] |  15.86 | &lt; .001***
+
+p-value adjustment method: Holm (1979)
+Observations: 307</code></pre>
+</div>
+</div>
+<p>Suddenly, <code>eating_healthy</code> and <code>happiness</code> show a slight negative correlation (<span class="math inline">\(r = -0.11\)</span>). In other words, by controlling for the effect of <code>life_satisfaction</code> on both variables, we reversed the relationship from positive to negative. You might wonder whether this implies that eating healthily makes us less happy. If we were to take this result superficiously, it would indicate exactly this. However, as mentioned before, when we look at correlations we have to consider not only <code>r</code> but also the p-value and the sample size. While sample size seems less problematic (<span class="math inline">\(n = 307\)</span>), the p-value is only <span class="math inline">\(p = 0.053\)</span>, which is just shy of the required minimum significance level of <code>0.05</code>. If we strictly applied the rules, this relationship would not be classified as ‘significant’. Thus, the relationship would not be strong enough to derive meaningful conclusions. Even if the p-value were slightly lower, the effect size would still be very small.</p>
+</section>
+<section id="sec-simpsons-paradox" class="level3" data-number="10.4.3">
+<h3 data-number="10.4.3" class="anchored" data-anchor-id="sec-simpsons-paradox"><span class="header-section-number">10.4.3</span> Simpson’s Paradox: When correlations betray you</h3>
+<p>The final limitation is so important that it even has its own name: the <em>‘Simpson’s Paradox’</em>. Let’s find out what is so paradoxical about some correlations. For this demonstration, we have to make use of a different dataset: <code>simpson</code> of the <code>r4np</code> package. It contains information about changes in student <code>performance</code> and changes in <code>happiness</code>. The dataset includes responses from three different groups: <code>Teachers</code>, <code>Students</code> and <code>Parents</code>.</p>
+<p>We would assume that an increase in students’ <code>performance</code> will likely increase the <code>happiness</code> of participants. After all, all three have stakes in students’ <code>performance</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>simpson <span class="sc">|&gt;</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> performance,</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>             <span class="at">y =</span> happiness)) <span class="sc">+</span></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>,</span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>              <span class="at">formula =</span> y <span class="sc">~</span> x,</span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>              <span class="at">se =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>              <span class="at">color =</span> <span class="st">"red"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="10_correlations_files/figure-html/simpson-paradox-plot-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>simpson <span class="sc">|&gt;</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(performance, happiness) <span class="sc">|&gt;</span></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">correlation</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># Correlation Matrix (pearson-method)
+
+Parameter1  | Parameter2 |     r |         95% CI | t(298) |         p
+----------------------------------------------------------------------
+performance |  happiness | -0.34 | [-0.44, -0.24] |  -6.32 | &lt; .001***
+
+p-value adjustment method: Holm (1979)
+Observations: 300</code></pre>
+</div>
+</div>
+<p>It appears we were terribly wrong. It seems as if <code>performance</code> and <code>happiness</code> are moderately negatively correlated with each other. Thus, the more a student improves their <code>performance</code>, the less happy teachers, parents, and students are. I hope you agree that this is quite counter-intuitive. However, what could be the cause for such a finding?</p>
+<p>If you have the instincts of a <a href="https://www.imdb.com/title/tt2356777/episodes?season=1" data-traget="blank" title="True Detective">true detective</a>, you would think that maybe we should look at each group of participants separately. So, let’s plot the same scatterplot again but colour the responses of each participant <code>group</code> differently and also compute the correlation for each subset of our data.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>simpson <span class="sc">|&gt;</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> performance,</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>             <span class="at">y =</span> happiness,</span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>             <span class="at">group =</span> group,</span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>             <span class="at">col =</span> group)) <span class="sc">+</span></span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>,</span>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a>              <span class="at">formula =</span> y <span class="sc">~</span> x,</span>
+<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a>              <span class="at">se =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a>              <span class="at">col =</span> <span class="st">"black"</span>) <span class="sc">+</span></span>
+<span id="cb27-11"><a href="#cb27-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-12"><a href="#cb27-12" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Choose custom colours for the dots</span></span>
+<span id="cb27-13"><a href="#cb27-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"#42BDFF"</span>, <span class="st">"#FF5C67"</span>, <span class="st">"#B3AF25"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="10_correlations_files/figure-html/simpson-paradox-plot-groups-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>simpson <span class="sc">|&gt;</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(group) <span class="sc">|&gt;</span></span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">correlation</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># Correlation Matrix (pearson-method)
+
+Group   |  Parameter1 | Parameter2 |    r |       95% CI | t(98) |         p
+----------------------------------------------------------------------------
+Parent  | performance |  happiness | 0.65 | [0.52, 0.75] |  8.47 | &lt; .001***
+Student | performance |  happiness | 0.65 | [0.52, 0.75] |  8.47 | &lt; .001***
+Teacher | performance |  happiness | 0.65 | [0.52, 0.75] |  8.47 | &lt; .001***
+
+p-value adjustment method: Holm (1979)
+Observations: 100</code></pre>
+</div>
+</div>
+<p>The results have magically been inverted. Instead of a negative correlation, we now find a strong positive correlation among all groups. This result seems to make much more sense.</p>
+<p>When computing correlations, we need to be aware that subsets of our data might show different directions of correlations. Sometimes insignificant correlations might suddenly become significant. This is what the <em>Simpson’s paradox</em> postulates.</p>
+<p>If your study relies solely on correlations to detect relationships between variables, which it hopefully does not, it is essential to investigate whether the detected (or undetected) correlations exist. Of course, such an investigation can only be based on the data you obtained. The rest remains pure speculation. Nevertheless, correlations are beneficial to review the bilateral relationship of your variables. It is often used as a pre-test for regressions (see <a href="13_regressions.html" class="quarto-xref"><span>Chapter 13</span></a>) and similarly more advanced computations. As a technique to make inferences, correlations are a good starting point but should be complemented by other steps, if possible.</p>
+
+
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
+<div id="ref-cohen1988statistical" class="csl-entry" role="listitem">
+Cohen, Jacob. 1988. <em>Statistical Power Analysis for the Behavioral Sciences New York</em>. <em>NY: Academic Press</em>.
+</div>
+</div>
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./09_sources_of_bias.html" class="pagination-link  aria-label=" &lt;span="" of="" bias:="" sampling,="" outliers,="" normality="" and="" other="" &#39;conundrums&#39;&lt;="" span&gt;"="">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Sources of bias: Sampling, outliers, normality and other ‘conundrums’</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./11_group_comparison.html" class="pagination-link" aria-label="<span class='chapter-number'>11</span>&nbsp; <span class='chapter-title'>Comparing groups</span>">
+        <span class="nav-page-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Comparing groups</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
