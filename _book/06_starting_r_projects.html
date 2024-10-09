@@ -54,27 +54,7 @@ div.sourceCode
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-/* CSS for citations */
-div.csl-bib-body { }
-div.csl-entry {
-  clear: both;
-  margin-bottom: 0em;
-}
-.hanging-indent div.csl-entry {
-  margin-left:2em;
-  text-indent:-2em;
-}
-div.csl-left-margin {
-  min-width:2em;
-  float:left;
-}
-div.csl-right-inline {
-  margin-left:2em;
-  padding-left:1em;
-}
-div.csl-indent {
-  margin-left: 2em;
-}</style>
+</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -174,6 +154,12 @@ div.csl-indent {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./00_acknowledgements.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Acknowledgements</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./01_before_you_get_started.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title"><code>Readme.</code> before you get started</span></span></a>
   </div>
@@ -223,7 +209,7 @@ div.csl-indent {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./09_sources_of_bias.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Sources of bias: Outliers, normality and other ‘conundrums’</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Sources of bias: Sampling, outliers, normality and other ‘conundrums’</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -234,14 +220,14 @@ div.csl-indent {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./11_power_analysis.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Power: You either have it or you don’t</span></span></a>
+  <a href="./11_group_comparison.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Comparing groups</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./12_group_comparison.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Comparing groups</span></span></a>
+  <a href="./12_power_analysis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Power: You either have it or you don’t</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -260,12 +246,6 @@ div.csl-indent {
   <div class="sidebar-item-container"> 
   <a href="./15_next_steps.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Where to go from here: The next steps in your <em>R</em> journey</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./16_case_studies.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Case studies</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -299,7 +279,7 @@ div.csl-indent {
   <li><a href="#sec-creating-an-r-project" id="toc-sec-creating-an-r-project" class="nav-link active" data-scroll-target="#sec-creating-an-r-project"><span class="header-section-number">6.1</span> Creating an <em>R</em> Project file</a></li>
   <li><a href="#sec-organising-your-projects" id="toc-sec-organising-your-projects" class="nav-link" data-scroll-target="#sec-organising-your-projects"><span class="header-section-number">6.2</span> Organising your projects</a></li>
   <li><a href="#sec-creating-an-r-script" id="toc-sec-creating-an-r-script" class="nav-link" data-scroll-target="#sec-creating-an-r-script"><span class="header-section-number">6.3</span> Creating an <em>R</em> Script</a></li>
-  <li><a href="#sec-r-markdown-and-r-notebooks" id="toc-sec-r-markdown-and-r-notebooks" class="nav-link" data-scroll-target="#sec-r-markdown-and-r-notebooks"><span class="header-section-number">6.4</span> Using <em>R</em> Markdown</a></li>
+  <li><a href="#sec-r-markdown-and-r-notebooks" id="toc-sec-r-markdown-and-r-notebooks" class="nav-link" data-scroll-target="#sec-r-markdown-and-r-notebooks"><span class="header-section-number">6.4</span> Using <em>Quarto</em></a></li>
   </ul>
 </nav>
     </div>
@@ -325,19 +305,19 @@ div.csl-indent {
 </header>
 
 
-<p>Every new project likely fills you with enthusiasm and excitement. And it should. You are about to find answers to your research questions, and you hopefully come out more knowledgeable due to it. However, there are likely certain aspects of data analysis that you find less enjoyable. I can think of two:</p>
+<p>Every new project likely fills you with enthusiasm and excitement. And it should. You are about to find answers to your research questions, and you hopefully come out more knowledgeable because of it. However, you likely find certain aspects of data analysis less enjoyable. I can think of two:</p>
 <ul>
 <li><p>Keeping track of all the files my project generates</p></li>
 <li><p>Data wrangling</p></li>
 </ul>
-<p>While we cover data wrangling in great detail in the next Chapter (Chapter @ref(data-wrangling)), I would like to share some insights from my work that helped me stay organised and, consequently, less frustrated. The following applies to small and large research projects, which makes it very convenient no matter the situation and the scale of the project. Of course, feel free to tweak my approach to whatever suits you. However, consistency is king.</p>
+<p>While we cover data wrangling in great detail in the next Chapter (<a href="07_data_wrangling.html" class="quarto-xref"><span>Chapter 7</span></a>), I would like to share some insights from my work that helped me stay organised and, consequently, less frustrated. The following applies to small and large research projects, which makes it very convenient no matter the situation and the scale of the project. Of course, feel free to tweak my approach to whatever suits you. However, consistency is king.</p>
 <section id="sec-creating-an-r-project" class="level2" data-number="6.1">
 <h2 data-number="6.1" class="anchored" data-anchor-id="sec-creating-an-r-project"><span class="header-section-number">6.1</span> Creating an <em>R</em> Project file</h2>
-<p>When working on a project, you likely create many different files for various purposes, especially <em>R</em> Scripts (see Chapter @ref(creating-an-r-script)). If you are not careful, this file is stored in your system’s default location, which might not be where you want them to be. RStudio allows you to manage your entire project intuitively and conveniently through <em>R</em> Project files. Using <em>R</em> Project files comes with a couple of perks, for example:</p>
+<p>When working on a project, you likely create many different files for various purposes, especially <em>R</em> Scripts (see <a href="#sec-creating-an-r-project" class="quarto-xref"><span>Section 6.1</span></a>). If you are not careful, this file is stored in your system’s default location, which might not be where you want them to be. RStudio allows you to manage your entire project intuitively and conveniently through <em>R</em> Project files. Using <em>R</em> Project files comes with a couple of perks, for example:</p>
 <ul>
 <li><p>All the files that you generate are in the same place. Your data, your coding, your exported plots, your reports, etc., all are in one place together without you having to manage the files manually. This is due to the fact that RStudio sets the root directory to whichever folder your project is saved to.</p></li>
 <li><p>If you want to share your project, you can share the entire folder, and others can quickly reproduce your research or help fix problems. This is because all file paths are relative and not absolute.</p></li>
-<li><p>You can, more easily, use GitHub for backups and so-called ‘version control’, which allows you to track changes you have made to your code over time (see also Chapter @ref(next-steps-github)).</p></li>
+<li><p>You can, more easily, use GitHub for backups and so-called ‘version control’, which allows you to track changes you have made to your code over time (see also <a href="15_next_steps.html#sec-next-steps-github" class="quarto-xref"><span>Section 15.1</span></a>).</p></li>
 </ul>
 <p>For now, the most important reason to use <em>R</em> Project files is the convenience of the organisation of files and the ability to share it easily with co-investigators, your supervisor, or your students.</p>
 <p>To create an R Project, you need to perform the following steps:</p>
@@ -360,7 +340,7 @@ div.csl-indent {
 </section>
 <section id="sec-organising-your-projects" class="level2" data-number="6.2">
 <h2 data-number="6.2" class="anchored" data-anchor-id="sec-organising-your-projects"><span class="header-section-number">6.2</span> Organising your projects</h2>
-<p>This section is not directly related to RStudio, <em>R</em> or data analysis in general. Instead, I want to convey to you that a good folder structure can go a long way. It is an excellent habit to start thinking about folder structures before you start working on your project. Placing your files into dedicated folders, rather than keeping them loosely in one container, will speed up your work and save you from the frustration of not finding the files you need. I have a template that I use regularly. You can either create it from scratch in RStudio or open your file browser and create the folders there. RStudio does not mind which way you do it. If you want to spend less time setting this up, you might want to use the function <code>create_project_folder()</code> from the <code>r4np</code> package. It creates all the folders as shown in Figure @ref(fig:folder-structure).</p>
+<p>This section is not directly related to RStudio, <em>R</em> or data analysis in general. Instead, I want to convey to you that a good folder structure can go a long way. It is an excellent habit to start thinking about folder structures before you start working on your project. Placing your files into dedicated folders, rather than keeping them loosely in one container, will speed up your work and save you from the frustration of not finding the files you need. I have a template that I use regularly. You can either create it from scratch in RStudio or open your file browser and create the folders there. RStudio does not mind which way you do it. If you want to spend less time setting this up, you might want to use the function <code>create_project_folder()</code> from the <code>r4np</code> package. It creates all the folders as shown in <a href="#fig-folder-structure" class="quarto-xref">Figure&nbsp;<span>6.1</span></a>.</p>
 <p><a name="install_r4np"></a></p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Install 'r4np' from GitHub</span></span>
@@ -372,7 +352,7 @@ div.csl-indent {
 <p>To create a folder, click on <code>New Folder</code> in the <em>Files</em> pane. I usually have at least the following folders for every project I am involved in:</p>
 <ul>
 <li><p>A folder for my raw data. I store ‘untouched’ datasets in it. With ‘untouched’, I mean they have not been processed in any way and are usually files I downloaded from my data collection tool, e.g.&nbsp;an online questionnaire platform.</p></li>
-<li><p>A folder with ‘tidy’ data. This is usually data I exported from <em>R</em> after cleaning it, i.e.&nbsp;after some basic data wrangling and cleaning (see Chapter @ref(data-wrangling)).</p></li>
+<li><p>A folder with ‘tidy’ data. This is usually data I exported from <em>R</em> after cleaning it, i.e.&nbsp;after some basic data wrangling and cleaning (see <a href="07_data_wrangling.html" class="quarto-xref"><span>Chapter 7</span></a>).</p></li>
 <li><p>A folder for my <em>R</em> scripts</p></li>
 <li><p>A folder for my plots</p></li>
 <li><p>A folder for reports.</p></li>
@@ -393,7 +373,7 @@ Figure&nbsp;6.1: An example of a scalable folder structure for your project
 <section id="sec-creating-an-r-script" class="level2" data-number="6.3">
 <h2 data-number="6.3" class="anchored" data-anchor-id="sec-creating-an-r-script"><span class="header-section-number">6.3</span> Creating an <em>R</em> Script</h2>
 <p>Code quickly becomes long and complex. Thus, it is not very convenient to write it in the console. So, instead, we can write code into an <em>R</em> Script. An <em>R</em> Script is a document that RStudio recognises as <em>R</em> programming code. Files that are not <em>R</em> Scripts, like <code>.txt</code>, <code>.rtf</code> or <code>.md</code>, can also be opened in RStudio, but any code written in it will not be automatically recognised.</p>
-<p>When opening an <em>R</em> script or creating a new one, it will display in the <em>Source</em> window (see Chapter @ref(the-source-window)). Some refer to this window as the ‘script editor’. An <em>R</em> script starts as an empty file. Good coding etiquette (see Chapter @ref(coding-etiquette)) demands that we use the first line to indicate what this file does by using a comment <code>#</code>. Here is an example for a <a href="https://www.tidytuesday.com" target="blank" title="'TidyTuesday'">‘TidyTuesday’</a> <em>R</em> Project.</p>
+<p>When opening an <em>R</em> script or creating a new one, it will display in the <em>Source</em> window (see <a href="04_rstudio_interface.html#sec-the-source-window" class="quarto-xref"><span>Section 4.2</span></a> Some refer to this window as the ‘script editor’. An <em>R</em> script starts as an empty file. Good coding etiquette (see <a href="05_r_basics.html#sec-coding-etiquette" class="quarto-xref"><span>Section 5.5</span></a>) demands that we use the first line to indicate what this file does by using a comment <code>#</code>. Here is an example for a <a href="https://www.tidytuesday.com" target="blank" title="'TidyTuesday'">‘TidyTuesday’</a> <em>R</em> Project.</p>
 <p><img src="images/chapter_06_img/02_r_script/00_r_script.png" class="img-fluid"></p>
 <p>All examples in this book can easily be copied and pasted into your own <em>R</em> script. However, for some code you will have to install the <em>R</em> package <code>r4np</code> (see <a href="#install_r4np">above</a>). Let’s try it with the following code. The plot this code creates reveals which car manufacturer produces the most efficient cars. Copy and paste this code into your <em>R</em> script.</p>
 <div class="cell">
@@ -425,23 +405,18 @@ Figure&nbsp;6.1: An example of a scalable folder structure for your project
 <p>Not only does RStudio show you all the available options, but it also tells you which package this function is from. In this case, all listed functions are from the <code>ggplot2</code> package. Furthermore, when you select one of the options but have not pressed <code>Return ↵</code> yet, you also get to see a yellow box, which provides you with a quick reference of all the arguments that this function accepts. So you do not have to memorise all the functions and their arguments.</p>
 </section>
 <section id="sec-r-markdown-and-r-notebooks" class="level2" data-number="6.4">
-<h2 data-number="6.4" class="anchored" data-anchor-id="sec-r-markdown-and-r-notebooks"><span class="header-section-number">6.4</span> Using <em>R</em> Markdown</h2>
-<p>There is too much to say about <em>R</em> Markdown, which is why I only will highlight that it exists and point out the one feature that might convince you to choose this format over plain <em>R</em> scripts: They look like a Word document (almost).</p>
-<p>As the name indicates, <em>R</em> Markdown files are a combination of <em>R</em> scripts and ’<em>Markdown’</em>. <em>‘Markdown’</em> is a way of writing and formatting text documents without needing software like MS Word. Instead, you write everything in plain text. Such plain text can be converted into many different document types such as HTML websites, PDF or Word documents. If you would like to see how it works, I recommend looking at the&nbsp;<a href="https://www.rstudio.com/resources/cheatsheets/">R Markdown Cheatsheet</a>. To create an <em>R</em> Markdown file click on <code>File &gt; New File &gt; R Markdown...</code>.</p>
-<p>An <em>R</em> Markdown file works oppositely to an <em>R</em> script. By default, an <em>R</em> script considers everything as code and only through commenting <code>#</code> we can include text to describe what the code does. This is what you have seen in all the coding examples so far. On the other hand, an <em>R</em> Markdown file considers everything as text, and we have to specify what is code. We can do so by inserting <em>‘code chunks’</em>. Therefore, there is less of a need to use comments <code>#</code> in <em>R</em> Markdown files because you can write about it. Another convenience of <em>R</em> Markdown files is that results from your analysis are immediately shown underneath the code chunk and not in the console.</p>
-<p><img src="images/chapter_06_img/03_r_markdown/01_r_markdown_plain.png" class="img-fluid"></p>
-<p>If you switch your view to the <code>Visual Editor</code>, it almost looks like you are writing a report in MS Word.</p>
-<p><img src="images/chapter_06_img/03_r_markdown/02_r_markdown_visual_editor_menu.png" class="img-fluid"></p>
-<p><img src="images/chapter_06_img/03_r_markdown/03_r_markdown_visual_editor.png" class="img-fluid"></p>
-<p>So, when should you use an <em>R</em> script, and when should you use <em>R</em> Markdown. The rule-of-thumb is that if you intend to write a report, thesis or another form of publication, it might be better to work in an <em>R</em> Markdown file. If this does not apply, you might want to use an <em>R</em> Script. As mentioned above, <em>R</em> Markdown files emphasise text, while <em>R</em> scripts primarily focus on code. In my projects, I often have a mixture of both. I use <em>R</em> Scripts to carry out data wrangling and my primary analysis and then use <em>R</em> Markdown files to present the findings, e.g.&nbsp;creating plots, tables, and other components of a report. By the way, this book is written in <em>R</em> Markdown using the <code>bookdown</code> package.</p>
-<p>No matter your choice, it will neither benefit nor disadvantage you in your <em>R</em> journey or when working through this book. The choice is all yours. You likely will come to appreciate both formats for what they offer. If you want to find out more about <em>R</em> Markdown and how to use it, I highly recommend taking a look at <a href="https://bookdown.org/yihui/rmarkdown/" target="blank" title="'R Markdown: The Definitive Guide'">‘R Markdown: The Definitive Guide’</a> <span class="citation" data-cites="rmarkdown2018">(<a href="references.html#ref-rmarkdown2018" role="doc-biblioref">Xie, Allaire, and Grolemund 2018</a>)</span>.</p>
+<h2 data-number="6.4" class="anchored" data-anchor-id="sec-r-markdown-and-r-notebooks"><span class="header-section-number">6.4</span> Using <em>Quarto</em></h2>
+<p>There is too much to say about <em>Quarto</em>, which is why I only will highlight that it exists and point out the one feature that might convince you to choose this format over plain <em>R</em> scripts: They look like a Word document (almost).</p>
+<p>The predecessor of <em>Quarto</em> was called <em>R</em> Markdown, which is a combination of <em>R</em> and ’<em>Markdown’</em>. <em>‘Markdown’</em> is a way of writing and formatting text documents without needing software like MS Word. Instead, you write everything in plain text. Such plain text can be converted into many different document types such as HTML websites, PDF or Word documents. If you would like to see how it works, I recommend looking at the&nbsp;<a href="#0" target="_blank">Quarto Website</a>. To create a <em>Quarto</em> file, click on <code>File &gt; New File &gt; Quarto Document...</code>.</p>
+<p>A <em>Quarto</em> file works oppositely to an <em>R</em> script. By default, an <em>R</em> script considers everything as code and only through commenting <code>#</code> we can include text to describe what the code does. This is what you have seen in all the coding examples so far. On the other hand, a <em>Quarto</em> file considers everything as text, and we have to specify what is code. We can do so by inserting <em>‘code chunks’</em>. Therefore, there is less of a need to use comments <code>#</code> in <em>Quarto</em> files because you can write about it like you would in MS Word. Another convenience of <em>Quarto</em> files is that results from your analysis are immediately shown underneath the code chunk and not in the console.</p>
+<p><img src="images/chapter_06_img/03_r_markdown/01_quarto_plain.png" class="img-fluid"></p>
+<p>If you switch your view to the <code>Visual Editor</code> it almost looks like you are writing a report in MS Word. In order to switch to the <code>Visual Editor</code> you need to either click on <code>Visual</code> in the top left or click on the gear icon and select <code>Use Visual Editor</code>.</p>
+<p><img src="images/chapter_06_img/03_r_markdown/02_quarto_visual_editor_menu.png" class="img-fluid"></p>
+<p><img src="images/chapter_06_img/03_r_markdown/03_quarto_visual_editor.png" class="img-fluid"></p>
+<p>So, when should you use an <em>R</em> script, and when should you use <em>Quarto</em>. The rule-of-thumb is that if you intend to write a report, assignment, thesis or another form of publication, it might be better to work in a <em>Quarto</em> file. If this does not apply, you might want to use an <em>R</em> Script. As mentioned above, <em>Quarto</em> files emphasise writing about your analysis, while <em>R</em> scripts primarily focus on code. In my projects, I often have a mixture of both. I use <em>R</em> Scripts to carry out data wrangling and my primary analysis and then use <em>Quarto</em> files to present the findings, e.g.&nbsp;creating plots, tables, and other components of a report. By the way, this book is written in <em>Quarto</em>.</p>
+<p>No matter your choice, it will neither benefit nor disadvantage you in your <em>R</em> journey or when working through this book. The choice is all yours. You will likely come to appreciate both formats for what they offer.</p>
 
 
-<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
-<div id="ref-rmarkdown2018" class="csl-entry" role="listitem">
-Xie, Yihui, J. J. Allaire, and Garrett Grolemund. 2018. <em>R Markdown: The Definitive Guide</em>. Boca Raton, Florida: Chapman; Hall/CRC. <a href="https://bookdown.org/yihui/rmarkdown">https://bookdown.org/yihui/rmarkdown</a>.
-</div>
-</div>
 </section>
 
 </main> <!-- /main -->

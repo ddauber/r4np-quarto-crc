@@ -72,7 +72,7 @@ ul.task-list li input[type="checkbox"] {
 
 </head>
 
-<body class="nav-sidebar floating">
+<body class="nav-sidebar floating fullcontent">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -116,6 +116,12 @@ ul.task-list li input[type="checkbox"] {
   <div class="sidebar-item-container"> 
   <a href="./00_about_the_author.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">About the author</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./00_acknowledgements.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Acknowledgements</span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -169,7 +175,7 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./09_sources_of_bias.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Sources of bias: Outliers, normality and other ‘conundrums’</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Sources of bias: Sampling, outliers, normality and other ‘conundrums’</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -180,14 +186,14 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./11_power_analysis.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Power: You either have it or you don’t</span></span></a>
+  <a href="./11_group_comparison.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Comparing groups</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./12_group_comparison.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Comparing groups</span></span></a>
+  <a href="./12_power_analysis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Power: You either have it or you don’t</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -206,12 +212,6 @@ ul.task-list li input[type="checkbox"] {
   <div class="sidebar-item-container"> 
   <a href="./15_next_steps.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Where to go from here: The next steps in your <em>R</em> journey</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./16_case_studies.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Case studies</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -237,20 +237,7 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">Table of contents</h2>
-   
-  <ul>
-  <li><a href="#sec-appendix-comparing-groups" id="toc-sec-appendix-comparing-groups" class="nav-link active" data-scroll-target="#sec-appendix-comparing-groups">Comparing groups</a>
-  <ul class="collapse">
-  <li><a href="#sec-comparing-two-unpaired-groups" id="toc-sec-comparing-two-unpaired-groups" class="nav-link" data-scroll-target="#sec-comparing-two-unpaired-groups">Comparing two unpaired groups</a></li>
-  <li><a href="#sec-comparing-two-paired-groups" id="toc-sec-comparing-two-paired-groups" class="nav-link" data-scroll-target="#sec-comparing-two-paired-groups">Comparing two paired groups</a></li>
-  <li><a href="#sec-comparing-multiple-unpaired-groups" id="toc-sec-comparing-multiple-unpaired-groups" class="nav-link" data-scroll-target="#sec-comparing-multiple-unpaired-groups">Comparing multiple unpaired groups</a></li>
-  </ul></li>
-  </ul>
-</nav>
-    </div>
+    
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
@@ -273,14 +260,12 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="sec-appendix-comparing-groups" class="level1">
-<h1>Comparing groups</h1>
 <section id="sec-comparing-two-unpaired-groups" class="level2">
 <h2 class="anchored" data-anchor-id="sec-comparing-two-unpaired-groups">Comparing two unpaired groups</h2>
 <div id="tbl-comparing-two-groups-unpaired-baser" class="quarto-float anchored">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-comparing-two-groups-unpaired-baser-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Table&nbsp;1.1: Comparing two unpaired groups (effect size functions from package <code>effectsize</code>, except for <code>wilcoxonR()</code> from <code>rcompanion</code>
+Table&nbsp;1: Comparing two unpaired groups (effect size functions from package <code>effectsize</code>, except for <code>wilcoxonR()</code> from <code>rcompanion</code>
 </figcaption>
 <div aria-describedby="tbl-comparing-two-groups-unpaired-baser-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <table class="table">
@@ -332,7 +317,7 @@ Table&nbsp;1.1: Comparing two unpaired groups (effect size functions from packag
 <div id="tbl-comparing-two-groups-paired-baser" class="quarto-float anchored">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-comparing-two-groups-paired-baser-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Table&nbsp;1.2: Comparing two unpaired groups (effect size functions from package <code>effectsize</code>, except for <code>wilcoxonPairedR()</code> from <code>rcompanion</code>)
+Table&nbsp;2: Comparing two unpaired groups (effect size functions from package <code>effectsize</code>, except for <code>wilcoxonPairedR()</code> from <code>rcompanion</code>)
 </figcaption>
 <div aria-describedby="tbl-comparing-two-groups-paired-baser-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <table class="table">
@@ -382,7 +367,7 @@ Table&nbsp;1.2: Comparing two unpaired groups (effect size functions from packag
 <div id="tbl-comparing-multiple-groups-unpaired-baser" class="quarto-float anchored">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-comparing-multiple-groups-unpaired-baser-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Table&nbsp;1.3: Comparing multiple unpaired groups (effect size functions from package <code>effectsize</code>)
+Table&nbsp;3: Comparing multiple unpaired groups (effect size functions from package <code>effectsize</code>)
 </figcaption>
 <div aria-describedby="tbl-comparing-multiple-groups-unpaired-baser-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <table class="table">
@@ -427,7 +412,6 @@ Table&nbsp;1.3: Comparing multiple unpaired groups (effect size functions from p
 </div>
 
 
-</section>
 </section>
 
 </main> <!-- /main -->

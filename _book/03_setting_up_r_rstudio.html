@@ -120,6 +120,12 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./00_acknowledgements.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Acknowledgements</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./01_before_you_get_started.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title"><code>Readme.</code> before you get started</span></span></a>
   </div>
@@ -169,7 +175,7 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./09_sources_of_bias.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Sources of bias: Outliers, normality and other ‘conundrums’</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Sources of bias: Sampling, outliers, normality and other ‘conundrums’</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -180,14 +186,14 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./11_power_analysis.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Power: You either have it or you don’t</span></span></a>
+  <a href="./11_group_comparison.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Comparing groups</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./12_group_comparison.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Comparing groups</span></span></a>
+  <a href="./12_power_analysis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Power: You either have it or you don’t</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -206,12 +212,6 @@ ul.task-list li input[type="checkbox"] {
   <div class="sidebar-item-container"> 
   <a href="./15_next_steps.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Where to go from here: The next steps in your <em>R</em> journey</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./16_case_studies.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Case studies</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -341,7 +341,7 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="sec-updating-r-and-rstudio" class="level2" data-number="3.4">
 <h2 data-number="3.4" class="anchored" data-anchor-id="sec-updating-r-and-rstudio"><span class="header-section-number">3.4</span> Updating R and RStudio: Living at the pulse of innovation</h2>
-<p>While not strictly something that helps you become a better programmer, this advice might come in handy to avoid turning into a frustrated programmer. When you update your software, you need to update <em>R</em> and RStudio separately from each other. While both <em>R</em> and RStudio work closely with each other, they still constitute separate pieces of software. Thus, it is essential to keep in mind that updating RStudio will not automatically update R. This can become problematic if specific tools you installed via RStudio (like a fancy learning algorithm) might not be compatible with earlier versions of <em>R</em>. Also, additional <em>R</em> packages (see Chapter @ref(r-packages)) developed by other developers are separate pieces which require updating too, independently from <em>R</em> and RStudio.</p>
+<p>While not strictly something that helps you become a better programmer, this advice might come in handy to avoid turning into a frustrated programmer. When you update your software, you need to update <em>R</em> and RStudio separately from each other. While both <em>R</em> and RStudio work closely with each other, they still constitute separate pieces of software. Thus, it is essential to keep in mind that updating RStudio will not automatically update R. This can become problematic if specific tools you installed via RStudio (like a fancy learning algorithm) might not be compatible with earlier versions of <em>R</em>. Also, additional <em>R</em> packages (see <a href="05_r_basics.html#sec-r-packages" class="quarto-xref"><span>Section 5.4</span></a>) developed by other developers are separate pieces which require updating too, independently from <em>R</em> and RStudio.</p>
 <p>I know what you are thinking: This already sounds complicated and cumbersome. However, rest assured, we take a look at how you can easily update all your packages with RStudio. Thus, all you need to remember is: <em>R</em> needs to be updated separately from everything else.</p>
 </section>
 <section id="sec-rstudio-cloud" class="level2" data-number="3.5">
@@ -360,7 +360,7 @@ ul.task-list li input[type="checkbox"] {
 <p><img src="images/chapter_03_img/rstudio_cloud/05_rstudio_cloud.png" class="img-fluid" alt="Screenshot of the RStudio Cloud landing page after logging into the website. It shows how clicking on 'New Project enables users to choose a new RStudio project in the cloud."></p></li>
 <li><p>To start a new <em>R</em> project, you can click on <code>New Project &gt; New RStudio Project</code>. This will open RStudio in the Cloud, which looks identical to the desktop version. You can immediately start writing your code. The example below computes a plot.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
 <p><img src="images/chapter_03_img/rstudio_cloud/06_rstudio_cloud.png" class="img-fluid" alt="Screenshot of an RStudio Cloud project opened, showing some coding."></p></li>
-<li><p>Now we can execute the code as we would on the desktop version (see Chapter @ref(r-basics-the-very-fundamentals)).</p>
+<li><p>Now we can execute the code as we would on the desktop version (see <a href="05_r_basics.html" class="quarto-xref"><span>Chapter 5</span></a> ).</p>
 <p><img src="images/chapter_03_img/rstudio_cloud/07_rstudio_cloud.png" class="img-fluid" alt="Screenshot of an RStudio Cloud project opened, showing some coding and the plot that results from running this code."></p></li>
 </ol>
 <p>No matter whether you choose to use a desktop version of RStudio or RStudio Cloud, you will be able to follow along in this book with no problem.</p>
@@ -370,7 +370,7 @@ ul.task-list li input[type="checkbox"] {
 <section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
 <hr>
 <ol>
-<li id="fn1"><p>RStudio and RStudio Cloud warn you if you need to install certain R packages to successfully run code. More about R packages and what they are can be found in Chapter @ref(r-packages).<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn1"><p>RStudio and RStudio Cloud warn you if you need to install certain R packages to successfully run code. More about R packages and what they are can be found in <a href="05_r_basics.html#sec-r-packages" class="quarto-xref"><span>Section 5.4</span></a>.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section>
 

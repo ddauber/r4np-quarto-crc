@@ -174,6 +174,12 @@ div.csl-indent {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./00_acknowledgements.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Acknowledgements</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./01_before_you_get_started.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title"><code>Readme.</code> before you get started</span></span></a>
   </div>
@@ -223,7 +229,7 @@ div.csl-indent {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./09_sources_of_bias.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Sources of bias: Outliers, normality and other ‘conundrums’</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Sources of bias: Sampling, outliers, normality and other ‘conundrums’</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -234,14 +240,14 @@ div.csl-indent {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./11_power_analysis.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Power: You either have it or you don’t</span></span></a>
+  <a href="./11_group_comparison.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Comparing groups</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./12_group_comparison.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Comparing groups</span></span></a>
+  <a href="./12_power_analysis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Power: You either have it or you don’t</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -260,12 +266,6 @@ div.csl-indent {
   <div class="sidebar-item-container"> 
   <a href="./15_next_steps.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Where to go from here: The next steps in your <em>R</em> journey</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./16_case_studies.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Case studies</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -411,8 +411,8 @@ div.csl-indent {
 </section>
 <section id="stop-words-removing-noise-in-the-data" class="level2" data-number="14.2">
 <h2 data-number="14.2" class="anchored" data-anchor-id="stop-words-removing-noise-in-the-data"><span class="header-section-number">14.2</span> Stop words: Removing noise in the data</h2>
-<p>In the previous example, we already performed an important data wrangling process, i.e.&nbsp;tokenization. However, besides changing the text format, we also need to take care of other components in our data that are usually not important, for example, removing <em>‘stop words’</em>. To showcase this step (and a little more), I will draw on the <code>imdb_top_250</code> dataset.</p>
-<p>In marketing, finding the right product name is a laborious task and requires careful attention. After all, our first impression of a product is partially informed by its name. Consequently, when promoting a movie, one might wonder whether more popular words in movie titles can lead to greater success, i.e.&nbsp;a higher ranking on IMDb. With the help of the <code>imdb_top_250</code> dataset, we can empirically investigate this matter. However, we first have to tidy the data and then clean it. An essential step in this process is the removal of <em>‘stop words’</em>.</p>
+<p>In the previous example, we already performed an important data wrangling process, i.e.&nbsp;tokenization. However, besides changing the text format, we also need to take care of other components in our data that are usually not important, for example, removing <em>‘stop words’</em>. To showcase this step (and a little more), I will draw on the <code>comments</code> dataset, which holds data about students’ study experiences.</p>
+<p>In my industry, i.e.&nbsp;Higher Education, understanding students’ study experiences is crucial for improving academic programmes and support services. The insights gathered from student feedback can significantly influence how a university enhances its offerings. With the help of the <code>comments</code> dataset, we can empirically investigate what themes emerge from students comments about their social inclusion experiences. However, we first have to tidy the data and then clean it. An essential step in this process is the removal of <em>‘stop words’</em>.</p>
 <p><em>‘Stop words’</em> are words that we want to exclude from our analysis, because they carry no particular meaning. The <code>tidytext</code> package comes with a data frame that contains common stop words in English.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>stop_words</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -434,34 +434,34 @@ div.csl-indent {
 </div>
 </div>
 <p>It is important to acknowledge that there is no unified standard of what constitutes a stop word. The data frame <code>stop_words</code> covers many words, but in your research context, you might not even want to remove them. For example, if we aim to identify topics in a text, stop words would be equivalent to white noise, i.e.&nbsp;many of them are of no help to identify relevant topics. Instead, stop words would confound our analysis. For obvious reasons, stop words highly depend on the language of your data. Thus, what works for English will not work for German, Russian or Chinese. You will need a separate set of stop words for each language.</p>
-<p>The removal of stop words can be achieved with a function we already know: <code>anti-join()</code>. In other words, we want to subtract all words from <code>stop_words</code> from a given text. Let’s begin with the tokenization of our movie titles.</p>
+<p>The removal of stop words can be achieved with a function we already know: <code>anti-join()</code>. In other words, we want to subtract all words from <code>stop_words</code> from a given text. Let’s begin with the tokenization of our comments.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>titles <span class="ot">&lt;-</span></span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  imdb_top_250 <span class="sc">|&gt;</span></span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unnest_tokens</span>(word, title) <span class="sc">|&gt;</span></span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(imdb_rating, word)</span>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>comments_token <span class="ot">&lt;-</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  comments <span class="sc">|&gt;</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unnest_tokens</span>(word, comment) <span class="sc">|&gt;</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(word, social_inclusion)</span>
 <span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>titles</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>comments_token</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 712 × 2
-   imdb_rating word      
-         &lt;dbl&gt; &lt;chr&gt;     
- 1         9.3 the       
- 2         9.3 shawshank 
- 3         9.3 redemption
- 4         9.2 the       
- 5         9.2 godfather 
- 6         9   the       
- 7         9   dark      
- 8         9   knight    
- 9         9   the       
-10         9   godfather 
-# ℹ 702 more rows</code></pre>
+<pre><code># A tibble: 3,299 × 2
+   word          social_inclusion
+   &lt;chr&gt;                    &lt;dbl&gt;
+ 1 joining                      8
+ 2 the                          8
+ 3 international                8
+ 4 club                         8
+ 5 was                          8
+ 6 a                            8
+ 7 game                         8
+ 8 changer                      8
+ 9 i                            8
+10 made                         8
+# ℹ 3,289 more rows</code></pre>
 </div>
 </div>
-<p>Our new data frame has considerably more rows, i.e.&nbsp;<code>712</code>, which hints at around 3 words per title on average. If you are the curious type, like me, we already can peek at the frequency of words in our dataset.</p>
+<p>Our new data frame has considerably more rows, i.e.&nbsp;<code>3299</code>, which hints at around 16 words per comment on average. If you are the curious type, like me, we already can peek at the frequency of words in our dataset.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>titles <span class="sc">|&gt;</span></span>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>comments_token <span class="sc">|&gt;</span></span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">word2 =</span> <span class="fu">fct_lump_n</span>(word, <span class="dv">5</span>,</span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>                            <span class="at">other_level =</span> <span class="st">"other words"</span>)) <span class="sc">|&gt;</span></span>
 <span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(word2) <span class="sc">|&gt;</span></span>
@@ -477,36 +477,36 @@ div.csl-indent {
 </div>
 </div>
 </div>
-<p>The result is somewhat disappointing. None of these words carries any particular meaning because they are all stop words. Thus, we must clean our data before conducting such an analysis.</p>
+<p>The result is somewhat disappointing. None of these words carries any particular meaning because they are all stop words, except for <code>group</code>. Thus, we must clean our data before conducting such an analysis.</p>
 <p>I also sneaked in a new function called <code>fct_lump_n()</code> from the <code>forcats</code> package. It creates a new factor level called <code>other words</code> and ‘lumps’ together all the other factor levels. You likely have seen plots before which show a category called ‘Other’. We usually apply this approach if we have many factor levels with very low frequencies. It would not be meaningful to plot 50 words as a barplot which only occurred once in our data. They are less important. Thus, it is sometimes meaningful to pool factor levels together. The function <code>fct_lump_n(word, 5)</code> returns the five most frequently occurring words and pools the other words together into a new category. There are many different ways to ‘lump’ factors. For a detailed explanation and showcase of all available alternatives, have a look at the <a href="https://forcats.tidyverse.org/reference/fct_lump.html" target="blank" title="forcats website">forcats website</a>.</p>
 <p>In our next step, we have to remove stop words using the <code>stop_words</code> data frame and apply the function <code>anti_join()</code>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>titles_no_sw <span class="ot">&lt;-</span> <span class="fu">anti_join</span>(titles, stop_words,</span>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>comments_no_sw <span class="ot">&lt;-</span> <span class="fu">anti_join</span>(comments_token, stop_words,</span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>                          <span class="at">by =</span> <span class="st">"word"</span>)</span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>titles_no_sw</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>comments_no_sw</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 443 × 2
-   imdb_rating word      
-         &lt;dbl&gt; &lt;chr&gt;     
- 1         9.3 shawshank 
- 2         9.3 redemption
- 3         9.2 godfather 
- 4         9   dark      
- 5         9   knight    
- 6         9   godfather 
- 7         9   ii        
- 8         9   12        
- 9         9   angry     
-10         8.9 lord      
-# ℹ 433 more rows</code></pre>
+<pre><code># A tibble: 1,510 × 2
+   word          social_inclusion
+   &lt;chr&gt;                    &lt;dbl&gt;
+ 1 joining                      8
+ 2 international                8
+ 3 club                         8
+ 4 game                         8
+ 5 changer                      8
+ 6 friends                      8
+ 7 world                        8
+ 8 studying                     8
+ 9 campus                      10
+10 diversity                   10
+# ℹ 1,500 more rows</code></pre>
 </div>
 </div>
-<p>The dataset shrank from <code>712</code> rows to <code>443</code> rows. Thus, almost 38% of our data was actually noise. With this cleaner dataset, we can now look at the frequency count again.</p>
+<p>The dataset shrank from <code>3299</code> rows to <code>1510</code> rows. Thus, about 54% of our data was actually noise. With this cleaner dataset, we can now look at the frequency count again.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>titles_no_sw <span class="sc">|&gt;</span></span>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>comments_no_sw <span class="sc">|&gt;</span></span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(word) <span class="sc">|&gt;</span></span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(n <span class="sc">&gt;</span> <span class="dv">1</span>) <span class="sc">|&gt;</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(n <span class="sc">&gt;</span> <span class="dv">10</span>) <span class="sc">|&gt;</span></span>
 <span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">reorder</span>(word, n),</span>
 <span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>             <span class="at">y =</span> n)) <span class="sc">+</span></span>
 <span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>() <span class="sc">+</span></span>
@@ -519,7 +519,27 @@ div.csl-indent {
 </div>
 </div>
 </div>
-<p>To keep the number of bars somewhat manageable, I removed those words with more less than <code>1</code> occurrence in the dataset. Some of the most frequently occurring words include, for example, <code>wild</code>, <code>wars</code>, <code>story</code>, <code>star</code>, <code>rings</code>, <code>lords</code>. If you know Hollywood movies of the past, you will notice that two movies likely cause this result: The ‘Star Wars’ and ‘Lord of the Rings’ series. We also have numbers included in our dataset. Sometimes these are worth removing, but in this case, the number <code>2</code> likely indicates a sequel to another movie. Thus, it provides essential information.</p>
+<p>To keep the number of bars somewhat manageable, I removed those words with less than <code>10</code> occurrences in the dataset. Some of the most frequently occurring words include, for example, <code>feel</code>, <code>cultural</code>, <code>friends</code>, <code>campus</code>, <code>events</code>, <code>projects</code>. There is also a reference to the word <code>i've</code> which refers to <code>i have</code> and, therefore, constitutes a stop word. However, it seems our list of <code>stopwords</code> did not pick this one up. It is always good to remember that our tools for analysis are never perfect and some more manual data cleaning is often necessary. It is very easy to remove this occurence of words using our trusty <code>filter()</code> function.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>comments_no_sw <span class="ot">&lt;-</span> </span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  comments_no_sw <span class="sc">|&gt;</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(word <span class="sc">!=</span> <span class="st">"i’ve"</span>)</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>comments_no_sw <span class="sc">|&gt;</span></span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(word) <span class="sc">|&gt;</span></span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(n <span class="sc">&gt;</span> <span class="dv">10</span>) <span class="sc">|&gt;</span></span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">reorder</span>(word, n),</span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>             <span class="at">y =</span> n)) <span class="sc">+</span></span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>() <span class="sc">+</span></span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="14_mixed_methods_files/figure-html/manually-remove-stopwords-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
 <p>Another commonly used method for visualising word frequencies are word clouds. You likely have seen them before since they are very popular, especially for websites and poster presentations. Word clouds use the frequency of words to determine the font size of each word and arrange them so that it resembles the shape of a cloud. The package <code>wordcloud</code> and its function <code>wordcloud()</code> make this very easy. You can modify a word cloud in several ways. Here are some settings I frequently change for my data visualisations:</p>
 <ul>
 <li><p><code>random.order = FALSE</code>: This ensures that the most important words appear in the middle of the plot.</p></li>
@@ -530,22 +550,22 @@ div.csl-indent {
 </ul>
 <p>To create a word cloud you have to provide at least a column with words and a column with their frequencies. All other settings are entirely customisable and optional. Here is an example based on the data we just used for our bar plot.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a dataframe with the word count</span></span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>word_frequencies <span class="ot">&lt;-</span></span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>  titles_no_sw <span class="sc">|&gt;</span></span>
-<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(word)</span>
-<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot word cloud</span></span>
-<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>wordcloud<span class="sc">::</span><span class="fu">wordcloud</span>(<span class="at">words =</span> word_frequencies<span class="sc">$</span>word,</span>
-<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>                     <span class="at">freq =</span> word_frequencies<span class="sc">$</span>n,</span>
-<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>                     <span class="at">random.order =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>                     <span class="at">scale =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="fl">0.5</span>),</span>
-<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>                     <span class="at">min.freq =</span> <span class="dv">1</span>,</span>
-<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a>                     <span class="at">max.words =</span> <span class="dv">100</span>,</span>
-<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a>                     <span class="at">colors =</span> <span class="fu">c</span>(<span class="st">"#6FA8F5"</span>,</span>
-<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a>                                <span class="st">"#FF4D45"</span>,</span>
-<span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a>                                <span class="st">"#FFC85E"</span>)</span>
-<span id="cb18-16"><a href="#cb18-16" aria-hidden="true" tabindex="-1"></a>                     )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a dataframe with the word count</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>word_frequencies <span class="ot">&lt;-</span></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>  comments_no_sw <span class="sc">|&gt;</span></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(word)</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot word cloud</span></span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>wordcloud<span class="sc">::</span><span class="fu">wordcloud</span>(<span class="at">words =</span> word_frequencies<span class="sc">$</span>word,</span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>                     <span class="at">freq =</span> word_frequencies<span class="sc">$</span>n,</span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>                     <span class="at">random.order =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>                     <span class="at">scale =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="fl">0.5</span>),</span>
+<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a>                     <span class="at">min.freq =</span> <span class="dv">1</span>,</span>
+<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a>                     <span class="at">max.words =</span> <span class="dv">100</span>,</span>
+<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a>                     <span class="at">colors =</span> <span class="fu">c</span>(<span class="st">"#6FA8F5"</span>,</span>
+<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a>                                <span class="st">"#FF4D45"</span>,</span>
+<span id="cb19-15"><a href="#cb19-15" aria-hidden="true" tabindex="-1"></a>                                <span class="st">"#FFC85E"</span>)</span>
+<span id="cb19-16"><a href="#cb19-16" aria-hidden="true" tabindex="-1"></a>                     )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -554,63 +574,140 @@ div.csl-indent {
 </div>
 </div>
 </div>
-<p>After preparing and visualising our data, it is time to perform our analysis. We want to know whether certain words are associated with higher <code>imdb_rating</code>s. If we use the function <code>count()</code> we will lose the variable <code>imdb_rating()</code>. Thus, we have to do this in three steps:</p>
+<p>Our word cloud nicely summarises keywords that were particularly important, assuming we consider frequency of words an indicator of importance. Students seem to talk about their feelings, culture and friends/friendships. While this constitutes a good starting point for further analysis we would require more context about what was said, for example what kind of feelings were expressed. This is something we will explore more shortly. Before we advance to this stage, though, we can investigate which words were mostly associated with each <code>social_inclusion</code> scores, i.e.&nbsp;what words were most frequently used by students who scores a <code>1</code>, <code>2</code>, <code>3</code>, etc. In other words, each <code>social_inclusion</code> will become its own little group/sub-sample that we look at.</p>
+<p>We can still use <code>count()</code> but we have do approach this slightly differently:</p>
 <ol type="1">
-<li><p>We create the frequencies for each word with <code>count()</code>, which we already did.</p></li>
-<li><p>Then, we <code>left_join()</code> the word frequencies with the original dataset to add the word frequencies.</p></li>
-<li><p>Compute a correlation using <code>correlation()</code> from the <code>correlation</code> package.</p></li>
+<li><p>We create the frequencies for each word with <code>count()</code> and include both variables, <code>social_inclusion</code> and <code>word</code>. This way, count will look for all combinations of the social inclusion scores and the word.</p></li>
+<li><p>Then, we group our data based on <code>social_inclusion</code>.</p></li>
+<li><p>We select the top 5 most frequently occurring words for each group.</p></li>
 </ol>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Combine word_frequencies with titles_no_sw</span></span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>titles_no_sw <span class="ot">&lt;-</span> <span class="fu">left_join</span>(titles_no_sw, word_frequencies,</span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>                          <span class="at">by =</span> <span class="st">"word"</span>)</span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>titles_no_sw</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>comments_grouped <span class="ot">&lt;-</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>  comments_no_sw <span class="sc">|&gt;</span></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(social_inclusion, word) <span class="sc">|&gt;</span></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(social_inclusion) <span class="sc">|&gt;</span></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_max</span>(n, <span class="at">n =</span> <span class="dv">5</span>) <span class="sc">|&gt;</span></span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">|&gt;</span></span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(social_inclusion))</span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>comments_grouped</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 443 × 3
-   imdb_rating word           n
-         &lt;dbl&gt; &lt;chr&gt;      &lt;int&gt;
- 1         9.3 shawshank      1
- 2         9.3 redemption     1
- 3         9.2 godfather      2
- 4         9   dark           2
- 5         9   knight         2
- 6         9   godfather      2
- 7         9   ii             1
- 8         9   12             2
- 9         9   angry          1
-10         8.9 lord           3
-# ℹ 433 more rows</code></pre>
+<pre><code># A tibble: 58 × 3
+   social_inclusion word            n
+              &lt;dbl&gt; &lt;chr&gt;       &lt;int&gt;
+ 1               10 friendships     7
+ 2               10 feel            5
+ 3               10 friends         5
+ 4               10 diversity       3
+ 5               10 times           3
+ 6                8 friends        14
+ 7                8 friendships    14
+ 8                8 study           6
+ 9                8 classmates      5
+10                8 love            5
+# ℹ 48 more rows</code></pre>
 </div>
 </div>
+<p>When you first look at this you might be slightly confused what it actually shows. It is best to think of <code>social_inclusion</code> as a grouping variable and not as a number anymore. For example, in group <code>10</code>, which refers to comments that scored very high on <code>social_inclusion</code>, <code>friendships</code> are mentioned <code>7</code> times, while <code>feel</code> and <code>friends</code> are mentioned <code>5</code> times. Similarly, in group <code>8</code>, <code>friends</code> and <code>friendships</code> are each mentioned <code>14</code> times. The frequency is very much affected by the size of each group, i.e.&nbsp;how many students scored a <code>10</code> or an <code>8</code>. Thus, comparing results across groups based on <code>n</code> is not wise. However, looking at words within each group we can get a sense of what made students score very high or low.</p>
+<p>We can visualise this data which will make it even clearer what the value of this analysis is. However, first we have to do some housekeeping since the meaning of our variables has changed. Our variable <code>social_inclusion</code> should now be a <code>factor</code>. Let’s transform it in the same way as we did at the very beginning of the book - going full circle.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Compute the correlation of imdb_rating and n</span></span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>corr <span class="ot">&lt;-</span></span>
-<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>  titles_no_sw <span class="sc">|&gt;</span></span>
-<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(imdb_rating, n) <span class="sc">|&gt;</span></span>
-<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>  correlation<span class="sc">::</span><span class="fu">correlation</span>()</span>
-<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>corr</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>comments_grouped <span class="ot">&lt;-</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>  comments_grouped <span class="sc">|&gt;</span></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">social_inclusion =</span> <span class="fu">as_factor</span>(social_inclusion))</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(comments_grouped)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># Correlation Matrix (pearson-method)
-
-Parameter1  | Parameter2 |    r |       95% CI | t(441) |         p
--------------------------------------------------------------------
-imdb_rating |          n | 0.18 | [0.09, 0.27] |   3.95 | &lt; .001***
-
-p-value adjustment method: Holm (1979)
-Observations: 443</code></pre>
+<pre><code>Rows: 58
+Columns: 3
+$ social_inclusion &lt;fct&gt; 10, 10, 10, 10, 10, 8, 8, 8, 8, 8, 7, 7, 7, 7, 7, 7, …
+$ word             &lt;chr&gt; "friendships", "feel", "friends", "diversity", "times…
+$ n                &lt;int&gt; 7, 5, 5, 3, 3, 14, 14, 6, 5, 5, 6, 4, 4, 4, 3, 3, 3, …</code></pre>
 </div>
 </div>
+<p>With this in place we can go ahead and create a plot for each group by using<code>facet_wrap().</code></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Interpret the effect size</span></span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>effectsize<span class="sc">::</span><span class="fu">interpret_r</span>(corr<span class="sc">$</span>r, <span class="at">rules =</span> <span class="st">"cohen1988"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] "small"
-(Rules: cohen1988)</code></pre>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>comments_grouped <span class="sc">|&gt;</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> word,</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>             <span class="at">y =</span> n)</span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>         ) <span class="sc">+</span></span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>() <span class="sc">+</span></span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> social_inclusion)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="14_mixed_methods_files/figure-html/visualise-social-inclusion-groups-words-n-01-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
 </div>
 </div>
-<p>Considering our correlation analysis, we find that more frequently used words tend to be significantly more successful. However, the effect size is too small to be of particular relevance. Besides, as mentioned before, the frequency of words is skewed towards two movie franchises, both of which have been very successful. Thus, we have to be content that there is no secret formula to create movie titles, i.e.&nbsp;choosing popular words from movie titles will not result in a better ranking.</p>
+</div>
+<p>One need not be a graphic designer to understand that this is not a well-designed visualisation and very hard to understand. Let’s improve it further by letting each plot have their own y-axis. In this case, this is perfectly fine, since there are different words ranked for each facet plot. We can achieve this by inserting <code>scales = "free_y"</code> into the <code>facet_wrap()</code> function.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>comments_grouped <span class="sc">|&gt;</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> word,</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>             <span class="at">y =</span> n)</span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>         ) <span class="sc">+</span></span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>() <span class="sc">+</span></span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> social_inclusion,</span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a>             <span class="at">scales =</span> <span class="st">"free_y"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="14_mixed_methods_files/figure-html/visualise-social-inclusion-groups-words-n-02-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>This looks a lot better and we start to see which words appeared most frequently in comments for each level of <code>social_inclusion</code>. There is, however, one more step we should take to make this visualisation even more meaningful. Ideally, we want the top word show up at the top for each plot. We can see that currently is seems each bar is in a rather random order. This problem might sound familiar, since we learnt how to <code>reorder()</code> barplots very early on in this book. So, let’s apply our knowledge to this plot.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>comments_grouped <span class="sc">|&gt;</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">reorder</span>(word, n),</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>             <span class="at">y =</span> n)</span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>         ) <span class="sc">+</span></span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>() <span class="sc">+</span></span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> social_inclusion,</span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a>             <span class="at">scales =</span> <span class="st">"free_y"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="14_mixed_methods_files/figure-html/visualise-social-inclusion-groups-words-n-03-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Well, this brought us a little closer, but not quite were we intended to be. Some plots are in the correct order but others are not. The reason for this odd phenomenon is that we reordered our variable <code>word</code> for the entire dataset and not for each facet in our visualisation. Unfortunately, neither <code>reorder()</code> nor <code>fct_reorder()</code> can help us in this case. Instead, we need to use two new functions from the <code>tidytext</code> package to help us perfect our plot: <code>reorder_within()</code> and <code>scale_x_reordered()</code>. The <code>reorder_within()</code> functions allows us to order a variable based on another quantitative variable (<code>n</code>) for each level of a factor (<code>social_inclusion</code>). The <code>scale_x_reordered()</code> function cleans up the labels of our x-axis which were changed in the process of using <code>reorder_within()</code>. If you are curious how the plot would look like without using <code>scale_x_reordered()</code> you can simply remove it.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>comments_grouped <span class="sc">|&gt;</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Reorder our data for for each group level ion social_inclusion</span></span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">word =</span> <span class="fu">reorder_within</span>(<span class="at">x =</span> word,</span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>                               <span class="at">by=</span> n,</span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>                               <span class="at">within =</span> social_inclusion)) <span class="sc">|&gt;</span></span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a> <span class="co"># Create the plot</span></span>
+<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> word,</span>
+<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a>               <span class="at">y =</span> n,</span>
+<span id="cb27-11"><a href="#cb27-11" aria-hidden="true" tabindex="-1"></a>               <span class="at">fill =</span> social_inclusion)) <span class="sc">+</span></span>
+<span id="cb27-12"><a href="#cb27-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb27-13"><a href="#cb27-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
+<span id="cb27-14"><a href="#cb27-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-15"><a href="#cb27-15" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Adjust the x-axis to obtain the correct labels    </span></span>
+<span id="cb27-16"><a href="#cb27-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_reordered</span>() <span class="sc">+</span></span>
+<span id="cb27-17"><a href="#cb27-17" aria-hidden="true" tabindex="-1"></a>      </span>
+<span id="cb27-18"><a href="#cb27-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> social_inclusion,</span>
+<span id="cb27-19"><a href="#cb27-19" aria-hidden="true" tabindex="-1"></a>             <span class="at">scales =</span> <span class="st">"free_y"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="14_mixed_methods_files/figure-html/visualise-social-inclusion-groups-words-n-04-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>The final visualisation, with a splash of colour added, reveals interesting clusters of words that are directly linked to the <code>social_inclusion</code> scores. For example, it seems students who score <code>5</code> or lower on <code>social_inclusion</code> never refer to <code>friends</code> or <code>friendships</code>. Most importantly, we can very quickly understand how individuals with very low scores felt: <code>lonely</code>, <code>isolated</code>, <code>anxiety</code>. This is clearly something a department would aim to improve and maybe learn from students who managed to built flourishing relationships with their peers.</p>
+<p>While these might all be fascinating insights, we have not exhausted our options and can further expand on what we did so far by looking at more than just single, isolated, words.</p>
 </section>
 <section id="sec-n-grams" class="level2" data-number="14.3">
 <h2 data-number="14.3" class="anchored" data-anchor-id="sec-n-grams"><span class="header-section-number">14.3</span> N-grams: Exploring correlations of words</h2>
@@ -624,85 +721,85 @@ Observations: 443</code></pre>
 <li>Merge columns <code>word1</code> and <code>word2</code> into one column again, i.e.&nbsp;<code>unite()</code> them. (optional)</li>
 <li>Count the frequency of bigrams, i.e.&nbsp;<code>count()</code>.</li>
 </ol>
-<p>There are a lot of new functions covered in this part. However, by now, you likely understand how they function already. Let’s proceed step-by-step. For this final example about mixed-methods research, we will look at the <code>synopsis</code> of movies provided by IMDb. Since we already have the text in our data frame, we can skip step one. Next, we need to engage in tokenization. While we use the same function as before, we need to provide different arguments to retrieve bigrams. As before, we need to define an <code>output</code> column and an <code>input</code> column. In addition, we also have to provide the correct type of tokenization, i.e.&nbsp;determine <code>token</code>, which we need to set to <code>"ngrams"</code>. We also need to define the <code>n</code> in ‘ngrams’, which will be <code>2</code> for bigrams. After this, we apply <code>count()</code> to our variable <code>bigram</code>, and we achieved our task. If we turn this into <em>R</em> code, we get the following (with considerably less characters than its explanation):</p>
+<p>There are a lot of new functions covered in this part. However, by now, you likely understand how they function already. Let’s proceed step-by-step. For this final example about mixed-methods research, we will look at the <code>comment</code> variable in the <code>comments</code> dataset. Since we already have the text as a data frame, we can skip step one. Next, we need to engage in tokenization. While we use the same function as before, we need to provide different arguments to retrieve bigrams. As before, we need to define an <code>output</code> column and an <code>input</code> column. In addition, we also have to provide the correct type of tokenization, i.e.&nbsp;determine <code>token</code>, which we need to set to <code>"ngrams"</code>. We also need to define the <code>n</code> in ‘ngrams’, which will be <code>2</code> for bigrams. After this, we apply <code>count()</code> to our variable <code>bigram</code>, and we achieved our task. If we turn this into <em>R</em> code, we get the following (with considerably less characters than its explanation):</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create bigrams from variable synopsis</span></span>
-<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>synopsis <span class="ot">&lt;-</span></span>
-<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>  imdb_top_250 <span class="sc">|&gt;</span></span>
-<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unnest_tokens</span>(bigram, synopsis, <span class="at">token =</span> <span class="st">"ngrams"</span>, <span class="at">n =</span> <span class="dv">2</span>) <span class="sc">|&gt;</span></span>
-<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(bigram)</span>
-<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>synopsis</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create bigrams from variable synopsis</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>comments_bigram <span class="ot">&lt;-</span></span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>  comments <span class="sc">|&gt;</span></span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unnest_tokens</span>(bigram, comment, <span class="at">token =</span> <span class="st">"ngrams"</span>, <span class="at">n =</span> <span class="dv">2</span>)</span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a>comments_bigram</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 6,094 × 1
-   bigram        
-   &lt;chr&gt;         
- 1 two imprisoned
- 2 imprisoned men
- 3 men bond      
- 4 bond over     
- 5 over a        
- 6 a number      
- 7 number of     
- 8 of years      
- 9 years finding 
-10 finding solace
-# ℹ 6,084 more rows</code></pre>
+<pre><code># A tibble: 3,090 × 2
+   social_inclusion bigram            
+              &lt;dbl&gt; &lt;chr&gt;             
+ 1                8 joining the       
+ 2                8 the international 
+ 3                8 international club
+ 4                8 club was          
+ 5                8 was a             
+ 6                8 a game            
+ 7                8 game changer      
+ 8                8 changer i         
+ 9                8 i made            
+10                8 made friends      
+# ℹ 3,080 more rows</code></pre>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Inspect frequency of bigrams</span></span>
-<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>synopsis <span class="sc">|&gt;</span> <span class="fu">count</span>(bigram, <span class="at">sort =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Inspect frequency of bigrams</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>comments_bigram <span class="sc">|&gt;</span> <span class="fu">count</span>(bigram, <span class="at">sort =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 5,035 × 2
-   bigram       n
-   &lt;chr&gt;    &lt;int&gt;
- 1 in the      31
- 2 of the      27
- 3 in a        25
- 4 of a        25
- 5 and his     18
- 6 on a        17
- 7 with the    17
- 8 of his      16
- 9 to find     15
-10 a young     14
-# ℹ 5,025 more rows</code></pre>
+<pre><code># A tibble: 2,098 × 2
+   bigram             n
+   &lt;chr&gt;          &lt;int&gt;
+ 1 can be            19
+ 2 i appreciate      18
+ 3 i often           18
+ 4 group work        16
+ 5 sense of          16
+ 6 group projects    14
+ 7 i enjoy           14
+ 8 but i             13
+ 9 i love            13
+10 i sometimes       13
+# ℹ 2,088 more rows</code></pre>
 </div>
 </div>
 <p>As before, the most frequent bigrams are those that contain stop words. Thus, we need to clean our data and remove them. This time, though, we face the challenge that the variable bigram has two words and not one. Thus, we cannot simply use <code>anti_join()</code> because the dataset <code>stop_words</code> only contains individual words, not pairs. To remove stop words successfully, we have to <code>separate()</code> the variable into two variables so that each word has its own column. The package <code>tidyr</code> makes this is an effortless task.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>bigram_split <span class="ot">&lt;-</span> synopsis <span class="sc">|&gt;</span></span>
-<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">separate</span>(<span class="at">col =</span> bigram,</span>
-<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>           <span class="at">into =</span> <span class="fu">c</span>(<span class="st">"word1"</span>, <span class="st">"word2"</span>),</span>
-<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>           <span class="at">sep =</span> <span class="st">" "</span>)</span>
-<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a>bigram_split</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>bigram_split <span class="ot">&lt;-</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>  comments_bigram <span class="sc">|&gt;</span></span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">separate</span>(<span class="at">col =</span> bigram,</span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>           <span class="at">into =</span> <span class="fu">c</span>(<span class="st">"word1"</span>, <span class="st">"word2"</span>),</span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>           <span class="at">sep =</span> <span class="st">" "</span>)</span>
+<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a>bigram_split</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 6,094 × 2
-   word1      word2     
-   &lt;chr&gt;      &lt;chr&gt;     
- 1 two        imprisoned
- 2 imprisoned men       
- 3 men        bond      
- 4 bond       over      
- 5 over       a         
- 6 a          number    
- 7 number     of        
- 8 of         years     
- 9 years      finding   
-10 finding    solace    
-# ℹ 6,084 more rows</code></pre>
+<pre><code># A tibble: 3,090 × 3
+   social_inclusion word1         word2        
+              &lt;dbl&gt; &lt;chr&gt;         &lt;chr&gt;        
+ 1                8 joining       the          
+ 2                8 the           international
+ 3                8 international club         
+ 4                8 club          was          
+ 5                8 was           a            
+ 6                8 a             game         
+ 7                8 game          changer      
+ 8                8 changer       i            
+ 9                8 i             made         
+10                8 made          friends      
+# ℹ 3,080 more rows</code></pre>
 </div>
 </div>
-<p>With this new data frame, we can remove stop words in each variable. Of course, we could use <code>anti_join()</code> as before and perform the step twice, but there is a much more elegant solution. Another method to compare values across vectors/columns is the <code>%in%</code> operator. It is very intuitive to use because it tests whether values in the variable on the left of <code>%in%</code> exist in the variable to the right. Let’s look at a simple example. Assume we have an object that contains the names of people related to <code>family</code> and <code>work</code>. We want to know whether people in our <code>family</code> are also found in the list of <code>work</code>. If you remember Table @ref(tab:logical-operators-r), which lists all logical operators, you might be tempted to try <code>family == work</code>. However, this would assess the object in its entirety and not tell us which values, i.e.&nbsp;which names, can be found in both lists.</p>
+<p>With this new data frame, we can remove stop words in each variable. Of course, we could use <code>anti_join()</code> as before and perform the step twice, but there is a much more elegant solution. Another method to compare values across vectors/columns is the <code>%in%</code> operator. It is very intuitive to use because it tests whether values in the variable on the left of <code>%in%</code> exist in the variable to the right. Let’s look at a simple example. Assume we have an object that contains the names of people related to <code>family</code> and <code>work</code>. We want to know whether people in our <code>family</code> are also found in the list of <code>work</code>. If you remember <a href="05_r_basics.html#tbl-logical-operators-r" class="quarto-xref">Table&nbsp;<span>5.1</span></a>, which lists all logical operators, you might be tempted to try <code>family == work</code>. However, this would assess the object in its entirety and not tell us which values, i.e.&nbsp;which names, can be found in both lists.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Define the two</span></span>
-<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>family <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">name =</span> <span class="fu">c</span>(<span class="st">"Fiona"</span>, <span class="st">"Ida"</span>, <span class="st">"Lukas"</span>, <span class="st">"Daniel"</span>))</span>
-<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>work <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">name =</span> <span class="fu">c</span>(<span class="st">"Fiona"</span>, <span class="st">"Katharina"</span>, <span class="st">"Daniel"</span>))</span>
-<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Compare the two objects using '=='</span></span>
-<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a>family<span class="sc">$</span>name <span class="sc">==</span> work<span class="sc">$</span>name</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Define the two</span></span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>family <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">name =</span> <span class="fu">c</span>(<span class="st">"Fiona"</span>, <span class="st">"Ida"</span>, <span class="st">"Lukas"</span>, <span class="st">"Daniel"</span>))</span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>work <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">name =</span> <span class="fu">c</span>(<span class="st">"Fiona"</span>, <span class="st">"Katharina"</span>, <span class="st">"Daniel"</span>))</span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Compare the two objects using '=='</span></span>
+<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a>family<span class="sc">$</span>name <span class="sc">==</span> work<span class="sc">$</span>name</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Warning in family$name == work$name: longer object length is not a multiple of
 shorter object length</code></pre>
@@ -711,28 +808,28 @@ shorter object length</code></pre>
 <pre><code>[1]  TRUE FALSE FALSE FALSE</code></pre>
 </div>
 </div>
-<p>All but one value in <code>family</code> and <code>work</code> are not equal, i.e.&nbsp;they are <code>FALSE</code>. This is because <code>==</code> compares the values in order. If we changed the order, some of the <code>FALSE</code> values would turn <code>TRUE</code>. In addition, we get a warning telling us that these two objects are not equally long because <code>family</code> holds four names, while <code>work</code> contains only three names. Lastly, the results are not what we expected because <code>Fiona</code> and <code>Daniel</code> appear in both objects. Therefore we would expect that there should be two <code>TRUE</code> values. In short, <code>==</code> is not the right choice to compare these two objects.</p>
+<p>The output suggests that all but one value in <code>family</code> and <code>work</code> are not equal, i.e.&nbsp;they are <code>FALSE</code>. This is because <code>==</code> compares the values in order. If we changed the order, some of the <code>FALSE</code> values would turn <code>TRUE</code>. In addition, we get a warning telling us that these two objects are not equally long because <code>family</code> holds four names, while <code>work</code> contains only three names. Lastly, the results are not what we expected because <code>Fiona</code> and <code>Daniel</code> appear in both objects. Therefore we would expect that there should be two <code>TRUE</code> values. In short, <code>==</code> is not the right choice to compare these two objects.</p>
 <p>If we use <code>%in%</code> instead, we can test whether each name appears in both objects, irrespective of their length and the order of the values.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Compare the two objects using '%in%'</span></span>
-<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>family<span class="sc">$</span>name <span class="sc">%in%</span> work<span class="sc">$</span>name</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Compare the two objects using '%in%'</span></span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>family<span class="sc">$</span>name <span class="sc">%in%</span> work<span class="sc">$</span>name</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1]  TRUE FALSE FALSE  TRUE</code></pre>
 </div>
 </div>
 <p>If we want <em>R</em> to return the values that are the same across both objects, we can ask: <code>which()</code> names are the same?</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Compare the two objects using '%in%'</span></span>
-<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>(same_names <span class="ot">&lt;-</span> <span class="fu">which</span>(family<span class="sc">$</span>name <span class="sc">%in%</span> work<span class="sc">$</span>name))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Compare the two objects using '%in%'</span></span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>(same_names <span class="ot">&lt;-</span> <span class="fu">which</span>(family<span class="sc">$</span>name <span class="sc">%in%</span> work<span class="sc">$</span>name))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 1 4</code></pre>
 </div>
 </div>
 <p>The numbers returned by <code>which()</code> refer to the position of the value in our object. In our case, the first value in <code>family</code> is <code>Fiona</code>, and the fourth value is <code>Daniel</code>. It is <code>TRUE</code> that these two names appear in both objects. If you have many values that overlap in a large dataset, you might not want to know the row number but retrieve the actual values. This can be achieved by <code>slice()</code>ing our dataset, i.e.&nbsp;filtering our data frame by providing row numbers.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Retrieve the values which exist in both objects</span></span>
-<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>family <span class="sc">|&gt;</span></span>
-<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice</span>(same_names)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Retrieve the values which exist in both objects</span></span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>family <span class="sc">|&gt;</span></span>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice</span>(same_names)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 2 × 1
   name  
@@ -743,54 +840,54 @@ shorter object length</code></pre>
 </div>
 <p>While this might be a nice little exercise, it is important to understand how <code>%in%</code> can help us remove stop words. Technically, we try to achieve the opposite, i.e.&nbsp;we want to keep the values in <code>word1</code> and <code>word2</code> that are not a word in <code>stop_words</code>. If we use the language of <code>dplyr</code>, we <code>filter()</code> based on whether a word in <code>bigram_split</code> is not <code>%in%</code> the data frame <code>stop_words</code>. Be aware that <code>%in%</code> requires a variable and not an entire data frame to work as we intend.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>bigram_cleaned <span class="ot">&lt;-</span></span>
-<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>  bigram_split <span class="sc">|&gt;</span></span>
-<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span>word1 <span class="sc">%in%</span> stop_words<span class="sc">$</span>word) <span class="sc">|&gt;</span></span>
-<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span>word2 <span class="sc">%in%</span> stop_words<span class="sc">$</span>word)</span>
-<span id="cb40-5"><a href="#cb40-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb40-6"><a href="#cb40-6" aria-hidden="true" tabindex="-1"></a>bigram_cleaned <span class="ot">&lt;-</span> bigram_cleaned <span class="sc">|&gt;</span></span>
-<span id="cb40-7"><a href="#cb40-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(word1, word2, <span class="at">sort =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb40-8"><a href="#cb40-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb40-9"><a href="#cb40-9" aria-hidden="true" tabindex="-1"></a>bigram_cleaned</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>bigram_cleaned <span class="ot">&lt;-</span></span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>  bigram_split <span class="sc">|&gt;</span></span>
+<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span>word1 <span class="sc">%in%</span> stop_words<span class="sc">$</span>word) <span class="sc">|&gt;</span></span>
+<span id="cb43-4"><a href="#cb43-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span>word2 <span class="sc">%in%</span> stop_words<span class="sc">$</span>word)</span>
+<span id="cb43-5"><a href="#cb43-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-6"><a href="#cb43-6" aria-hidden="true" tabindex="-1"></a>bigram_cleaned <span class="ot">&lt;-</span> bigram_cleaned <span class="sc">|&gt;</span></span>
+<span id="cb43-7"><a href="#cb43-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(word1, word2, <span class="at">sort =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb43-8"><a href="#cb43-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-9"><a href="#cb43-9" aria-hidden="true" tabindex="-1"></a>bigram_cleaned</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 1,246 × 3
-   word1   word2        n
-   &lt;chr&gt;   &lt;chr&gt;    &lt;int&gt;
- 1 world   war          8
- 2 war     ii           7
- 3 darth   vader        3
- 4 gotham  city         3
- 5 serial  killer       3
- 6 vietnam war          3
- 7 york    city         3
- 8 24      hours        2
- 9 adolf   hitler's     2
-10 army    officer      2
-# ℹ 1,236 more rows</code></pre>
+<pre><code># A tibble: 420 × 3
+   word1    word2           n
+   &lt;chr&gt;    &lt;chr&gt;       &lt;int&gt;
+ 1 cultural events          8
+ 2 study    sessions        8
+ 3 lasting  friendships     7
+ 4 late     night           5
+ 5 night    study           5
+ 6 campus   life            4
+ 7 leave    feeling         4
+ 8 campus   events          3
+ 9 deeper   connections     3
+10 feel     grateful        3
+# ℹ 410 more rows</code></pre>
 </div>
 </div>
-<p>The result is a clean dataset, which reveals that <code>world</code> and <code>war</code> are the most common bigram in the synopsis of our Top 250 IMDb movies.</p>
+<p>The result is a clean dataset, which reveals that <code>cultural</code> and <code>events</code> are the most common bigram together with <code>study</code> and <code>session</code> in the <code>comments</code> dataset. Clearly, students spend a lot of time at social events or in study groups. Thus, when they talk about their experiences, these could be considered common places where they have them.</p>
 <p>Sometimes we might wish to re-<code>unite()</code> the two columns that we separated. For example, when plotting the results into a <code>ggplot()</code>, we need both words in one column<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> to use the actual bigrams as labels.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>bigram_cleaned <span class="sc">|&gt;</span></span>
-<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unite</span>(<span class="at">col =</span> bigram,</span>
-<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a>        word1, word2,</span>
-<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a>        <span class="at">sep =</span> <span class="st">" "</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>bigram_cleaned <span class="sc">|&gt;</span></span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unite</span>(<span class="at">col =</span> bigram,</span>
+<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a>        word1, word2,</span>
+<span id="cb45-4"><a href="#cb45-4" aria-hidden="true" tabindex="-1"></a>        <span class="at">sep =</span> <span class="st">" "</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 1,246 × 2
-   bigram             n
-   &lt;chr&gt;          &lt;int&gt;
- 1 world war          8
- 2 war ii             7
- 3 darth vader        3
- 4 gotham city        3
- 5 serial killer      3
- 6 vietnam war        3
- 7 york city          3
- 8 24 hours           2
- 9 adolf hitler's     2
-10 army officer       2
-# ℹ 1,236 more rows</code></pre>
+<pre><code># A tibble: 420 × 2
+   bigram                  n
+   &lt;chr&gt;               &lt;int&gt;
+ 1 cultural events         8
+ 2 study sessions          8
+ 3 lasting friendships     7
+ 4 late night              5
+ 5 night study             5
+ 6 campus life             4
+ 7 leave feeling           4
+ 8 campus events           3
+ 9 deeper connections      3
+10 feel grateful           3
+# ℹ 410 more rows</code></pre>
 </div>
 </div>
 <p>So far, we primarily looked at frequencies as numbers in tables or as bar plots. However, it is possible to create network plots of words with bigrams by drawing a line between <code>word1</code> and <code>word2</code>. Since there will be overlaps across bigrams, they would mutually connect and create a network of linked words.</p>
@@ -798,19 +895,19 @@ shorter object length</code></pre>
 <p>Unfortunately, <code>ggplot2</code> does not enable us to easily create network plots, but the package <code>ggraph</code> offers such features using the familiar <code>ggplot2</code> syntax. Network plots are usually made using specific algorithms to arrange values in a network efficiently. Thus, if you want your plots to be reproducible, you have to <code>set.seed()</code> in advance. This way, random aspects of some algorithms are set constant.</p>
 <p>There is one more complication, but with a simple solution. The function <code>ggraph()</code>, which is an equivalent to <code>ggplot()</code>, requires us to create a <code>graph</code> object that can be used to plot networks. The package <code>igraph</code> has a convenient function that produces a <code>graph_from_data_frame()</code>. As a final step we need to choose a layout for the network. This requires some experimentation. Details about different layouts and more for the <code>ggraph</code> package can be found on its <a href="https://ggraph.data-imaginist.com" target="blank" title="ggraph website">website</a>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggraph)</span>
-<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Make plot reproducible</span></span>
-<span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1234</span>)</span>
-<span id="cb44-5"><a href="#cb44-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb44-6"><a href="#cb44-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Create the special igraph object</span></span>
-<span id="cb44-7"><a href="#cb44-7" aria-hidden="true" tabindex="-1"></a>graph <span class="ot">&lt;-</span> igraph<span class="sc">::</span><span class="fu">graph_from_data_frame</span>(bigram_cleaned)</span>
-<span id="cb44-8"><a href="#cb44-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb44-9"><a href="#cb44-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the network graph</span></span>
-<span id="cb44-10"><a href="#cb44-10" aria-hidden="true" tabindex="-1"></a>graph <span class="sc">|&gt;</span></span>
-<span id="cb44-11"><a href="#cb44-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggraph</span>(<span class="at">layout =</span> <span class="st">"kk"</span>) <span class="sc">+</span>  <span class="co"># Choose a layout</span></span>
-<span id="cb44-12"><a href="#cb44-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_edge_link</span>() <span class="sc">+</span>       <span class="co"># Draw lines between nodes</span></span>
-<span id="cb44-13"><a href="#cb44-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_node_point</span>()        <span class="co"># Add node points</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggraph)</span>
+<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Make plot reproducible</span></span>
+<span id="cb47-4"><a href="#cb47-4" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1234</span>)</span>
+<span id="cb47-5"><a href="#cb47-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-6"><a href="#cb47-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Create the special igraph object</span></span>
+<span id="cb47-7"><a href="#cb47-7" aria-hidden="true" tabindex="-1"></a>graph <span class="ot">&lt;-</span> igraph<span class="sc">::</span><span class="fu">graph_from_data_frame</span>(bigram_cleaned)</span>
+<span id="cb47-8"><a href="#cb47-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-9"><a href="#cb47-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the network graph</span></span>
+<span id="cb47-10"><a href="#cb47-10" aria-hidden="true" tabindex="-1"></a>graph <span class="sc">|&gt;</span></span>
+<span id="cb47-11"><a href="#cb47-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggraph</span>(<span class="at">layout =</span> <span class="st">"kk"</span>) <span class="sc">+</span>  <span class="co"># Choose a layout, e.g. "kk"</span></span>
+<span id="cb47-12"><a href="#cb47-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_edge_link</span>() <span class="sc">+</span>       <span class="co"># Draw lines between nodes</span></span>
+<span id="cb47-13"><a href="#cb47-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_node_point</span>()        <span class="co"># Add node points</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -821,16 +918,16 @@ shorter object length</code></pre>
 </div>
 <p>The result looks like a piece of modern art. Still, it is not easy to understand what the plot shows us. Thus, we need to remove some bigrams that are not so frequent. For example, we could remove those that only appear once.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Filter bigrams</span></span>
-<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>network_plot <span class="ot">&lt;-</span> bigram_cleaned <span class="sc">|&gt;</span></span>
-<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(n <span class="sc">&gt;</span> <span class="dv">1</span>) <span class="sc">|&gt;</span></span>
-<span id="cb45-4"><a href="#cb45-4" aria-hidden="true" tabindex="-1"></a>  igraph<span class="sc">::</span><span class="fu">graph_from_data_frame</span>()</span>
-<span id="cb45-5"><a href="#cb45-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb45-6"><a href="#cb45-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot network plot</span></span>
-<span id="cb45-7"><a href="#cb45-7" aria-hidden="true" tabindex="-1"></a>network_plot <span class="sc">|&gt;</span></span>
-<span id="cb45-8"><a href="#cb45-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggraph</span>(<span class="at">layout =</span> <span class="st">"kk"</span>) <span class="sc">+</span></span>
-<span id="cb45-9"><a href="#cb45-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_edge_link</span>() <span class="sc">+</span></span>
-<span id="cb45-10"><a href="#cb45-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_node_point</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Filter bigrams</span></span>
+<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a>network_plot <span class="ot">&lt;-</span> bigram_cleaned <span class="sc">|&gt;</span></span>
+<span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(n <span class="sc">&gt;</span> <span class="dv">1</span>) <span class="sc">|&gt;</span></span>
+<span id="cb48-4"><a href="#cb48-4" aria-hidden="true" tabindex="-1"></a>  igraph<span class="sc">::</span><span class="fu">graph_from_data_frame</span>()</span>
+<span id="cb48-5"><a href="#cb48-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-6"><a href="#cb48-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot network plot</span></span>
+<span id="cb48-7"><a href="#cb48-7" aria-hidden="true" tabindex="-1"></a>network_plot <span class="sc">|&gt;</span></span>
+<span id="cb48-8"><a href="#cb48-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggraph</span>(<span class="at">layout =</span> <span class="st">"kk"</span>) <span class="sc">+</span></span>
+<span id="cb48-9"><a href="#cb48-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_edge_link</span>() <span class="sc">+</span></span>
+<span id="cb48-10"><a href="#cb48-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_node_point</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -841,14 +938,15 @@ shorter object length</code></pre>
 </div>
 <p>It seems that many bigrams were removed. Thus, the network plot looks much smaller and less busy. Nevertheless, we cannot fully understand what this visualisation shows because there are no labels for each node. We can add them using <code>geom_node_text()</code>. I also recommend offsetting the labels with <code>vjust</code> (vertical adjustment) and <code>hjust</code> (horizontal adjustment), making them easier to read. To enhance the network visualisation further, we could colour the edges based on the frequency of each token.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot network plot</span></span>
-<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a>network_plot <span class="sc">|&gt;</span></span>
-<span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggraph</span>(<span class="at">layout =</span> <span class="st">"kk"</span>) <span class="sc">+</span></span>
-<span id="cb46-4"><a href="#cb46-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_edge_link</span>(<span class="fu">aes</span>(<span class="at">col =</span> <span class="fu">factor</span>(n))) <span class="sc">+</span></span>
-<span id="cb46-5"><a href="#cb46-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_node_point</span>() <span class="sc">+</span></span>
-<span id="cb46-6"><a href="#cb46-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_node_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> name),</span>
-<span id="cb46-7"><a href="#cb46-7" aria-hidden="true" tabindex="-1"></a>                 <span class="at">vjust =</span> <span class="dv">1</span>,</span>
-<span id="cb46-8"><a href="#cb46-8" aria-hidden="true" tabindex="-1"></a>                 <span class="at">hjust =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot network plot</span></span>
+<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a>network_plot <span class="sc">|&gt;</span></span>
+<span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggraph</span>(<span class="at">layout =</span> <span class="st">"kk"</span>) <span class="sc">+</span></span>
+<span id="cb49-4"><a href="#cb49-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_edge_link</span>(<span class="fu">aes</span>(<span class="at">col =</span> <span class="fu">factor</span>(n))) <span class="sc">+</span></span>
+<span id="cb49-5"><a href="#cb49-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_node_point</span>() <span class="sc">+</span></span>
+<span id="cb49-6"><a href="#cb49-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_node_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> name),</span>
+<span id="cb49-7"><a href="#cb49-7" aria-hidden="true" tabindex="-1"></a>                 <span class="at">vjust =</span> <span class="dv">1</span>,</span>
+<span id="cb49-8"><a href="#cb49-8" aria-hidden="true" tabindex="-1"></a>                 <span class="at">hjust =</span> <span class="dv">1</span>,</span>
+<span id="cb49-9"><a href="#cb49-9" aria-hidden="true" tabindex="-1"></a>                 <span class="at">size =</span> <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -857,8 +955,29 @@ shorter object length</code></pre>
 </div>
 </div>
 </div>
-<p>The final plot shows that <code>war</code> and other military aspects, e.g.&nbsp;<code>soldiers</code>, <code>army</code> are very prevalent in our dataset. Besides, we also find some famous movie characters in our visualisation, such as <code>darth</code> <code>vader</code>, <code>luke</code> <code>skywalker</code> or <code>indiana</code> <code>jones</code>.</p>
-<p>Our example is a simple analysis based on a relatively small ‘corpus’, i.e.&nbsp;a small dataset. However, the application of n-grams in larger datasets can reveal topic areas and links between them. There are more approaches to exploring topics in large datasets, for example, <a href="https://www.tidytextmining.com/topicmodeling.html" target="blank" title="Topic Modeling">‘topic modelling’</a>, which are far more complex, but offer more sophisticated analytical insights.</p>
+<p>This visualisation looks considerably more informative than any of the previous attempts. Still, it seems the chosen layout is not ideal to identify themes/topics in our data. Thus, it is worth experimenting with another layout, for example <code>graphopt</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1234</span>)</span>
+<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-3"><a href="#cb50-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot network plot but using a different layout</span></span>
+<span id="cb50-4"><a href="#cb50-4" aria-hidden="true" tabindex="-1"></a>network_plot <span class="sc">|&gt;</span></span>
+<span id="cb50-5"><a href="#cb50-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggraph</span>(<span class="at">layout =</span> <span class="st">"graphopt"</span>) <span class="sc">+</span></span>
+<span id="cb50-6"><a href="#cb50-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_edge_link</span>(<span class="fu">aes</span>(<span class="at">col =</span> <span class="fu">factor</span>(n))) <span class="sc">+</span></span>
+<span id="cb50-7"><a href="#cb50-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_node_point</span>() <span class="sc">+</span></span>
+<span id="cb50-8"><a href="#cb50-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_node_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> name),</span>
+<span id="cb50-9"><a href="#cb50-9" aria-hidden="true" tabindex="-1"></a>                 <span class="at">vjust =</span> <span class="fl">0.5</span>,</span>
+<span id="cb50-10"><a href="#cb50-10" aria-hidden="true" tabindex="-1"></a>                 <span class="at">hjust =</span> <span class="sc">-</span><span class="fl">0.25</span>,</span>
+<span id="cb50-11"><a href="#cb50-11" aria-hidden="true" tabindex="-1"></a>                 <span class="at">size =</span> <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="14_mixed_methods_files/figure-html/ngrams-network-plot-step-four-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>The final plot shows us how themes like <code>events</code>, <code>friendships</code>, and <code>feel</code> (i.e.&nbsp;‘feelings’) connect to other words. They constitute important topics that students talked about when describing their study experiences. While this type of analysis cannot fully replace manual analysis, it does offer unique insights into our data from a macro perspective without spending days analysing these comments.</p>
+<p>Our example is a simple analysis based on a relatively small ‘corpus’, i.e.&nbsp;a small dataset. However, the application of n-grams in larger datasets can reveal topic areas and links between them even more effectively. There are more approaches to exploring topics in large datasets, for example, <a href="https://www.tidytextmining.com/topicmodeling.html" target="blank" title="Topic Modeling">‘topic modelling’</a>, which are far more complex, but offer more sophisticated analytical insights.</p>
 </section>
 <section id="exploring-more-mixed-methods-research-approaches-in-r" class="level2" data-number="14.4">
 <h2 data-number="14.4" class="anchored" data-anchor-id="exploring-more-mixed-methods-research-approaches-in-r"><span class="header-section-number">14.4</span> Exploring more mixed-methods research approaches in <em>R</em></h2>

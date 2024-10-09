@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>R for Non-Programmers: A Guide for Social Scientists - 9&nbsp; Sources of bias: Outliers, normality and other ‘conundrums’</title>
+<title>R for Non-Programmers: A Guide for Social Scientists - 9&nbsp; Sources of bias: Sampling, outliers, normality and other ‘conundrums’</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -164,7 +164,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./09_sources_of_bias.html"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Sources of bias: Outliers, normality and other ‘conundrums’</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./09_sources_of_bias.html"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Sources of bias: Sampling, outliers, normality and other ‘conundrums’</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -199,6 +199,12 @@ window.Quarto = {
   <div class="sidebar-item-container"> 
   <a href="./00_about_the_author.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">About the author</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./00_acknowledgements.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Acknowledgements</span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -252,7 +258,7 @@ window.Quarto = {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./09_sources_of_bias.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Sources of bias: Outliers, normality and other ‘conundrums’</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Sources of bias: Sampling, outliers, normality and other ‘conundrums’</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -263,14 +269,14 @@ window.Quarto = {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./11_power_analysis.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Power: You either have it or you don’t</span></span></a>
+  <a href="./11_group_comparison.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Comparing groups</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./12_group_comparison.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Comparing groups</span></span></a>
+  <a href="./12_power_analysis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Power: You either have it or you don’t</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -289,12 +295,6 @@ window.Quarto = {
   <div class="sidebar-item-container"> 
   <a href="./15_next_steps.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Where to go from here: The next steps in your <em>R</em> journey</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./16_case_studies.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Case studies</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -325,16 +325,17 @@ window.Quarto = {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#sec-additivity-and-linearity" id="toc-sec-additivity-and-linearity" class="nav-link active" data-scroll-target="#sec-additivity-and-linearity"><span class="header-section-number">9.1</span> Linearity and additivity</a></li>
-  <li><a href="#independence-sec-independence" id="toc-independence-sec-independence" class="nav-link" data-scroll-target="#independence-sec-independence"><span class="header-section-number">9.2</span> Independence {sec-independence}</a></li>
-  <li><a href="#sec-normality" id="toc-sec-normality" class="nav-link" data-scroll-target="#sec-normality"><span class="header-section-number">9.3</span> Normality</a></li>
-  <li><a href="#sec-homogeneity-of-variance" id="toc-sec-homogeneity-of-variance" class="nav-link" data-scroll-target="#sec-homogeneity-of-variance"><span class="header-section-number">9.4</span> Homogeneity of variance (homoscedasticity)</a></li>
-  <li><a href="#sec-dealing-with-outliers" id="toc-sec-dealing-with-outliers" class="nav-link" data-scroll-target="#sec-dealing-with-outliers"><span class="header-section-number">9.5</span> Outliers and how to deal with them</a>
+  <li><a href="#origins-of-bias" id="toc-origins-of-bias" class="nav-link active" data-scroll-target="#origins-of-bias"><span class="header-section-number">9.1</span> The origins of biases: A short introduction to sampling theory</a></li>
+  <li><a href="#sec-additivity-and-linearity" id="toc-sec-additivity-and-linearity" class="nav-link" data-scroll-target="#sec-additivity-and-linearity"><span class="header-section-number">9.2</span> Linearity and additivity</a></li>
+  <li><a href="#sec-independence" id="toc-sec-independence" class="nav-link" data-scroll-target="#sec-independence"><span class="header-section-number">9.3</span> Independence</a></li>
+  <li><a href="#sec-normality" id="toc-sec-normality" class="nav-link" data-scroll-target="#sec-normality"><span class="header-section-number">9.4</span> Normality</a></li>
+  <li><a href="#sec-homogeneity-of-variance" id="toc-sec-homogeneity-of-variance" class="nav-link" data-scroll-target="#sec-homogeneity-of-variance"><span class="header-section-number">9.5</span> Homogeneity of variance (homoscedasticity)</a></li>
+  <li><a href="#sec-dealing-with-outliers" id="toc-sec-dealing-with-outliers" class="nav-link" data-scroll-target="#sec-dealing-with-outliers"><span class="header-section-number">9.6</span> Outliers and how to deal with them</a>
   <ul class="collapse">
-  <li><a href="#sec-ouliers-standard_deviation" id="toc-sec-ouliers-standard_deviation" class="nav-link" data-scroll-target="#sec-ouliers-standard_deviation"><span class="header-section-number">9.5.1</span> Detecting outliers using the standard deviation</a></li>
-  <li><a href="#sec-outliers-iqr" id="toc-sec-outliers-iqr" class="nav-link" data-scroll-target="#sec-outliers-iqr"><span class="header-section-number">9.5.2</span> Detecting outliers using the interquartile range (IQR)</a></li>
-  <li><a href="#sec-removing-or-replacing-outliers" id="toc-sec-removing-or-replacing-outliers" class="nav-link" data-scroll-target="#sec-removing-or-replacing-outliers"><span class="header-section-number">9.5.3</span> Removing or replacing outliers</a></li>
-  <li><a href="#sec-concluding-remarks-outliers" id="toc-sec-concluding-remarks-outliers" class="nav-link" data-scroll-target="#sec-concluding-remarks-outliers"><span class="header-section-number">9.5.4</span> Concluding remarks about outliers</a></li>
+  <li><a href="#sec-ouliers-standard_deviation" id="toc-sec-ouliers-standard_deviation" class="nav-link" data-scroll-target="#sec-ouliers-standard_deviation"><span class="header-section-number">9.6.1</span> Detecting outliers using the standard deviation</a></li>
+  <li><a href="#sec-outliers-iqr" id="toc-sec-outliers-iqr" class="nav-link" data-scroll-target="#sec-outliers-iqr"><span class="header-section-number">9.6.2</span> Detecting outliers using the interquartile range (IQR)</a></li>
+  <li><a href="#sec-removing-or-replacing-outliers" id="toc-sec-removing-or-replacing-outliers" class="nav-link" data-scroll-target="#sec-removing-or-replacing-outliers"><span class="header-section-number">9.6.3</span> Removing or replacing outliers</a></li>
+  <li><a href="#sec-concluding-remarks-outliers" id="toc-sec-concluding-remarks-outliers" class="nav-link" data-scroll-target="#sec-concluding-remarks-outliers"><span class="header-section-number">9.6.4</span> Concluding remarks about outliers</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -344,7 +345,7 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span id="sec-sources-of-bias" class="quarto-section-identifier"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Sources of bias: Outliers, normality and other ‘conundrums’</span></span></h1>
+<h1 class="title"><span id="sec-sources-of-bias" class="quarto-section-identifier"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Sources of bias: Sampling, outliers, normality and other ‘conundrums’</span></span></h1>
 </div>
 
 
@@ -361,7 +362,7 @@ window.Quarto = {
 </header>
 
 
-<p>’<em>Bias’</em> in your analysis is hardly ever a good thing unless you are a qualitative researcher. Whether you consider it positive or negative, we have to be aware of issues preventing us from performing a specific type of analysis. All of the statistical computations discussed in the following chapters can easily be affected by different sources of bias. The lack of certain biases can be an assumption of particular statistical tests. Thus, violating these assumptions would imply that the analytical technique we use will produce wrong results, i.e.&nbsp;biased results. <span class="citation" data-cites="field2013discovering">Field (<a href="references.html#ref-field2013discovering" role="doc-biblioref">2013</a>)</span> summarises three main assumptions we have to consider:</p>
+<p>’<em>Bias’</em> in your analysis is hardly ever a good thing unless you are a qualitative researcher. Whether you consider it positive or negative, we have to be aware of issues preventing us from performing a specific type of analysis. All of the statistical computations discussed in the following chapters can easily be affected by different sources of bias and, therefore, need to be discussed in advance. The lack of certain biases can be an assumption of particular statistical tests. Thus, violating these assumptions would imply that the analytical technique we use will produce wrong results, i.e.&nbsp;biased results. <span class="citation" data-cites="field2013discovering">Field (<a href="references.html#ref-field2013discovering" role="doc-biblioref">2013</a>)</span> summarises three main assumptions we have to consider:</p>
 <ul>
 <li><p>Linearity and additivity,</p></li>
 <li><p>Independence,</p></li>
@@ -370,70 +371,294 @@ window.Quarto = {
 </ul>
 <p>Most <em>parametric tests</em> require that all assumptions are met. If this is not the case, we have to use alternative approaches, i.e.&nbsp;<em>non-parametric tests</em>. The distinction is essential since parametric and non-parametric tests are based on different computational methods, leading to different outcomes.</p>
 <p>Lastly, <span class="citation" data-cites="field2013discovering">Field (<a href="references.html#ref-field2013discovering" role="doc-biblioref">2013</a>)</span> also mentions outliers as an important source of bias. Irrespective of whether your data fulfils the assumptions for parametric tests, outliers tend to be a significant problem. They usually lead to wrong results and, consequently, to misinterpretations of our findings. We will also cover how we can identify and handle such outliers in our data at the end of this chapter.</p>
-<section id="sec-additivity-and-linearity" class="level2" data-number="9.1">
-<h2 data-number="9.1" class="anchored" data-anchor-id="sec-additivity-and-linearity"><span class="header-section-number">9.1</span> Linearity and additivity</h2>
-<p>The assumption of linearity postulates that the relationship of variables represents a straight line and not a curve or any other shape. Figure @ref(fig:linear-nonlinear-relationships) depicts examples of how two variables could be related to each other. Only the first one demonstrates a linear relationship, and all other plots would represent a violation of linearity.</p>
+<section id="origins-of-bias" class="level2" data-number="9.1">
+<h2 data-number="9.1" class="anchored" data-anchor-id="origins-of-bias"><span class="header-section-number">9.1</span> The origins of biases: A short introduction to sampling theory</h2>
+<p>While we might have a solid understanding that biases are an issue for quantitative researchers, we might be wondering where they emerge from or whether they show up at random to make our lives miserable. While there are many different reasons why we have a biased dataset, there are two that are particularly noteworthy. One the one hand, what might seem like a bias to us could simply be the nature of the population. Not every population follows a normal distribution (see <a href="08_descriptive_statistics.html#sec-histograms" class="quarto-xref"><span>Section 8.4.2</span></a> and <a href="#sec-normality" class="quarto-xref"><span>Section 9.4</span></a>) and not every relationship between variables is linear (see <a href="#sec-additivity-and-linearity" class="quarto-xref"><span>Section 9.2</span></a>). So, no matter how carefully we choose our participants, we might still violate some of the assumptions for certain techniques. On the other hand, and much more of a concern, are sampling strategies we pick to collect our data. This section will elaborate more on the issues of choosing a viable sampling strategy and why it matters. In many ways, it is the building block of any analysis. Only good and reliable data can produce good and reliable results.</p>
+<p>Let’s take a step back and consider the purpose of our analysis. We primarily conduct analysis to identify patterns in our world that can hopefully be replicated across different contexts. We often conduct research based on a smaller group of people (i.e.&nbsp;a sample) to generalise to a much larger group of people (i.e.&nbsp;the population). Under most circumstances It would be impossible for most studies to collect data from the entire population. Thus, we try to infer from our small sample how things are in the entire population. For this to work reliably, we need to ensure that our sample is sufficiently large to reflect the entire population. By ‘reflect’ I mean that the data is large enough to produce results that closely approximate what we would observe if data were collected from the entire population. Researchers often refer to this as the ‘representativeness’ of the sample. The lack of ‘representativeness’ is often referred to as ‘selection bias’ (see also <span class="citation" data-cites="lohr2021sampling">(<a href="references.html#ref-lohr2021sampling" role="doc-biblioref">Lohr 2021</a>)</span>).</p>
+<p>In order to achieve ‘representativeness,’ we need to ensure that our sample matches the characteristics of the population closely enough. A major factor that affects this is <em>sampling strategy</em>. The sampling strategy determines the method we use to select individuals from a population. Unfortunately, not all strategies are considered good choices and introduce various degrees of selection bias. Bear in mind, in qualitative research, selection bias is not a real issue and strategies that help identify participants that could valuable contribute to the study would always be given preference over randomly selecting people for the sake of representativeness. <a href="#tbl-sampling-strategies" class="quarto-xref">Table&nbsp;<span>9.1</span></a> briefly summarises some of the most common sampling strategies deployed in Social Sciences and their likelihood of introducing selection bias.</p>
+<div id="tbl-sampling-strategies" class="quarto-float anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-sampling-strategies-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;9.1: Overview of some of the most common sampling strategies used in Social Sciences (adopted from <span class="citation" data-cites="lohr2021sampling">(<a href="references.html#ref-lohr2021sampling" role="doc-biblioref">Lohr 2021</a>)</span>
+</figcaption>
+<div aria-describedby="tbl-sampling-strategies-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Sampling strategy</th>
+<th>Description</th>
+<th>Likelihood of selection bias</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><em>Simple Random Sampling</em></td>
+<td>Every participant in the population has the same chance of being selected for the study. However, it is usually difficult to achieve this approach in practice since it requires a complete list of the population, also known as the sampling frame, which is difficult to obtain. Also, in very small samples it can happen that small subgroups in a population might get missed as their chance of being included is also small.</td>
+<td>Low</td>
+</tr>
+<tr class="even">
+<td><em>Stratified Random Sampling</em></td>
+<td>The population is divided into subgroups, so-called ‘strata’ from which participants are selected using random sampling. This technique ensures that all subgroups of a population can be included, regardless of their size. In those scenarios, this technique can be superior to simple random sampling.</td>
+<td>Low</td>
+</tr>
+<tr class="odd">
+<td><em>Cluster Sampling</em></td>
+<td>The population is divided into clusters (e.g.&nbsp;countries, schools, departments, etc.), and a random sample of clusters is selected. After that, either all individuals in the chosen clusters are asked to participate (i.e.&nbsp;one-stage cluster sampling), or a random sample is drawn from within each of the sampled clusters (i.e.&nbsp;two-stage cluster sampling). This technique is often used in large and geographically dispersed populations to make the research more feasible.</td>
+<td>Low to Moderate</td>
+</tr>
+<tr class="even">
+<td><em>Quota Sampling</em></td>
+<td>The population is divided into subgroups (quota classes) and convenience sampling is used to fill quotas for each subgroup based on specific characteristics. A main difference of this technique to stratified sampling is that non-probability techniques are used to choose members for the subgroups.</td>
+<td>Moderate</td>
+</tr>
+<tr class="odd">
+<td><em>Purposive/ Judgement Sampling</em></td>
+<td>Participants are selected based on specific criteria that the researcher believes are important for identifying individuals who are most relevant to the study.</td>
+<td>Moderate to High</td>
+</tr>
+<tr class="even">
+<td><em>Snowball Sampling</em></td>
+<td>Future participants are chosen based on recommendations from current participants. For example, after conducting an interview, the interviewer might ask whether they can recommend other possible participants.</td>
+<td>High</td>
+</tr>
+<tr class="odd">
+<td><em>Convenience Sampling</em></td>
+<td>Participants are chosen because they are easy for the researcher to access and are willing to take part in the study.</td>
+<td>High</td>
+</tr>
+<tr class="even">
+<td><em>Self-selected Sampling</em></td>
+<td>Individuals choose by themselves whether they want to take part in a study or not. Many online questionnaires or review platforms use self-selected samples. Be vary of those Amazon reviews.</td>
+<td>High</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p>While all this might sound terribly theoretical, let me provide you with an example. Imagine we are interested in understanding how much time students spend on their weekly readings in our department. Also, assume that our department consists of 1000 students. We now wish to draw a sample of students for our analysis.</p>
+<p>The dataset <code>reading_time</code> from the <code>r4np</code> package contains all the information we are after. Since the dataset contains information about the entire population we can identify important characteristics of our population which we later can compare against our sample. We can use the trusty <code>count()</code> function to obtain information about distributions in our population, for example for <code>gender</code>.</p>
 <div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Gender distribtuion</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>reading_time <span class="sc">|&gt;</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(gender) <span class="sc">|&gt;</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">perc =</span> n<span class="sc">/</span><span class="fu">sum</span>(n))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 3
+  gender         n  perc
+  &lt;chr&gt;      &lt;int&gt; &lt;dbl&gt;
+1 female       450  0.45
+2 male         450  0.45
+3 non-binary   100  0.1 </code></pre>
+</div>
+</div>
+<p>We can see that in our department 45% of students identify as <code>female</code>, 45% as <code>male</code> and 10% as <code>non-binary</code>. Consequently, when we draw a sample from this population we would ideally wish to end up with a similar distribution. The percentages mentioned here are also indicative of how likely someone will be selected based on <code>gender</code>, i.e.&nbsp;there is only a 10% chance that we pick a student who identifies as <code>non-binary</code>, while there is an even chance of 45% to pick a <code>female</code> or <code>male</code> student.</p>
+<p>Now that we know how our sample should look like with regards to <code>gender</code> we can start selecting people. Let’s begin by drawing nine samples of 20 students.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ANALYSIS ----------------------------------------------------------------</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>plots <span class="ot">&lt;-</span> <span class="fu">sampling_sim</span>(<span class="at">seeds =</span> <span class="fu">c</span>(<span class="dv">123456</span>, <span class="dv">123457</span>, <span class="dv">123458</span>,</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>                                <span class="dv">123451</span>, <span class="dv">123455</span>, <span class="dv">123465</span>,</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>                                <span class="dv">123471</span>, <span class="dv">123585</span>, <span class="dv">123495</span>),</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>             <span class="at">sample_size =</span> <span class="dv">20</span>,</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>             <span class="at">df =</span> reading_time)</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>combined_plot <span class="ot">&lt;-</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">reduce</span>(plots<span class="sc">$</span>plots, <span class="st">`</span><span class="at">+</span><span class="st">`</span>) <span class="sc">+</span> </span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot_annotation</span>(</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"SIMULATION OF SIMPLE RANDOM SAMPLING"</span>,</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"(Sample size = 20) </span><span class="sc">\n</span><span class="st">"</span>,</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">theme =</span> <span class="fu">theme</span>(</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>      <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">16</span>, <span class="at">face =</span> <span class="st">"bold"</span>, <span class="at">hjust =</span> <span class="fl">0.5</span>),</span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>      <span class="at">plot.subtitle =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>, <span class="at">face =</span> <span class="st">"italic"</span>, <span class="at">hjust =</span> <span class="fl">0.5</span>),</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>      )</span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">+</span></span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot_layout</span>(<span class="at">guides =</span> <span class="st">"collect"</span>) <span class="co"># Collects legends from plots</span></span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>combined_plot</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="09_sources_of_bias_files/figure-html/linear-nonlinear-relationships-1.png" class="img-fluid figure-img" width="672"></p>
-<figcaption>Examples of linear and non-linear relationships of two variables</figcaption>
+<p><img src="09_sources_of_bias_files/figure-html/drawing-samples-of-20-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption>Simulation of simple random sampling (n = 20)</figcaption>
 </figure>
 </div>
 </div>
 </div>
-<p>Data visualisations are particularly useful to identify whether variables are related to each other in a linear fashion. The examples above were all created with <code>geom_point()</code>, which creates a dot plot that maps the relationship between two variables. In Chapter @ref(correlations), we will look more closely at the relationship of two variables in the form of <em>correlations</em>, which measure the strength of a linear relationship between variables.</p>
+<p>Looking at the visualisation, we can see the distribution of <code>gender</code> in our sample in red compared to the one in our population coloured in grey. You might be surprised to see that not all samples seem equally good in being representative even though we used simple random sampling. <code>Sample 1</code>, <code>Sample 2</code>, and <code>Sample 9</code> seem to match the gender distribution of our population fairly well. However, <code>Sample 4</code>, <code>Sample 5</code> and <code>Sample 8</code> are rather poor representations of our population. Thus, only 3 out of 9 samples would provide us with a dataset that is somewhat representative.</p>
+<p>An attentive reader might wonder: Is a sample of 20 students not too small? And the answer would be a resounding ‘yes’. Even with simple random sampling, we would have to achieve a large enough sample to ensure no matter how often we draw a sample, we end up with a dataset that is representative enough of our population. Let’s draw nine more samples, but this time we opt to select 300 students for each sample.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ANALYSIS ----------------------------------------------------------------</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>plots <span class="ot">&lt;-</span> <span class="fu">sampling_sim</span>(<span class="at">seeds =</span> <span class="fu">c</span>(<span class="dv">123456</span>, <span class="dv">123457</span>, <span class="dv">123458</span>,</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>                                <span class="dv">123451</span>, <span class="dv">123455</span>, <span class="dv">123465</span>,</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>                                <span class="dv">123471</span>, <span class="dv">123585</span>, <span class="dv">123495</span>),</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>             <span class="at">sample_size =</span> <span class="dv">300</span>,</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>             <span class="at">df =</span> reading_time)</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>combined_plot <span class="ot">&lt;-</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">reduce</span>(plots<span class="sc">$</span>plots, <span class="st">`</span><span class="at">+</span><span class="st">`</span>) <span class="sc">+</span> </span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot_annotation</span>(</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"SIMULATION OF SIMPLE RANDOM SAMPLING"</span>,</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"(Sample size = 300) </span><span class="sc">\n</span><span class="st">"</span>,</span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">theme =</span> <span class="fu">theme</span>(</span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>      <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">16</span>, <span class="at">face =</span> <span class="st">"bold"</span>, <span class="at">hjust =</span> <span class="fl">0.5</span>),</span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>      <span class="at">plot.subtitle =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>, <span class="at">face =</span> <span class="st">"italic"</span>, <span class="at">hjust =</span> <span class="fl">0.5</span>),</span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>      )</span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">+</span></span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot_layout</span>(<span class="at">guides =</span> <span class="st">"collect"</span>) <span class="co"># Collects legends from plots</span></span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>combined_plot</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="09_sources_of_bias_files/figure-html/drawing-samples-of-300-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption>Simulation of simple random sampling (n = 300)</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>This time, all of our 9 samples seem to represent the population very well with regards to the gender distribution. In short: your sampling strategy and sample size matter significantly to achieve a dataset which can provide insights into the chosen population. This is true irrespective of whether correct analytical techniques were chosen to analyse the data afterwards, which of course would still produce wrong results.</p>
+<p>Lastly, let me show you how results could differ when samples are not comparable by considering the mean and median reading time (<code>min_reading</code>) by students in our department. I made a couple more modifications to enable us to read the final results better. So don’t feel irritated by the code I am showing you below.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Reading time based on entire population (n = 1000)</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>population <span class="ot">&lt;-</span> reading_time <span class="sc">|&gt;</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">mean =</span> <span class="fu">mean</span>(min_reading),</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">median =</span> <span class="fu">median</span>(min_reading)) <span class="sc">|&gt;</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">sample_type =</span> <span class="st">"population"</span>,</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>         <span class="at">.before =</span> <span class="fu">everything</span>())</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Reading time based on representative sample (n = 300)</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123456</span>)</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>rep_sample_300 <span class="ot">&lt;-</span></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>  reading_time <span class="sc">|&gt;</span></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_sample</span>(<span class="at">n =</span> <span class="dv">300</span>) <span class="sc">|&gt;</span></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">mean =</span> <span class="fu">mean</span>(min_reading),</span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>            <span class="at">median =</span> <span class="fu">median</span>(min_reading)) <span class="sc">|&gt;</span></span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">sample_type =</span> <span class="st">"representative sample (n = 300)"</span>, <span class="at">.before =</span> <span class="fu">everything</span>())</span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Reading time based on representative sample (n = 20)</span></span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123456</span>)</span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a>rep_sample_20 <span class="ot">&lt;-</span></span>
+<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a>  reading_time <span class="sc">|&gt;</span></span>
+<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_sample</span>(<span class="at">n =</span> <span class="dv">20</span>) <span class="sc">|&gt;</span></span>
+<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">mean =</span> <span class="fu">mean</span>(min_reading),</span>
+<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a>            <span class="at">median =</span> <span class="fu">median</span>(min_reading)) <span class="sc">|&gt;</span></span>
+<span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">sample_type =</span> <span class="st">"representative sample (n = 20)"</span>,</span>
+<span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a>         <span class="at">.before =</span> <span class="fu">everything</span>())</span>
+<span id="cb5-29"><a href="#cb5-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-30"><a href="#cb5-30" aria-hidden="true" tabindex="-1"></a><span class="co"># Reading time based on non-representative sample (n = 20)</span></span>
+<span id="cb5-31"><a href="#cb5-31" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123585</span>)</span>
+<span id="cb5-32"><a href="#cb5-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-33"><a href="#cb5-33" aria-hidden="true" tabindex="-1"></a>non_rep_sample <span class="ot">&lt;-</span></span>
+<span id="cb5-34"><a href="#cb5-34" aria-hidden="true" tabindex="-1"></a>  reading_time <span class="sc">|&gt;</span></span>
+<span id="cb5-35"><a href="#cb5-35" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_sample</span>(<span class="at">n =</span> <span class="dv">20</span>) <span class="sc">|&gt;</span></span>
+<span id="cb5-36"><a href="#cb5-36" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">mean =</span> <span class="fu">mean</span>(min_reading),</span>
+<span id="cb5-37"><a href="#cb5-37" aria-hidden="true" tabindex="-1"></a>            <span class="at">median =</span> <span class="fu">median</span>(min_reading)) <span class="sc">|&gt;</span></span>
+<span id="cb5-38"><a href="#cb5-38" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">sample_type =</span> <span class="st">"non-representative sample (n = 20)"</span>, <span class="at">.before =</span> <span class="fu">everything</span>())</span>
+<span id="cb5-39"><a href="#cb5-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-40"><a href="#cb5-40" aria-hidden="true" tabindex="-1"></a>comparison <span class="ot">&lt;-</span> <span class="fu">rbind</span>(population, rep_sample_300, rep_sample_20, non_rep_sample)</span>
+<span id="cb5-41"><a href="#cb5-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-42"><a href="#cb5-42" aria-hidden="true" tabindex="-1"></a>comparison</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 4 × 3
+  sample_type                         mean median
+  &lt;chr&gt;                              &lt;dbl&gt;  &lt;dbl&gt;
+1 population                          362.   359 
+2 representative sample (n = 300)     364.   364.
+3 representative sample (n = 20)      354.   376 
+4 non-representative sample (n = 20)  335.   328.</code></pre>
+</div>
+</div>
+<p>In light of everything we covered in this chapter, it is not surprising to find that the representative samples are much closer to the true <code>mean</code> and <code>median</code> of the population than the non-representative one. In addition, the bigger representative sample also performed much better in capturing the central tendency of <code>min_reading</code> in our population than the smaller one.</p>
+<p>In conclusion, even with the right analytical tools, our results depend heavily on how we selected a sample from the population to ensure it represents the group we are interested in. This highlights the importance of clearly defining your population as a crucial first step in the process. Consequently, choosing a sampling strategy that leads to less representative datasets implies that your findings are likely not applicable to people outside your sample. While this is not necessarily a problem, it is a limitation that you should be transparent about.</p>
+</section>
+<section id="sec-additivity-and-linearity" class="level2" data-number="9.2">
+<h2 data-number="9.2" class="anchored" data-anchor-id="sec-additivity-and-linearity"><span class="header-section-number">9.2</span> Linearity and additivity</h2>
+<p>The assumption of linearity postulates that the relationship of variables represents a straight line and not a curve or any other shape. <a href="#fig-linear-nonlinear-relationships" class="quarto-xref">Figure&nbsp;<span>9.1</span></a> depicts examples of how two variables could be related to each other. Only the first one demonstrates a linear relationship, and all other plots would represent a violation of linearity.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-linear-nonlinear-relationships" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-linear-nonlinear-relationships-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="09_sources_of_bias_files/figure-html/fig-linear-nonlinear-relationships-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-linear-nonlinear-relationships-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;9.1: Examples of linear and non-linear relationships of two variables
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>Data visualisations are particularly useful to identify whether variables are related to each other in a linear fashion. The examples above were all created with <code>geom_point()</code>, which creates a dot plot that maps the relationship between two variables. In <a href="10_correlations.html" class="quarto-xref"><span>Chapter 10</span></a>, we will look more closely at the relationship of two variables in the form of <em>correlations</em>, which measure the strength of a linear relationship between variables.</p>
 <p>Additivity is given when the effects of all independent variables can be added up to obtain the total effect they have on a dependent variable. In other words, the effect that multiple variables have on another variable can be added up to reflect their total effect.</p>
 <p>If we assume that we have a dependent variable <span class="math inline">\(Y\)</span> which is affected by other (independent) variables <span class="math inline">\(X\)</span>, we could summarise additivity and linearity as a formula:</p>
 <div id="linearity_additivity-formula" data-align="center">
 <p><span class="math inline">\(Y = \beta_{1} * X_1 + \beta_{2} * X_{2} + ... + \beta_{n} * X_{n}\)</span></p>
 </div>
-<p>The <span class="math inline">\(\beta\)</span> (beta) stands for the degree of change in a variable <span class="math inline">\(X\)</span> causes in <span class="math inline">\(Y\)</span>. Or, in simpler terms, <span class="math inline">\(\beta\)</span> reflects the impact an independent variable has on the dependent variable. We will return to this equation in Chapter @ref(regression), where we create a linear model via regression.</p>
+<p>The <span class="math inline">\(\beta\)</span> (beta) stands for the degree of change in a variable <span class="math inline">\(X\)</span> causes in <span class="math inline">\(Y\)</span>. Or, in simpler terms, <span class="math inline">\(\beta\)</span> reflects the impact an independent variable has on the dependent variable. We will return to this equation and terminology in <a href="13_regressions.html" class="quarto-xref"><span>Chapter 13</span></a>, where we create a linear model via regression.</p>
 </section>
-<section id="independence-sec-independence" class="level2" data-number="9.2">
-<h2 data-number="9.2" class="anchored" data-anchor-id="independence-sec-independence"><span class="header-section-number">9.2</span> Independence {sec-independence}</h2>
+<section id="sec-independence" class="level2" data-number="9.3">
+<h2 data-number="9.3" class="anchored" data-anchor-id="sec-independence"><span class="header-section-number">9.3</span> Independence</h2>
 <p>The notion of independence is an important one. It assumes that each observation in our dataset is independent of other observations. For example, imagine my wife Fiona and I take part in a study that asks us to rank movies by how much we like them. Each of us has to complete the ranking by ourselves, but since we both sit in the same living room, we start chatting about these movies. By doing so, we influence each other’s rankings and might even agree on the same ranking. Thus, our scores are not independent from each other. On the other hand, suppose we were both sitting in our respective offices and rank these movies. In that case, the rankings could potentially still be very similar, but this time the observations are independent of each other.</p>
 <p>There is no statistical measurement or plot that can tell us whether observations are independent or not. Ensuring independence is a matter of data collection and not data analysis. Thus, it depends on how you, for example, designed your experiment, or when and where you ask participants to complete a survey, etc. Still, this criterion should not be downplayed as being a ‘soft’ one, just because there is no statistical test, but should remain on your radar throughout the planning and data collection stage of your research.</p>
 </section>
-<section id="sec-normality" class="level2" data-number="9.3">
-<h2 data-number="9.3" class="anchored" data-anchor-id="sec-normality"><span class="header-section-number">9.3</span> Normality</h2>
-<p>We touched upon the notion of <em>‘normality’</em> and <em>‘normal distributions’</em> before in Chapter @ref(spread-of-data) because it refers to the spread of our data. Figure @ref(fig:normal-distribution2) should look familiar by now.</p>
+<section id="sec-normality" class="level2" data-number="9.4">
+<h2 data-number="9.4" class="anchored" data-anchor-id="sec-normality"><span class="header-section-number">9.4</span> Normality</h2>
+<p>We touched upon the notion of <em>‘normality’</em> and <em>‘normal distributions’</em> before in <a href="08_descriptive_statistics.html#sec-spread-of-data" class="quarto-xref"><span>Section 8.4</span></a> because it refers to the spread of our data. <a href="#fig-normal-distribution2" class="quarto-xref">Figure&nbsp;<span>9.2</span></a> should look familiar by now.</p>
 <div class="cell">
 <div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="09_sources_of_bias_files/figure-html/normal-distribution2-1.png" class="img-fluid figure-img" width="672"></p>
-<figcaption>A normal distribution</figcaption>
+<div id="fig-normal-distribution2" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-normal-distribution2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="09_sources_of_bias_files/figure-html/fig-normal-distribution2-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-normal-distribution2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;9.2: A normal distribution
+</figcaption>
 </figure>
 </div>
 </div>
 </div>
-<p>However, we have yet to understand why it is essential that our data follows a normal distribution. Most parametric tests are based on means. For example, if we want to compare two groups with each other, we would compute the mean for each of them and then see whether their means differ from each other in a significant way (see Chapter @ref(comparing-groups). Of course, if our data is not very normally distributed, means are a poor reference point for most of the observations in this group. We already know that outliers heavily affect means, but even without outliers, the mean could be a poor choice. Let me provide some visual examples.</p>
+<p>However, we have yet to understand why it is essential that our data follows a normal distribution. Most parametric tests are based on means. For example, if we want to compare two groups with each other, we would compute the mean for each of them and then see whether their means differ from each other in a significant way (see <a href="11_group_comparison.html" class="quarto-xref"><span>Chapter 11</span></a>. Of course, if our data is not very normally distributed, means are a poor reference point for most of the observations in this group. We already know that outliers heavily affect means, but even without outliers, the mean could be a poor choice. Let me provide some visual examples.</p>
 <div class="cell">
 <div class="cell-output cell-output-stderr">
 <pre><code>Warning in geom_text(aes(x = mean(income) - 15, y = 2e-04, label = "mean", : All aesthetics have length 1, but the data has 11 rows.
-ℹ Did you mean to use `annotate()`?</code></pre>
+ℹ Please consider using `annotate()` or provide this layer with data containing
+  a single row.</code></pre>
 </div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Warning in geom_text(aes(x = median(income) + 15, y = 0.00024, label = "median", : All aesthetics have length 1, but the data has 11 rows.
-ℹ Did you mean to use `annotate()`?</code></pre>
+ℹ Please consider using `annotate()` or provide this layer with data containing
+  a single row.</code></pre>
 </div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Warning in geom_text(aes(x = mean(income) + 25, y = 2e-04, label = "mean", : All aesthetics have length 1, but the data has 13 rows.
-ℹ Did you mean to use `annotate()`?</code></pre>
+ℹ Please consider using `annotate()` or provide this layer with data containing
+  a single row.</code></pre>
 </div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Warning in geom_text(aes(x = median(income) - 30, y = 0.00024, label = "median", : All aesthetics have length 1, but the data has 13 rows.
-ℹ Did you mean to use `annotate()`?</code></pre>
+ℹ Please consider using `annotate()` or provide this layer with data containing
+  a single row.</code></pre>
 </div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Warning in geom_text(aes(x = mean(income) - 15, y = 2e-04, label = "mean", : All aesthetics have length 1, but the data has 12 rows.
-ℹ Did you mean to use `annotate()`?</code></pre>
+ℹ Please consider using `annotate()` or provide this layer with data containing
+  a single row.</code></pre>
 </div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Warning in geom_text(aes(x = median(income) + 15, y = 0.00024, label = "median", : All aesthetics have length 1, but the data has 12 rows.
-ℹ Did you mean to use `annotate()`?</code></pre>
+ℹ Please consider using `annotate()` or provide this layer with data containing
+  a single row.</code></pre>
 </div>
 <div class="cell-output-display">
 <div>
@@ -446,10 +671,14 @@ window.Quarto = {
 <p>We notice that neither the median nor the mean by themselves is a reliable indicator for normality. Figure A and Figure C both show that the median and mean are almost identical, but only Figure A follows a normal distribution. The median and mean in Figure C are not reflective of the average observation in this dataset. Most scores lie below and above the mean/median. Therefore, when we analyse the normality of our data, we usually are not interested in the normality of a single variable but the normality of the sampling distribution. However, we cannot directly assess the sampling distribution in most cases. As such, we often revert to testing the normality of our data. There are also instances where we would not expect a normal distribution to exist. Consider the following plots:</p>
 <div class="cell">
 <div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="09_sources_of_bias_files/figure-html/two-normalities-groups-1.png" class="img-fluid figure-img" width="672"></p>
-<figcaption>Two normal distributions in one dataset.</figcaption>
+<div id="fig-two-normalities-groups" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-two-normalities-groups-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="09_sources_of_bias_files/figure-html/fig-two-normalities-groups-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-two-normalities-groups-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;9.3: Two normal distributions in one dataset.
+</figcaption>
 </figure>
 </div>
 </div>
@@ -457,7 +686,7 @@ window.Quarto = {
 <p>The first plot clearly shows that data is not normally distributed. If anything, it looks more like the back of a camel. The technical term for this distribution is called <em>‘bimodal distribution’</em>. In cases where our data has even more peaks we consider it as a <em>‘multimodal distribution’</em>. If we identify distributions that look remotely like this, we can assume that there must be another variable that helps explain why there are two peaks in our distribution. The plot below reveals that gender appears to play an important role. Drawing the distribution for each subset of our data reveals that <code>income</code> is now normally distributed for each group and has two different means. Thus, solely focusing on normal distributions for a single variable would not be meaningful if you do not consider the impact of other variables. If we think that <code>gender</code> plays an important role to understand <code>income</code> levels, we would have to expect that the distribution is not normal when looking at our data in its entirety.</p>
 <p>Determining whether data is normally distributed can be challenging when only inspecting plots, e.g.&nbsp;histograms, density plots or QQ plots. Luckily, there is also a statistical method to test whether our data is normally distributed: <em>The Shapiro-Wilk test</em>. This test compares our distribution with a normal distribution (like in our plot) and tells us whether our distribution is <strong>significantly different</strong> from it. Thus, if the test is not significant, the distribution of our data is not significantly different from a normal distribution, or in simple terms: It is normally distributed. We can run the test in R as follows for the dataset that underpins Fig A above:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">shapiro.test</span>(data<span class="sc">$</span>income)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">shapiro.test</span>(data<span class="sc">$</span>income)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Shapiro-Wilk normality test
@@ -466,50 +695,101 @@ data:  data$income
 W = 0.94586, p-value = 0.5916</code></pre>
 </div>
 </div>
-<p>This result confirms that the data is normally distributed, because it is not significantly different (<span class="math inline">\(p &gt; 0.05\)</span>). The chapter on correlations looks at significance and its meaning more thoroughly (see Chapter @ref(correlations)).</p>
-<p>In conclusion, the normality of data is an essential pre-test for any of our studies. If we violate the assumption of normality, we will have to fall back to non-parametric tests. However, this rule has two exceptions: <em>The Central Limit Theorem</em> and using <em>‘robust’</em> measures of parametric tests.The Central Limit Theorem postulates that as our sample becomes larger, our sampling distribution becomes more and more normal around the mean of the underlying population. For example, <span class="citation" data-cites="field2013discovering">Field (<a href="references.html#ref-field2013discovering" role="doc-biblioref">2013</a>)</span> (p.54) refers to a sample of 30 as a common rule of thumb. As such, it is possible to assume normality for larger datasets even though our visualisation and the Shapiro-Wilk test tell us otherwise. The second exception is that many parametric tests offer a ‘robust’ alternative, often via <em>bootstrapping</em>. <em>Bootstrapping</em> refers to the process of subsampling your data, for example, 2000 times, and look at the average outcome. An example of bootstrapping is shown in Chapter @ref(bootstrapped-regression).</p>
-<p>Admittedly, this raises the question: Can I ignore normality and move on with my analysis if my sample is large enough or I use bootstrapping? In short: Yes. This fact probably also explains why we hardly ever find results from normality tests in journal publications since most Social Science research involves more than 30 participants. However, if you find yourself in a situation where the sample size is smaller, all of the above needs to be check and thoroughly considered. However, the sample size also has implications with regards to the power of your test/findings (see Chapter @ref(power-analysis)). Ultimately, the answer to the above questions remains, unsatisfyingly: ‘It depends’.</p>
-</section>
-<section id="sec-homogeneity-of-variance" class="level2" data-number="9.4">
-<h2 data-number="9.4" class="anchored" data-anchor-id="sec-homogeneity-of-variance"><span class="header-section-number">9.4</span> Homogeneity of variance (homoscedasticity)</h2>
-<p>The term <em>‘variance’</em> should sound familiar, because we mentioned it in Chapter @ref(standard-deviation) where we looked at the standard deviation derived from the variance.</p>
-<p><em>Homogeneity of variance</em> implies that the variance of, for example, two subsets of data, is equal or close to being equal. Let’s look at how close the observed values are to the mean for the two groups identified in Figure @ref(fig:two-normalities-groups).</p>
+<p>This result confirms that the data is normally distributed, because it is not significantly different (<span class="math inline">\(p &gt; 0.05\)</span>). The chapter on correlations looks at significance and its meaning more thoroughly (see <a href="10_correlations.html#sec-significance" class="quarto-xref"><span>Section 10.3</span></a>).</p>
+<p>In terms of computing normality, it can become very troublesome, very quickly. When we compare different groups of people (like in <a href="11_group_comparison.html#sec-multiple-unpaired-groups" class="quarto-xref"><span>Section 11.3.1</span></a>) we have to check normality for each group and each variable of interest separately, which means we first need to create subsets of our data for each group and then perform <code>shapiro.test()</code> separately for each group. This might be still manageable with two or three groups, but can become very time-consuming if there are more groups in a larger dataset. Luckily, I included some helpful function in <code>r4np</code> that can help make this a lot easier:</p>
+<ul>
+<li><p><code>ntest()</code>: This function allows to compute multiple <code>shapiro.test()</code>s for multiple variables.</p></li>
+<li><p><code>ntest_by()</code>: This function allows to compute multiple <code>shapiro.test()</code>s for multiple variables based on a group variable.</p></li>
+</ul>
+<p>Let me show you how these two functions extremely handy when testing normality in bulk.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>data4 <span class="sc">|&gt;</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> gender, <span class="at">y =</span> income, <span class="at">col =</span> gender)) <span class="sc">+</span></span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_jitter</span>(<span class="at">width =</span> <span class="fl">0.1</span>) <span class="sc">+</span></span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> group_means<span class="sc">$</span>mean[<span class="dv">1</span>], <span class="at">color =</span> <span class="st">"red"</span>) <span class="sc">+</span></span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> group_means<span class="sc">$</span>mean[<span class="dv">2</span>], <span class="at">color =</span> <span class="st">"turquoise"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Perform 'shapiro.test()' for multiple variables at once</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>ic_training <span class="sc">|&gt;</span> <span class="fu">ntest</span>(<span class="at">cols =</span> <span class="fu">c</span>(communication,</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>                              teamwork,</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>                              leadership))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 4
+  row_name      statistic p.value method                     
+  &lt;chr&gt;             &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;                      
+1 communication     0.970 0.0255  Shapiro-Wilk normality test
+2 teamwork          0.963 0.00890 Shapiro-Wilk normality test
+3 leadership        0.962 0.00702 Shapiro-Wilk normality test</code></pre>
+</div>
+</div>
+<p>Here is an example where we compute the normality for all three variables again, but this time we consider two different subsets of our dataset.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Perform 'shapiro.test()' for multiple variables and groups</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>ic_training <span class="sc">|&gt;</span> <span class="fu">ntest_by</span>(<span class="at">cols =</span> <span class="fu">c</span>(communication,</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>                                 teamwork,</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>                                 leadership),</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>                        <span class="at">group =</span> test</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>                        )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 5
+  test          variable      statistic p.value method                     
+  &lt;fct&gt;         &lt;chr&gt;             &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;                      
+1 pre_training  communication     0.978 0.517   Shapiro-Wilk normality test
+2 pre_training  teamwork          0.950 0.0398  Shapiro-Wilk normality test
+3 pre_training  leadership        0.957 0.0747  Shapiro-Wilk normality test
+4 post_training communication     0.924 0.00415 Shapiro-Wilk normality test
+5 post_training teamwork          0.944 0.0240  Shapiro-Wilk normality test
+6 post_training leadership        0.937 0.0124  Shapiro-Wilk normality test</code></pre>
+</div>
+</div>
+<p>I use the <code>ntest_by()</code> function regularly, because it saves so much time and does not require me to create subsets of my data. It is probably the most useful analytical function I have ever written.</p>
+<p>In conclusion, the normality of data is an essential pre-test for any of our studies. If we violate the assumption of normality, we will have to fall back to non-parametric tests. However, this rule has two exceptions: <em>The Central Limit Theorem</em> and using <em>‘robust’</em> measures of parametric tests.The Central Limit Theorem postulates that as our sample becomes larger, our sampling distribution becomes more and more normal around the mean of the underlying population. For example, <span class="citation" data-cites="field2013discovering">Field (<a href="references.html#ref-field2013discovering" role="doc-biblioref">2013</a>)</span> (p.54) refers to a sample of 30 as a common rule of thumb. As such, it is possible to assume normality for larger datasets even though our visualisation and the Shapiro-Wilk test tell us otherwise. The second exception is that many parametric tests offer a ‘robust’ alternative, often via <em>bootstrapping</em>. <em>Bootstrapping</em> refers to the process of subsampling your data, for example, 2000 times, and look at the average outcome.</p>
+<p>Admittedly, this raises the question: Can I ignore normality and move on with my analysis if my sample is large enough or I use bootstrapping? In short: Yes. This fact probably also explains why we hardly ever find results from normality tests in journal publications since most Social Science research involves more than 30 participants. However, if you find yourself in a situation where the sample size is smaller, all of the above needs to be checked and thoroughly considered. However, the sample size also has implications with regards to the power of your test/findings (see <a href="12_power_analysis.html" class="quarto-xref"><span>Chapter 12</span></a>). Ultimately, the answer to the above questions remains, unsatisfyingly: ‘It depends’.</p>
+</section>
+<section id="sec-homogeneity-of-variance" class="level2" data-number="9.5">
+<h2 data-number="9.5" class="anchored" data-anchor-id="sec-homogeneity-of-variance"><span class="header-section-number">9.5</span> Homogeneity of variance (homoscedasticity)</h2>
+<p>The term <em>‘variance’</em> should sound familiar, because we mentioned it in <a href="08_descriptive_statistics.html#sec-standard-deviation" class="quarto-xref"><span>Section 8.4.6</span></a> where we looked at the standard deviation derived from the variance.</p>
+<p><em>Homogeneity of variance</em> implies that the variance of, for example, two subsets of data, is equal or close to being equal. Let’s look at how close the observed values are to the mean for the two groups identified in <a href="#fig-two-normalities-groups" class="quarto-xref">Figure&nbsp;<span>9.3</span></a>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>data4 <span class="sc">|&gt;</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> gender, <span class="at">y =</span> income, <span class="at">col =</span> gender)) <span class="sc">+</span></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_jitter</span>(<span class="at">width =</span> <span class="fl">0.1</span>) <span class="sc">+</span></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> group_means<span class="sc">$</span>mean[<span class="dv">1</span>], <span class="at">color =</span> <span class="st">"red"</span>) <span class="sc">+</span></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> group_means<span class="sc">$</span>mean[<span class="dv">2</span>], <span class="at">color =</span> <span class="st">"turquoise"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="09_sources_of_bias_files/figure-html/homogeneity-variance-1.png" class="img-fluid figure-img" width="672"></p>
+<div id="fig-homogeneity-variance" class="quarto-figure quarto-figure-center quarto-float anchored" width="672">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-homogeneity-variance-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="09_sources_of_bias_files/figure-html/fig-homogeneity-variance-1.png" id="fig-homogeneity-variance" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-homogeneity-variance-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;9.4
+</figcaption>
 </figure>
 </div>
 </div>
 </div>
 <p>Judging by eye, we could argue that most values lie around the mean for each respective group. However, some observations are a bit further off. Still, using this visualisation, it is tough to judge whether the spread is about the same. However, boxplots can help with this, or even better, a boxplot reflected by a bar. The package <code>ggdist</code> has an excellent plotting function called <code>stat_interval()</code>, which allows us to show a boxplot in the form of a bar.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>data4 <span class="sc">|&gt;</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> gender, <span class="at">y =</span> income, <span class="at">group =</span> gender)) <span class="sc">+</span></span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  ggdist<span class="sc">::</span><span class="fu">stat_interval</span>(<span class="fu">aes</span>(<span class="at">y =</span> income),</span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>                        <span class="at">.width =</span> <span class="fu">c</span>(<span class="fl">0.25</span>, <span class="fl">0.5</span>, <span class="fl">0.75</span>, <span class="dv">1</span>)) <span class="sc">+</span></span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Let's add some nice complementary colours</span></span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"#4D87B3"</span>, <span class="st">"#A1D6FF"</span>, <span class="st">"#FFDAA1"</span>, <span class="st">"#B3915F"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>data4 <span class="sc">|&gt;</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> gender, <span class="at">y =</span> income, <span class="at">group =</span> gender)) <span class="sc">+</span></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>  ggdist<span class="sc">::</span><span class="fu">stat_interval</span>(<span class="fu">aes</span>(<span class="at">y =</span> income),</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>                        <span class="at">.width =</span> <span class="fu">c</span>(<span class="fl">0.25</span>, <span class="fl">0.5</span>, <span class="fl">0.75</span>, <span class="dv">1</span>)) <span class="sc">+</span></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Let's add some nice complementary colours</span></span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"#4D87B3"</span>, <span class="st">"#A1D6FF"</span>, <span class="st">"#FFDAA1"</span>, <span class="st">"#B3915F"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="09_sources_of_bias_files/figure-html/homogeneity-variance-alt-vis-1.png" class="img-fluid figure-img" width="672"></p>
+<div id="fig-homogeneity-variance-alt-vis" class="quarto-figure quarto-figure-center quarto-float anchored" width="672">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-homogeneity-variance-alt-vis-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="09_sources_of_bias_files/figure-html/fig-homogeneity-variance-alt-vis-1.png" id="fig-homogeneity-variance-alt-vis" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-homogeneity-variance-alt-vis-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;9.5
+</figcaption>
 </figure>
 </div>
 </div>
 </div>
 <p>If we compare the bars, we can tell that the variance in both groups looks very similar, i.e.&nbsp;the length of the bars appear to be about the same height. Furthermore, if we compare the IQR for both groups, we find that they are quite close to each other.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>data4 <span class="sc">|&gt;</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(gender) <span class="sc">|&gt;</span></span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">iqr =</span> <span class="fu">IQR</span>(income))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>data4 <span class="sc">|&gt;</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(gender) <span class="sc">|&gt;</span></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">iqr =</span> <span class="fu">IQR</span>(income))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 2 × 2
   gender   iqr
@@ -520,7 +800,7 @@ W = 0.94586, p-value = 0.5916</code></pre>
 </div>
 <p>However, to test whether the variance between these two groups is truly similar or different, we have to perform a <em>Levene’s test</em>. The Levene’s test follows a similar logic as the Shapiro-Wilk test. If the test is significant, i.e.&nbsp;<span class="math inline">\(p &lt; 0.05\)</span>, we have to assume that the variances between these groups are significantly different from each other. However, if the test is not significant, then the variances are similar, and we can proceed with a parametric test - assuming other assumptions are not violated. The interpretation of this test follows the one for the Shapiro-Wilk test. To compute the Levene’s test we can use the function <code>leveneTest()</code> from the <code>car</code> package. However, instead of using <code>,</code> to separate the two variables, this function expects a formula, which is denotated by a <code>~</code>. We will cover formulas in the coming chapters.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>car<span class="sc">::</span><span class="fu">leveneTest</span>(gep<span class="sc">$</span>age <span class="sc">~</span> gep<span class="sc">$</span>gender)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>car<span class="sc">::</span><span class="fu">leveneTest</span>(gep<span class="sc">$</span>age <span class="sc">~</span> gep<span class="sc">$</span>gender)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Levene's Test for Homogeneity of Variance (center = median)
        Df F value Pr(&gt;F)
@@ -528,48 +808,82 @@ group   2  0.8834 0.4144
       297               </code></pre>
 </div>
 </div>
-<p>The Levene’s test shows that our variances are similar and not different from each other because <span class="math inline">\(p &gt; 0.05\)</span>. This is good news if we wanted to continue and perform a group comparison, like in Chapter @ref(comparing-groups).</p>
+<p>The Levene’s test shows that our variances are similar and not different from each other because <span class="math inline">\(p &gt; 0.05\)</span>. This is good news if we wanted to continue and perform a group comparison, like in <a href="11_group_comparison.html" class="quarto-xref"><span>Chapter 11</span></a>.</p>
 </section>
-<section id="sec-dealing-with-outliers" class="level2" data-number="9.5">
-<h2 data-number="9.5" class="anchored" data-anchor-id="sec-dealing-with-outliers"><span class="header-section-number">9.5</span> Outliers and how to deal with them</h2>
-<p>In Chapter @ref(descriptive-statistics), I referred to outliers many times but never eluded to the aspects of handling them. Dealing with outliers is similar to dealing with missing data. However, it is not quite as straightforward as one might think.</p>
+<section id="sec-dealing-with-outliers" class="level2" data-number="9.6">
+<h2 data-number="9.6" class="anchored" data-anchor-id="sec-dealing-with-outliers"><span class="header-section-number">9.6</span> Outliers and how to deal with them</h2>
+<p>In <a href="08_descriptive_statistics.html" class="quarto-xref"><span>Chapter 8</span></a>, I referred to outliers many times but never eluded to the aspects of handling them. Dealing with outliers is similar to dealing with missing data. However, it is not quite as straightforward as one might think.</p>
 <p>In a first step, we need to determine which values count as an outlier. <span class="citation" data-cites="aguinis2013best">Aguinis, Gottfredson, and Joo (<a href="references.html#ref-aguinis2013best" role="doc-biblioref">2013</a>)</span> reviewed 232 journal articles and found that scholars had defined outliers in 14 different ways, used 39 different techniques to detect them and applied 20 different strategies to handle them. It would be impossible to work through all these options in this book. However, I want to offer two options that have been frequently considered in publications in the field of Social Sciences:</p>
 <ul>
 <li><p>The standard deviation (SD), and</p></li>
 <li><p>The inter-quartile range (IQR).</p></li>
 </ul>
-<section id="sec-ouliers-standard_deviation" class="level3" data-number="9.5.1">
-<h3 data-number="9.5.1" class="anchored" data-anchor-id="sec-ouliers-standard_deviation"><span class="header-section-number">9.5.1</span> Detecting outliers using the standard deviation</h3>
-<p>A very frequently used approach to detecting outliers is the use of the standard deviation. Usually, scholars use multiples of the standard deviation to determine thresholds. For example, a value that lies 3 standard deviations above or below the mean could be categorised as an outlier. Unfortunately, there is quite some variability regarding how many multiples of the standard deviation counts as an outlier. Some authors might use <code>3</code>, and others might settle for <code>2</code> (see also <span class="citation" data-cites="leys2013detecting">Leys et al. (<a href="references.html#ref-leys2013detecting" role="doc-biblioref">2013</a>)</span>). Let’s stick with the definition of <code>3</code> standard deviations to get us started. We can revisit our previous plot regarding <code>runtime_min</code> (see Figure @ref(fig:runtime-movies-deviation)) and add lines that show the thresholds above and below the mean. As before, I will create a base plot <code>outlier_plot</code> first so that we do not have to repeat the same code over and over again. We then use <code>outlier_plot</code> and add more layers as we see fit.</p>
+<section id="sec-ouliers-standard_deviation" class="level3" data-number="9.6.1">
+<h3 data-number="9.6.1" class="anchored" data-anchor-id="sec-ouliers-standard_deviation"><span class="header-section-number">9.6.1</span> Detecting outliers using the standard deviation</h3>
+<p>Let us assume we are interested in understanding whether there are certain areas in England that score particularly high/low on <code>happiness</code> and whether the majority of areas report levels around the <code>mean</code>. This is a deviation analysis similar to our previous plot regarding alcohol <code>consumption</code> (see <a href="08_descriptive_statistics.html#fig-alcohol-consumption-deviation" class="quarto-xref">Figure&nbsp;<span>8.10</span></a>). We can simply adapt it to our new research aim. By using the <code>hie_2021</code> we can first recreate the same plot. As before, I will create a base plot <code>outlier_plot</code> first so that we do not have to repeat the same code over and over again. We then use <code>outlier_plot</code> and add more layers as we see fit.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Compute the mean and the thresholds</span></span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>runtime_mean <span class="ot">&lt;-</span> <span class="fu">mean</span>(imdb_top_250<span class="sc">$</span>runtime_min)</span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>sd_upper <span class="ot">&lt;-</span> runtime_mean <span class="sc">+</span> <span class="dv">3</span> <span class="sc">*</span> <span class="fu">sd</span>(imdb_top_250<span class="sc">$</span>runtime_min)</span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>sd_lower <span class="ot">&lt;-</span> runtime_mean <span class="sc">-</span> <span class="dv">3</span> <span class="sc">*</span> <span class="fu">sd</span>(imdb_top_250<span class="sc">$</span>runtime_min)</span>
-<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Create the base plot</span></span>
-<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>outlier_plot <span class="ot">&lt;-</span></span>
-<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>  imdb_top_250 <span class="sc">|&gt;</span></span>
-<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(title, runtime_min) <span class="sc">|&gt;</span></span>
-<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">reorder</span>(title, runtime_min),</span>
-<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>             <span class="at">y =</span> runtime_min)) <span class="sc">+</span></span>
-<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">shape =</span> <span class="dv">124</span>) <span class="sc">+</span></span>
-<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_blank</span>(),</span>
-<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a>        <span class="at">panel.grid.major =</span> <span class="fu">element_blank</span>(),</span>
-<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a>        <span class="at">panel.background =</span> <span class="fu">element_blank</span>()</span>
-<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a>        ) <span class="sc">+</span></span>
-<span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">"run time"</span>) <span class="sc">+</span></span>
-<span id="cb15-19"><a href="#cb15-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">"movies"</span>)</span>
-<span id="cb15-20"><a href="#cb15-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-21"><a href="#cb15-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Add the thresholds and mean</span></span>
-<span id="cb15-22"><a href="#cb15-22" aria-hidden="true" tabindex="-1"></a>outlier_plot <span class="sc">+</span></span>
-<span id="cb15-23"><a href="#cb15-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="fu">aes</span>(<span class="at">yintercept =</span> runtime_mean, <span class="at">col =</span> <span class="st">"red"</span>),</span>
-<span id="cb15-24"><a href="#cb15-24" aria-hidden="true" tabindex="-1"></a>             <span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
-<span id="cb15-25"><a href="#cb15-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="fu">aes</span>(<span class="at">yintercept =</span> sd_upper, <span class="at">col =</span> <span class="st">"blue"</span>),</span>
-<span id="cb15-26"><a href="#cb15-26" aria-hidden="true" tabindex="-1"></a>             <span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
-<span id="cb15-27"><a href="#cb15-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="fu">aes</span>(<span class="at">yintercept =</span> sd_lower, <span class="at">col =</span> <span class="st">"blue"</span>),</span>
-<span id="cb15-28"><a href="#cb15-28" aria-hidden="true" tabindex="-1"></a>             <span class="at">show.legend =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create the base plot</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>outlier_plot <span class="ot">&lt;-</span></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>  hie_2021 <span class="sc">|&gt;</span></span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(area_name, happiness) <span class="sc">|&gt;</span></span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">reorder</span>(area_name, happiness),</span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>             <span class="at">y =</span> happiness)) <span class="sc">+</span></span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">shape =</span> <span class="dv">124</span>) <span class="sc">+</span></span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a>        <span class="at">panel.grid.major =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a>        <span class="at">panel.background =</span> <span class="fu">element_blank</span>()</span>
+<span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb25-13"><a href="#cb25-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">"Area in England"</span>) <span class="sc">+</span></span>
+<span id="cb25-14"><a href="#cb25-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">"Happiness"</span>)</span>
+<span id="cb25-15"><a href="#cb25-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-16"><a href="#cb25-16" aria-hidden="true" tabindex="-1"></a>outlier_plot</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="fig-deviation-plot-happiness" class="quarto-figure quarto-figure-center quarto-float anchored" width="672">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-deviation-plot-happiness-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="09_sources_of_bias_files/figure-html/fig-deviation-plot-happiness-1.png" id="fig-deviation-plot-happiness" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-deviation-plot-happiness-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;9.6
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>Now we can compute the <code>mean</code> of <code>happiness</code> and add it as a new layer to our existing plot.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Compute the mean</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>happiness_mean <span class="ot">&lt;-</span> <span class="fu">mean</span>(hie_2021<span class="sc">$</span>happiness)</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Add the mean reference line</span></span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>outlier_plot <span class="sc">+</span></span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="fu">aes</span>(<span class="at">yintercept =</span> happiness_mean, <span class="at">col =</span> <span class="st">"red"</span>),</span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>             <span class="at">show.legend =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="09_sources_of_bias_files/figure-html/deviation-plot-with-mean-happiness-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>We can see that our distribution follows an S-curve and there seem to be some areas that score very high and some that score very low on <code>happiness</code>. Those observations at both ends of this plot which seem further away from the rest could likely be outliers. So, how can we determine which observations are truly outliers?</p>
+<p>A very frequently used approach to detecting outliers is the use of the standard deviation. Usually, scholars use multiples of the standard deviation to determine thresholds. For example, a value that lies 3 standard deviations above or below the mean could be categorised as an outlier. Unfortunately, there is quite some variability regarding how many multiples of the standard deviation counts as an outlier. Some authors might use <code>3</code>, and others might settle for <code>2</code> (see also <span class="citation" data-cites="leys2013detecting">Leys et al. (<a href="references.html#ref-leys2013detecting" role="doc-biblioref">2013</a>)</span>). Let’s stick with the definition of <code>3</code> standard deviations to get us started.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Compute the mean and the thresholds</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>happiness_mean <span class="ot">&lt;-</span> <span class="fu">mean</span>(hie_2021<span class="sc">$</span>happiness)</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>sd_upper <span class="ot">&lt;-</span> happiness_mean <span class="sc">+</span> <span class="dv">3</span> <span class="sc">*</span> <span class="fu">sd</span>(hie_2021<span class="sc">$</span>happiness)</span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>sd_lower <span class="ot">&lt;-</span> happiness_mean <span class="sc">-</span> <span class="dv">3</span> <span class="sc">*</span> <span class="fu">sd</span>(hie_2021<span class="sc">$</span>happiness)</span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Add the thresholds and mean</span></span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>outlier_plot <span class="sc">+</span></span>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="fu">aes</span>(<span class="at">yintercept =</span> happiness_mean, <span class="at">col =</span> <span class="st">"red"</span>),</span>
+<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a>             <span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="fu">aes</span>(<span class="at">yintercept =</span> sd_upper, <span class="at">col =</span> <span class="st">"blue"</span>),</span>
+<span id="cb27-11"><a href="#cb27-11" aria-hidden="true" tabindex="-1"></a>             <span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb27-12"><a href="#cb27-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="fu">aes</span>(<span class="at">yintercept =</span> sd_lower, <span class="at">col =</span> <span class="st">"blue"</span>),</span>
+<span id="cb27-13"><a href="#cb27-13" aria-hidden="true" tabindex="-1"></a>             <span class="at">show.legend =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -578,21 +892,20 @@ group   2  0.8834 0.4144
 </div>
 </div>
 </div>
-<p>The results suggest that only very few outliers would be detected if we chose these thresholds. Especially <code>Sherlock Jr.</code>, the shortest movie in our dataset, would not classify as an outlier. How about we choose 2 standard deviations instead?</p>
+<p>The results suggest that only very few outliers would be detected if we chose these thresholds, i.e.&nbsp;one at the very bottom that sits right under the red line. However, what would we find if we applied the stricter threshold of <code>2</code>?</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Compute the mean and standard deviation</span></span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>runtime_mean <span class="ot">&lt;-</span> <span class="fu">mean</span>(imdb_top_250<span class="sc">$</span>runtime_min)</span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>sd_upper <span class="ot">&lt;-</span> runtime_mean <span class="sc">+</span> <span class="dv">2</span> <span class="sc">*</span> <span class="fu">sd</span>(imdb_top_250<span class="sc">$</span>runtime_min)</span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>sd_lower <span class="ot">&lt;-</span> runtime_mean <span class="sc">-</span> <span class="dv">2</span> <span class="sc">*</span> <span class="fu">sd</span>(imdb_top_250<span class="sc">$</span>runtime_min)</span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Create our plot</span></span>
-<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>outlier_plot <span class="sc">+</span></span>
-<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="fu">aes</span>(<span class="at">yintercept =</span> runtime_mean, <span class="at">col =</span> <span class="st">"red"</span>),</span>
-<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>               <span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
-<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="fu">aes</span>(<span class="at">yintercept =</span> sd_upper, <span class="at">col =</span> <span class="st">"blue"</span>),</span>
-<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>             <span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
-<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="fu">aes</span>(<span class="at">yintercept =</span> sd_lower, <span class="at">col =</span> <span class="st">"blue"</span>),</span>
-<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>             <span class="at">show.legend =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Compute the standard deviation</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>sd_upper <span class="ot">&lt;-</span> happiness_mean <span class="sc">+</span> <span class="dv">2</span> <span class="sc">*</span> <span class="fu">sd</span>(hie_2021<span class="sc">$</span>happiness)</span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>sd_lower <span class="ot">&lt;-</span> happiness_mean <span class="sc">-</span> <span class="dv">2</span> <span class="sc">*</span> <span class="fu">sd</span>(hie_2021<span class="sc">$</span>happiness)</span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Create our plot</span></span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a>outlier_plot <span class="sc">+</span></span>
+<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="fu">aes</span>(<span class="at">yintercept =</span> happiness_mean, <span class="at">col =</span> <span class="st">"red"</span>),</span>
+<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a>               <span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="fu">aes</span>(<span class="at">yintercept =</span> sd_upper, <span class="at">col =</span> <span class="st">"blue"</span>),</span>
+<span id="cb28-10"><a href="#cb28-10" aria-hidden="true" tabindex="-1"></a>             <span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb28-11"><a href="#cb28-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="fu">aes</span>(<span class="at">yintercept =</span> sd_lower, <span class="at">col =</span> <span class="st">"blue"</span>),</span>
+<span id="cb28-12"><a href="#cb28-12" aria-hidden="true" tabindex="-1"></a>             <span class="at">show.legend =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -601,7 +914,7 @@ group   2  0.8834 0.4144
 </div>
 </div>
 </div>
-<p>As we would expect, we identify some more movies as being outliers, but the shortest movie would still not be classified as an outlier. It certainly feels somewhat arbitrary to choose a threshold of our liking. Despite its popularity, there are additional problems with this approach:</p>
+<p>As we would expect, we identify some more areas in England as being outliers regarding their <code>happiness</code>. It certainly feels somewhat arbitrary to choose a threshold of our liking. Despite its popularity, there are additional problems with this approach:</p>
 <ul>
 <li><p>outliers affect our mean and standard deviation too,</p></li>
 <li><p>since we use the mean, we assume that our data is normally distributed, and</p></li>
@@ -609,168 +922,202 @@ group   2  0.8834 0.4144
 </ul>
 <p><span class="citation" data-cites="leys2013detecting">Leys et al. (<a href="references.html#ref-leys2013detecting" role="doc-biblioref">2013</a>)</span> propose an alternative approach because medians are much less vulnerable to outliers than the mean. Similarly to the standard deviation, it is possible to calculate thresholds using the <em>median absolute deviation</em> (MAD). Best of all, the function <code>mad()</code> in <em>R</em> does this automatically for us. <span class="citation" data-cites="leys2013detecting">Leys et al. (<a href="references.html#ref-leys2013detecting" role="doc-biblioref">2013</a>)</span> suggest using <code>2.5</code> times the MAD as a threshold. However, if we want to compare how well this option performs against the standard deviation, we could use <code>3</code> as well.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Compute the median and thresholds</span></span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>runtime_median <span class="ot">&lt;-</span> <span class="fu">median</span>(imdb_top_250<span class="sc">$</span>runtime_min)</span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>mad_upper <span class="ot">&lt;-</span> runtime_median <span class="sc">+</span> <span class="dv">3</span> <span class="sc">*</span> <span class="fu">mad</span>(imdb_top_250<span class="sc">$</span>runtime_min)</span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>mad_lower <span class="ot">&lt;-</span> runtime_median <span class="sc">-</span> <span class="dv">3</span> <span class="sc">*</span> <span class="fu">mad</span>(imdb_top_250<span class="sc">$</span>runtime_min)</span>
-<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Create our plot</span></span>
-<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>outlier_plot <span class="sc">+</span></span>
-<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="fu">aes</span>(<span class="at">yintercept =</span> runtime_median, <span class="at">col =</span> <span class="st">"red"</span>),</span>
-<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>             <span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
-<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="fu">aes</span>(<span class="at">yintercept =</span> mad_upper, <span class="at">col =</span> <span class="st">"blue"</span>),</span>
-<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>             <span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
-<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="fu">aes</span>(<span class="at">yintercept =</span> mad_lower, <span class="at">col =</span> <span class="st">"blue"</span>),</span>
-<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a>             <span class="at">show.legend =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Compute the median and thresholds</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>happiness_median <span class="ot">&lt;-</span> <span class="fu">median</span>(hie_2021<span class="sc">$</span>happiness)</span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>mad_upper <span class="ot">&lt;-</span> happiness_median <span class="sc">+</span> <span class="dv">3</span> <span class="sc">*</span> <span class="fu">mad</span>(hie_2021<span class="sc">$</span>happiness)</span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>mad_lower <span class="ot">&lt;-</span> happiness_median <span class="sc">-</span> <span class="dv">3</span> <span class="sc">*</span> <span class="fu">mad</span>(hie_2021<span class="sc">$</span>happiness)</span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Create our plot</span></span>
+<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a>outlier_plot <span class="sc">+</span></span>
+<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="fu">aes</span>(<span class="at">yintercept =</span> happiness_median, <span class="at">col =</span> <span class="st">"red"</span>),</span>
+<span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a>             <span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb29-10"><a href="#cb29-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="fu">aes</span>(<span class="at">yintercept =</span> mad_upper, <span class="at">col =</span> <span class="st">"blue"</span>),</span>
+<span id="cb29-11"><a href="#cb29-11" aria-hidden="true" tabindex="-1"></a>             <span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb29-12"><a href="#cb29-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="fu">aes</span>(<span class="at">yintercept =</span> mad_lower, <span class="at">col =</span> <span class="st">"blue"</span>),</span>
+<span id="cb29-13"><a href="#cb29-13" aria-hidden="true" tabindex="-1"></a>             <span class="at">show.legend =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="09_sources_of_bias_files/figure-html/outlier-detection-median-mad3-1.png" class="img-fluid figure-img" width="672"></p>
+<div id="fig-outlier-detection-median-mad3" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-outlier-detection-median-mad3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="09_sources_of_bias_files/figure-html/fig-outlier-detection-median-mad3-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-outlier-detection-median-mad3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;9.7: Outlier detection via MAD using <code>3 * MAD</code> as a threshold
+</figcaption>
 </figure>
 </div>
 </div>
 </div>
-<p>Compared to our previous results, we notice that the median approach was much better in detecting outliers at the upper range of <code>runtim_min</code>. Because the median is not affected so much by the five-hour-long movie, the results have improved. Still, we would not classify the outlier at the bottom for the shortest film in the data. If we chose the criterion of <code>2.5 * MAD</code>, we would also get this outlier (see Figure @ref(fig:MAD2-outlier-detection)).</p>
+<p>Compared to our previous results, we notice that the median approach was much better in detecting outliers at the upper range of <code>happiness</code>. Because the median is not affected so much by the ‘extraordinarily happy areas of England’. Thus, the results have improved and seem more balanced. Still, one could argue that there are at least two more observations at the lower range of <code>happiness</code> that seem a little further away from the rest of the points on this S-curve. If we chose the criterion of <code>2.5 * MAD</code>, we would also capture these outliers (see <a href="#fig-MAD2-outlier-detection" class="quarto-xref">Figure&nbsp;<span>9.8</span></a>).</p>
 <div class="cell">
 <div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="09_sources_of_bias_files/figure-html/MAD2-outlier-detection-1.png" class="img-fluid figure-img" width="672"></p>
-<figcaption>Outlier detection via MAD using <code>2.5 * MAD</code> as a threshold</figcaption>
+<div id="fig-MAD2-outlier-detection" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-MAD2-outlier-detection-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="09_sources_of_bias_files/figure-html/fig-MAD2-outlier-detection-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-MAD2-outlier-detection-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;9.8: Outlier detection via MAD using <code>2.5 * MAD</code> as a threshold
+</figcaption>
 </figure>
 </div>
 </div>
 </div>
 <p>Which approach to choose very much depends on the nature of your data. For example, one consideration could be that if the median and the mean of a variable are dissimilar, choosing the median might be the better option. However, we should not forget that the outliers we need to identify will affect the mean. Hence, it appears that in many cases, the median could be the better choice. Luckily, there is yet another highly popular method based on two quartiles (rather than one, i.e.&nbsp;the median).</p>
 </section>
-<section id="sec-outliers-iqr" class="level3" data-number="9.5.2">
-<h3 data-number="9.5.2" class="anchored" data-anchor-id="sec-outliers-iqr"><span class="header-section-number">9.5.2</span> Detecting outliers using the interquartile range (IQR)</h3>
+<section id="sec-outliers-iqr" class="level3" data-number="9.6.2">
+<h3 data-number="9.6.2" class="anchored" data-anchor-id="sec-outliers-iqr"><span class="header-section-number">9.6.2</span> Detecting outliers using the interquartile range (IQR)</h3>
 <p>Another approach to classifying outliers is the use of the <em>interquartile range (IQR)</em>. The IQR is used in boxplots and creates the dots at its ends to indicate any outliers. This approach is straightforward to implement because the computation of the IQR is simple:</p>
 <div id="iqr-formula" data-align="center">
 <p><span class="math inline">\(IQR = Q_{3}-Q_{1}\)</span></p>
 </div>
 <p>Therefore, we can create new thresholds for the detection of outliers. For the IQR, it is common to use <span class="math inline">\(\pm 1.5 * IQR\)</span> as the lower and upper thresholds measured from <span class="math inline">\(Q_1\)</span> and <span class="math inline">\(Q_3\)</span> respectively. To compute the quartiles we can use the function <code>quantile()</code>, which returns <span class="math inline">\(Minimum, Q_1, Q_2, Q_3, and\ Q_4\)</span></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Compute the quartiles</span></span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>(runtime_quantiles <span class="ot">&lt;-</span> <span class="fu">quantile</span>(imdb_top_250<span class="sc">$</span>runtime_min))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Compute the quartiles</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>(happiness_quantiles <span class="ot">&lt;-</span> <span class="fu">quantile</span>(hie_2021<span class="sc">$</span>happiness))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>    0%    25%    50%    75%   100% 
- 45.00 107.00 126.00 145.75 321.00 </code></pre>
+<pre><code>   0%   25%   50%   75%  100% 
+6.760 7.335 7.470 7.610 8.160 </code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Compute the thresholds</span></span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>iqr_upper <span class="ot">&lt;-</span> runtime_quantiles[<span class="dv">4</span>] <span class="sc">+</span> <span class="fl">1.5</span> <span class="sc">*</span> <span class="fu">IQR</span>(imdb_top_250<span class="sc">$</span>runtime_min)</span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>iqr_lower <span class="ot">&lt;-</span> runtime_quantiles[<span class="dv">2</span>] <span class="sc">-</span> <span class="fl">1.5</span> <span class="sc">*</span> <span class="fu">IQR</span>(imdb_top_250<span class="sc">$</span>runtime_min)</span>
-<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Create our plot</span></span>
-<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>outlier_plot <span class="sc">+</span></span>
-<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="fu">aes</span>(<span class="at">yintercept =</span> runtime_median, <span class="at">col =</span> <span class="st">"red"</span>),</span>
-<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>             <span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
-<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="fu">aes</span>(<span class="at">yintercept =</span> iqr_upper, <span class="at">col =</span> <span class="st">"blue"</span>),</span>
-<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>             <span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
-<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="fu">aes</span>(<span class="at">yintercept =</span> iqr_lower, <span class="at">col =</span> <span class="st">"blue"</span>),</span>
-<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a>             <span class="at">show.legend =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Compute the thresholds</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>iqr_upper <span class="ot">&lt;-</span> happiness_quantiles[<span class="dv">4</span>] <span class="sc">+</span> <span class="fl">1.5</span> <span class="sc">*</span> <span class="fu">IQR</span>(hie_2021<span class="sc">$</span>happiness)</span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>iqr_lower <span class="ot">&lt;-</span> happiness_quantiles[<span class="dv">2</span>] <span class="sc">-</span> <span class="fl">1.5</span> <span class="sc">*</span> <span class="fu">IQR</span>(hie_2021<span class="sc">$</span>happiness)</span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Create our plot</span></span>
+<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a>outlier_plot <span class="sc">+</span></span>
+<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="fu">aes</span>(<span class="at">yintercept =</span> happiness_median, <span class="at">col =</span> <span class="st">"red"</span>),</span>
+<span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a>             <span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb32-9"><a href="#cb32-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="fu">aes</span>(<span class="at">yintercept =</span> iqr_upper, <span class="at">col =</span> <span class="st">"blue"</span>),</span>
+<span id="cb32-10"><a href="#cb32-10" aria-hidden="true" tabindex="-1"></a>             <span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb32-11"><a href="#cb32-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="fu">aes</span>(<span class="at">yintercept =</span> iqr_lower, <span class="at">col =</span> <span class="st">"blue"</span>),</span>
+<span id="cb32-12"><a href="#cb32-12" aria-hidden="true" tabindex="-1"></a>             <span class="at">show.legend =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="09_sources_of_bias_files/figure-html/iqr-threshold-1.png" class="img-fluid figure-img" width="672"></p>
+<div id="fig-iqr-threshold" class="quarto-figure quarto-figure-center quarto-float anchored" width="672">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-iqr-threshold-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="09_sources_of_bias_files/figure-html/fig-iqr-threshold-1.png" id="fig-iqr-threshold" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-iqr-threshold-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;9.9
+</figcaption>
 </figure>
 </div>
 </div>
 </div>
-<p>As we can tell, the IQR method detects about the same outliers for our data as the median absolute deviation (MAD) approach. The outliers we find here are the same as shown in Figure @ref(fig:a-boxplot). For our data, I would argue that the IQR and MAD method by <span class="citation" data-cites="leys2013detecting">Leys et al. (<a href="references.html#ref-leys2013detecting" role="doc-biblioref">2013</a>)</span> produced the ‘best’ selection of outliers. However, we have to acknowledge that these classifications will always be subjective because how we position the thresholds depends on the researcher’s choice. Still, the computation is standardised, and we can plausibly explain the process of identifying outliers, we just have to make it explicit to the audience of our research.</p>
+<p>As we can tell, the IQR method detects about the same outliers for our data as the median absolute deviation (MAD) approach. The outliers we find here are the same as shown in <a href="#fig-boxplot-happiness-england" class="quarto-xref">Figure&nbsp;<span>9.10</span></a> below.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>hie_2021 <span class="sc">|&gt;</span></span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> happiness)) <span class="sc">+</span></span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="fig-boxplot-happiness-england" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-boxplot-happiness-england-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="09_sources_of_bias_files/figure-html/fig-boxplot-happiness-england-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-boxplot-happiness-england-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;9.10: Outliers identified via IQR shown in boxplot
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>For our data, I would argue that the IQR and MAD method by <span class="citation" data-cites="leys2013detecting">Leys et al. (<a href="references.html#ref-leys2013detecting" role="doc-biblioref">2013</a>)</span> produced the ‘best’ selection of outliers. However, we have to acknowledge that these classifications will always be subjective because how we position the thresholds depends on the researcher’s choice. Still, the computation is standardised, and we can plausibly explain the process of identifying outliers, we just have to make it explicit to the audience of our research.</p>
 </section>
-<section id="sec-removing-or-replacing-outliers" class="level3" data-number="9.5.3">
-<h3 data-number="9.5.3" class="anchored" data-anchor-id="sec-removing-or-replacing-outliers"><span class="header-section-number">9.5.3</span> Removing or replacing outliers</h3>
-<p>Now that we have identified our outliers, we are confronted with the question of what we should do with them. Like missing data (see Chapter @ref(dealing-with-missing-data)), we can either remove them or replace them with other values. While removal is a relatively simple task, replacing it with other ‘reasonable’ values implies finding techniques to create such values. As you may remember, we were confronted with a similar problem before when we looked into missing data (Chapter @ref(dealing-with-missing-data)). The same techniques, especially multiple imputation <span class="citation" data-cites="cousineau2010outliers">(see <a href="references.html#ref-cousineau2010outliers" role="doc-biblioref">Cousineau and Chartier 2010</a>)</span>, can be used for such scenarios.</p>
-<p>Irrespective of whether we remove or replace outliers, we somehow need to single them out of the crowd. Since the IQR strategy worked well for our data, we can use the thresholds we defined before, i.e.&nbsp;<code>iqr_upper</code> and <code>iqr_lower</code>. Therefore, an observation (i.e.&nbsp;a movie) is considered an outlier if</p>
+<section id="sec-removing-or-replacing-outliers" class="level3" data-number="9.6.3">
+<h3 data-number="9.6.3" class="anchored" data-anchor-id="sec-removing-or-replacing-outliers"><span class="header-section-number">9.6.3</span> Removing or replacing outliers</h3>
+<p>Now that we have identified our outliers, we are confronted with the question of what we should do with them. Like missing data (see <a href="07_data_wrangling.html#sec-dealing-with-missing-data" class="quarto-xref"><span>Section 7.7</span></a>), we can either remove them or replace them with other values. While removal is a relatively simple task, replacing it with other ‘reasonable’ values implies finding techniques to create such values. The same methods we used for missing data, especially multiple imputation <span class="citation" data-cites="cousineau2010outliers">(see <a href="references.html#ref-cousineau2010outliers" role="doc-biblioref">Cousineau and Chartier 2010</a>)</span>, can be used for replacing outliers. Of course, changing our dataset implies we are changing our results, so it is good practice to consider your analysis with and without outliers (e.g. <span class="citation" data-cites="cohen2014applied">Cohen, West, and Aiken (<a href="references.html#ref-cohen2014applied" role="doc-biblioref">2014</a>)</span>). Consequently, running your analysis with two datasets can be a meaningful way to understand how much outliers affect your outcomes. Simply removing data without knowing how this might impact one’s results would be a poor decision. We should not forget that, especially with human participants, outliers can be genuine observations and should not simply be marginalised. If we know that our outliers are mistakes or respondents have intentionally provided wrong ratings in our dataset, we can certainly remove them. However, this is not always evident when detecting outliers. Thus, I recommend proceeding with caution when removing outliers. Besides, there are many alternatives to analysing your data, which are less biased by outliers, such as analytical tools that rely on the median instead of the mean. In this book, we primarily focus on conducting analysis without outliers. However, performing the analysis twice (with and without outliers) would be meaningful for your own research projects.</p>
+<p>Irrespective of whether we remove or replace outliers, we somehow need to single them out of the crowd. Since the IQR strategy worked well for our data, we can use the thresholds we defined before, i.e.&nbsp;<code>iqr_upper</code> and <code>iqr_lower</code>. Therefore, an observation (i.e.&nbsp;an area in England) is considered an outlier if</p>
 <ul>
 <li><p>its value lies above <code>iqr_upper</code>, or</p></li>
 <li><p>its value lies below <code>iqr_lower</code></p></li>
 </ul>
-<p>It becomes clear that we somehow need to define a condition because if it is an outlier, it should be labelled as one, but if not, then obviously we need to label the observation differently. Ideally, we want a new column in our dataset which indicates whether a movie is an outlier (i.e.&nbsp;<code>outlier == TRUE</code>) or not (<code>outlier == FALSE</code>). <em>R</em> offers a way for us to express such conditions with the function <code>ifelse()</code>. It has the following structure:</p>
+<p>It becomes clear that we somehow need to define a condition because if it is an outlier, it should be labelled as one, but if not, then obviously we need to label the observation differently. Ideally, we want a new column in our dataset which indicates whether an area in England is an outlier (i.e.&nbsp;<code>outlier == TRUE</code>) or not (<code>outlier == FALSE</code>). <em>R</em> offers a way for us to express such conditions with the function <code>ifelse()</code>. It has the following structure:</p>
 <div id="ifelse-function" data-align="center">
 <p><code>ifelse(condition, TRUE, FALSE)</code></p>
 </div>
 <p>Let’s formulate a sentence that describes our scenario as an <code>ifelse()</code> function:</p>
 <ul>
-<li><p>If a movie’s <code>runtime_min</code> is longer than <code>iqr_upper</code>, <u>or</u></p></li>
-<li><p>if a movie’s <code>runtime_min</code> is lower than <code>iqr_lower</code>,</p></li>
-<li><p>classify this movie as an outlier (i.e.&nbsp;<code>TRUE</code>),</p></li>
-<li><p>otherwise, classify this movie as not being an outlier (i.e.&nbsp;<code>FALSE</code>).</p></li>
+<li><p>If an area’s <code>happiness</code> is higher than <code>iqr_upper</code>, <u>or</u></p></li>
+<li><p>if an area’s <code>happiness</code> is lower than <code>iqr_lower</code>,</p></li>
+<li><p>classify this area as an outlier (i.e.&nbsp;<code>TRUE</code>),</p></li>
+<li><p>otherwise, classify this area as not being an outlier (i.e.&nbsp;<code>FALSE</code>).</p></li>
 </ul>
-<p>We already know from Chapter @ref(basic-computations-in-r) how to use logical and arithmetic operators. All we have to do is put them together in one function call and create a new column with <code>mutate()</code>.</p>
+<p>We already know from <a href="05_r_basics.html#sec-basic-computations-in-r" class="quarto-xref"><span>Section 5.1</span></a> how to use logical and arithmetic operators. All we have to do is put them together in one function call and create a new column with <code>mutate()</code>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>imdb_top_250 <span class="ot">&lt;-</span></span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>  imdb_top_250 <span class="sc">|&gt;</span></span>
-<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">outlier =</span> <span class="fu">ifelse</span>(runtime_min <span class="sc">&gt;</span> iqr_upper <span class="sc">|</span></span>
-<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>                            runtime_min <span class="sc">&lt;</span> iqr_lower,</span>
-<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>                          <span class="cn">TRUE</span>, <span class="cn">FALSE</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>hie_2021_outliers <span class="ot">&lt;-</span></span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>  hie_2021 <span class="sc">|&gt;</span></span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">outlier =</span> <span class="fu">ifelse</span>(happiness <span class="sc">&gt;</span> iqr_upper <span class="sc">|</span></span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>                            happiness <span class="sc">&lt;</span> iqr_lower,</span>
+<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a>                          <span class="cn">TRUE</span>, <span class="cn">FALSE</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Since we have now a classification, we can more thoroughly inspect our outliers and see which movies are the ones that are lying outside our defined norm. We can <code>arrange()</code> them by <code>runtime_min</code>.</p>
+<p>Since we have now a classification, we can more thoroughly filter for and inspect our outliers, i.e.&nbsp;we can see which areas in England are the ones that are lying outside our defined norm. We can <code>arrange()</code> our outliers by <code>happiness</code> to give the output even more meaning and improve readability</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>imdb_top_250 <span class="sc">|&gt;</span></span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(outlier <span class="sc">==</span> <span class="st">"TRUE"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(title, runtime_min, outlier) <span class="sc">|&gt;</span></span>
-<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(runtime_min)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>hie_2021_outliers <span class="sc">|&gt;</span></span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(outlier <span class="sc">==</span> <span class="st">"TRUE"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(area_name, happiness, outlier) <span class="sc">|&gt;</span></span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(happiness)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 8 × 3
-  title                       runtime_min outlier
-  &lt;chr&gt;                             &lt;dbl&gt; &lt;lgl&gt;  
-1 Sherlock Jr.                         45 TRUE   
-2 Andrei Rublev                       205 TRUE   
-3 Seven Samurai                       207 TRUE   
-4 Ben-Hur                             212 TRUE   
-5 Lawrence of Arabia                  228 TRUE   
-6 Once Upon a Time in America         229 TRUE   
-7 Gone with the Wind                  238 TRUE   
-8 Gangs of Wasseypur                  321 TRUE   </code></pre>
+<pre><code># A tibble: 9 × 3
+  area_name  happiness outlier
+  &lt;fct&gt;          &lt;dbl&gt; &lt;lgl&gt;  
+1 Colchester      6.76 TRUE   
+2 Redditch        6.84 TRUE   
+3 Norwich         6.88 TRUE   
+4 Blaby           8.03 TRUE   
+5 Ryedale         8.03 TRUE   
+6 Hambleton       8.05 TRUE   
+7 Pendle          8.1  TRUE   
+8 Lichfield       8.1  TRUE   
+9 Torridge        8.16 TRUE   </code></pre>
 </div>
 </div>
-<p>The list of movies contains some of the most iconic Hollywood films ever shown on screen. However, I think we can agree that most of them are truly outside the norm of regular movies, not just in terms of runtime.</p>
-<p>From here, it is simple to remove these movies (i.e.&nbsp;keep the movies that are not outliers) or set their values to <code>NA</code>. If we <code>replace()</code> the values with <code>NA</code>, we can continue with one of the techniques demonstrated for missing values in Chapter @ref(dealing-with-missing-data). Both approaches are shown in the following code chunk.</p>
+<p>Given that the <code>median</code> of <code>happiness</code> for this dataset is <code>7.47</code>, we can postulate that <code>Colchester</code> and <code>Redditch</code> are places in England that score considerably below the majority of the rest. However, places like <code>Torridge</code> and <code>Lichfield</code> can be considered particularly happy places in England. This list of areas in England represents to the answer to our question at the beginning of this section.</p>
+<p>From here, it is simple to remove these areas in England (i.e.&nbsp;keep the areas that are not outliers) or set their values to <code>NA</code>. If we <code>replace()</code> the values with <code>NA</code>, we can continue with one of the techniques demonstrated for missing values in <a href="07_data_wrangling.html#sec-dealing-with-missing-data" class="quarto-xref"><span>Section 7.7</span></a>. Both approaches are shown in the following code chunk.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Keep all observations but outliers</span></span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>imdb_top_250 <span class="sc">|&gt;</span></span>
-<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(outlier <span class="sc">==</span> <span class="st">"FALSE"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(title, outlier)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Keep all observations but outliers</span></span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>hie_2021_outliers <span class="sc">|&gt;</span></span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(outlier <span class="sc">==</span> <span class="st">"FALSE"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(area_name, outlier)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Replace values with NA</span></span>
-<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>imdb_top_250 <span class="sc">|&gt;</span></span>
-<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">runtime_min =</span> <span class="fu">replace</span>(runtime_min, outlier <span class="sc">==</span> <span class="st">"TRUE"</span>, <span class="cn">NA</span>)) <span class="sc">|&gt;</span></span>
-<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(title, runtime_min)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Replace values with NA</span></span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>hie_2021_outliers <span class="sc">|&gt;</span></span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">happiness =</span> <span class="fu">replace</span>(happiness, outlier <span class="sc">==</span> <span class="st">"TRUE"</span>, <span class="cn">NA</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(area_name, happiness)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 250 × 2
-   title                                         runtime_min
-   &lt;chr&gt;                                               &lt;dbl&gt;
- 1 The Shawshank Redemption                              142
- 2 The Godfather                                         175
- 3 The Dark Knight                                       152
- 4 The Godfather: Part II                                202
- 5 12 Angry Men                                           96
- 6 The Lord of the Rings: The Return of the King         201
- 7 Pulp Fiction                                          154
- 8 Schindler's List                                      195
- 9 Inception                                             148
-10 Fight Club                                            139
-# ℹ 240 more rows</code></pre>
+<pre><code># A tibble: 307 × 2
+   area_name                   happiness
+   &lt;fct&gt;                           &lt;dbl&gt;
+ 1 Hartlepool                       7.54
+ 2 Middlesbrough                    7.41
+ 3 Redcar and Cleveland             7.46
+ 4 Stockton-on-Tees                 7.23
+ 5 Darlington                       7.35
+ 6 Halton                           7.36
+ 7 Warrington                       7.38
+ 8 Blackburn with Darwen            7.36
+ 9 Blackpool                        7.43
+10 Kingston upon Hull, City of      7.38
+# ℹ 297 more rows</code></pre>
 </div>
 </div>
-<p>The <code>replace()</code> function is very intuitive to use. It first needs to know where you want to replace a value (<code>runtime_min</code>), then what the condition for replacing is (<code>outlier == "TRUE"</code>), and lastly, which value should be put instead of the original one (<code>NA</code>).</p>
+<p>The <code>replace()</code> function is very intuitive to use. It first needs to know where you want to replace a value (<code>happiness</code>), then what the condition for replacing is (<code>outlier == "TRUE"</code>), and lastly, which value should be put instead of the original one (<code>NA</code>).</p>
 </section>
-<section id="sec-concluding-remarks-outliers" class="level3" data-number="9.5.4">
-<h3 data-number="9.5.4" class="anchored" data-anchor-id="sec-concluding-remarks-outliers"><span class="header-section-number">9.5.4</span> Concluding remarks about outliers</h3>
+<section id="sec-concluding-remarks-outliers" class="level3" data-number="9.6.4">
+<h3 data-number="9.6.4" class="anchored" data-anchor-id="sec-concluding-remarks-outliers"><span class="header-section-number">9.6.4</span> Concluding remarks about outliers</h3>
 <p>As you hopefully noticed, understanding your data requires some effort, but it is important to know your data well before proceeding to any further analysis. You can experiment with different data visualisations and design them in a way that best reflects the message you want to get across. For example, because we have added a new variable that classifies outliers, we can do more with our data visualisation than before and highlight them more clearly.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>imdb_top_250 <span class="sc">|&gt;</span></span>
-<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">reorder</span>(genre_01, runtime_min),</span>
-<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>             <span class="at">y =</span> runtime_min,</span>
-<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>             <span class="at">col =</span> outlier,</span>
-<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>             <span class="at">shape =</span> outlier)</span>
-<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>         ) <span class="sc">+</span></span>
-<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
-<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">panel.background =</span> <span class="fu">element_blank</span>()) <span class="sc">+</span></span>
-<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>hie_2021_outliers <span class="sc">|&gt;</span></span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">reorder</span>(area_name, happiness),</span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>             <span class="at">y =</span> happiness,</span>
+<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a>             <span class="at">col =</span> outlier,</span>
+<span id="cb40-5"><a href="#cb40-5" aria-hidden="true" tabindex="-1"></a>             <span class="at">shape =</span> outlier)</span>
+<span id="cb40-6"><a href="#cb40-6" aria-hidden="true" tabindex="-1"></a>         ) <span class="sc">+</span></span>
+<span id="cb40-7"><a href="#cb40-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb40-8"><a href="#cb40-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">panel.background =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb40-9"><a href="#cb40-9" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.text.y =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">2</span>)) <span class="sc">+</span></span>
+<span id="cb40-10"><a href="#cb40-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -779,34 +1126,44 @@ group   2  0.8834 0.4144
 </div>
 </div>
 </div>
-<p>To round things off, let me share with you one more visualisation, which demonstrates that outliers might also have to be defined based on specific groupings of your data, e.g.&nbsp;movie genres. Thus, it might be essential to consider outliers in light of sub-samples of your data rather than the entire dataset, especially when comparing groups (see Chapter @ref(comparing-groups)).</p>
+<p>To round things off, let me share with you one more visualisation, which demonstrates that outliers might also have to be defined based on specific groupings of your data. For example, if we look at the <code>gep</code> dataset that we used before, we could compare distributions based on <code>level_of_study</code> e.g.&nbsp;<code>UG</code>, <code>PGT</code>, <code>PGR</code> or <code>Other</code>. Thus, it might be essential to consider outliers in light of sub-samples of your data rather than the entire dataset, especially when comparing groups (see <a href="11_group_comparison.html" class="quarto-xref"><span>Chapter 11</span></a>).</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co"># The wesanderson package can make your plots look more</span></span>
-<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="co"># 'Wes Anderson'</span></span>
-<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>colour_pal <span class="ot">&lt;-</span> wesanderson<span class="sc">::</span><span class="fu">wes_palette</span>(<span class="st">"Darjeeling1"</span>, <span class="dv">11</span>, <span class="at">type =</span> <span class="st">"continuous"</span>)</span>
-<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>imdb_top_250 <span class="sc">|&gt;</span></span>
-<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">reorder</span>(genre_01, runtime_min),</span>
-<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a>             <span class="at">y =</span> runtime_min,</span>
-<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a>             <span class="at">col =</span> genre_01)</span>
-<span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a>         ) <span class="sc">+</span></span>
-<span id="cb28-10"><a href="#cb28-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">alpha =</span> <span class="dv">0</span>,</span>
-<span id="cb28-11"><a href="#cb28-11" aria-hidden="true" tabindex="-1"></a>               <span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
-<span id="cb28-12"><a href="#cb28-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_jitter</span>(<span class="at">width =</span> <span class="fl">0.1</span>,</span>
-<span id="cb28-13"><a href="#cb28-13" aria-hidden="true" tabindex="-1"></a>              <span class="at">size =</span> <span class="fl">0.5</span>,</span>
-<span id="cb28-14"><a href="#cb28-14" aria-hidden="true" tabindex="-1"></a>              <span class="at">alpha =</span> <span class="fl">0.5</span>,</span>
-<span id="cb28-15"><a href="#cb28-15" aria-hidden="true" tabindex="-1"></a>              <span class="at">show.legend =</span> <span class="cn">FALSE</span></span>
-<span id="cb28-16"><a href="#cb28-16" aria-hidden="true" tabindex="-1"></a>              ) <span class="sc">+</span></span>
-<span id="cb28-17"><a href="#cb28-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> colour_pal) <span class="sc">+</span></span>
-<span id="cb28-18"><a href="#cb28-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
-<span id="cb28-19"><a href="#cb28-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">panel.background =</span> <span class="fu">element_blank</span>()) <span class="sc">+</span></span>
-<span id="cb28-20"><a href="#cb28-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">"runtime"</span>) <span class="sc">+</span></span>
-<span id="cb28-21"><a href="#cb28-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">"Genre"</span>) <span class="sc">+</span></span>
-<span id="cb28-22"><a href="#cb28-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"Distribution of movie runtimes by genre"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="co"># The wesanderson package can make your plots look more</span></span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a><span class="co"># 'Wes Anderson'</span></span>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a>colour_pal <span class="ot">&lt;-</span></span>
+<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a>  wesanderson<span class="sc">::</span><span class="fu">wes_palette</span>(<span class="st">"Darjeeling1"</span>,</span>
+<span id="cb41-5"><a href="#cb41-5" aria-hidden="true" tabindex="-1"></a>                           <span class="dv">11</span>,</span>
+<span id="cb41-6"><a href="#cb41-6" aria-hidden="true" tabindex="-1"></a>                           <span class="at">type =</span> <span class="st">"continuous"</span>)</span>
+<span id="cb41-7"><a href="#cb41-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-8"><a href="#cb41-8" aria-hidden="true" tabindex="-1"></a>gep <span class="sc">|&gt;</span></span>
+<span id="cb41-9"><a href="#cb41-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">reorder</span>(level_of_study,</span>
+<span id="cb41-10"><a href="#cb41-10" aria-hidden="true" tabindex="-1"></a>                         si_socialise_with_people_exp,</span>
+<span id="cb41-11"><a href="#cb41-11" aria-hidden="true" tabindex="-1"></a>                         <span class="at">FUN =</span> median),</span>
+<span id="cb41-12"><a href="#cb41-12" aria-hidden="true" tabindex="-1"></a>             <span class="at">y =</span> si_socialise_with_people_exp,</span>
+<span id="cb41-13"><a href="#cb41-13" aria-hidden="true" tabindex="-1"></a>             <span class="at">col =</span> level_of_study)</span>
+<span id="cb41-14"><a href="#cb41-14" aria-hidden="true" tabindex="-1"></a>         ) <span class="sc">+</span></span>
+<span id="cb41-15"><a href="#cb41-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">alpha =</span> <span class="dv">0</span>,</span>
+<span id="cb41-16"><a href="#cb41-16" aria-hidden="true" tabindex="-1"></a>               <span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb41-17"><a href="#cb41-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_jitter</span>(<span class="at">width =</span> <span class="fl">0.1</span>,</span>
+<span id="cb41-18"><a href="#cb41-18" aria-hidden="true" tabindex="-1"></a>              <span class="at">size =</span> <span class="fl">0.5</span>,</span>
+<span id="cb41-19"><a href="#cb41-19" aria-hidden="true" tabindex="-1"></a>              <span class="at">alpha =</span> <span class="fl">0.5</span>,</span>
+<span id="cb41-20"><a href="#cb41-20" aria-hidden="true" tabindex="-1"></a>              <span class="at">show.legend =</span> <span class="cn">FALSE</span></span>
+<span id="cb41-21"><a href="#cb41-21" aria-hidden="true" tabindex="-1"></a>              ) <span class="sc">+</span></span>
+<span id="cb41-22"><a href="#cb41-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> colour_pal) <span class="sc">+</span></span>
+<span id="cb41-23"><a href="#cb41-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
+<span id="cb41-24"><a href="#cb41-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">panel.background =</span> <span class="fu">element_blank</span>()) <span class="sc">+</span></span>
+<span id="cb41-25"><a href="#cb41-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">"Level of study"</span>) <span class="sc">+</span></span>
+<span id="cb41-26"><a href="#cb41-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">"Socialising with people"</span>) <span class="sc">+</span></span>
+<span id="cb41-27"><a href="#cb41-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"Distribution of 'socialising with people' in the GEP dataset"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="09_sources_of_bias_files/figure-html/final-plot-outliers-1.png" class="img-fluid figure-img" width="672"></p>
+<div id="fig-final-plot-outliers" class="quarto-figure quarto-figure-center quarto-float anchored" width="672">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-final-plot-outliers-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="09_sources_of_bias_files/figure-html/fig-final-plot-outliers-1.png" id="fig-final-plot-outliers" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-final-plot-outliers-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;9.11
+</figcaption>
 </figure>
 </div>
 </div>
@@ -817,6 +1174,9 @@ group   2  0.8834 0.4144
 <div id="ref-aguinis2013best" class="csl-entry" role="listitem">
 Aguinis, Herman, Ryan K Gottfredson, and Harry Joo. 2013. <span>“Best-Practice Recommendations for Defining, Identifying, and Handling Outliers.”</span> <em>Organizational Research Methods</em> 16 (2): 270–301.
 </div>
+<div id="ref-cohen2014applied" class="csl-entry" role="listitem">
+Cohen, Patricia, Stephen G West, and Leona S Aiken. 2014. <em>Applied Multiple Regression/Correlation Analysis for the Behavioral Sciences</em>. Psychology press.
+</div>
 <div id="ref-cousineau2010outliers" class="csl-entry" role="listitem">
 Cousineau, Denis, and Sylvain Chartier. 2010. <span>“Outliers Detection and Treatment: A Review.”</span> <em>International Journal of Psychological Research</em> 3 (1): 58–67.
 </div>
@@ -825,6 +1185,9 @@ Field, Andy. 2013. <em>Discovering Statistics Using IBM SPSS Statistics</em>. Sa
 </div>
 <div id="ref-leys2013detecting" class="csl-entry" role="listitem">
 Leys, Christophe, Christophe Ley, Olivier Klein, Philippe Bernard, and Laurent Licata. 2013. <span>“Detecting Outliers: Do Not Use Standard Deviation Around the Mean, Use Absolute Deviation Around the Median.”</span> <em>Journal of Experimental Social Psychology</em> 49 (4): 764–66.
+</div>
+<div id="ref-lohr2021sampling" class="csl-entry" role="listitem">
+Lohr, Sharon L. 2021. <em>Sampling: Design and Analysis (3rd Ed.)</em>. Chapman; Hall/CRC. <a href="https://doi.org/10.1201/9780429298899">https://doi.org/10.1201/9780429298899</a>.
 </div>
 </div>
 </section>

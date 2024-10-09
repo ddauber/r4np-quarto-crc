@@ -84,7 +84,7 @@ div.csl-indent {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./11_power_analysis.html" rel="next">
+<link href="./11_group_comparison.html" rel="next">
 <link href="./09_sources_of_bias.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -203,6 +203,12 @@ window.Quarto = {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./00_acknowledgements.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Acknowledgements</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./01_before_you_get_started.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title"><code>Readme.</code> before you get started</span></span></a>
   </div>
@@ -252,7 +258,7 @@ window.Quarto = {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./09_sources_of_bias.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Sources of bias: Outliers, normality and other ‘conundrums’</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Sources of bias: Sampling, outliers, normality and other ‘conundrums’</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -263,14 +269,14 @@ window.Quarto = {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./11_power_analysis.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Power: You either have it or you don’t</span></span></a>
+  <a href="./11_group_comparison.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Comparing groups</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./12_group_comparison.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Comparing groups</span></span></a>
+  <a href="./12_power_analysis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Power: You either have it or you don’t</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -289,12 +295,6 @@ window.Quarto = {
   <div class="sidebar-item-container"> 
   <a href="./15_next_steps.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Where to go from here: The next steps in your <em>R</em> journey</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./16_case_studies.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Case studies</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -359,18 +359,23 @@ window.Quarto = {
 </header>
 
 
-<p>Sometimes counting and measuring means, medians, and standard deviations is not enough because they are all based on a single variable. Instead, we might have questions related to the relationship of two or more variables. In this section, we will explore how correlations can (and kind of cannot - see Chapter @ref(simpsons-paradox)) provide insights into the following questions:</p>
+<p>Sometimes, counting and measuring means, medians, and standard deviations is not enough because they are all based on a single variable. Instead, we might have questions about the relationship between two or more variables. In this section, we will explore how correlations can (and kind of cannot - see <a href="#sec-simpsons-paradox" class="quarto-xref"><span>Section 10.4.3</span></a>) provide insights into the following questions:</p>
 <ul>
-<li><p>Do movie viewers agree with movie critics regarding the rating of movies?</p></li>
-<li><p>Do popular movies receive more votes from users than less popular movies?</p></li>
-<li><p>Do movies with more votes also make more money?</p></li>
+<li><p>Do people who eat healthier also feel happier?</p></li>
+<li><p>Are happier people also more satisfied with their life?</p></li>
+<li><p>Is eating healthier related to other health factors, such as life expectancy, blood pressure and overweight/obesity?</p></li>
 </ul>
-<p>There are many different ways to compute the correlation, and it partially depends on the type of data you want to relate to each other. The <em>‘Pearson’s correlation’</em> is by far the most frequently used correlation technique for normally distributed data. On the other hand, if data is not normally distributed, we can opt for the <em>‘Spearman’s rank’</em> correlation. One could argue that the relationship between these two correlations is like the mean (Pearson) to the median (Spearman). Both approaches require numeric values to be computed correctly. If our data is ordinal, or worse dichotomous (like a logical variable), we have to choose different options. Table @ref(tab:different-correlations) summarises different methods depending on data type.</p>
+<p>There are many different ways to compute the correlation, and it partially depends on the type of data you want to relate to each other. The <em>‘Pearson’s correlation’</em> is by far the most frequently used correlation technique for normally distributed data. On the other hand, if data is not normally distributed, we can opt for the <em>‘Spearman’s rank’</em> correlation. One could argue that the relationship between these two correlations is like the mean (Pearson) to the median (Spearman). Both approaches require numeric values to be computed correctly. If our data is ordinal or, worse, dichotomous (like a logical variable), we have to choose different options. <a href="#tbl-different-correlations" class="quarto-xref">Table&nbsp;<span>10.1</span></a> summarises different methods depending on the data type.</p>
+<div id="tbl-different-correlations" class="quarto-float anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-different-correlations-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;10.1: Different ways of computing correlations
+</figcaption>
+<div aria-describedby="tbl-different-correlations-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <table class="table">
-<caption>(#tab:different-correlations) Different ways of computing correlations</caption>
 <colgroup>
-<col style="width: 23%">
-<col style="width: 76%">
+<col style="width: 50%">
+<col style="width: 50%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -401,29 +406,31 @@ window.Quarto = {
 </tr>
 </tbody>
 </table>
+</div>
+</figure>
+</div>
 <p>There are many more variations of correlations, which you can explore on the <a href="https://easystats.github.io/correlation/articles/types.html" target="blank" title="website of the package">package’s website</a> we will use in this chapter: <code>correlation</code>. However, we will primarily focus on Pearson and Spearman because they are the most commonly used correlation types in academic publications to understand the relationship between two variables. In addition, we also look at <em>‘partial correlations’</em>, which allow us to introduce a third variable into this mix.</p>
 <section id="sec-plotting-correlations" class="level2" data-number="10.1">
 <h2 data-number="10.1" class="anchored" data-anchor-id="sec-plotting-correlations"><span class="header-section-number">10.1</span> Plotting correlations</h2>
-<p>Since correlations only show the relationship between two variables, we can easily put one variable on the x-axis and one on the y-axis, creating a so-called ‘scatterplot’. We used two functions to plot scatterplots before, i.e.&nbsp;<code>geom_point()</code> and <code>geom_jitter</code>. Let’s try to answer our first research question, i.e.&nbsp;whether regular movie viewers and critics (people who review movies as a profession) rate the top 250 in the same way. One assumption could be that it does not matter whether you are a regular movie viewer or someone who does it professionally. After all, we are just human beings. A counter thesis could be that critics have a different perspective on movies and might use other evaluation criteria. Either way, we first need to identify the two variables of interest:</p>
+<p>Since correlations only show the relationship between two variables, we can easily put one variable on the x-axis and one on the y-axis, creating a so-called ‘scatterplot’. We used two functions to plot scatterplots before, i.e.&nbsp;<code>geom_point()</code> and <code>geom_jitter</code>. Let’s explore our first research question: Do people who eat healthier also feel happier? One assumption might be that healthier eating habits contribute to better physical well-being, which in turn enhances happiness. However, a counter-argument could be that diet does not significantly impact happiness levels, as everyone is subject to various life circumstances that influence our mood. Either way, we first need to identify the two variables of interest, which we can find in the <code>hie_2021</code> dataset. It contains measures of national health in various areas of England collected in 2021, such as:</p>
 <ul>
-<li><p><code>imdb_rating</code> is based on IMDb users, and</p></li>
-<li><p><code>metascore</code> is based on movie critics.</p></li>
+<li><p><code>happiness</code>, which measures the average happiness of respondents when asked how they felt the day before on a scale from <code>0</code> (not at all) to <code>10</code> (completely), and</p></li>
+<li><p><code>healthy_eating</code>, which represents the percentage of adults who report eating five or more portions of fruit and vegetables on a regular day.</p></li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>imdb_top_250 <span class="sc">|&gt;</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(metascore)) <span class="sc">|&gt;</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(imdb_rating, metascore)) <span class="sc">+</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_jitter</span>() <span class="sc">+</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  see<span class="sc">::</span><span class="fu">theme_modern</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>hie_2021 <span class="sc">|&gt;</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(healthy_eating, happiness)) <span class="sc">+</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  see<span class="sc">::</span><span class="fu">theme_modern</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="10_correlations_files/figure-html/correlation-imdb-rating-metascore-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="10_correlations_files/figure-html/correlation-happiness-healthy-eating-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
-<p>The results from our scatterplot are, well, somewhat random. We can see that some movies receive high <code>imdb_rating</code>s as well as high <code>metascore</code>s. However, some movies receive high <code>imdb_rating</code>s but low <code>metascore</code>s. Overall, the points look like they are randomly scattered all over our canvas. The only visible pattern we can notice is that there are more movies at the lower end of the rating system relative to all the films in the top 250. In fact, there are only two movies that received an IMDb rating of over <code>9.0</code>. Be aware that <code>geom_jitter()</code> offsets values slightly, so it can appear as if there were more movies over <code>9.0</code>.</p>
+<p>The results from our scatterplot are, well, somewhat random. We can see that in some areas of England people report very high <code>happiness</code> scores as well as high levels of <code>healthy_eating</code>. However, some regions score high on <code>happiness</code> but low regarding <code>healthy_eating</code>. Overall, the points look like they are randomly scattered all over our canvas. The only visible pattern we can notice is that there are slightly more scores at the center of this cloud of dots than on its edges.</p>
 <p>Since correlations only explain linear relationships, a perfect correlation would be represented by a straight line. Consider the following examples of correlations:</p>
 <div class="cell">
 <div class="cell-output-display">
@@ -440,9 +447,14 @@ window.Quarto = {
 <li><p><code>0</code> defines no correlation (completely random), and</p></li>
 <li><p><code>1</code> defines a perfectly positive correlation.</p></li>
 </ul>
-<p>In other words, the further the score is away from <code>0</code>, the stronger is the relationship between variables. We also have benchmarks that we can use to assess the strength of a relationship, for example, the one by <span class="citation" data-cites="cohen1988statistical">Cohen (<a href="references.html#ref-cohen1988statistical" role="doc-biblioref">1988</a>)</span>. The strength of the relationship is also called <em>‘effect size’</em>. Table @ref(tab:effect-size-cohen) shows the relevant benchmarks. Note that effect sizes are always provided as absolute figures. Therefore, <code>-0.4</code> would also count as a moderate relationship.</p>
+<p>In other words, the further the score is away from <code>0</code>, the stronger is the relationship between variables. We also have benchmarks that we can use to assess the strength of a relationship, for example, the one by <span class="citation" data-cites="cohen1988statistical">Cohen (<a href="references.html#ref-cohen1988statistical" role="doc-biblioref">1988</a>)</span>. The strength of the relationship is also called <em>‘effect size’</em>. <a href="#tbl-effect-size-cohen" class="quarto-xref">Table&nbsp;<span>10.2</span></a> shows the relevant benchmarks. Note that effect sizes are always provided as absolute figures. Therefore, <code>-0.4</code> would also count as a moderate relationship.</p>
+<div id="tbl-effect-size-cohen" class="quarto-float anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-effect-size-cohen-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;10.2: Assessing effect size of relationships according to <span class="citation" data-cites="cohen1988statistical">Cohen (<a href="references.html#ref-cohen1988statistical" role="doc-biblioref">1988</a>)</span>.
+</figcaption>
+<div aria-describedby="tbl-effect-size-cohen-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <table class="table">
-<caption>(#tab:effect-size-cohen) Assessing effect size of relationships according to Cohen (1988)</caption>
 <thead>
 <tr class="header">
 <th>effect size</th>
@@ -468,6 +480,9 @@ window.Quarto = {
 </tr>
 </tbody>
 </table>
+</div>
+</figure>
+</div>
 </section>
 <section id="sec-computing-correlations" class="level2" data-number="10.2">
 <h2 data-number="10.2" class="anchored" data-anchor-id="sec-computing-correlations"><span class="header-section-number">10.2</span> Computing correlations</h2>
@@ -476,200 +491,160 @@ window.Quarto = {
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(correlation)</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Pearson correlation</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>imdb_top_250 <span class="sc">|&gt;</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(imdb_rating, metascore) <span class="sc">|&gt;</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>hie_2021 <span class="sc">|&gt;</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(happiness, healthy_eating) <span class="sc">|&gt;</span></span>
 <span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">correlation</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># Correlation Matrix (pearson-method)
 
-Parameter1  | Parameter2 |    r |        95% CI | t(214) |     p
-----------------------------------------------------------------
-imdb_rating |  metascore | 0.08 | [-0.06, 0.21] |   1.11 | 0.270
+Parameter1 |     Parameter2 |    r |        95% CI | t(305) |     p
+-------------------------------------------------------------------
+happiness  | healthy_eating | 0.07 | [-0.04, 0.18] |   1.24 | 0.215
 
 p-value adjustment method: Holm (1979)
-Observations: 216</code></pre>
+Observations: 307</code></pre>
 </div>
 </div>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Spearman correlation</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>imdb_top_250 <span class="sc">|&gt;</span></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(imdb_rating, metascore) <span class="sc">|&gt;</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>hie_2021 <span class="sc">|&gt;</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(happiness, healthy_eating) <span class="sc">|&gt;</span></span>
 <span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">correlation</span>(<span class="at">method =</span> <span class="st">"spearman"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># Correlation Matrix (spearman-method)
 
-Parameter1  | Parameter2 |  rho |        95% CI |        S |     p
-------------------------------------------------------------------
-imdb_rating |  metascore | 0.06 | [-0.08, 0.19] | 1.58e+06 | 0.406
+Parameter1 |     Parameter2 |  rho |        95% CI |        S |     p
+---------------------------------------------------------------------
+happiness  | healthy_eating | 0.09 | [-0.03, 0.20] | 4.41e+06 | 0.135
 
 p-value adjustment method: Holm (1979)
-Observations: 216</code></pre>
+Observations: 307</code></pre>
 </div>
 </div>
-<p>Indeed, our analysis reveals that the effect size is very small (r = 0.08 &lt; 0.1). Therefore, critics appear to rate movies differently than regular movie viewers, irrespective of which method we use. This mistmatch of ratings triggers an interesting follow-up question: Which movie is the most controversial one, i.e.&nbsp;for which movie is the difference between <code>imdb_rating</code> and <code>metascore</code> the biggest?</p>
-<p>We can answer this question with the tools we already know. We create a new variable to subtract the <code>metascore</code> from the <code>imdb_rating</code> and plot it. We have to make sure both scales are the same length. The variable <code>imdb_rating</code> ranges from 0-10, but the <code>metascore</code> ranges from 0-100. I used the percentile score instead by dividing the scores by 10 and 100, respectively. Since plotting 250 movies would have been too much and would also not help us find the answer to our question, I chose arbitrary values to pick only those movies with the highest differences in scores. Feel free to adjust the <code>filter()</code> to your liking to see more or fewer movies. While this plot requires much more coding than previous ones, it looks nicer and demonstrates how many of the functions we have learned so far can be combined to create unique visualisations of your data.</p>
+<p>Indeed, our analysis reveals that the effect size is very small (r = 0.07 &lt; 0.1). Therefore, <code>healthy_eating</code>, seems to not make us happier. In all fairness, the foods that make us smile are often not fruits and veggies, but other, more guilty, pleasures.</p>
+<p>Another question we posed at the beginning was: Are people who are happier also more satisfied with their life? Our intuition might say ‘yes’. A person who consistently feels happy is more likely to assess their overall life positively, because their day-to-day experiences are enjoyable. Let’s create another scatterplot to find out.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>plot_data <span class="ot">&lt;-</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  imdb_top_250 <span class="sc">|&gt;</span></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">r_diff =</span> imdb_rating <span class="sc">/</span> <span class="dv">10</span> <span class="sc">-</span> metascore <span class="sc">/</span> <span class="dv">100</span>) <span class="sc">|&gt;</span></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(r_diff) <span class="sc">&amp;</span> r_diff <span class="sc">&gt;=</span> <span class="fl">0.25</span> <span class="sc">|</span> r_diff <span class="sc">&lt;=</span> <span class="sc">-</span><span class="fl">0.165</span>)</span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>plot_data <span class="sc">|&gt;</span></span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">reorder</span>(title, r_diff), <span class="at">y =</span> r_diff, <span class="at">label =</span> title)) <span class="sc">+</span></span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Colour bars based on the value of 'r_diff'</span></span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="fu">aes</span>(<span class="at">fill =</span> <span class="fu">ifelse</span>(r_diff <span class="sc">&gt;</span> <span class="dv">0</span>, <span class="st">"Viewers"</span>, <span class="st">"Critics"</span>))) <span class="sc">+</span></span>
-<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Add movie titles</span></span>
-<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">x =</span> title,</span>
-<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>                <span class="at">y =</span> <span class="dv">0</span>,</span>
-<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>                <span class="at">label =</span> title),</span>
-<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>            <span class="at">size =</span> <span class="fl">2.5</span>,</span>
-<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>            <span class="co"># Align the labels of the plot</span></span>
-<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>            <span class="at">hjust =</span> <span class="fu">ifelse</span>(plot_data<span class="sc">$</span>r_diff <span class="sc">&gt;=</span> <span class="dv">0</span>, <span class="st">"right"</span>, <span class="st">"left"</span>),</span>
-<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>            <span class="at">nudge_y =</span> <span class="fu">ifelse</span>(plot_data<span class="sc">$</span>r_diff <span class="sc">&gt;=</span> <span class="dv">0</span>, <span class="sc">-</span><span class="fl">0.008</span>, <span class="fl">0.008</span>)</span>
-<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>            ) <span class="sc">+</span></span>
-<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
-<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Cleaning up the plot to make it look more readable and colourful</span></span>
-<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"#FFCE7D"</span>, <span class="st">"#7DC0FF"</span>)) <span class="sc">+</span></span>
-<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_void</span>() <span class="sc">+</span></span>
-<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.title =</span> <span class="fu">element_blank</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>hie_2021 <span class="sc">|&gt;</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> life_satisfaction, <span class="at">y =</span> happiness)) <span class="sc">+</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="10_correlations_files/figure-html/discrepancy-movie-ratings-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="10_correlations_files/figure-html/happiness-vs-life-satisfaction-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
-<p>The blue bars reflect movies that were rated much higher by regular viewers than critics. The opposite is true for the yellow bars, i.e.&nbsp;movies that were favoured by critics.</p>
-<p>Another question we posed at the beginning was: Do higher-ranked movies receive more votes from users than lower-ranked ones? Our intuition might say ‘yes’. If movies are ranked higher, they are likely seen by more people, which makes them more popular. Consequently, if more people have seen a movie, it is more likely they might vote for this movie. For lower ranked movies, the opposite should be true. Let’s create another scatterplot to find out.</p>
+<p>The scatterplot shows a somewhat positive trend which suggests that we are right: Higher <code>happiness</code> is linked to higher <code>life_satisfaction</code>. Often, it can be tough to see the trend. To improve our plot, we can use the function <code>geom_smooth()</code>, which can help us draw a straight line that best fits our data points. We need to set the <code>method</code> for drawing the line to <code>lm</code>, which stands for ‘linear model’. Remember, correlations assume a linear relationship between two variables, i.e.&nbsp;we model a linear relationship in our scatterplot. As mentioned before, the stronger the relationship the closer each dot in the plot will be to the red line.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>imdb_top_250 <span class="sc">|&gt;</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> imdb_rating, <span class="at">y =</span> votes)) <span class="sc">+</span></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_jitter</span>() <span class="sc">+</span></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Adjust the labels of the y-axis</span></span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">labels =</span> scales<span class="sc">::</span><span class="fu">label_number</span>(<span class="at">big.mark =</span> <span class="st">","</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>hie_2021 <span class="sc">|&gt;</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> life_satisfaction, <span class="at">y =</span> happiness)) <span class="sc">+</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>,</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>              <span class="at">formula =</span> y <span class="sc">~</span> x,</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>              <span class="at">se =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>              <span class="at">col =</span> <span class="st">"red"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="10_correlations_files/figure-html/ratings-vs-votes-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="10_correlations_files/figure-html/happiness-vs-life-satisfaction-regression-line-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
-<p>The last line of code helps to make the labels on the y-axis more readable. The numbers are in the millions, and it helps to have the indicators present using <code>label_number()</code> from the <code>scales</code> package.</p>
-<p>The scatterplot shows a somewhat positive trend. Often, it can be tough to see the trend. To improve our plot, we can use the function <code>geom_smooth()</code>, which can help us draw a straight line that best fits our data points. We need to set the <code>method</code> for drawing the line to <code>lm</code>, which stands for ‘linear model’. Remember, correlations assume a linear relationship between two variables.</p>
+<p>To find a definitive answer to this research question we can compute the correlation for both variables.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>imdb_top_250 <span class="sc">|&gt;</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> imdb_rating, <span class="at">y =</span> votes)) <span class="sc">+</span></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_jitter</span>() <span class="sc">+</span></span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>,</span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>              <span class="at">formula =</span> y <span class="sc">~</span> x,</span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>              <span class="at">se =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>              <span class="at">col =</span> <span class="st">"red"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="10_correlations_files/figure-html/ratings-vs-votes-regression-line-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-<p>Another problem we face with this plot (and correlations) are extreme values, i.e.&nbsp;outliers. We already know that outliers tend to cause trouble for our analysis (see Chapter @ref(dealing-with-outliers)), and in correlations, they can affect the strength of relationships. However, the differences are very significant if we compute the Pearson correlation with and without outliers. Be aware that since we work with two variables simultaneously, we should consider outliers in both. The function <code>filter()</code> will have to include four conditions.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># The correlation with outliers</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>imdb_top_250 <span class="sc">|&gt;</span></span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(imdb_rating, votes) <span class="sc">|&gt;</span></span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">correlation</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>hie_2021 <span class="sc">|&gt;</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(life_satisfaction, happiness) <span class="sc">|&gt;</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">correlation</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># Correlation Matrix (pearson-method)
 
-Parameter1  | Parameter2 |    r |       95% CI | t(248) |         p
--------------------------------------------------------------------
-imdb_rating |      votes | 0.59 | [0.51, 0.67] |  11.57 | &lt; .001***
+Parameter1        | Parameter2 |    r |       95% CI | t(305) |         p
+-------------------------------------------------------------------------
+life_satisfaction |  happiness | 0.67 | [0.60, 0.73] |  15.73 | &lt; .001***
 
 p-value adjustment method: Holm (1979)
-Observations: 250</code></pre>
+Observations: 307</code></pre>
 </div>
 </div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Compute quartiles</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>votes_quantiles <span class="ot">&lt;-</span> <span class="fu">quantile</span>(imdb_top_250<span class="sc">$</span>votes)</span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>rating_quantiles <span class="ot">&lt;-</span> <span class="fu">quantile</span>(imdb_top_250<span class="sc">$</span>imdb_rating)</span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Define outliers</span></span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>votes_out_upper <span class="ot">&lt;-</span> votes_quantiles[<span class="dv">4</span>] <span class="sc">+</span> <span class="fl">1.5</span> <span class="sc">*</span> <span class="fu">IQR</span>(imdb_top_250<span class="sc">$</span>votes)</span>
-<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>votes_out_lower <span class="ot">&lt;-</span> votes_quantiles[<span class="dv">2</span>] <span class="sc">-</span> <span class="fl">1.5</span> <span class="sc">*</span> <span class="fu">IQR</span>(imdb_top_250<span class="sc">$</span>votes)</span>
-<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>rating_out_upper <span class="ot">&lt;-</span> rating_quantiles[<span class="dv">4</span>] <span class="sc">+</span> <span class="fl">1.5</span> <span class="sc">*</span> <span class="fu">IQR</span>(imdb_top_250<span class="sc">$</span>imdb_rating)</span>
-<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>rating_out_lower <span class="ot">&lt;-</span> rating_quantiles[<span class="dv">2</span>] <span class="sc">-</span> <span class="fl">1.5</span> <span class="sc">*</span> <span class="fu">IQR</span>(imdb_top_250<span class="sc">$</span>imdb_rating)</span>
-<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Remove outliers</span></span>
-<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>movies_no_out <span class="ot">&lt;-</span></span>
-<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>  imdb_top_250 <span class="sc">|&gt;</span></span>
-<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(votes <span class="sc">&lt;=</span> votes_out_upper <span class="sc">&amp;</span></span>
-<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a>           votes <span class="sc">&gt;=</span> votes_out_lower <span class="sc">&amp;</span></span>
-<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a>           imdb_rating <span class="sc">&lt;=</span> rating_out_upper <span class="sc">&amp;</span></span>
-<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a>           imdb_rating <span class="sc">&gt;=</span> rating_out_lower)</span>
-<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a><span class="co"># The correlation without outliers (based on 1.5 * IQR)</span></span>
-<span id="cb11-21"><a href="#cb11-21" aria-hidden="true" tabindex="-1"></a>movies_no_out <span class="sc">|&gt;</span></span>
-<span id="cb11-22"><a href="#cb11-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(votes <span class="sc">&lt;=</span> votes_out_upper <span class="sc">&amp;</span></span>
-<span id="cb11-23"><a href="#cb11-23" aria-hidden="true" tabindex="-1"></a>           votes <span class="sc">&gt;=</span> votes_out_lower <span class="sc">&amp;</span></span>
-<span id="cb11-24"><a href="#cb11-24" aria-hidden="true" tabindex="-1"></a>           imdb_rating <span class="sc">&lt;=</span> rating_out_upper <span class="sc">&amp;</span></span>
-<span id="cb11-25"><a href="#cb11-25" aria-hidden="true" tabindex="-1"></a>           imdb_rating <span class="sc">&gt;=</span> rating_out_lower) <span class="sc">|&gt;</span></span>
-<span id="cb11-26"><a href="#cb11-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(imdb_rating, votes) <span class="sc">|&gt;</span></span>
-<span id="cb11-27"><a href="#cb11-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">correlation</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># Correlation Matrix (pearson-method)
-
-Parameter1  | Parameter2 |    r |       95% CI | t(238) |         p
--------------------------------------------------------------------
-imdb_rating |      votes | 0.43 | [0.32, 0.53] |   7.41 | &lt; .001***
-
-p-value adjustment method: Holm (1979)
-Observations: 240</code></pre>
-</div>
-</div>
-<p>While both correlations are highly significant (<span class="math inline">\(p &lt; 0.01\)</span>), the drop in <code>r</code> from <code>0.59</code> to <code>0.43</code> is substantial. When we plot the data again, we can see that the dots are fairly randomly distributed across the plotting area. Thanks to <code>geom_smooth</code> we get an idea of a slight positive relationship between these two variables.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>movies_no_out <span class="sc">|&gt;</span></span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> imdb_rating, <span class="at">y =</span> votes)) <span class="sc">+</span></span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_jitter</span>() <span class="sc">+</span></span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>,</span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>              <span class="at">formula =</span> y <span class="sc">~</span> x,</span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>              <span class="at">se =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>              <span class="at">col =</span> <span class="st">"red"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="10_correlations_files/figure-html/scatterplot-no-outliers-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-<p>In conclusion, while there is some relationship between the rating and the number of votes, it is by far not as strong as we might have thought, especially after removing outliers, which had a considerable bearing on the effect size.</p>
+<p>With an <code>r</code> of <code>0.67</code>, we did not only find a positive relationship, but one that is considered <em>large</em>, according to Cohen (1988).</p>
 </section>
 <section id="sec-significance" class="level2" data-number="10.3">
 <h2 data-number="10.3" class="anchored" data-anchor-id="sec-significance"><span class="header-section-number">10.3</span> Significance: A way to help you judge your findings</h2>
-<p>One of the most common pitfalls of novice statisticians is the interpretation of what counts as significant and not significant. Most basic tests offer a <em>‘p value’</em>, which stands for <em>‘probability value’</em>. I referred to this value multiple times in this book already. The <code>p</code>-value can range from 1 (for 100%) to 0 (for 0%) and implies:</p>
+<p>One of the most common pitfalls of novice statisticians is the interpretation of what counts as significant and not significant. Most basic tests offer a <em>‘p value’</em>, which stands for <em>‘probability value’</em>. I have referred to this value multiple times in this book already, but did not thoroughly explain why it is important.</p>
+<p>To understand p-values and significance, we need to briefly discuss <em>hypotheses</em>. A hypothesis is an assumption we make about the data, such as whether <code>healthy_eating</code> leads to more <code>happiness</code> (as in <a href="#sec-computing-correlations" class="quarto-xref"><span>Section 10.2</span></a>). In contrast, the null hypothesis is a special type of hypothesis that assumes that no effect or relationship exists between variables, i.e.&nbsp;the opposite of what we are testing. When you read that a hypothesis has been “rejected” or “accepted,” it is often the null hypothesis being tested. The p-value helps determine whether we should reject or retain the null hypothesis based on the data.</p>
+<p>The <code>p</code>-value can range from 1 (for 100%) to 0 (for 0%) and helps us assess whether to accept or reject the null hypothesis:</p>
 <ul>
-<li><p><span class="math inline">\(p = 1\)</span>, there is a 100% chance that the result is a pure coincidence</p></li>
-<li><p><span class="math inline">\(p = 0\)</span>, there is a 0% chance that the result is a pure coincidence, i.e.&nbsp;we can be certain this is not just luck.</p></li>
+<li><p><span class="math inline">\(p = 1\)</span>, there is a 100% probability that the result is due to pure chance, supporting (accepting) the null hypothesis.</p></li>
+<li><p><span class="math inline">\(p = 0\)</span>, there is a 0% probability that the result is due to pure chance, suggesting that the null hypothesis has to be rejected.</p></li>
 </ul>
-<p>Technically, we would not find that <code>p</code> is ever truly zero and instead denote very small <code>p</code>-values with <code>p &lt; 0.01</code> or even <code>p &lt; 0.001</code>.</p>
-<p>There are also commonly considered thresholds for the <code>p</code>-value:</p>
+<p>Technically, we would not find that <code>p</code> is ever truly zero and instead denote very small <code>p</code>-values with <code>p &lt; 0.01</code> or even <code>p &lt; 0.001</code>, indicating that our null hypothesis is unlikely to be true.</p>
+<p>There are also commonly considered and accepted thresholds for the <code>p</code>-value:</p>
 <ul>
-<li><p><span class="math inline">\(p &gt; 0.05\)</span>, the result is not significant. There is a chance of +5% that our finding is a pure coincidence.</p></li>
-<li><p><span class="math inline">\(p \leq 0.05\)</span> , the result is significant.</p></li>
+<li><p><span class="math inline">\(p &gt; 0.05\)</span>, the result is not significant.</p></li>
+<li><p><span class="math inline">\(p \leq 0.05\)</span>, the result is significant, i.e.&nbsp;there is less than a 5% chance that the null hypothesis should have been accepted.</p></li>
 <li><p><span class="math inline">\(p \leq 0.01\)</span>, the result is highly significant.</p></li>
 </ul>
-<p>We will cover more about the <code>p</code>-value in Chapter @ref(comparing-groups) and Chapter @ref(regression). For now, it is important to know that a significant correlation is one that we should look at more closely. Usually, correlations that are not significant suffer from small effect sizes. However, different samples can lead to different effect sizes and different significant levels. Consider the following examples:</p>
+<p>Most frequently, confusion about the p-value emerges because we test FOR the null hypothesis and not what we are actually interested in.Returning to our example of eating healthy and its impact on happiness, we would first formulate our hypothesis and the null hypothesis:</p>
+<ul>
+<li><p>Hypothesis (<span class="math inline">\(H_1\)</span>): Healthy eating and happiness are significantly positively related to each other.</p></li>
+<li><p>Null Hypothesis (<span class="math inline">\(H_0\)</span>): There is no significant relationship between healthy eating and happiness.</p></li>
+</ul>
+<p>Based on our research question, we hope to accept our hypothesis and, therefore, reject the null hypothesis. Hardly ever will you find that researchers are interested in not finding relationships/effects in their data. Consequently, a <em>significant</em> p-value would tell us to reject the null hypothesis and accept our hypothesis.</p>
+<p>Let’s revisit the results from our earlier analysis where we performed a Pearson correlation to test our assumption.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Pearson correlation</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>hie_2021 <span class="sc">|&gt;</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(happiness, healthy_eating) <span class="sc">|&gt;</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">correlation</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># Correlation Matrix (pearson-method)
+
+Parameter1 |     Parameter2 |    r |        95% CI | t(305) |     p
+-------------------------------------------------------------------
+happiness  | healthy_eating | 0.07 | [-0.04, 0.18] |   1.24 | 0.215
+
+p-value adjustment method: Holm (1979)
+Observations: 307</code></pre>
+</div>
+</div>
+<p>Besides the correlation coefficient (<code>r</code>), we also find <span class="math inline">\(t_{(305)} = 1.24\)</span>, which is the test statistic. The test statistic helps us determine if our data shows something unusual based on our hypothesis. A test statistic close to <code>0</code> suggests that our data is consistent with the null hypothesis, i.e.&nbsp;no effect/relationship. The further the test statistic moves from <code>0</code>, the more evidence we have against the null hypothesis.</p>
+<p>In our analysis of the relationship between <code>happiness</code> and <code>healthy_eating</code>, we obtained a p-value of <code>0.215</code>. This indicates that there is a 21.5% probability of finding a t-value of <code>1.24</code> or or larger if the null hypothesis is true. You probably agree that these are not good odds. Since this p-value is greater than the conventional significance level of <span class="math inline">\(p \leq 0.05\)</span> we do not reject the null hypothesis. This means we do not have sufficient evidence to conclude that a significant relationship exists between <code>happiness</code> and <code>healthy_eating</code>.</p>
+<p>Lastly, I also want to visually explain what the test statistic is and how it relates to p-values. We already learned about the normal distribution, as such, the visualisation in <a href="#fig-null-hypothesis-testing-plot" class="quarto-xref">Figure&nbsp;<span>10.1</span></a> will look familiar.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-null-hypothesis-testing-plot" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-null-hypothesis-testing-plot-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="10_correlations_files/figure-html/fig-null-hypothesis-testing-plot-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-null-hypothesis-testing-plot-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;10.1: t-Distribution with test statistic
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>What we can see here is the distribution of test statistic scores (t-values) related to our correlation analysis. We can see that all t-values that fall within the blue area of the distribution would not count as significantly different from the null hypothesis, which means we have to accept that there is no effect/relationship to be found. However, if the t-value falls into one of the two red areas, we can reject the null hypothesis and be excited that the effect/relationship we found is <em>significant</em>.</p>
+<p>While we clarified how the t-value is related to the p-value, you might still be confused how these two values relate to the correlation coefficient (<code>r</code>) in our correlation results. The answer is fairly simple: we need <code>r</code> to compute our t-value. The mathematical formula is as follows:</p>
+<p><span class="math display">\[
+t = \frac{r \sqrt{n - 2}}{\sqrt{1 - r^2}}
+\]</span></p>
+<p>With this knowledge, we can reproduce <span class="math inline">\(t_{(305)} = 1.24\)</span> writing the following lines of code:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Define the correlation coefficient and sample size</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>r <span class="ot">&lt;-</span> <span class="fl">0.07099542</span> <span class="co"># not rounded</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">307</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate the t-value</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>t_value <span class="ot">&lt;-</span> (r <span class="sc">*</span> <span class="fu">sqrt</span>(n <span class="sc">-</span> <span class="dv">2</span>)) <span class="sc">/</span> <span class="fu">sqrt</span>(<span class="dv">1</span> <span class="sc">-</span> r<span class="sc">^</span><span class="dv">2</span>)</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>t_value</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1.243018</code></pre>
+</div>
+</div>
+<p>We will cover more about the <code>p</code>-value in <a href="11_group_comparison.html" class="quarto-xref"><span>Chapter 11</span></a> and <a href="13_regressions.html" class="quarto-xref"><span>Chapter 13</span></a>. For now, it is important to know that a significant correlation is one that we should look at more closely. Usually, correlations that are not significant suffer from small effect sizes. However, different samples can lead to different effect sizes and significance levels. Consider the following examples:</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code># Correlation Matrix (pearson-method)
@@ -692,64 +667,59 @@ p-value adjustment method: Holm (1979)
 Observations: 12</code></pre>
 </div>
 </div>
-<p>In both examples <span class="math inline">\(r = 0.77\)</span>, but the sample sizes are different (<code>4</code> vs <code>12</code>), and the <code>p</code>-values differ. In the first example, <span class="math inline">\(p = 0.225\)</span>, which means the relationship is not significant, while in the second example, we find that <span class="math inline">\(p &lt; 0.01\)</span> and is therefore highly significant. As a general rule, the bigger the sample, the more likely we find significant results, even though the effect size is small. Therefore, it is crucial to interpret correlations base on at least three factors:</p>
+<p>In both examples <span class="math inline">\(r = 0.77\)</span>, but the sample sizes are different (<code>4</code> vs <code>12</code>), and the <code>p</code>-values differ. In the first example, <span class="math inline">\(p = 0.225\)</span>, which means the relationship is not significant, while in the second example, we find that <span class="math inline">\(p &lt; 0.01\)</span> and is, therefore, highly significant. As a general rule, the bigger the sample, the more likely we find significant results, even though the effect size is small. Therefore, it is crucial to interpret correlations based on at least three factors:</p>
 <ul>
 <li><p>the <code>p</code>-value, i.e.&nbsp;significance level,</p></li>
 <li><p>the <code>r</code>-value, i.e.&nbsp;the effect size, and</p></li>
-<li><p>the sample size.</p></li>
+<li><p>the <code>n</code>, i.e.&nbsp;the sample size</p></li>
 </ul>
 <p>The interplay of all three can help determine whether a relationship is important. Therefore, when we include correlation tables in publications, we have to provide information about all three indicators.</p>
-<p>It is common that we do not only compute correlations for two variables at a time. Instead, we can do this for multiple variables simultaneously.</p>
+<p>Let’s put all this information into practice and investigate our third research question, which asks whether eating healthy relates to other health factors such as life expectancy, blood pressure and overweight/obesity. While we could compute three correlations independently to find an answer to our question, it is much more common to include multiple variables simultaneously and look at the results conjointly.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>imdb_top_250 <span class="sc">|&gt;</span></span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(imdb_rating, metascore, year, votes, gross_in_m) <span class="sc">|&gt;</span></span>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>hie_2021 <span class="sc">|&gt;</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(healthy_eating, life_expectancy, high_blood_pressure, overweight_and_obesity_in_adults) <span class="sc">|&gt;</span></span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">correlation</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># Correlation Matrix (pearson-method)
 
-Parameter1  | Parameter2 |     r |         95% CI |     t |  df |         p
----------------------------------------------------------------------------
-imdb_rating |  metascore |  0.08 | [-0.06,  0.21] |  1.11 | 214 | 0.539    
-imdb_rating |       year |  0.03 | [-0.10,  0.15] |  0.42 | 248 | 0.678    
-imdb_rating |      votes |  0.59 | [ 0.51,  0.67] | 11.57 | 248 | &lt; .001***
-imdb_rating | gross_in_m |  0.21 | [ 0.07,  0.33] |  3.07 | 213 | 0.010**  
-metascore   |       year | -0.41 | [-0.52, -0.30] | -6.63 | 214 | &lt; .001***
-metascore   |      votes | -0.25 | [-0.37, -0.12] | -3.76 | 214 | 0.001**  
-metascore   | gross_in_m | -0.13 | [-0.27,  0.01] | -1.83 | 193 | 0.207    
-year        |      votes |  0.37 | [ 0.26,  0.47] |  6.29 | 248 | &lt; .001***
-year        | gross_in_m |  0.36 | [ 0.23,  0.47] |  5.58 | 213 | &lt; .001***
-votes       | gross_in_m |  0.56 | [ 0.46,  0.64] |  9.79 | 213 | &lt; .001***
+Parameter1          |                       Parameter2 |     r |         95% CI | t(305) |         p
+----------------------------------------------------------------------------------------------------
+healthy_eating      |                  life_expectancy |  0.70 | [ 0.64,  0.75] |  17.14 | &lt; .001***
+healthy_eating      |              high_blood_pressure | -0.05 | [-0.16,  0.06] |  -0.85 | 0.395    
+healthy_eating      | overweight_and_obesity_in_adults | -0.45 | [-0.54, -0.36] |  -8.85 | &lt; .001***
+life_expectancy     |              high_blood_pressure | -0.08 | [-0.19,  0.03] |  -1.45 | 0.295    
+life_expectancy     | overweight_and_obesity_in_adults | -0.56 | [-0.63, -0.48] | -11.81 | &lt; .001***
+high_blood_pressure | overweight_and_obesity_in_adults |  0.10 | [-0.01,  0.21] |   1.76 | 0.237    
 
 p-value adjustment method: Holm (1979)
-Observations: 195-250</code></pre>
+Observations: 307</code></pre>
 </div>
 </div>
-<p>If you have seen correlation tables before, you might find that <code>correlation()</code> does not produce the classic table by default. If you want it to look like the tables in publications, which are more compact but offer less information, you can use the function <code>summary()</code>.</p>
+<p>If you have seen correlation tables before, you might find that <code>correlation()</code> does not produce the classic table by default. If you want it to look like the tables in publications, which are more compact but offer less information, you can use the function <code>summary()</code>. Which one you use it entirely up to you (or your supervisor).</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>imdb_top_250 <span class="sc">|&gt;</span></span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(imdb_rating, metascore, year, votes, gross_in_m) <span class="sc">|&gt;</span></span>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>hie_2021 <span class="sc">|&gt;</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(healthy_eating, life_expectancy, high_blood_pressure, overweight_and_obesity_in_adults) <span class="sc">|&gt;</span></span>
 <span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">correlation</span>() <span class="sc">|&gt;</span></span>
 <span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summary</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># Correlation Matrix (pearson-method)
 
-Parameter   | gross_in_m |   votes |     year | metascore
----------------------------------------------------------
-imdb_rating |     0.21** | 0.59*** |     0.03 |      0.08
-metascore   |      -0.13 | -0.25** | -0.41*** |          
-year        |    0.36*** | 0.37*** |          |          
-votes       |    0.56*** |         |          |          
+Parameter           | overweight_and_obesity_in_adults | high_blood_pressure | life_expectancy
+----------------------------------------------------------------------------------------------
+healthy_eating      |                         -0.45*** |               -0.05 |         0.70***
+life_expectancy     |                         -0.56*** |               -0.08 |                
+high_blood_pressure |                             0.10 |                     |                
 
 p-value adjustment method: Holm (1979)</code></pre>
 </div>
 </div>
-<p>This table answers our final question, i.e.&nbsp;do movies with more votes earn more money. It appears as if this is true, because <span class="math inline">\(r = 0.56\)</span> and <span class="math inline">\(p &lt; 0.001\)</span>. In the classic correlation table, you often see <code>*</code>. These stand for the different significant levels:</p>
+<p>This table provides a clear answer to our final question. While <code>healthy_eating</code> positively relates to <code>life_expectancy</code> (<span class="math inline">\(r = 0.70\)</span>, <span class="math inline">\(p &lt;0.001\)</span>) and negatively to <code>overweight_and_obesity_in_adults</code> (<span class="math inline">\(r = -0.45\)</span>, <span class="math inline">\(p &lt;0.001\)</span>), it does not correlate with <code>high_blood_pressure</code> (<span class="math inline">\(r = 0.05\)</span>, <span class="math inline">\(p &lt;0.395\)</span>). In the classic correlation table, you often see <code>*</code>. These stand for the different significant levels:</p>
 <ul>
 <li><p><code>*</code>, i.e.&nbsp;<span class="math inline">\(p &lt; 0.05\)</span></p></li>
 <li><p><code>**</code>, i.e.&nbsp;<span class="math inline">\(p &lt; 0.01\)</span></p></li>
 <li><p><code>***</code>, i.e.&nbsp;<span class="math inline">\(p &lt; 0.001\)</span> (you might find some do not use this as a separate level)</p></li>
 </ul>
-<p>In short, the more <code>*</code> there are attached to each value, the more significant a result. Therefore, we likely find the same relationships in newly collected data if there are many <code>*</code>.</p>
+<p>In short, the more <code>*</code> there are attached to each value, the more significant a result. Therefore, we likely find the same relationships in newly collected data if there are many <code>*</code> and we can trust our findings.</p>
 </section>
 <section id="sec-limitations-of-correlations" class="level2" data-number="10.4">
 <h2 data-number="10.4" class="anchored" data-anchor-id="sec-limitations-of-correlations"><span class="header-section-number">10.4</span> Limitations of correlations</h2>
@@ -761,59 +731,60 @@ p-value adjustment method: Holm (1979)</code></pre>
 </ul>
 <section id="sec-correlations-are-not-causal-relationships" class="level3" data-number="10.4.1">
 <h3 data-number="10.4.1" class="anchored" data-anchor-id="sec-correlations-are-not-causal-relationships"><span class="header-section-number">10.4.1</span> Correlations are not causal relationships</h3>
-<p>Correlations do not offer insights into causality, i.e.&nbsp;whether a change in one variable causes change in the other variable. Correlations only provide insights into whether these two variables tend to change when one of them changes. Still, sometimes we can infer such causality by the nature of the variables. For example, in countries with heavy rain, more umbrellas are sold. Buying more umbrellas will not cause more rain, but if there is more rain in a country, we rightly assume a higher demand for umbrellas. If we can theorise the relationship between variables, we would rather opt for a regression model instead of a correlation (see Chapter @ref(regression)).</p>
+<p>Correlations do not offer insights into causality, i.e.&nbsp;whether a change in one variable causes change in the other variable. Correlations only provide insights into whether these two variables tend to change when one of them changes. Still, sometimes we can infer such causality by the nature of the variables. For example, in countries with heavy rain, more umbrellas are sold. Buying more umbrellas will not cause more rain, but if there is more rain in a country, we rightly assume a higher demand for umbrellas. If we can theorise the relationship between variables, we would rather opt for a regression model instead of a correlation (see <a href="13_regressions.html" class="quarto-xref"><span>Chapter 13</span></a>).</p>
 </section>
 <section id="sec-correlations-can-be-spurious" class="level3" data-number="10.4.2">
 <h3 data-number="10.4.2" class="anchored" data-anchor-id="sec-correlations-can-be-spurious"><span class="header-section-number">10.4.2</span> Correlations can be spurious</h3>
-<p>Just because we find a relationship between two variables does not necessarily mean that they are truly related. Instead, it might be possible that a third variable is the reason for the relationship. We call relationships between variables that are caused by a third variable <em>‘spurious correlations’</em>. This third variable can either be part of our dataset or even something we have not measured at all. The latter case would make it impossible to investigate the relationship further. However, we can always test whether some of our variables affect the relationship between the two variables of interest. This can be done by using <em>partial correlations</em>. A <em>partial correlation</em> returns the relationship between two variables minus the relationship to a third variable. Figure @ref(fig:illustration-spurious-correlation) depicts this visually. While <code>a</code> and <code>b</code> appear to be correlated, the correlation might only exist because they correlate with <code>x</code>.</p>
+<p>Just because we find a relationship between two variables does not necessarily mean that they are truly related. Instead, it might be possible that a third variable is the reason for the relationship. We call relationships between variables that are caused by a third variable <em>‘spurious correlations’</em>. This third variable can either be part of our dataset or even something we have not measured at all. The latter case would make it impossible to investigate the relationship further. However, we can always test whether some of our variables affect the relationship between the two variables of interest. This can be done by using <em>partial correlations</em>. A <em>partial correlation</em> returns the relationship between two variables minus the relationship to a third variable. <a href="#fig-illustration-spurious-correlation" class="quarto-xref">Figure&nbsp;<span>10.2</span></a> depicts this visually. While <code>a</code> and <code>b</code> appear to be correlated, the correlation might only exist because they correlate with <code>x</code>.</p>
 <div id="fig-illustration-spurious-correlation" class="quarto-figure quarto-figure-center quarto-float anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-illustration-spurious-correlation-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="./images/chapter_09_img/spurious-correlation.png" class="img-fluid figure-img">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-illustration-spurious-correlation-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;10.1: Illustration of a spurious correlation
+Figure&nbsp;10.2: Illustration of a spurious correlation
 </figcaption>
 </figure>
 </div>
-<p>Let’s consider a practical example. We found that <code>votes</code> and <code>gross_in_m</code> are positively correlated with each other. However, could it be possible that this relationship is affected by the year in which the movies were published? We could assume that later movies received more votes because it has become more of a cultural phenomenon to vote about almost everything online<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>.</p>
+<p>Let’s return to our first research questions. We found that <code>healthy_eating</code> is not related to <code>happiness</code>, but to <code>life_satisfaction</code>. <code>Life_satisfaction</code>, however, is related to <code>happiness</code>.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Correlation between variables</span></span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>imdb_top_250 <span class="sc">|&gt;</span></span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(votes, gross_in_m, year) <span class="sc">|&gt;</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>hie_2021 <span class="sc">|&gt;</span></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(healthy_eating, happiness, life_satisfaction) <span class="sc">|&gt;</span></span>
 <span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">correlation</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># Correlation Matrix (pearson-method)
 
-Parameter1 | Parameter2 |    r |       95% CI |    t |  df |         p
-----------------------------------------------------------------------
-votes      | gross_in_m | 0.56 | [0.46, 0.64] | 9.79 | 213 | &lt; .001***
-votes      |       year | 0.37 | [0.26, 0.47] | 6.29 | 248 | &lt; .001***
-gross_in_m |       year | 0.36 | [0.23, 0.47] | 5.58 | 213 | &lt; .001***
+Parameter1     |        Parameter2 |    r |        95% CI | t(305) |         p
+------------------------------------------------------------------------------
+healthy_eating |         happiness | 0.07 | [-0.04, 0.18] |   1.24 | 0.215    
+healthy_eating | life_satisfaction | 0.23 | [ 0.12, 0.33] |   4.05 | &lt; .001***
+happiness      | life_satisfaction | 0.67 | [ 0.60, 0.73] |  15.73 | &lt; .001***
 
 p-value adjustment method: Holm (1979)
-Observations: 215-250</code></pre>
+Observations: 307</code></pre>
 </div>
 </div>
+<p>However, if we consider the impact of <code>life_satisfaction</code> on the relationship between <code>heathly_eating</code> and <code>happiness</code> when we compute the correlation, we retrieve a very different result.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Correlation between variables, considering partial correlations</span></span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>imdb_top_250 <span class="sc">|&gt;</span></span>
-<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(votes, gross_in_m, year) <span class="sc">|&gt;</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>hie_2021 <span class="sc">|&gt;</span></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(healthy_eating, happiness, life_satisfaction) <span class="sc">|&gt;</span></span>
 <span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">correlation</span>(<span class="at">partial =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># Correlation Matrix (pearson-method)
 
-Parameter1 | Parameter2 |    r |       95% CI | t(213) |         p
-------------------------------------------------------------------
-votes      | gross_in_m | 0.48 | [0.37, 0.58] |   7.98 | &lt; .001***
-votes      |       year | 0.28 | [0.16, 0.40] |   4.31 | &lt; .001***
-gross_in_m |       year | 0.16 | [0.03, 0.29] |   2.43 | 0.016*   
+Parameter1     |        Parameter2 |     r |        95% CI | t(305) |         p
+-------------------------------------------------------------------------------
+healthy_eating |         happiness | -0.11 | [-0.22, 0.00] |  -1.95 | 0.053    
+healthy_eating | life_satisfaction |  0.24 | [ 0.13, 0.34] |   4.33 | &lt; .001***
+happiness      | life_satisfaction |  0.67 | [ 0.61, 0.73] |  15.86 | &lt; .001***
 
 p-value adjustment method: Holm (1979)
-Observations: 215</code></pre>
+Observations: 307</code></pre>
 </div>
 </div>
-<p>The first table reveals a strong relationship between the variables of interest, i.e.&nbsp;between <code>votes</code> and <code>gross_in_m</code> with an effect size of <span class="math inline">\(r = 0.56\)</span>. There is also a significant relationship between <code>votes</code> and <code>year</code>, <span class="math inline">\(r = 0.37\)</span> and between <code>gross_in_m</code> and <code>year</code>, <span class="math inline">\(r = 0.36\)</span>. Thus, we should control for <code>year</code> to see how it might affect the relationship between <code>votes</code> and <code>gross_in_m</code>. The second table suggests that <code>year</code> does not much affect the relationship between <code>votes</code> and <code>gross_in_m</code>. However, we notice that the relationship between <code>gross_in_m</code> and <code>year</code> substantially goes down to <span class="math inline">\(r = 0.16\)</span>. It appears as if the <code>year</code> has not managed to impact the relationship between <code>votes</code> and <code>gross_in_m</code> all that much. Therefore, we can be more confident that this relationship is likely not spurious. However, we can never be fully sure because we might not have all data that could explain this correlation.</p>
+<p>Suddenly, <code>eating_healthy</code> and <code>happiness</code> show a slight negative correlation (<span class="math inline">\(r = -0.11\)</span>). In other words, by controlling for the effect of <code>life_satisfaction</code> on both variables, we reversed the relationship from positive to negative. You might wonder whether this implies that eating healthily makes us less happy. If we were to take this result superficiously, it would indicate exactly this. However, as mentioned before, when we look at correlations we have to consider not only <code>r</code> but also the p-value and the sample size. While sample size seems less problematic (<span class="math inline">\(n = 307\)</span>), the p-value is only <span class="math inline">\(p = 0.053\)</span>, which is just shy of the required minimum significance level of <code>0.05</code>. If we strictly applied the rules, this relationship would not be classified as ‘significant’. Thus, the relationship would not be strong enough to derive meaningful conclusions. Even if the p-value were slightly lower, the effect size would still be very small.</p>
 </section>
 <section id="sec-simpsons-paradox" class="level3" data-number="10.4.3">
 <h3 data-number="10.4.3" class="anchored" data-anchor-id="sec-simpsons-paradox"><span class="header-section-number">10.4.3</span> Simpson’s Paradox: When correlations betray you</h3>
@@ -894,7 +865,7 @@ Observations: 100</code></pre>
 </div>
 <p>The results have magically been inverted. Instead of a negative correlation, we now find a strong positive correlation among all groups. This result seems to make much more sense.</p>
 <p>When computing correlations, we need to be aware that subsets of our data might show different directions of correlations. Sometimes insignificant correlations might suddenly become significant. This is what the <em>Simpson’s paradox</em> postulates.</p>
-<p>If your study relies solely on correlations to detect relationships between variables, which it hopefully does not, it is essential to investigate whether the detected (or undetected) correlations exist. Of course, such an investigation can only be based on the data you obtained. The rest remains pure speculation. Nevertheless, correlations are beneficial to review the bilateral relationship of your variables. It is often used as a pre-test for regressions (see Chapter @ref(regression)) and similarly more advanced computations. As a technique to make inferences, correlations are a good starting point but should be complemented by other steps, if possible.</p>
+<p>If your study relies solely on correlations to detect relationships between variables, which it hopefully does not, it is essential to investigate whether the detected (or undetected) correlations exist. Of course, such an investigation can only be based on the data you obtained. The rest remains pure speculation. Nevertheless, correlations are beneficial to review the bilateral relationship of your variables. It is often used as a pre-test for regressions (see <a href="13_regressions.html" class="quarto-xref"><span>Chapter 13</span></a>) and similarly more advanced computations. As a technique to make inferences, correlations are a good starting point but should be complemented by other steps, if possible.</p>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
@@ -903,12 +874,6 @@ Cohen, Jacob. 1988. <em>Statistical Power Analysis for the Behavioral Sciences N
 </div>
 </div>
 </section>
-</section>
-<section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
-<hr>
-<ol>
-<li id="fn1"><p>If you want to know what people vote on these days, have a look at <a href="https://www.ranker.com">www.ranker.com</a><a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-</ol>
 </section>
 
 </main> <!-- /main -->
@@ -1301,13 +1266,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./09_sources_of_bias.html" class="pagination-link  aria-label=" &lt;span="" of="" bias:="" outliers,="" normality="" and="" other="" &#39;conundrums&#39;&lt;="" span&gt;"="">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Sources of bias: Outliers, normality and other ‘conundrums’</span></span>
+      <a href="./09_sources_of_bias.html" class="pagination-link  aria-label=" &lt;span="" of="" bias:="" sampling,="" outliers,="" normality="" and="" other="" &#39;conundrums&#39;&lt;="" span&gt;"="">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Sources of bias: Sampling, outliers, normality and other ‘conundrums’</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./11_power_analysis.html" class="pagination-link" aria-label="<span class='chapter-number'>11</span>&nbsp; <span class='chapter-title'>Power: You either have it or you don't</span>">
-        <span class="nav-page-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Power: You either have it or you don’t</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./11_group_comparison.html" class="pagination-link" aria-label="<span class='chapter-number'>11</span>&nbsp; <span class='chapter-title'>Comparing groups</span>">
+        <span class="nav-page-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Comparing groups</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
