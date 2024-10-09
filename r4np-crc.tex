@@ -406,9 +406,7 @@ This book will guide you through the most common challenges in empirical
 research in the Social Sciences. Each chapter is dedicated to a common
 task we have to achieve to answer our research questions. At the end of
 each chapter, exercises are provided to hone your skills and allow you
-to revisit key aspects. In addition, the appendix offers several
-in-depth case studies that showcase how a research project would be
-carried out from start to finish in R using real datasets.
+to revisit key aspects.
 
 This book likely caters to your needs irrespective of whether you are a
 seasoned analyst and want to learn a new tool or have barely any
@@ -2936,12 +2934,12 @@ webpage}.
 
 \section{Inspecting your data}\label{sec-inspecting-raw-data}
 
-For the rest of this chapter, we will use the \texttt{wvs} dataset from
-the \texttt{r4np} package. However, we do not know much about this
-dataset, and therefore we cannot ask any research questions worth
-investigating. Therefore, we need to look at what it contains. The first
-method of inspecting a dataset is to type the name of the object,
-i.e.~\texttt{wvs}.
+For the rest of this chapter, we will use the World Value Survery data
+(Haerpfer et al. 2022) (\texttt{wvs}) from the \texttt{r4np} package.
+However, we do not know much about this dataset, and therefore we cannot
+ask any research questions worth investigating. Therefore, we need to
+look at what it contains. The first method of inspecting a dataset is to
+type the name of the object, i.e.~\texttt{wvs}.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -10263,7 +10261,7 @@ In the following chapters, we will primarily rely on the package
 \texttt{rstatix}, which offers a pipe-friendly approach to using the
 built-in functions of \emph{R} to perform our group comparisons.
 However, you are welcome to try the basic functions, which you can find
-in \textbf{?@sec-appendix-comparing-groups}.
+in the Appendix.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -10561,7 +10559,7 @@ explore other indices as well, especially those offered in the
 # A tibble: 1 x 9
   .y.             group1 group2 effsize    n1    n2 conf.low conf.high magnitude
 * <chr>           <chr>  <chr>    <dbl> <int> <int>    <dbl>     <dbl> <ord>    
-1 freedom_of_cho~ female male    -0.275   579   621    -0.38     -0.17 small    
+1 freedom_of_cho~ female male    -0.275   579   621    -0.39     -0.16 small    
 \end{verbatim}
 
 \begin{Shaded}
@@ -10850,7 +10848,7 @@ $ effsize   <dbl> 0.5574338
 $ n1        <int> 307
 $ n2        <int> 307
 $ conf.low  <dbl> 0.47
-$ conf.high <dbl> 0.63
+$ conf.high <dbl> 0.64
 $ magnitude <ord> large
 \end{verbatim}
 
@@ -18432,6 +18430,14 @@ Analysis of Profile Data.''} \emph{Psychometrika} 24 (2): 95--112.
 Grolemund, Garrett, and Hadley Wickham. 2011. {``Dates and Times Made
 Easy with {lubridate}.''} \emph{Journal of Statistical Software} 40 (3):
 1--25. \url{https://www.jstatsoft.org/v40/i03/}.
+
+\bibitem[\citeproctext]{ref-wvs2022}
+Haerpfer, Christian, Ronald Inglehart, Alejandro Moreno, Christian
+Welzel, Kseniya Kizilova, Jaime Diez-Medrano, Marta Lagos, Pippa Norris,
+Eduard Ponarin, and Bi Puranen. 2022. {``World Values Survey: All Rounds
+- Country-Pooled Datafile. Madrid, Spain \& Vienna, Austria: JD Systems
+Institute \& WVSA Secretariat. Dataset Version 3.0.0.''} World Values
+Survey Association. \url{https://doi.org/10.14281/18241.17}.
 
 \bibitem[\citeproctext]{ref-henson2001understanding}
 Henson, Robin K. 2001. {``Understanding Internal Consistency Reliability
