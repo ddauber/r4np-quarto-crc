@@ -10,7 +10,7 @@ library(r4np)
 library(patchwork)
 ```
 
-Sometimes, counting and measuring means, medians, and standard deviations is not enough because they are all based on a single variable. Instead, we might have questions about the relationship between two or more variables. In this section, we will explore how correlations can (and kind of cannot - see Chapter \@ref(simpsons-paradox)) provide insights into the following questions:
+Sometimes, counting and measuring means, medians, and standard deviations is not enough because they are all based on a single variable. Instead, we might have questions about the relationship between two or more variables. In this section, we will explore how correlations can (and kind of cannot - see @sec-simpsons-paradox) provide insights into the following questions:
 
 -   Do people who eat healthier also feel happier?
 
@@ -18,17 +18,17 @@ Sometimes, counting and measuring means, medians, and standard deviations is not
 
 -   Is eating healthier related to other health factors, such as life expectancy, blood pressure and overweight/obesity?
 
-There are many different ways to compute the correlation, and it partially depends on the type of data you want to relate to each other. The *'Pearson's correlation'* is by far the most frequently used correlation technique for normally distributed data. On the other hand, if data is not normally distributed, we can opt for the *'Spearman's rank'* correlation. One could argue that the relationship between these two correlations is like the mean (Pearson) to the median (Spearman). Both approaches require numeric values to be computed correctly. If our data is ordinal or, worse, dichotomous (like a logical variable), we have to choose different options. Table \@ref(tab:different-correlations) summarises different methods depending on the data type.
+There are many different ways to compute the correlation, and it partially depends on the type of data you want to relate to each other. The *'Pearson's correlation'* is by far the most frequently used correlation technique for normally distributed data. On the other hand, if data is not normally distributed, we can opt for the *'Spearman's rank'* correlation. One could argue that the relationship between these two correlations is like the mean (Pearson) to the median (Spearman). Both approaches require numeric values to be computed correctly. If our data is ordinal or, worse, dichotomous (like a logical variable), we have to choose different options. @tbl-different-correlations summarises different methods depending on the data type.
 
-| Correlation     | Used when ...                                                     |
-|-------------------|-----------------------------------------------------|
-| *Pearson*       | ... variables are numeric and parametric                          |
-| *Spearman*      | ... variables are numeric and non-parametric                      |
-| *Polychoric*    | ... investigating two ordinal variables                           |
-| *Tetrachoric*   | ... both variables are dichotomous, e.g. 'yes/no', 'True/False'.  |
+| Correlation | Used when ... |
+|------------------------------------|------------------------------------|
+| *Pearson* | ... variables are numeric and parametric |
+| *Spearman* | ... variables are numeric and non-parametric |
+| *Polychoric* | ... investigating two ordinal variables |
+| *Tetrachoric* | ... both variables are dichotomous, e.g. 'yes/no', 'True/False'. |
 | *Rank-biserial* | ... one variable is dichotomous and the other variable is ordinal |
 
-: (#tab:different-correlations) Different ways of computing correlations
+: Different ways of computing correlations {#tbl-different-correlations}
 
 There are many more variations of correlations, which you can explore on the [package's website](https://easystats.github.io/correlation/articles/types.html "website of the package"){target="blank"} we will use in this chapter: `correlation`. However, we will primarily focus on Pearson and Spearman because they are the most commonly used correlation types in academic publications to understand the relationship between two variables. In addition, we also look at *'partial correlations'*, which allow us to introduce a third variable into this mix.
 
@@ -174,7 +174,7 @@ A correlation can be either positive or negative, and its value (i.e. `r` in cas
 
 -   `1` defines a perfectly positive correlation.
 
-In other words, the further the score is away from `0`, the stronger is the relationship between variables. We also have benchmarks that we can use to assess the strength of a relationship, for example, the one by @cohen1988statistical. The strength of the relationship is also called *'effect size'*. Table \@ref(tab:effect-size-cohen) shows the relevant benchmarks. Note that effect sizes are always provided as absolute figures. Therefore, `-0.4` would also count as a moderate relationship.
+In other words, the further the score is away from `0`, the stronger is the relationship between variables. We also have benchmarks that we can use to assess the strength of a relationship, for example, the one by @cohen1988statistical. The strength of the relationship is also called *'effect size'*. @tbl-effect-size-cohen shows the relevant benchmarks. Note that effect sizes are always provided as absolute figures. Therefore, `-0.4` would also count as a moderate relationship.
 
 | effect size         | interpretation |
 |---------------------|----------------|
@@ -183,7 +183,7 @@ In other words, the further the score is away from `0`, the stronger is the rela
 | 0.3 $\leq$ r \< 0.5 | moderate       |
 | r $\geq$ 0.5        | large          |
 
-: (#tab:effect-size-cohen) Assessing effect size of relationships according to Cohen (1988)
+: Assessing effect size of relationships according to @cohen1988statistical. {#tbl-effect-size-cohen}
 
 ## Computing correlations {#sec-computing-correlations}
 
@@ -211,7 +211,7 @@ hie_2021 |>
   correlation(method = "spearman")
 ```
 
-Indeed, our analysis reveals that the effect size is very small (r = 0.07 \< 0.1). Therefore, eating healthy, seems to not make us happier. In all fairness, the foods that make us smile are often not fruits and veggies, but other, more guilty, pleasures.
+Indeed, our analysis reveals that the effect size is very small (r = 0.07 \< 0.1). Therefore, `healthy_eating`, seems to not make us happier. In all fairness, the foods that make us smile are often not fruits and veggies, but other, more guilty, pleasures.
 
 Another question we posed at the beginning was: Are people who are happier also more satisfied with their life? Our intuition might say 'yes'. A person who consistently feels happy is more likely to assess their overall life positively, because their day-to-day experiences are enjoyable. Let's create another scatterplot to find out.
 
@@ -254,23 +254,143 @@ With an `r` of `0.67`, we did not only find a positive relationship, but one tha
 
 ## Significance: A way to help you judge your findings {#sec-significance}
 
-One of the most common pitfalls of novice statisticians is the interpretation of what counts as significant and not significant. Most basic tests offer a *'p value'*, which stands for *'probability value'*. I referred to this value multiple times in this book already. The `p`-value can range from 1 (for 100%) to 0 (for 0%) and implies:
+One of the most common pitfalls of novice statisticians is the interpretation of what counts as significant and not significant. Most basic tests offer a *'p value'*, which stands for *'probability value'*. I have referred to this value multiple times in this book already, but did not thoroughly explain why it is important.
 
--   $p = 1$, there is a 100% chance that the result is a pure coincidence
+To understand p-values and significance, we need to briefly discuss *hypotheses*. A hypothesis is an assumption we make about the data, such as whether `healthy_eating` leads to more `happiness` (as in @sec-computing-correlations). In contrast, the null hypothesis is a special type of hypothesis that assumes that no effect or relationship exists between variables, i.e. the opposite of what we are testing. When you read that a hypothesis has been “rejected” or “accepted,” it is often the null hypothesis being tested. The p-value helps determine whether we should reject or retain the null hypothesis based on the data.
 
--   $p = 0$, there is a 0% chance that the result is a pure coincidence, i.e. we can be certain this is not just luck.
+The `p`-value can range from 1 (for 100%) to 0 (for 0%) and helps us assess whether to accept or reject the null hypothesis:
 
-Technically, we would not find that `p` is ever truly zero and instead denote very small `p`-values with `p < 0.01` or even `p < 0.001`.
+-   $p = 1$, there is a 100% probability that the result is due to pure chance, supporting (accepting) the null hypothesis.
 
-There are also commonly considered thresholds for the `p`-value:
+-   $p = 0$, there is a 0% probability that the result is due to pure chance, suggesting that the null hypothesis has to be rejected.
 
--   $p > 0.05$, the result is not significant. There is a chance of +5% that our finding is a pure coincidence.
+Technically, we would not find that `p` is ever truly zero and instead denote very small `p`-values with `p < 0.01` or even `p < 0.001`, indicating that our null hypothesis is unlikely to be true.
 
--   $p \leq 0.05$ , the result is significant.
+There are also commonly considered and accepted thresholds for the `p`-value:
+
+-   $p > 0.05$, the result is not significant.
+
+-   $p \leq 0.05$, the result is significant, i.e. there is less than a 5% chance that the null hypothesis should have been accepted.
 
 -   $p \leq 0.01$, the result is highly significant.
 
-We will cover more about the `p`-value in Chapter \@ref(comparing-groups) and Chapter \@ref(regression). For now, it is important to know that a significant correlation is one that we should look at more closely. Usually, correlations that are not significant suffer from small effect sizes. However, different samples can lead to different effect sizes and different significant levels. Consider the following examples:
+Most frequently, confusion about the p-value emerges because we test FOR the null hypothesis and not what we are actually interested in.Returning to our example of eating healthy and its impact on happiness, we would first formulate our hypothesis and the null hypothesis:
+
+-   Hypothesis ($H_1$): Healthy eating and happiness are significantly positively related to each other.
+
+-   Null Hypothesis ($H_0$): There is no significant relationship between healthy eating and happiness.
+
+Based on our research question, we hope to accept our hypothesis and, therefore, reject the null hypothesis. Hardly ever will you find that researchers are interested in not finding relationships/effects in their data. Consequently, a *significant* p-value would tell us to reject the null hypothesis and accept our hypothesis.
+
+Let's revisit the results from our earlier analysis where we performed a Pearson correlation to test our assumption.
+
+```{r}
+#| label: correlation-test-statistic
+#| echo: true
+
+# Pearson correlation
+hie_2021 |>
+  select(happiness, healthy_eating) |>
+  correlation()
+```
+
+Besides the correlation coefficient (`r`), we also find $t_{(305)} = 1.24$, which is the test statistic. The test statistic helps us determine if our data shows something unusual based on our hypothesis. A test statistic close to `0` suggests that our data is consistent with the null hypothesis, i.e. no effect/relationship. The further the test statistic moves from `0`, the more evidence we have against the null hypothesis.
+
+In our analysis of the relationship between `happiness` and `healthy_eating`, we obtained a p-value of `0.215`. This indicates that there is a 21.5% probability of finding a t-value of `1.24` or or larger if the null hypothesis is true. You probably agree that these are not good odds. Since this p-value is greater than the conventional significance level of $p \leq 0.05$ we do not reject the null hypothesis. This means we do not have sufficient evidence to conclude that a significant relationship exists between `happiness` and `healthy_eating`.
+
+Lastly, I also want to visually explain what the test statistic is and how it relates to p-values. We already learned about the normal distribution, as such, the visualisation in @fig-null-hypothesis-testing-plot will look familiar.
+
+```{r}
+#| label: fig-null-hypothesis-testing-plot
+#| echo: false
+#| output: true
+#| fig-cap: "t-Distribution with test statistic"
+
+# Load required libraries
+library(ggplot2)
+
+# Create a sequence of t-values (x-axis) ranging from -4 to 4
+t_values <- seq(-4, 4, length.out = 100)
+
+# Define the degrees of freedom (df) based on your sample size (n = 305 + 2)
+df <- 305
+
+# Create a data frame for the t-distribution
+data <- data.frame(t_values = t_values, density = dt(t_values, df))
+
+# Define the test statistic (t = 1.24)
+t_statistic <- tibble(tstat = 1.24)
+
+# Calculate the critical t-values for the significance level (0.05)
+t_critical_low <- qt(0.025, df)  # Lower critical value
+t_critical_high <- qt(0.975, df) # Upper critical value
+
+# Create the plot
+ggplot(data = data,
+       aes(x = t_values, y = density)) + 
+  
+  # Shade the non-significant area (p > 0.05) in light grey
+  geom_area(data = subset(data, t_values >= qt(0.025, df) & t_values <= qt(0.975, df)),
+            aes(x = t_values, y = density), fill = "#74a7fe", alpha = 0.5) +
+  
+  # Shade the significant areas (p <= 0.05) in red
+  geom_area(data = subset(data, t_values < qt(0.025, df)),
+            aes(x = t_values, y = density), fill = "#e6473a", alpha = 0.5) +
+  geom_area(data = subset(data, t_values > qt(0.975, df)),
+            aes(x = t_values, y = density), fill = "#e6473a", alpha = 0.5) +
+  
+  # Plot the t-distribution curve
+  geom_line(color = "#33496F", linewidth = 1.1) +
+  
+  # Plot the test statistic as a point
+  geom_point(data = t_statistic,
+             aes(x = tstat, y = dt(tstat, df)), color = "black", size = 3) +
+  
+  # Annotate the test statistic
+  annotate("text",
+           x = t_statistic$tstat,
+           y = dt(t_statistic$tstat, df) + 0.02, 
+           label = paste("t =", t_statistic$tstat),
+           color = "black",
+           size = 4,
+           hjust = -0.2) +
+  
+  # Annotate the significance levels
+  annotate("text", x = t_critical_low, y = 0.02, label = "p < 0.05", 
+           color = "#e6473a", size = 4, vjust = -1.9, hjust = 1.2) +
+  annotate("text", x = t_critical_high, y = 0.02, label = "p < 0.05", 
+           color = "#e6473a", size = 4, vjust = -1.9, hjust = -0.2) +
+  
+  # Customize plot labels and theme
+  labs(x = "t-value (Test Statistic)", 
+       y = "Density") +
+  ggdist::theme_ggdist()
+```
+
+What we can see here is the distribution of test statistic scores (t-values) related to our correlation analysis. We can see that all t-values that fall within the blue area of the distribution would not count as significantly different from the null hypothesis, which means we have to accept that there is no effect/relationship to be found. However, if the t-value falls into one of the two red areas, we can reject the null hypothesis and be excited that the effect/relationship we found is *significant*.
+
+While we clarified how the t-value is related to the p-value, you might still be confused how these two values relate to the correlation coefficient (`r`) in our correlation results. The answer is fairly simple: we need `r` to compute our t-value. The mathematical formula is as follows:
+
+$$
+t = \frac{r \sqrt{n - 2}}{\sqrt{1 - r^2}}
+$$
+
+With this knowledge, we can reproduce $t_{(305)} = 1.24$ writing the following lines of code:
+
+```{r}
+#| label: compute-t-value-by-hand
+#| echo: true
+
+# Define the correlation coefficient and sample size
+r <- 0.07099542 # not rounded
+n <- 307
+
+# Calculate the t-value
+t_value <- (r * sqrt(n - 2)) / sqrt(1 - r^2)
+t_value
+```
+
+We will cover more about the `p`-value in @sec-comparing-groups and @sec-regression. For now, it is important to know that a significant correlation is one that we should look at more closely. Usually, correlations that are not significant suffer from small effect sizes. However, different samples can lead to different effect sizes and significance levels. Consider the following examples:
 
 ```{r Significance for different sample sizes, echo=FALSE}
 #| label: sig-for-diff-sample-sizes
@@ -305,17 +425,17 @@ df_02 <- tribble(
 df_02 |> correlation()
 ```
 
-In both examples $r = 0.77$, but the sample sizes are different (`4` vs `12`), and the `p`-values differ. In the first example, $p = 0.225$, which means the relationship is not significant, while in the second example, we find that $p < 0.01$ and is therefore highly significant. As a general rule, the bigger the sample, the more likely we find significant results, even though the effect size is small. Therefore, it is crucial to interpret correlations base on at least three factors:
+In both examples $r = 0.77$, but the sample sizes are different (`4` vs `12`), and the `p`-values differ. In the first example, $p = 0.225$, which means the relationship is not significant, while in the second example, we find that $p < 0.01$ and is, therefore, highly significant. As a general rule, the bigger the sample, the more likely we find significant results, even though the effect size is small. Therefore, it is crucial to interpret correlations based on at least three factors:
 
 -   the `p`-value, i.e. significance level,
 
 -   the `r`-value, i.e. the effect size, and
 
--   the `n`, i.e. the sample size.
+-   the `n`, i.e. the sample size
 
 The interplay of all three can help determine whether a relationship is important. Therefore, when we include correlation tables in publications, we have to provide information about all three indicators.
 
-Let's put all this information into practice and investigate our one more of our research questions, which asks whether eating healthy relates to other health factors such as life expectancy, blood pressure and overweight/obesity. While we could compute three correlations independently to find an answer to our question, it is much more common to include multiple variables simultaneously and look at the results conjointly.
+Let's put all this information into practice and investigate our third research question, which asks whether eating healthy relates to other health factors such as life expectancy, blood pressure and overweight/obesity. While we could compute three correlations independently to find an answer to our question, it is much more common to include multiple variables simultaneously and look at the results conjointly.
 
 ```{r}
 #| label: correlation-list-format
@@ -360,11 +480,11 @@ Correlations are helpful, but only to some extend. The three most common limitat
 
 ### Correlations are not causal relationships {#sec-correlations-are-not-causal-relationships}
 
-Correlations do not offer insights into causality, i.e. whether a change in one variable causes change in the other variable. Correlations only provide insights into whether these two variables tend to change when one of them changes. Still, sometimes we can infer such causality by the nature of the variables. For example, in countries with heavy rain, more umbrellas are sold. Buying more umbrellas will not cause more rain, but if there is more rain in a country, we rightly assume a higher demand for umbrellas. If we can theorise the relationship between variables, we would rather opt for a regression model instead of a correlation (see Chapter \@ref(regression)).
+Correlations do not offer insights into causality, i.e. whether a change in one variable causes change in the other variable. Correlations only provide insights into whether these two variables tend to change when one of them changes. Still, sometimes we can infer such causality by the nature of the variables. For example, in countries with heavy rain, more umbrellas are sold. Buying more umbrellas will not cause more rain, but if there is more rain in a country, we rightly assume a higher demand for umbrellas. If we can theorise the relationship between variables, we would rather opt for a regression model instead of a correlation (see @sec-regression).
 
 ### Correlations can be spurious {#sec-correlations-can-be-spurious}
 
-Just because we find a relationship between two variables does not necessarily mean that they are truly related. Instead, it might be possible that a third variable is the reason for the relationship. We call relationships between variables that are caused by a third variable *'spurious correlations'*. This third variable can either be part of our dataset or even something we have not measured at all. The latter case would make it impossible to investigate the relationship further. However, we can always test whether some of our variables affect the relationship between the two variables of interest. This can be done by using *partial correlations*. A *partial correlation* returns the relationship between two variables minus the relationship to a third variable. Figure \@ref(fig:illustration-spurious-correlation) depicts this visually. While `a` and `b` appear to be correlated, the correlation might only exist because they correlate with `x`.
+Just because we find a relationship between two variables does not necessarily mean that they are truly related. Instead, it might be possible that a third variable is the reason for the relationship. We call relationships between variables that are caused by a third variable *'spurious correlations'*. This third variable can either be part of our dataset or even something we have not measured at all. The latter case would make it impossible to investigate the relationship further. However, we can always test whether some of our variables affect the relationship between the two variables of interest. This can be done by using *partial correlations*. A *partial correlation* returns the relationship between two variables minus the relationship to a third variable. @fig-illustration-spurious-correlation depicts this visually. While `a` and `b` appear to be correlated, the correlation might only exist because they correlate with `x`.
 
 ![Illustration of a spurious correlation](/images/chapter_09_img/spurious-correlation.png){#fig-illustration-spurious-correlation}
 
@@ -459,4 +579,4 @@ The results have magically been inverted. Instead of a negative correlation, we 
 
 When computing correlations, we need to be aware that subsets of our data might show different directions of correlations. Sometimes insignificant correlations might suddenly become significant. This is what the *Simpson's paradox* postulates.
 
-If your study relies solely on correlations to detect relationships between variables, which it hopefully does not, it is essential to investigate whether the detected (or undetected) correlations exist. Of course, such an investigation can only be based on the data you obtained. The rest remains pure speculation. Nevertheless, correlations are beneficial to review the bilateral relationship of your variables. It is often used as a pre-test for regressions (see Chapter \@ref(regression)) and similarly more advanced computations. As a technique to make inferences, correlations are a good starting point but should be complemented by other steps, if possible.
+If your study relies solely on correlations to detect relationships between variables, which it hopefully does not, it is essential to investigate whether the detected (or undetected) correlations exist. Of course, such an investigation can only be based on the data you obtained. The rest remains pure speculation. Nevertheless, correlations are beneficial to review the bilateral relationship of your variables. It is often used as a pre-test for regressions (see @sec-regression) and similarly more advanced computations. As a technique to make inferences, correlations are a good starting point but should be complemented by other steps, if possible.

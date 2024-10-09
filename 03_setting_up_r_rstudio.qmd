@@ -96,7 +96,7 @@ Of course, if you wish to customise your workspace further, you can do so. The v
 
 ## Updating R and RStudio: Living at the pulse of innovation {#sec-updating-r-and-rstudio}
 
-While not strictly something that helps you become a better programmer, this advice might come in handy to avoid turning into a frustrated programmer. When you update your software, you need to update *R* and RStudio separately from each other. While both *R* and RStudio work closely with each other, they still constitute separate pieces of software. Thus, it is essential to keep in mind that updating RStudio will not automatically update R. This can become problematic if specific tools you installed via RStudio (like a fancy learning algorithm) might not be compatible with earlier versions of *R*. Also, additional *R* packages (see Chapter \@ref(r-packages)) developed by other developers are separate pieces which require updating too, independently from *R* and RStudio.
+While not strictly something that helps you become a better programmer, this advice might come in handy to avoid turning into a frustrated programmer. When you update your software, you need to update *R* and RStudio separately from each other. While both *R* and RStudio work closely with each other, they still constitute separate pieces of software. Thus, it is essential to keep in mind that updating RStudio will not automatically update R. This can become problematic if specific tools you installed via RStudio (like a fancy learning algorithm) might not be compatible with earlier versions of *R*. Also, additional *R* packages (see @sec-r-packages) developed by other developers are separate pieces which require updating too, independently from *R* and RStudio.
 
 I know what you are thinking: This already sounds complicated and cumbersome. However, rest assured, we take a look at how you can easily update all your packages with RStudio. Thus, all you need to remember is: *R* needs to be updated separately from everything else.
 
@@ -128,10 +128,10 @@ To get started with RStudio Cloud, we have to undertake a couple of steps:
 
     ![](images/chapter_03_img/rstudio_cloud/06_rstudio_cloud.png){fig-alt="Screenshot of an RStudio Cloud project opened, showing some coding."}
 
-7.  Now we can execute the code as we would on the desktop version (see Chapter \@ref(r-basics-the-very-fundamentals)).
+7.  Now we can execute the code as we would on the desktop version (see @sec-r-basics-the-very-fundamentals ).
 
     ![](images/chapter_03_img/rstudio_cloud/07_rstudio_cloud.png){fig-alt="Screenshot of an RStudio Cloud project opened, showing some coding and the plot that results from running this code."}
 
-[^03_setting_up_r_rstudio-1]: RStudio and RStudio Cloud warn you if you need to install certain R packages to successfully run code. More about R packages and what they are can be found in Chapter \@ref(r-packages).
+[^03_setting_up_r_rstudio-1]: RStudio and RStudio Cloud warn you if you need to install certain R packages to successfully run code. More about R packages and what they are can be found in @sec-r-packages.
 
 No matter whether you choose to use a desktop version of RStudio or RStudio Cloud, you will be able to follow along in this book with no problem.

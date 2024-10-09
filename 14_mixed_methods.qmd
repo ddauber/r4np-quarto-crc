@@ -88,9 +88,9 @@ Once we have converted our data into a data frame, all the techniques we covered
 
 ## Stop words: Removing noise in the data
 
-In the previous example, we already performed an important data wrangling process, i.e. tokenization. However, besides changing the text format, we also need to take care of other components in our data that are usually not important, for example, removing *'stop words'*. To showcase this step (and a little more), I will draw on the `imdb_top_250` dataset.
+In the previous example, we already performed an important data wrangling process, i.e. tokenization. However, besides changing the text format, we also need to take care of other components in our data that are usually not important, for example, removing *'stop words'*. To showcase this step (and a little more), I will draw on the `comments` dataset, which holds data about students' study experiences.
 
-In marketing, finding the right product name is a laborious task and requires careful attention. After all, our first impression of a product is partially informed by its name. Consequently, when promoting a movie, one might wonder whether more popular words in movie titles can lead to greater success, i.e. a higher ranking on IMDb. With the help of the `imdb_top_250` dataset, we can empirically investigate this matter. However, we first have to tidy the data and then clean it. An essential step in this process is the removal of *'stop words'*.
+In my industry, i.e. Higher Education, understanding students' study experiences is crucial for improving academic programmes and support services. The insights gathered from student feedback can significantly influence how a university enhances its offerings. With the help of the `comments` dataset, we can empirically investigate what themes emerge from students comments about their social inclusion experiences. However, we first have to tidy the data and then clean it. An essential step in this process is the removal of *'stop words'*.
 
 *'Stop words'* are words that we want to exclude from our analysis, because they carry no particular meaning. The `tidytext` package comes with a data frame that contains common stop words in English.
 
@@ -103,27 +103,27 @@ stop_words
 
 It is important to acknowledge that there is no unified standard of what constitutes a stop word. The data frame `stop_words` covers many words, but in your research context, you might not even want to remove them. For example, if we aim to identify topics in a text, stop words would be equivalent to white noise, i.e. many of them are of no help to identify relevant topics. Instead, stop words would confound our analysis. For obvious reasons, stop words highly depend on the language of your data. Thus, what works for English will not work for German, Russian or Chinese. You will need a separate set of stop words for each language.
 
-The removal of stop words can be achieved with a function we already know: `anti-join()`. In other words, we want to subtract all words from `stop_words` from a given text. Let's begin with the tokenization of our movie titles.
+The removal of stop words can be achieved with a function we already know: `anti-join()`. In other words, we want to subtract all words from `stop_words` from a given text. Let's begin with the tokenization of our comments.
 
 ```{r}
-#| label: tokenization-movie-titles
+#| label: tokenization-comments
 #| echo: true
 
-titles <-
-  imdb_top_250 |>
-  unnest_tokens(word, title) |>
-  select(imdb_rating, word)
+comments_token <-
+  comments |>
+  unnest_tokens(word, comment) |>
+  select(word, social_inclusion)
 
-titles
+comments_token
 ```
 
-Our new data frame has considerably more rows, i.e. `712`, which hints at around 3 words per title on average. If you are the curious type, like me, we already can peek at the frequency of words in our dataset.
+Our new data frame has considerably more rows, i.e. `3299`, which hints at around 16 words per comment on average. If you are the curious type, like me, we already can peek at the frequency of words in our dataset.
 
 ```{r}
 #| label: freq-words-before-stopwords-removal
 #| echo: true
 
-titles |>
+comments_token |>
   mutate(word2 = fct_lump_n(word, 5,
                             other_level = "other words")) |>
   count(word2) |>
@@ -133,7 +133,7 @@ titles |>
   coord_flip()
 ```
 
-The result is somewhat disappointing. None of these words carries any particular meaning because they are all stop words. Thus, we must clean our data before conducting such an analysis.
+The result is somewhat disappointing. None of these words carries any particular meaning because they are all stop words, except for `group`. Thus, we must clean our data before conducting such an analysis.
 
 I also sneaked in a new function called `fct_lump_n()` from the `forcats` package. It creates a new factor level called `other words` and 'lumps' together all the other factor levels. You likely have seen plots before which show a category called 'Other'. We usually apply this approach if we have many factor levels with very low frequencies. It would not be meaningful to plot 50 words as a barplot which only occurred once in our data. They are less important. Thus, it is sometimes meaningful to pool factor levels together. The function `fct_lump_n(word, 5)` returns the five most frequently occurring words and pools the other words together into a new category. There are many different ways to 'lump' factors. For a detailed explanation and showcase of all available alternatives, have a look at the [forcats website](https://forcats.tidyverse.org/reference/fct_lump.html "forcats website"){target="blank"}.
 
@@ -143,28 +143,45 @@ In our next step, we have to remove stop words using the `stop_words` data frame
 #| label: remove-stop-words
 #| echo: true
 
-titles_no_sw <- anti_join(titles, stop_words,
+comments_no_sw <- anti_join(comments_token, stop_words,
                           by = "word")
 
-titles_no_sw
+comments_no_sw
 ```
 
-The dataset shrank from `712` rows to `443` rows. Thus, almost 38% of our data was actually noise. With this cleaner dataset, we can now look at the frequency count again.
+The dataset shrank from `3299` rows to `1510` rows. Thus, about 54% of our data was actually noise. With this cleaner dataset, we can now look at the frequency count again.
 
 ```{r}
 #| label: freq-after-stopwords-removal
 #| echo: true
 
-titles_no_sw |>
+comments_no_sw |>
   count(word) |>
-  filter(n > 1) |>
+  filter(n > 10) |>
   ggplot(aes(x = reorder(word, n),
              y = n)) +
   geom_col() +
   coord_flip()
 ```
 
-To keep the number of bars somewhat manageable, I removed those words with more less than `1` occurrence in the dataset. Some of the most frequently occurring words include, for example, `wild`, `wars`, `story`, `star`, `rings`, `lords`. If you know Hollywood movies of the past, you will notice that two movies likely cause this result: The 'Star Wars' and 'Lord of the Rings' series. We also have numbers included in our dataset. Sometimes these are worth removing, but in this case, the number `2` likely indicates a sequel to another movie. Thus, it provides essential information.
+To keep the number of bars somewhat manageable, I removed those words with less than `10` occurrences in the dataset. Some of the most frequently occurring words include, for example, `feel`, `cultural`, `friends`, `campus`, `events`, `projects`. There is also a reference to the word `i've` which refers to `i have` and, therefore, constitutes a stop word. However, it seems our list of `stopwords` did not pick this one up. It is always good to remember that our tools for analysis are never perfect and some more manual data cleaning is often necessary. It is very easy to remove this occurence of words using our trusty `filter()` function.
+
+```{r}
+#| label: manually-remove-stopwords
+#| echo: true
+
+comments_no_sw <- 
+  comments_no_sw |>
+  filter(word != "i’ve")
+  
+comments_no_sw |>
+  count(word) |>
+  filter(n > 10) |>
+  ggplot(aes(x = reorder(word, n),
+             y = n)) +
+  geom_col() +
+  coord_flip()
+```
 
 Another commonly used method for visualising word frequencies are word clouds. You likely have seen them before since they are very popular, especially for websites and poster presentations. Word clouds use the frequency of words to determine the font size of each word and arrange them so that it resembles the shape of a cloud. The package `wordcloud` and its function `wordcloud()` make this very easy. You can modify a word cloud in several ways. Here are some settings I frequently change for my data visualisations:
 
@@ -186,7 +203,7 @@ To create a word cloud you have to provide at least a column with words and a co
 
 # Create a dataframe with the word count
 word_frequencies <-
-  titles_no_sw |>
+  comments_no_sw |>
   count(word)
 
 # Plot word cloud
@@ -202,47 +219,125 @@ wordcloud::wordcloud(words = word_frequencies$word,
                      )
 ```
 
-After preparing and visualising our data, it is time to perform our analysis. We want to know whether certain words are associated with higher `imdb_rating`s. If we use the function `count()` we will lose the variable `imdb_rating()`. Thus, we have to do this in three steps:
+Our word cloud nicely summarises keywords that were particularly important, assuming we consider frequency of words an indicator of importance. Students seem to talk about their feelings, culture and friends/friendships. While this constitutes a good starting point for further analysis we would require more context about what was said, for example what kind of feelings were expressed. This is something we will explore more shortly. Before we advance to this stage, though, we can investigate which words were mostly associated with each `social_inclusion` scores, i.e. what words were most frequently used by students who scores a `1`, `2`, `3`, etc. In other words, each `social_inclusion` will become its own little group/sub-sample that we look at.
 
-1.  We create the frequencies for each word with `count()`, which we already did.
+We can still use `count()` but we have do approach this slightly differently:
 
-2.  Then, we `left_join()` the word frequencies with the original dataset to add the word frequencies.
+1.  We create the frequencies for each word with `count()` and include both variables, `social_inclusion` and `word`. This way, count will look for all combinations of the social inclusion scores and the word.
 
-3.  Compute a correlation using `correlation()` from the `correlation` package.
+2.  Then, we group our data based on `social_inclusion`.
 
-```{r}
-#| label: combine-word-freq-with-titles-no-sw
-#| echo: true
-
-# Combine word_frequencies with titles_no_sw
-titles_no_sw <- left_join(titles_no_sw, word_frequencies,
-                          by = "word")
-
-titles_no_sw
-```
+3.  We select the top 5 most frequently occurring words for each group.
 
 ```{r}
-#| label: correlation-imdb-rating-n
+#| label: count-social-inclusion-relative-to-word
 #| echo: true
 
-# Compute the correlation of imdb_rating and n
-corr <-
-  titles_no_sw |>
-  select(imdb_rating, n) |>
-  correlation::correlation()
+comments_grouped <-
+  comments_no_sw |>
+  count(social_inclusion, word) |>
+  group_by(social_inclusion) |>
+  slice_max(n, n = 5) |>
+  ungroup() |>
+  arrange(desc(social_inclusion))
 
-corr
+comments_grouped
 ```
+
+When you first look at this you might be slightly confused what it actually shows. It is best to think of `social_inclusion` as a grouping variable and not as a number anymore. For example, in group `10`, which refers to comments that scored very high on `social_inclusion`, `friendships` are mentioned `7` times, while `feel` and `friends` are mentioned `5` times. Similarly, in group `8`, `friends` and `friendships` are each mentioned `14` times. The frequency is very much affected by the size of each group, i.e. how many students scored a `10` or an `8`. Thus, comparing results across groups based on `n` is not wise. However, looking at words within each group we can get a sense of what made students score very high or low.
+
+We can visualise this data which will make it even clearer what the value of this analysis is. However, first we have to do some housekeeping since the meaning of our variables has changed. Our variable `social_inclusion` should now be a `factor`. Let's transform it in the same way as we did at the very beginning of the book - going full circle.
 
 ```{r}
-#| label: interpret-effect-size-imdb-rating-n
+#| label: comments-data-type-change
 #| echo: true
 
-# Interpret the effect size
-effectsize::interpret_r(corr$r, rules = "cohen1988")
+comments_grouped <-
+  comments_grouped |>
+  mutate(social_inclusion = as_factor(social_inclusion))
+
+glimpse(comments_grouped)
 ```
 
-Considering our correlation analysis, we find that more frequently used words tend to be significantly more successful. However, the effect size is too small to be of particular relevance. Besides, as mentioned before, the frequency of words is skewed towards two movie franchises, both of which have been very successful. Thus, we have to be content that there is no secret formula to create movie titles, i.e. choosing popular words from movie titles will not result in a better ranking.
+With this in place we can go ahead and create a plot for each group by using`facet_wrap().`
+
+```{r}
+#| label: visualise-social-inclusion-groups-words-n-01
+#| echo: true
+
+comments_grouped |>
+  ggplot(aes(x = word,
+             y = n)
+         ) +
+  geom_col() +
+  coord_flip() +
+  facet_wrap(~ social_inclusion)
+
+```
+
+One need not be a graphic designer to understand that this is not a well-designed visualisation and very hard to understand. Let's improve it further by letting each plot have their own y-axis. In this case, this is perfectly fine, since there are different words ranked for each facet plot. We can achieve this by inserting `scales = "free_y"` into the `facet_wrap()` function.
+
+```{r}
+#| label: visualise-social-inclusion-groups-words-n-02
+#| echo: true
+
+comments_grouped |>
+  ggplot(aes(x = word,
+             y = n)
+         ) +
+  geom_col() +
+  coord_flip() +
+  facet_wrap(~ social_inclusion,
+             scales = "free_y")
+```
+
+This looks a lot better and we start to see which words appeared most frequently in comments for each level of `social_inclusion`. There is, however, one more step we should take to make this visualisation even more meaningful. Ideally, we want the top word show up at the top for each plot. We can see that currently is seems each bar is in a rather random order. This problem might sound familiar, since we learnt how to `reorder()` barplots very early on in this book. So, let's apply our knowledge to this plot.
+
+```{r}
+#| label: visualise-social-inclusion-groups-words-n-03
+#| echo: true
+
+comments_grouped |>
+  ggplot(aes(x = reorder(word, n),
+             y = n)
+         ) +
+  geom_col() +
+  coord_flip() +
+  facet_wrap(~ social_inclusion,
+             scales = "free_y")
+
+```
+
+Well, this brought us a little closer, but not quite were we intended to be. Some plots are in the correct order but others are not. The reason for this odd phenomenon is that we reordered our variable `word` for the entire dataset and not for each facet in our visualisation. Unfortunately, neither `reorder()` nor `fct_reorder()` can help us in this case. Instead, we need to use two new functions from the `tidytext` package to help us perfect our plot: `reorder_within()` and `scale_x_reordered()`. The `reorder_within()` functions allows us to order a variable based on another quantitative variable (`n`) for each level of a factor (`social_inclusion`). The `scale_x_reordered()` function cleans up the labels of our x-axis which were changed in the process of using `reorder_within()`. If you are curious how the plot would look like without using `scale_x_reordered()` you can simply remove it.
+
+```{r}
+#| label: visualise-social-inclusion-groups-words-n-04
+#| echo: true
+
+comments_grouped |>
+  
+  # Reorder our data for for each group level ion social_inclusion
+  mutate(word = reorder_within(x = word,
+                               by= n,
+                               within = social_inclusion)) |>
+
+ # Create the plot
+    ggplot(aes(x = word,
+               y = n,
+               fill = social_inclusion)) +
+  geom_col(show.legend = FALSE) +
+  coord_flip() +
+
+  # Adjust the x-axis to obtain the correct labels    
+  scale_x_reordered() +
+      
+  facet_wrap(~ social_inclusion,
+             scales = "free_y")
+```
+
+The final visualisation, with a splash of colour added, reveals interesting clusters of words that are directly linked to the `social_inclusion` scores. For example, it seems students who score `5` or lower on `social_inclusion` never refer to `friends` or `friendships`. Most importantly, we can very quickly understand how individuals with very low scores felt: `lonely`, `isolated`, `anxiety`. This is clearly something a department would aim to improve and maybe learn from students who managed to built flourishing relationships with their peers.
+
+While these might all be fascinating insights, we have not exhausted our options and can further expand on what we did so far by looking at more than just single, isolated, words.
 
 ## N-grams: Exploring correlations of words {#sec-n-grams}
 
@@ -257,19 +352,18 @@ Creating a bigram is relatively simple in *R* and follows similar steps as count
 5.  Merge columns `word1` and `word2` into one column again, i.e. `unite()` them. (optional)
 6.  Count the frequency of bigrams, i.e. `count()`.
 
-There are a lot of new functions covered in this part. However, by now, you likely understand how they function already. Let's proceed step-by-step. For this final example about mixed-methods research, we will look at the `synopsis` of movies provided by IMDb. Since we already have the text in our data frame, we can skip step one. Next, we need to engage in tokenization. While we use the same function as before, we need to provide different arguments to retrieve bigrams. As before, we need to define an `output` column and an `input` column. In addition, we also have to provide the correct type of tokenization, i.e. determine `token`, which we need to set to `"ngrams"`. We also need to define the `n` in 'ngrams', which will be `2` for bigrams. After this, we apply `count()` to our variable `bigram`, and we achieved our task. If we turn this into *R* code, we get the following (with considerably less characters than its explanation):
+There are a lot of new functions covered in this part. However, by now, you likely understand how they function already. Let's proceed step-by-step. For this final example about mixed-methods research, we will look at the `comment` variable in the `comments` dataset. Since we already have the text as a data frame, we can skip step one. Next, we need to engage in tokenization. While we use the same function as before, we need to provide different arguments to retrieve bigrams. As before, we need to define an `output` column and an `input` column. In addition, we also have to provide the correct type of tokenization, i.e. determine `token`, which we need to set to `"ngrams"`. We also need to define the `n` in 'ngrams', which will be `2` for bigrams. After this, we apply `count()` to our variable `bigram`, and we achieved our task. If we turn this into *R* code, we get the following (with considerably less characters than its explanation):
 
 ```{r}
 #| label: tokenizing-ngrams
 #| echo: true
 
 # Create bigrams from variable synopsis
-synopsis <-
-  imdb_top_250 |>
-  unnest_tokens(bigram, synopsis, token = "ngrams", n = 2) |>
-  select(bigram)
+comments_bigram <-
+  comments |>
+  unnest_tokens(bigram, comment, token = "ngrams", n = 2)
 
-synopsis
+comments_bigram
 ```
 
 ```{r}
@@ -277,7 +371,7 @@ synopsis
 #| echo: true
 
 # Inspect frequency of bigrams
-synopsis |> count(bigram, sort = TRUE)
+comments_bigram |> count(bigram, sort = TRUE)
 ```
 
 As before, the most frequent bigrams are those that contain stop words. Thus, we need to clean our data and remove them. This time, though, we face the challenge that the variable bigram has two words and not one. Thus, we cannot simply use `anti_join()` because the dataset `stop_words` only contains individual words, not pairs. To remove stop words successfully, we have to `separate()` the variable into two variables so that each word has its own column. The package `tidyr` makes this is an effortless task.
@@ -286,7 +380,8 @@ As before, the most frequent bigrams are those that contain stop words. Thus, we
 #| label: split-bigram-into-two-columns
 #| echo: true
 
-bigram_split <- synopsis |>
+bigram_split <-
+  comments_bigram |>
   separate(col = bigram,
            into = c("word1", "word2"),
            sep = " ")
@@ -294,7 +389,7 @@ bigram_split <- synopsis |>
 bigram_split
 ```
 
-With this new data frame, we can remove stop words in each variable. Of course, we could use `anti_join()` as before and perform the step twice, but there is a much more elegant solution. Another method to compare values across vectors/columns is the `%in%` operator. It is very intuitive to use because it tests whether values in the variable on the left of `%in%` exist in the variable to the right. Let's look at a simple example. Assume we have an object that contains the names of people related to `family` and `work`. We want to know whether people in our `family` are also found in the list of `work`. If you remember Table \@ref(tab:logical-operators-r), which lists all logical operators, you might be tempted to try `family == work`. However, this would assess the object in its entirety and not tell us which values, i.e. which names, can be found in both lists.
+With this new data frame, we can remove stop words in each variable. Of course, we could use `anti_join()` as before and perform the step twice, but there is a much more elegant solution. Another method to compare values across vectors/columns is the `%in%` operator. It is very intuitive to use because it tests whether values in the variable on the left of `%in%` exist in the variable to the right. Let's look at a simple example. Assume we have an object that contains the names of people related to `family` and `work`. We want to know whether people in our `family` are also found in the list of `work`. If you remember @tbl-logical-operators-r, which lists all logical operators, you might be tempted to try `family == work`. However, this would assess the object in its entirety and not tell us which values, i.e. which names, can be found in both lists.
 
 ```{r}
 #| label: example-of-equal-to-logical-operator
@@ -308,7 +403,7 @@ work <- tibble(name = c("Fiona", "Katharina", "Daniel"))
 family$name == work$name
 ```
 
-All but one value in `family` and `work` are not equal, i.e. they are `FALSE`. This is because `==` compares the values in order. If we changed the order, some of the `FALSE` values would turn `TRUE`. In addition, we get a warning telling us that these two objects are not equally long because `family` holds four names, while `work` contains only three names. Lastly, the results are not what we expected because `Fiona` and `Daniel` appear in both objects. Therefore we would expect that there should be two `TRUE` values. In short, `==` is not the right choice to compare these two objects.
+The output suggests that all but one value in `family` and `work` are not equal, i.e. they are `FALSE`. This is because `==` compares the values in order. If we changed the order, some of the `FALSE` values would turn `TRUE`. In addition, we get a warning telling us that these two objects are not equally long because `family` holds four names, while `work` contains only three names. Lastly, the results are not what we expected because `Fiona` and `Daniel` appear in both objects. Therefore we would expect that there should be two `TRUE` values. In short, `==` is not the right choice to compare these two objects.
 
 If we use `%in%` instead, we can test whether each name appears in both objects, irrespective of their length and the order of the values.
 
@@ -358,11 +453,11 @@ bigram_cleaned <- bigram_cleaned |>
 bigram_cleaned
 ```
 
-The result is a clean dataset, which reveals that `world` and `war` are the most common bigram in the synopsis of our Top 250 IMDb movies.
+The result is a clean dataset, which reveals that `cultural` and `events` are the most common bigram together with `study` and `session` in the `comments` dataset. Clearly, students spend a lot of time at social events or in study groups. Thus, when they talk about their experiences, these could be considered common places where they have them.
 
-Sometimes we might wish to re-`unite()` the two columns that we separated. For example, when plotting the results into a `ggplot()`, we need both words in one column[^mixed_methods-1] to use the actual bigrams as labels.
+Sometimes we might wish to re-`unite()` the two columns that we separated. For example, when plotting the results into a `ggplot()`, we need both words in one column[^14_mixed_methods-1] to use the actual bigrams as labels.
 
-[^mixed_methods-1]: With `glue::glue()` you can also combine values from two different columns directly in `ggplot()`, but it seems simpler to just use `unite()`. Remember, there is always more than one way of doing things in R.
+[^14_mixed_methods-1]: With `glue::glue()` you can also combine values from two different columns directly in `ggplot()`, but it seems simpler to just use `unite()`. Remember, there is always more than one way of doing things in R.
 
 ```{r}
 #| label: united-two-columns-bigram
@@ -396,7 +491,7 @@ graph <- igraph::graph_from_data_frame(bigram_cleaned)
 
 # Plot the network graph
 graph |>
-  ggraph(layout = "kk") +  # Choose a layout
+  ggraph(layout = "kk") +  # Choose a layout, e.g. "kk"
   geom_edge_link() +       # Draw lines between nodes
   geom_node_point()        # Add node points
 ```
@@ -432,12 +527,32 @@ network_plot |>
   geom_node_point() +
   geom_node_text(aes(label = name),
                  vjust = 1,
-                 hjust = 1)
+                 hjust = 1,
+                 size = 3)
 ```
 
-The final plot shows that `war` and other military aspects, e.g. `soldiers`, `army` are very prevalent in our dataset. Besides, we also find some famous movie characters in our visualisation, such as `darth` `vader`, `luke` `skywalker` or `indiana` `jones`.
+This visualisation looks considerably more informative than any of the previous attempts. Still, it seems the chosen layout is not ideal to identify themes/topics in our data. Thus, it is worth experimenting with another layout, for example `graphopt`.
 
-Our example is a simple analysis based on a relatively small 'corpus', i.e. a small dataset. However, the application of n-grams in larger datasets can reveal topic areas and links between them. There are more approaches to exploring topics in large datasets, for example, ['topic modelling'](https://www.tidytextmining.com/topicmodeling.html "Topic Modeling"){target="blank"}, which are far more complex, but offer more sophisticated analytical insights.
+```{r}
+#| label: ngrams-network-plot-step-four
+#| echo: true
+
+set.seed(1234)
+
+# Plot network plot but using a different layout
+network_plot |>
+  ggraph(layout = "graphopt") +
+  geom_edge_link(aes(col = factor(n))) +
+  geom_node_point() +
+  geom_node_text(aes(label = name),
+                 vjust = 0.5,
+                 hjust = -0.25,
+                 size = 3)
+```
+
+The final plot shows us how themes like `events`, `friendships`, and `feel` (i.e. 'feelings') connect to other words. They constitute important topics that students talked about when describing their study experiences. While this type of analysis cannot fully replace manual analysis, it does offer unique insights into our data from a macro perspective without spending days analysing these comments.
+
+Our example is a simple analysis based on a relatively small 'corpus', i.e. a small dataset. However, the application of n-grams in larger datasets can reveal topic areas and links between them even more effectively. There are more approaches to exploring topics in large datasets, for example, ['topic modelling'](https://www.tidytextmining.com/topicmodeling.html "Topic Modeling"){target="blank"}, which are far more complex, but offer more sophisticated analytical insights.
 
 ## Exploring more mixed-methods research approaches in *R*
 

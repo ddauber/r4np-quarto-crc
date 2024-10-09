@@ -43,7 +43,7 @@ Here is an overview of the different steps we usually work through before starti
 
 -   Run missing data diagnostics.
 
-## Import your data
+## Import your data {#sec-import-your-data}
 
 The `r4np` package hosts several different datasets to work with, but at some point, you might want to apply your *R* knowledge to your own data. Therefore, an essential first step is to import your data into RStudio. There are three different methods, all of which are very handy:
 
@@ -53,7 +53,7 @@ The `r4np` package hosts several different datasets to work with, but at some po
 
 3.  Import your data calling one of the `readr` functions in the *Console* or *R* script.
 
-We will use the `readr` package or all three options. Using this package we can import a range of different file formats, including `.csv`, `.tsv`, `.txt`. If you want to import data from an `.xlsx` file, you need to use another package called `readxl`. Similarly, if you used SPSS, Stata or SAS files before and want to use them in *R* you can use the `haven` package. The following sections will primarily focus on using `readr` via RStudio or directly in your *Console* or *R* script.
+We will use the `readr` package for all three options. Using this package we can import a range of different file formats, including `.csv`, `.tsv`, `.txt`. If you want to import data from an `.xlsx` file, you need to use another package called `readxl`. Similarly, if you used SPSS, Stata or SAS files before and want to use them in *R* you can use the `haven` package. The following sections will primarily focus on using `readr` via RStudio or directly in your *Console* or *R* script.
 
 ### Import data from the *Files* pane
 
@@ -93,7 +93,7 @@ This approach is by far the easiest. Let's assume you have a dataset called `gen
 
     ![](images/chapter_07_img/01_files_pane_import/04_files_pane_import.png)
 
-In the *Console*, you can see that *R* also provides the `Column specification`, which we need later when inspecting 'data types'. `readr` automatically imports all text-based columns as `chr`, i.e. `character` values. However, this might not always be the correct data type. We will cover more of this aspect of data wrangling in Chapter \@ref(change-data-types).
+In the *Console*, you can see that *R* also provides the `Column specification`, which we need later when inspecting 'data types'. `readr` automatically imports all text-based columns as `chr`, i.e. `character` values. However, this might not always be the correct data type. We will cover more of this aspect of data wrangling in @sec-change-data-types.
 
 ### Importing data from the *Environment* pane {#sec-importing-data-from-the-environment-pane}
 
@@ -122,30 +122,38 @@ You might be wondering whether you can use `read_delim()` to import `.csv` files
 
 You might also be wondering what a *'delimiter'* is. When you record data in a plain-text file, it is easy to see where a new observation starts and ends because it is defined by a row in your file. However, we also need to tell our software where a new column starts, i.e. where a cell begins and ends. Consider the following example. We have a file that holds our data which looks like this:
 
-    idagegender
-    124male
-    256female
-    333male
+```         
+idagegender
+124male
+256female
+333male
+```
 
 The first row we probably can still decipher as `id`, `age`, `gender`. However, the next row makes it difficult to understand which value represents the `id` of a participant and which value reflects the `age` of that participant. Like us, computer software would find it hard too to decide on this ambiguous content. Thus, we need to use delimiters to make it very clear which value belongs to which column. For example, in a `.csv` file, the data would be separated by a `,`.
 
-    id,age,gender
-    1,24,male
-    2,56,female
-    3,33,male
+```         
+id,age,gender
+1,24,male
+2,56,female
+3,33,male
+```
 
 Considering our example from above, we could also use `|` as a delimiter, but this is very unusual.
 
-    id|age|gender
-    1|24|male
-    2|56|female
-    3|33|male
+```         
+id|age|gender
+1|24|male
+2|56|female
+3|33|male
+```
+
+An important advantage of this approach is the ability to load large data files much more quickly. The previous options offer a preview of your data, but loading this preview can take a long time for large datasets. Therefore, I highly recommend using the `readr` functions directly in the console or your R script to avoid frustration when importing large datasets.
 
 There is a lot more to `readr` than could be covered in this book. If you want to know more about this *R* package, I highly recommend looking at the [readr webpage](https://readr.tidyverse.org "package webpage"){target="blank"}.
 
 ## Inspecting your data {#sec-inspecting-raw-data}
 
-For the rest of this chapter, we will use the `wvs` dataset from the `r4np` package. However, we do not know much about this dataset, and therefore we cannot ask any research questions worth investigating. Therefore, we need to look at what it contains. The first method of inspecting a dataset is to type the name of the object, i.e. `wvs`.
+For the rest of this chapter, we will use the World Value Survery data [@wvs2022] (`wvs`) from the `r4np` package. However, we do not know much about this dataset, and therefore we cannot ask any research questions worth investigating. Therefore, we need to look at what it contains. The first method of inspecting a dataset is to type the name of the object, i.e. `wvs`.
 
 ```{r}
 #| label: open-wvs
@@ -188,7 +196,7 @@ The output of glimpse shows us the name of each column/variable after the `$`, f
 wvs$relationship_status
 ```
 
-When using `glimpse()` we find the recognised data type for each column, i.e. each variable, in `<...>`, for example `<chr>`. We will return to data types in Chapter \@ref(change-data-types). Lastly, we get examples of the values included in each variable. This output is much more helpful.
+When using `glimpse()` we find the recognised data type for each column, i.e. each variable, in `<...>`, for example `<chr>`. We will return to data types in @sec-change-data-types. Lastly, we get examples of the values included in each variable. This output is much more helpful.
 
 I use `glimpse()` very frequently for different purposes, for example:
 
@@ -234,7 +242,7 @@ Freedom.of.Choice
 Satisfaction-with-life
 ```
 
-From Chapter \@ref(coding-etiquette), you will remember that being consistent in writing your code and naming your objects is essential. The same applies, of course, to variable names. *R* will not break using the existing names, but it will save you a lot of frustration if we take a minute to clean the names and make them more consistent. Since we will use column names in almost every line of code we produce, it is best to standardise them and make them easier to read and write.
+From @sec-coding-etiquette, you will remember that being consistent in writing your code and naming your objects is essential. The same applies, of course, to variable names. *R* will not break using the existing names, but it will save you a lot of frustration if we take a minute to clean the names and make them more consistent. Since we will use column names in almost every line of code we produce, it is best to standardise them and make them easier to read and write.
 
 You are probably thinking: "This is easy. I just open the dataset in Excel and change all the column names." Indeed, it would be a viable and easy option, but it is not very efficient, especially with larger datasets with many more variables. Instead, we can make use of the `janitor` package. By definition, `janitor` is a package that helps to clean up whatever needs cleaning. In our case, we want to tidy our column names. We can use the function `clean_names()` to achieve this. We store the result in a new object called `wvs` to keep those changes. The object will also show up in our *Environment* pane.
 
@@ -288,6 +296,8 @@ rename(wvs_clean, satisfaction_new = satisfaction)
 ```
 
 Since you will be using the pipe operator very frequently, it is a good idea to remember the keyboard shortcut for it: `Ctrl+Shift+M` for PC and `Cmd+Shift+M` for Mac.
+
+Besides `|>` operator you might also find that some sources use a different pipe operator `%>%`. The original `tidyverse` approach used `%>%` before R introduced their own pipe operator. In short: You can use both of them if you like, but in 90% of cases, you probably will be fine using the one that comes shipped with RStudio by default, i.e. `|>`. More and more R resources adopt the `|>` operator and there are only few situations where `%>%` is preferred. For the content of this book and the techniques demonstrated here, you can use both operators interchangeably and the code will work just fine.
 
 ## Data types: What are they and how can you change them {#sec-change-data-types}
 
@@ -413,17 +423,17 @@ numeric_values |>
 
 ## Handling factors {#sec-handling-factors}
 
-Factors are an essential way to classify observations in our data in different ways. In terms of data wrangling, there are usually at least two steps we take to prepare them for analysis:
+Factors are an essential way to classify observations in our data in different ways. In terms of data wrangling, there are usually at least three steps we take to prepare them for analysis:
 
--   Recoding factors, and
-
--   Reordering factor levels.
+-   Recoding factors,
+-   Reordering factor levels, and
+-   Removing factor levels
 
 ### Recoding factors {#sec-recoding-factors}
 
-Another common problem we have to tackle when working with data is their representation in the dataset. For example, `gender` could be measured as `male` and `female`[^data_wrangling-1] or as `0` and `1`. *R* does not mind which way you represent your data, but some other software does. Therefore, when we import data from somewhere else, the values of a variable might not look the way we want. The practicality of having your data represented accurately as what they are, becomes apparent when you intend to create tables and plots.
+Another common problem we have to tackle when working with data is their representation in the dataset. For example, `gender` could be measured as `male` and `female`[^07_data_wrangling-1] or as `0` and `1`. *R* does not mind which way you represent your data, but some other software does. Therefore, when we import data from somewhere else, the values of a variable might not look the way we want. The practicality of having your data represented accurately as what they are, becomes apparent when you intend to create tables and plots.
 
-[^data_wrangling-1]: A sophisticated research project would likely not rely on a dichotomous approach to gender, but appreciate the diversity in this regard.
+[^07_data_wrangling-1]: A sophisticated research project would likely not rely on a dichotomous approach to gender, but appreciate the diversity in this regard.
 
 For example, we might be interested in knowing how many participants in `wvs_clean` were `male` and `female`. The function `count()` from `dplyr` does precisely that. We can sort the results, i.e. `n`, in descending order by including `sort = TRUE`. By default, `count()` arranges our variable `gender` in alphabetical order.
 
@@ -449,7 +459,7 @@ wvs_clean <-
                              "female" = "1"))
 ```
 
-If you have been following along very carefully, you might spot one oddity in this code: `"0"` and `"1"`. You likely recall that in Chapter \@ref(r-basics-the-very-fundamentals), I mentioned that we use `""` for `character` values but not for numbers. So what happens if we run the code and remove `""`.
+If you have been following along very carefully, you might spot one oddity in this code: `"0"` and `"1"`. You likely recall that in @sec-r-basics-the-very-fundamentals, I mentioned that we use `""` for `character` values but not for numbers. So what happens if we run the code and remove `""`.
 
 ```{r}
 #| label: recode-gender-without-quot-marks
@@ -476,7 +486,7 @@ wvs_clean |> count(gender)
 Another benefit of going through the trouble of recoding your factors is the readability of your plots. For example, we could quickly generate a bar plot based on the above table and have appropriate labels instead of `0` and `1`.
 
 ```{r}
-#| label: gender-bar-plot
+#| label: fig-gender-bar-plot
 #| echo: true
 #| fig-cap: "A bar plot of the factor levels `male` and `female`"
 
@@ -486,7 +496,7 @@ wvs_clean |>
   geom_col()
 ```
 
-Plots are an excellent way to explore your data and understand relationships between variables. We will learn more about this when we start to perform analytical steps on our data (see Chapter \@ref(descriptive-statistics) and beyond).
+Plots are an excellent way to explore your data and understand relationships between variables. We will learn more about this when we start to perform analytical steps on our data (see @sec-descriptive-statistics and beyond).
 
 Another use case for recoding factors could be for purely cosmetic reasons. For example, when looking through our dataset, we might notice that some country names are very long and do not look great in data visualisations or tables. Thus, we could consider shortening them which is a slightly more advanced process.
 
@@ -528,7 +538,7 @@ Besides changing factor levels, it is also common that we want to reconsider the
 fct_unique(wvs_clean$gender)
 ```
 
-A reason for changing the order of factor levels could be to arrange how factor levels are displayed in plots. For example, Figure \@ref(fig:gender-bar-plot) shows the bar of `male` participants first, but instead, we might want to show `female` participants first. The `forcats` package offers several options to rearrange factor levels based on different conditions. Depending on the circumstances, one or the other function might be more efficient. Three of [these functions](https://forcats.tidyverse.org/reference/index.html "forcats functions to change order of factor levels"){target="blank"} I tend to use fairly frequently:
+A reason for changing the order of factor levels could be to arrange how factor levels are displayed in plots. For example, @fig-gender-bar-plot shows the bar of `male` participants first, but instead, we might want to show `female` participants first. The `forcats` package offers several options to rearrange factor levels based on different conditions. Depending on the circumstances, one or the other function might be more efficient. Four of [these functions](https://forcats.tidyverse.org/reference/index.html "forcats functions to change order of factor levels"){target="blank"} I tend to use fairly frequently:
 
 -   `fct_relevel()`: To reorder factor levels by hand.
 
@@ -536,7 +546,9 @@ A reason for changing the order of factor levels could be to arrange how factor 
 
 -   `fct_rev()`: To reverse the order of factor levels.
 
-Each function requires slightly different arguments. If we wanted to change the order of our factor levels, we could use all three of them to achieve the same result (in our case):
+-   `fct_infreq()`: To reorder factor levels by frequency of appearance in our dataset.
+
+Each function requires slightly different arguments. If we wanted to change the order of our factor levels, we could use all four of them to achieve the same result (in our case):
 
 ```{r}
 #| label: reorder-factor-levels-forcats
@@ -562,6 +574,18 @@ wvs_clean |>
   geom_col()
 ```
 
+The function `fct_infreq()` is particularly convenient when looking at frequencies, because it will automatically order factor levels according to their size. Thus, we can skip the part where we `count()` factor levels and use `geom_bar()` instead.
+
+```{r}
+#| label: reorder-by-other-variable-infreq
+#| echo: true
+
+# Reorder based on frequency of appearance
+wvs_clean |>
+  ggplot(aes(x = fct_infreq(gender))) +
+  geom_bar()
+```
+
 ```{r}
 #| label: reverse-order
 #| echo: true
@@ -575,6 +599,80 @@ wvs_clean |>
 ```
 
 There are many ways to rearrange factors, and it very much depends on the data you have and what you wish to achieve. For most of my plots, I tend to revert to a basic R function, i.e. `reorder()`, which is much shorter to type and does essentially the same as `fct_reorder()`. There is no right or wrong in this regard, just personal taste.
+
+### Removing factor levels {#sec-removing-factor-levels}
+
+When we work with factors, it can sometimes happen that we have factor levels that are not linked to any of our observations in the dataset, but when we try to perform certain analytical steps they might get in the way (for example in @sec-regressions-with-control-variables). Therefore it is important to perform some housekeeping and remove unneeded factor levels.
+
+```{r}
+#| label: dataset-dropping-levels 
+#| echo: true
+
+# A dataset which contains a factor with 4 levels
+data <- tibble(gender = factor(c("female",
+                                 "male",
+                                 "non-binary"),
+                               
+                               # Setting the factor levels
+                               levels = c("female",
+                                          "male",
+                                          "non-binary",
+                                          "unknown")
+                               )
+               )
+
+data
+```
+
+The `data` dataframe contains the variable `gender` which has four levels, but only three levels are represented in the data, i.e. the factor level `unknown` matches none of our observations in the dataset. However, it is still there:
+
+```{r}
+#| label: inspecting-all-factor-levels
+#| echo: true
+
+# All four factors are still here
+levels(data$gender)
+```
+
+If we want to remove the unused factor level we have two options: We can either use `droplevels()` or `fct_drop()` from the `forcats` package. A nice little perk of the `droplevels()` function is that it can remove unused factor levels from all factors in the dataset. Here are the different options in action:
+
+```{r}
+#| label: drop-factor-levels-01
+#| echo: true
+
+# Option 1: Using 'droplevels()
+data_3_lvls <- 
+  data |>
+  mutate(gender = droplevels(gender))
+
+levels(data_3_lvls$gender)
+```
+
+```{r}
+#| label: drop-factor-levelsoption-02
+#| echo: true
+
+# Option 2: Using 'fct_drop()
+data_3_lvls <- 
+  data |>
+  mutate(gender = fct_drop(gender))
+
+levels(data_3_lvls$gender)
+
+```
+
+```{r}
+#| label: drop-factor-levels-option-03
+#| echo: true
+
+# Removing unused factor levels of all factors 
+data_3_levels <-
+  data |> droplevels()
+
+levels(data_3_lvls$gender)
+```
+
+In my experience, it is always good to remove unused categories (i.e. levels) because sometimes they can lead to unexpected outcomes. Thus, it is a matter of good practice than an absolute necessity. Besides, it is fairly easy to tidy your factors with the above functions.
 
 ## Handling dates, times and durations {#sec-handling-dates-times-and-durations}
 
@@ -590,14 +688,16 @@ The following sections will provide some guidance on solving commonly occurring 
 
 No matter which data collection tool you use, you likely encounter differences in how various software report dates and times back to you. Not only is there a great variety in formats in which dates and times are reported, but there are also other issues that one has to take care of, e.g. time zone differences. Here are some examples of how dates could be reported in your data:
 
-    26 November 2022
-    26 Nov 2022
-    November, 26 2022
-    Nov, 26 2022
-    26/11/2022
-    11/26/2022
-    2022-11-26
-    20221126
+```         
+26 November 2022
+26 Nov 2022
+November, 26 2022
+Nov, 26 2022
+26/11/2022
+11/26/2022
+2022-11-26
+20221126
+```
 
 It would be nice if there was a standardised method of recording dates and times and, in fact, there is one: [ISO 8601](https://www.iso.org/iso-8601-date-and-time-format.html "ISO 8601: A standard for reporting and recording dates and times"). But unfortunately, not every software, let alone scholar, necessarily adheres to this standard. Luckily there is a dedicated *R* package that solely deals with these issues called `lubridate`, which is also part of the `tidyverse`. It helps reformat data into a coherent format and takes care of other essential aspects, such as '*time zones, leap days, daylight savings times, and other time related quirks*' [@lubridate]. Here, we will primarily focus on the most common issues, but I highly recommend looking at the ['lubridate' website](https://lubridate.tidyverse.org/ "Website of the package 'lubridate'"){target="_blank"} to see what else the package has to offer.
 
@@ -709,7 +809,7 @@ df_duration |>
 
 For now, you should not worry about what this code means but rather consider the interpretation of the plot, i.e. that most participants (represented by a black dot) needed less than 20 minutes to complete the questionnaire. Depending on the length of your data collection tool, this could either be good or bad news. Usually, the shorter the questionnaire can be, the higher the response rate, unless you have incentives for participants to complete a longer survey.
 
-in Chapter \@ref(descriptive-statistics), we will cover data visualisations like this boxplot in greater detail. If you cannot wait any longer and want to create your own visualisations, you are welcome to skip ahead. However, several data visualisations are awaiting you in the next chapter as well.
+In @sec-descriptive-statistics, we will cover data visualisations like this boxplot in greater detail. If you cannot wait any longer and want to create your own visualisations, you are welcome to skip ahead. However, several data visualisations are awaiting you in the next chapter as well.
 
 ## Dealing with missing data {#sec-dealing-with-missing-data}
 
@@ -726,7 +826,7 @@ There is hardly any Social Sciences project where researchers do not have to dea
 Every study that intends to be rigorous will have to identify how much data is missing because it affects the interpretability of our available data. In *R*, this can be achieved in multiple ways, but using a specialised package like `naniar` does help us to do this very quickly and systematically. First, we have to load the `naniar` package, and then we use the function `vis_miss()` to visualise how much and where exactly data is missing.
 
 ```{r}
-#| label: mapping-missing-data
+#| label: fig-mapping-missing-data
 #| echo: true
 #| fig-cap: "Mapping missing data with `naniar`"
 
@@ -743,7 +843,7 @@ As we can see, 99,7% of our dataset is complete, and we are only missing 0.3%. T
 When working with larger datasets, it might also be helpful to rank variables by their degree of missing data to see where the most significant problems lie.
 
 ```{r}
-#| label: missing-data-per-variable
+#| label: fig-missing-data-per-variable
 #| echo: true
 #| warning: false
 #| fig-cap: "Missing data per variable"
@@ -791,7 +891,7 @@ wvs_clean |>
 
 When you run such a test, you have to ensure that variables that are not part of the data collection process are removed. In our case, the `participant_id` is generated by the researcher and does not represent an actual response by the participants. As such, we need to remove it using `select()` before we can run the test. A `-` inverts the meaning of `select()`. While `select(participant_id)` would do what it says, i.e. include it as the only variable in the test, `select(-participant_id)` results in selecting everything but this variable in our test. You will find it is sometimes easier to remove a variable with `select()` rather than listing all the variables you want to keep.
 
-Since the `p.value` of the test is so small that it got rounded down to `0`, i.e. $p<0.0001$, we have to assume that our data is not missing completely at random. If we found that $p>0.05$, we would have confirmation that data are missing completely at random. We will cover p-values and significance tests in more detail in Chapter \@ref(significance).
+Since the `p.value` of the test is so small that it got rounded down to `0`, i.e. $p<0.0001$, we have to assume that our data is not missing completely at random. If we found that $p>0.05$, we would have confirmation that data are missing completely at random. We will cover p-values and significance tests in more detail in @sec-significance.
 
 #### Missing at random (MAR) {#sec-missing-at-random-mar}
 
@@ -826,15 +926,19 @@ gg_miss_upset(wvs_clean)
 
 The most frequent combination of missing data in our dataset occurs when only `freedom_of_choice` is missing (the first column), but nothing else. Similar results can be found for `relationships_status` and `age`. The first combination of missing data is defined by two variables: `satisfaction` and `freedom_of_choice`. In total, 107 participants had `satisfaction` and `freedom_of_choice` missing but nothing else.
 
-The 'set size' shown in the upset plot refers to the number of missing values for each variable in the diagram. This corresponds to what we have found when looking at Figure \@ref(fig:missing-data-per-variable).
+The 'set size' shown in the upset plot refers to the number of missing values for each variable in the diagram. This corresponds to what we have found when looking at @fig-missing-data-per-variable.
 
 Our analysis also suggests that values are not completely randomly missing but that we have data to help explain why they are missing.
 
 #### Missing not at random (MNAR) {#sec-missing-not-at-random-mnar}
 
-Lastly, missing not at random (MNAR) implies that data is missing systematically and that other variables or reasons exist that explain why data is missing. Still, they are not fully known to us. In questionnaire-based research, an easily overlooked reason that can explain missing data is the 'page-drop-off' phenomenon. In such cases, participants stop completing a questionnaire once they advance to another page. Figure \@ref(fig:mnar-example) shows this very clearly for a large scale project where an online questionnaire was used. After almost every page break in the questionnaire, some participants decided to discontinue. Finding these types of patterns is difficult when only working with numeric values. Thus, it is always advisable to visualise your data as well. Such missing data is linked to the design of the data collection tool.
+Lastly, missing not at random (MNAR) implies that data is missing systematically and that other variables or reasons exist that explain why data is missing. Still, they are not fully known to us. In questionnaire-based research, an easily overlooked reason that can explain missing data is the 'page-drop-off' phenomenon. In such cases, participants stop completing a questionnaire once they advance to another page. @fig-mnar-example shows this very clearly for a large scale project where an online questionnaire was used. After almost every page break in the questionnaire, some participants decided to discontinue. Finding these types of patterns is difficult when only working with numeric values. Thus, it is always advisable to visualise your data as well. Such missing data is linked to the design of the data collection tool.
 
-```{r, fig.cap="MNAR pattern in a dataset due to 'page-drop-offs'", echo=FALSE, label="mnar-example"}
+```{r}
+#| label: fig-mnar-example
+#| echo: false
+#| fig-cap: "MNAR pattern in a dataset due to 'page-drop-offs'"
+
 knitr::include_graphics("images/chapter_07_img/03_missing_data/00_mnar_example.png")
 ```
 
@@ -931,18 +1035,18 @@ wvs_nona <-
          satisfaction = as.numeric(satisfaction))
 ```
 
-The function `impute_knn(. ~ .)` might look like a combination of text with an emoji `(. ~ .)`. This imputation function requires us to specify a model to impute the data. Since we want to impute all missing values in the dataset and use all variables available, we put `.` on both sides of the equation, separated by a `~`. The `.` reflects that we do not specify a specific variable but instead tell the function to use all variables that are not mentioned. In our case, we did not mention any variables at all, and therefore it chooses all of them. For example, if we wanted to impute only `freedom_of_choice`, we would have to put `impute_knn(freedom_of_choice ~ .)`. We will elaborate more on how to specify models when we cover regression models (see Chapter \@ref(regression)).
+The function `impute_knn(. ~ .)` might look like a combination of text with an emoji `(. ~ .)`. This imputation function requires us to specify a model to impute the data. Since we want to impute all missing values in the dataset and use all variables available, we put `.` on both sides of the equation, separated by a `~`. The `.` reflects that we do not specify a specific variable but instead tell the function to use all variables that are not mentioned. In our case, we did not mention any variables at all, and therefore it chooses all of them. For example, if we wanted to impute only `freedom_of_choice`, we would have to put `impute_knn(freedom_of_choice ~ .)`. We will elaborate more on how to specify models when we cover regression models (see @sec-regression).
 
-As you will have noticed, we also had to convert our `tibble` into a `data frame` using `as.data.frame()`. As mentioned in Chapter \@ref(functions), some functions require a specific data type or format. The `simputation` package works with `dplyr`, but it prefers `data frame`s. Based on my experiences, the wrong data type or format is one of the most frequent causes of errors that novice *R* programmers report. So, keep an eye on it and read the documentation carefully. Also, once you inspect the new data frame, you will notice that some of our `double` variables have now turned into `character` values. Therefore, I strongly recommend checking your newly created data frames to avoid any surprises further down the line of your analysis. *R* requires us to be very precise in our work, which I think is rather an advantage than an annoyance[^data_wrangling-2].
+As you will have noticed, we also had to convert our `tibble` into a `data frame` using `as.data.frame()`. As mentioned in @sec-functions, some functions require a specific data type or format. The `simputation` package works with `dplyr`, but it prefers `data frame`s. Based on my experiences, the wrong data type or format is one of the most frequent causes of errors that novice *R* programmers report. So, keep an eye on it and read the documentation carefully. Also, once you inspect the new data frame, you will notice that some of our `double` variables have now turned into `character` values. Therefore, I strongly recommend checking your newly created data frames to avoid any surprises further down the line of your analysis. *R* requires us to be very precise in our work, which I think is rather an advantage than an annoyance[^07_data_wrangling-2].
 
-[^data_wrangling-2]: Still, I understand that it often feels annoying.
+[^07_data_wrangling-2]: Still, I understand that it often feels annoying.
 
 Be aware that imputation of any kind can take a long time. For example, my MacBook Pro took about 4.22 seconds to complete `impute_knn()` with the `wvs` dataset. If we used multiple imputation, this would have taken considerably longer, i.e. several minutes and more.
 
-We now should have a dataset that is free of any missing values. To ensure this is the case we can create the missing data matrix that we made at the beginning of this chapter (see Figure \@ref(fig:mapping-missing-data)).
+We now should have a dataset that is free of any missing values. To ensure this is the case we can create the missing data matrix that we made at the beginning of this chapter (see @fig-mapping-missing-data).
 
 ```{r}
-#| label: mapping-missing-data-imputed-data
+#| label: fig-mapping-missing-data-imputed-data
 #| echo: true
 
 vis_miss(wvs_nona)
@@ -952,9 +1056,9 @@ As the plot demonstrates, we managed to obtain a dataset which is now free of mi
 
 ### Two more methods of replacing missing data you hardly ever need {#sec-two-more-methods-of-replacing-missing-data}
 
-There are two more options for replacing missing data[^data_wrangling-3], but these I would hardly ever recommend. Still, this section would not be complete without mentioning them, and they have their use-cases.
+There are two more options for replacing missing data[^07_data_wrangling-3], but these I would hardly ever recommend. Still, this section would not be complete without mentioning them, and they have their use-cases.
 
-[^data_wrangling-3]: Technically, there are many more options, but most of them work similar to the demonstrated techniques and are equally less needed in most scenarios.
+[^07_data_wrangling-3]: Technically, there are many more options, but most of them work similar to the demonstrated techniques and are equally less needed in most scenarios.
 
 The first method involves the function `replace_na()`. It allows you to replace any missing data with a value of your choice. For example, let's consider the following dataset which contains feedback from students regarding one of their lectures.
 
@@ -971,7 +1075,7 @@ student_feedback <- tibble(name = c("Thomas", NA, "Helen", NA),
 student_feedback
 ```
 
-We have different types of data to deal with in `student_feedback`, and there are several missing data points, i.e. `NA` in each column. We can use the `replace_na()` function to decide how to replace the missing data. For `feedback`, we might want to insert a number, for example, the average of all available ratings (`(6 + 5+ 4) / 3 = 5)`. However, we might wish to add some string values for `name` and `overall`. We have to keep in mind that `replace_na()` requires a `chr` variable as input, which is not the case for `overall`, because it is a `factor`. Consequently, we need to go back to Chapter \@ref(change-data-types) and change the data type before replacing `NA`s. Here is how we can achieve all this in a few lines of code:
+We have different types of data to deal with in `student_feedback`, and there are several missing data points, i.e. `NA` in each column. We can use the `replace_na()` function to decide how to replace the missing data. For `feedback`, we might want to insert a number, for example, the average of all available ratings (`(6 + 5+ 4) / 3 = 5)`. However, we might wish to add some string values for `name` and `overall`. We have to keep in mind that `replace_na()` requires a `chr` variable as input, which is not the case for `overall`, because it is a `factor`. Consequently, we need to go back to @sec-change-data-types and change the data type before replacing `NA`s. Here is how we can achieve all this in a few lines of code:
 
 ```{r}
 #| label: na-replacement-with-value
@@ -1096,7 +1200,7 @@ Compared to dealing with missing data, this is a fairly straightforward task. Ho
 
 By far, the most common approach to assessing *internal consistency* of latent variables is Cronbach's $\alpha$. This indicator looks at how strongly a set of items (i.e. questions in your questionnaire) are related to each other. For example, the stronger the relationship of all items starting with `si_` to each other, the more likely we achieve a higher Cronbach's $\alpha$. The `psych` package has a suitable function to compute it for us.
 
-Instead of listing all the items by hand, I use the function `starts_with()` to pick only the variables whose names start with `si_`. It certainly pays off to think about your variable names more thoroughly in advance to benefit from such shortcuts (see also Chapter \@ref(colnames-cleaning)).
+Instead of listing all the items by hand, I use the function `starts_with()` to pick only the variables whose names start with `si_`. It certainly pays off to think about your variable names more thoroughly in advance to benefit from such shortcuts (see also @sec-colnames-cleaning).
 
 ```{r}
 #| label: compute-cronbachs-alpha-si
@@ -1145,7 +1249,7 @@ gep |>
   glimpse()
 ```
 
-Therefore it is necessary to define two conditions to select the correct items in our dataset using `ends_with()` and combine these two with the logical operator `&` (see also Table \@ref(tab:logical-operators-r)).
+Therefore it is necessary to define two conditions to select the correct items in our dataset using `ends_with()` and combine these two with the logical operator `&` (see also @tbl-logical-operators-r).
 
 ```{r}
 #| label: evolution-select-function-example
@@ -1202,7 +1306,7 @@ However, while Cronbach's $\alpha$ is very popular due to its simplicity, there 
 
 During the development of a new questionnaire, researchers often perform EFA on a pilot dataset to see which factors would emerge without prior assumptions. Once this process has been completed, another round of data would be collected to perform a CFA. This CFA ideally confirms the results from the pilot study. It is also not unusual to split a larger dataset into two parts and then perform EFA and CFA on separate sub-samples. However, this latter approach has the disadvantage that researchers would not have the opportunity to improve the questionnaire between EFA and CFA.
 
-Since the `gep` data is based on an established measurement tool, we perform a CFA. To perform a CFA, we use the popular `lavaan` ([*La*]{.ul}*tent [Va]{.ul}riable [An]{.ul}alysis*) package. The steps of running a CFA in *R* include:
+Since the `gep` data is based on an established measurement tool, we perform a CFA. To perform a CFA, we use the popular `lavaan` ([*La*]{.underline}*tent [Va]{.underline}riable [An]{.underline}alysis*) package. The steps of running a CFA in *R* include:
 
 1.  Define which variables are supposed to measure a specific latent variable (i.e. creating a model).
 
@@ -1319,12 +1423,12 @@ df_social |>
 
 The function `alpha()` is clever enough to make us aware that something went wrong. It even tells us that `Some items ( q2 ) were negatively correlated with the total scale and probably should be reversed`. Also, the Cronbach's $\alpha$ is now negative, which is another indicator that reversed items might be present in the dataset. To remedy this problem, we have to recode `q2` to reflect the opposite meaning. Inverting the coding usually implies we have to mirror the scores, i.e. the largest value become the smallest one and vice versa. Since we use a 6-point Likert scale, we have to recode values in the following way:
 
--   `6` -> `1`
--   `5` -> `2`
--   `4` -> `3`
--   `3` -> `4`
--   `2` -> `5`
--   `1` -> `6`
+-   `6` -\> `1`
+-   `5` -\> `2`
+-   `4` -\> `3`
+-   `3` -\> `4`
+-   `2` -\> `5`
+-   `1` -\> `6`
 
 As is so often the case in *R*, there is more than just one way of achieving this:
 
@@ -1358,7 +1462,7 @@ This technique is simple, flexible and easy to read and understand. We can chang
 
 #### Reversing items with `recode()` {#sec-reversing-items-recode}
 
-Another option to reverse items is `recode()`. Conceptually, `recode()` functions similarly to `fct_recode()`, only that it can handle numbers and factors. Therefore, we can apply a similar strategy as we did before with factors (see Chapter \@ref(recoding-factors)).
+Another option to reverse items is `recode()`. Conceptually, `recode()` functions similarly to `fct_recode()`, only that it can handle numbers and factors. Therefore, we can apply a similar strategy as we did before with factors (see @sec-recoding-factors).
 
 ```{r}
 #| label: reverse-coding-recode-01
@@ -1402,7 +1506,7 @@ df_social_r
 
 #### Reversing items with the `psych` package {#sec-reversing-items-psych}
 
-The last option I would like to share with you is with the `psych` package. This option can be helpful when reversing multiple items at once without having to create additional variables. The function `reverse.code()` takes a data set with items and requires the specification of a coding key, i.e. `keys`. This coding key indicates whether an item in this dataset should be reversed or not by using `1` for items that should not be reversed and `-1` for items you wish to reverse.
+The last option I would like to share with you is with the `psych` package. This option can be helpful when reversing multiple items at once without having to create additional variables. The function `reverse.code()` takes a dataset with items and requires the specification of a coding key, i.e. `keys`. This coding key indicates whether an item in this dataset should be reversed or not by using `1` for items that should not be reversed and `-1` for items you wish to reverse.
 
 ```{r}
 #| label: reverse-coding-psych
@@ -1441,7 +1545,7 @@ df_social_r |>
   psych::alpha()
 ```
 
-Now everything seems to make sense, and the internal consistency is excellent. We can assume that all three questions reflect one latent construct. From here, we can return to computing our latent variables (see Chapter \@ref(computing-latent-variables)) and continue with our analysis.
+Now everything seems to make sense, and the internal consistency is excellent. We can assume that all three questions reflect one latent construct. From here, we can return to computing our latent variables (see @sec-computing-latent-variables) and continue with our analysis.
 
 When working with datasets, especially those you have not generated yourself, it is always important to check whether any items are meant to be reverse coded. Missing this aspect will likely throw many surprising results and can completely ruin your analysis. I vividly remember my PhD supervisor's story about a viva where a student forgot about reversing their scores. The panellists noticed that the correlations presented were counter-intuitive, and only then it was revealed that the entire analysis had to be redone. Tiny mistakes can often have an enormous ripple effect. Make sure you have 'reversed items' on your checklist when performing data cleaning and wrangling.
 

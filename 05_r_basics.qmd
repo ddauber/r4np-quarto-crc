@@ -13,7 +13,7 @@ After a likely tedious installation of *R* and RStudio, as well as a somewhat de
 
 ## Basic computations in *R* {#sec-basic-computations-in-r}
 
-The most basic computation you can do in *R* is arithmetic operations. In other words, addition, subtraction, multiplication, division, exponentiation and extraction of roots. In short, *R* can be used like your pocket calculator, or more likely the one you have on your phone. For example, in Chapter \@ref(the-console-window) we already performed an addition. Thus, it might not come as a surprise how their equivalents work in *R*. Let's take a look at the following examples:
+The most basic computation you can do in *R* is arithmetic operations. In other words, addition, subtraction, multiplication, division, exponentiation and extraction of roots. In short, *R* can be used like your pocket calculator, or more likely the one you have on your phone. For example, in @sec-the-console-window we already performed an addition. Thus, it might not come as a surprise how their equivalents work in *R*. Let's take a look at the following examples:
 
 ```{r}
 #| label: addition
@@ -65,7 +65,7 @@ sqrt(10)
 
 They all look fairly straightforward except for the extraction of roots. As you probably know, extracting the root would typically mean we use the symbol $\sqrt{}$ on our calculator. To compute the square root in *R*, we have to use a function instead to perform the computation. So we first put the name of the function `sqrt` and then the value `10` within parenthesis `()`. This results in the following code: `sqrt(10)`. If we were to write this down in our report, we would write $\sqrt[2]{10}$.
 
-Functions are an essential part of *R* and programming in general. You will learn more about them in Chapter \@ref(functions). Besides arithmetic operations, there are also logical queries you can perform. Logical queries always return either the value `TRUE` or `FALSE`. Here are some examples which make this clearer:
+Functions are an essential part of *R* and programming in general. You will learn more about them in @sec-functions. Besides arithmetic operations, there are also logical queries you can perform. Logical queries always return either the value `TRUE` or `FALSE`. Here are some examples which make this clearer:
 
 ```{r}
 #| label: logical-queries-equal
@@ -113,12 +113,12 @@ Reflecting on these examples, you might notice three important aspects of logica
 2.  We can compare non-numerical values, i.e. text, which is also known as `character` values, with each other,
 3.  The devil is in the details (consider #5).
 
-One of the most common mistakes of *R* novices is the confusion around the `==` and `=` notation. While `==` represents `equal to`, `=` is used to assign a value to an object (for more details on assignments see Chapter \@ref(assigning-values-to-objects)). However, in practice, most *R* programmers tend to avoid `=` since it can easily lead to confusion with `==`. As such, you can strike `=` out of your R vocabulary for now.
+One of the most common mistakes of *R* novices is the confusion around the `==` and `=` notation. While `==` represents `equal to`, `=` is used to assign a value to an object (for more details on assignments see @sec-assigning-values-to-objects. However, in practice, most *R* programmers tend to avoid `=` since it can easily lead to confusion with `==`. As such, you can strike `=` out of your R vocabulary for now.
 
-There are many different logical operations you can perform. Table \@ref(tab:logical-operators-r) lists the most frequently used logical operators for your reference. These will become important, for example when we filter our data for analysis, e.g. include only female or male participants.
+There are many different logical operations you can perform. @tbl-logical-operators-r lists the most frequently used logical operators for your reference. These will become important, for example when we filter our data for analysis, e.g. include only female or male participants.
 
 ```{r}
-#| label: logical-operators-r
+#| label: tbl-logical-operators-r
 #| tbl-cap: "Logical operators in R"
 #| echo: false
 
@@ -259,7 +259,7 @@ This last example is not necessarily something I would recommend to do, because 
 
 The `friends` object shows that all the values inside the object are classified as `chr`, which denominates `character`. For this object, this is correct because it only includes the names of my friends. On the other hand, the object `milestones_of_my_life` only includes `numeric` values, and therefore it says `num` in the environment pane. However, for the object `names_and_years` we know we want to have `numeric` and `character` values included. Still, *R* recognises them as `character` values because values inside objects are meant to be of the same type. Remember that in *R,* numbers can always be interpreted as `character` and `numeric`, but text only can be considered as `character`.
 
-Consequently, mixing different types of data into one object is likely a bad idea. This is especially true if you want to use the `numeric` values for computation. We will return to data types in Chapter \@ref(change-data-types) where we learn how to change them, but for now we should ensure that our objects are all of the same data type.
+Consequently, mixing different types of data into one object is likely a bad idea. This is especially true if you want to use the `numeric` values for computation. We will return to data types in @sec-change-data-types where we learn how to change them, but for now we should ensure that our objects are all of the same data type.
 
 However, there is an exception to this rule. 'Of course', you might say. There is one object that can have values of different types: a `list`. As the name indicates, a `list` object holds several items. These items are usually other objects. In the spirit of '[Inception](https://www.imdb.com/title/tt1375666/?ref_=ext_shr_lnk)', you can have lists inside lists, which contain more lists or other objects.
 
@@ -284,7 +284,7 @@ We will encounter `list` objects quite frequently when we perform our analysis. 
 
 ![The environment pane showing our objects and our list `x_files`](images/chapter_05_img/02_basic_computation_environment_lists.png){#fig-img-x-files fig-alt="Screenshot of the Environemnt tab in RStudio, showing three objects: files, miletsones_f_my_life, and names_and_years."}
 
-In Chapter @basic-computations-in-r , I mentioned that we should avoid using the `=` operator and explained that it is used to assign values to objects. You can, if you want, use `=` instead of `<-`. They fulfil the same purpose. However, as mentioned before, it is not wise to do so. Here is an example that shows that, in principle, it is possible.
+In @sec-basic-computations-in-r , I mentioned that we should avoid using the `=` operator and explained that it is used to assign values to objects. You can, if you want, use `=` instead of `<-`. They fulfil the same purpose. However, as mentioned before, it is not wise to do so. Here is an example that shows that, in principle, it is possible.
 
 ```{r}
 #| label: using-two-assignment-operators
@@ -321,7 +321,7 @@ measurement_of_boredom_of_watching_youtube
 Sleep.per_monthsIn.hours
 ```
 
-Ultimately, you need to be able to effectively work with your data and output. Ideally, this should be true for others as well who want or need to work with your analysis and data as well, e.g. your co-investigator or supervisor. The same is applies to column names in datasets (see Chapter \@ref(colnames-cleaning)). Some more information about coding style and coding etiquette can be found in Chapter \@ref(coding-etiquette).
+Ultimately, you need to be able to effectively work with your data and output. Ideally, this should be true for others as well who want or need to work with your analysis and data as well, e.g. your co-investigator or supervisor. The same is applies to column names in datasets (see @sec-colnames-cleaning). Some more information about coding style and coding etiquette can be found in @sec-coding-etiquette.
 
 ## Functions {#sec-functions}
 
@@ -379,7 +379,7 @@ my_mean <- function(numbers){
 my_mean(pocket_money)
 ```
 
-Don't worry if half of this code does not make sense to you. Writing functions is an advanced *R* skill. However, it is good to know how functions look on the 'inside'. You certainly can see the similarities between the code we have written before, but instead of using actual numbers, we work with placeholders like `numbers`. This way, we can use a function for different data and do not have to rewrite it every time. Writing and using functions relates to the skill of abstraction mentioned in Chapter \@ref(programming-languages-enhance-your-conceptual-thinking).
+Don't worry if half of this code does not make sense to you. Writing functions is an advanced *R* skill. However, it is good to know how functions look on the 'inside'. You certainly can see the similarities between the code we have written before, but instead of using actual numbers, we work with placeholders like `numbers`. This way, we can use a function for different data and do not have to rewrite it every time. Writing and using functions relates to the skill of abstraction mentioned in @sec-programming-languages-enhance-your-conceptual-thinking.
 
 All functions in *R* share the same structure. They have a `name` followed by `()`. Within these parentheses, we put `arguments`, which have specific `values`. For example, a generic structure of a function would look something like this:
 
@@ -406,7 +406,7 @@ How many arguments there are and what kind of values you can provide is very muc
 mean(friends)
 ```
 
-`NA` refers to a value that is *'not available'*. In this case, *R* tries to compute the mean, but the result is not available, because the values are not `numeric` but a `character`. In your dataset, you might find values that are `NA`, which means there is data missing. If a function attempts a computation that includes even just a single value that is `NA`, *R* will return `NA`. However, there is a way to fix this. You will learn more about how to deal with `NA` values in Chapter \@ref(dealing-with-missing-data).
+`NA` refers to a value that is *'not available'*. In this case, *R* tries to compute the mean, but the result is not available, because the values are not `numeric` but a `character`. In your dataset, you might find values that are `NA`, which means there is data missing. If a function attempts a computation that includes even just a single value that is `NA`, *R* will return `NA`. However, there is a way to fix this. You will learn more about how to deal with `NA` values in @sec-dealing-with-missing-data.
 
 Sometimes you will also get a message from *R* that states `NaN`. `NaN` stands for *'not a number'* and is returned when something is not possible to compute, for example:
 
@@ -445,7 +445,6 @@ Luckily, *R* packages are free to use, so I do not have to bring my credit card.
 
 ![The R package documentation for 'ggplot2'](images/chapter_05_img/r_package_documentation.png){#fig-img-r-package-documentation fig-alt="Screenshot of the RStudio showing the documentation for the ggplot2 package in a separate window. It shows a list of functions and other objects, like datasets that are included in this package."}
 
-
 However, how do you find those *R* packages? They are right at your fingertips. You have two options:
 
 1.  Use the function `install.packages()`, or
@@ -454,7 +453,7 @@ However, how do you find those *R* packages? They are right at your fingertips. 
 
 ### Installing packages using `install.packages()` {#sec-installing-packages-using-a-function}
 
-The simplest and fastest way to install a package is calling the function `install.packages()`. You can either use it to install a single package or install a series of packages all at once using our trusty `c()` function. All you need to know is the name of the package. This approach works for all packages that are on CRAN (remember CRAN from Chapter \@ref(installing-r)?). <a id="install-packages-tidyverse-nanair-psych"></a>
+The simplest and fastest way to install a package is calling the function `install.packages()`. You can either use it to install a single package or install a series of packages all at once using our trusty `c()` function. All you need to know is the name of the package. This approach works for all packages that are on CRAN (remember CRAN from @sec-installing-r ?). <a id="install-packages-tidyverse-nanair-psych"></a>
 
 ```{r}
 #| label: installing-r-packages-function
@@ -469,7 +468,7 @@ install.packages("tidyverse")
 install.packages(c("tidyverse", "naniar", "psych"))
 ```
 
-If a package is not available from CRAN, chances are you can find them on [GitHub](https://github.com){target="blank"}. GitHub is probably the world's largest global platform for programmers from all walks of life, and many of them develop fantastic *R* packages that make programming and data analysis not just easier but a lot more fun. As you continue to work in *R*, you should seriously consider creating your own account to keep backups of your projects (see also Chapter \@ref(next-steps-github)).
+If a package is not available from CRAN, chances are you can find them on [GitHub](https://github.com){target="blank"}. GitHub is probably the world's largest global platform for programmers from all walks of life, and many of them develop fantastic *R* packages that make programming and data analysis not just easier but a lot more fun. As you continue to work in *R*, you should seriously consider creating your own account to keep backups of your projects (see also @sec-next-steps-github).
 
 <a id="install-r4np"></a>An essential companion for this book is `r4np`, which contains all datasets for this book and some useful functions to get you up and running in no time. Since it is currently only available on Github, you can use the following code snippet to install it. However, you have to install the package `devtools` first to use the function `install_github()`.
 
@@ -537,7 +536,7 @@ The `tidyverse` package is a special kind of package. It contains multiple packa
 
 I know what you are thinking. Can you use `c()` to load all your packages at once? Unfortunately not. However, there is a way to do this, but it goes beyond the scope of this book to fully explain this. If you are curious, you can take a peek at the code [here on stackoverflow.com](https://stackoverflow.com/questions/8175912/load-multiple-packages-at-once "Loading multiple R packages at once"){target="blank"}.
 
-Besides, it is not always advisable to load all functions of an entire package. One reason could be that two packages contain a function with the same name but with a different purpose. Two functions with the same name create a conflict between these two packages, and one of the functions would not be usable. Another reason could be that you only need to use the function once, and loading the whole package to use only one specific function seems excessive. Instead, you can explicitly call functions from packages without loading the package. For example, we might want to use the `vis_miss()` function from the `naniar` package to show where data is missing in our dataset `airquality`. Using functions without `library()` is also much quicker than loading the package and then calling the function if you don't use it repeatedly. Make sure you have `naniar` installed (see [above](#install-packages-tidyverse-nanair-psych)). We will work with this package when we explore missing data in Chapter \@ref(dealing-with-missing-data). To use a function from an *R* package without loading it, we have to use `::` between the package's name and the function we want to use. Copy the code below and try it yourself.
+Besides, it is not always advisable to load all functions of an entire package. One reason could be that two packages contain a function with the same name but with a different purpose. Two functions with the same name create a conflict between these two packages, and one of the functions would not be usable. Another reason could be that you only need to use the function once, and loading the whole package to use only one specific function seems excessive. Instead, you can explicitly call functions from packages without loading the package. For example, we might want to use the `vis_miss()` function from the `naniar` package to show where data is missing in our dataset `airquality`. Using functions without `library()` is also much quicker than loading the package and then calling the function if you don't use it repeatedly. Make sure you have `naniar` installed (see [above](#install-packages-tidyverse-nanair-psych)). We will work with this package when we explore missing data in @sec-dealing-with-missing-data . To use a function from an *R* package without loading it, we have to use `::` between the package's name and the function we want to use. Copy the code below and try it yourself.
 
 ```{r}
 #| label: explicitly-calling-functions
@@ -551,7 +550,7 @@ naniar::vis_miss(airquality)
 
 Now you know everything to get started, but before we jump into our first project, I would like to briefly touch upon coding etiquette. This is not something that improves your analytical or coding skills directly, but is essential in building good habbits and making your life and those of others a little easier. Consider writing code like growing plants in your garden. You want to nurture the good plants, remove the weed and add labels that tell you which plant it is that you are growing. At the end of the day, you want your garden to be well-maintained. Treat you programming code the same way.
 
-A script (see Chapter \@ref(creating-an-r-script)) of programming code should always have at least the following qualities:
+A script (see @sec-creating-an-r-script) of programming code should always have at least the following qualities:
 
 -   Only contains code that is necessary,
 

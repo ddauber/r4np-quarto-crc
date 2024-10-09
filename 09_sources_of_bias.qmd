@@ -1,15 +1,20 @@
-# Sources of bias: Outliers, normality and other 'conundrums' {#sec-sources-of-bias}
+---
+bibliography: references.bib
+---
+
+# Sources of bias: Sampling, outliers, normality and other 'conundrums' {#sec-sources-of-bias}
 
 ```{r}
 #| label: load-packages
 #| include: false
 
 library(tidyverse)
+library(purrr)
 library(patchwork)
 library(r4np)
 ```
 
-'*Bias'* in your analysis is hardly ever a good thing unless you are a qualitative researcher. Whether you consider it positive or negative, we have to be aware of issues preventing us from performing a specific type of analysis. All of the statistical computations discussed in the following chapters can easily be affected by different sources of bias. The lack of certain biases can be an assumption of particular statistical tests. Thus, violating these assumptions would imply that the analytical technique we use will produce wrong results, i.e. biased results. @field2013discovering summarises three main assumptions we have to consider:
+'*Bias'* in your analysis is hardly ever a good thing unless you are a qualitative researcher. Whether you consider it positive or negative, we have to be aware of issues preventing us from performing a specific type of analysis. All of the statistical computations discussed in the following chapters can easily be affected by different sources of bias and, therefore, need to be discussed in advance. The lack of certain biases can be an assumption of particular statistical tests. Thus, violating these assumptions would imply that the analytical technique we use will produce wrong results, i.e. biased results. @field2013discovering summarises three main assumptions we have to consider:
 
 -   Linearity and additivity,
 
@@ -23,12 +28,226 @@ Most *parametric tests* require that all assumptions are met. If this is not the
 
 Lastly, @field2013discovering also mentions outliers as an important source of bias. Irrespective of whether your data fulfils the assumptions for parametric tests, outliers tend to be a significant problem. They usually lead to wrong results and, consequently, to misinterpretations of our findings. We will also cover how we can identify and handle such outliers in our data at the end of this chapter.
 
-## Linearity and additivity {#sec-additivity-and-linearity}
+## The origins of biases: A short introduction to sampling theory {#origins-of-bias}
 
-The assumption of linearity postulates that the relationship of variables represents a straight line and not a curve or any other shape. Figure \@ref(fig:linear-nonlinear-relationships) depicts examples of how two variables could be related to each other. Only the first one demonstrates a linear relationship, and all other plots would represent a violation of linearity.
+While we might have a solid understanding that biases are an issue for quantitative researchers, we might be wondering where they emerge from or whether they show up at random to make our lives miserable. While there are many different reasons why we have a biased dataset, there are two that are particularly noteworthy. One the one hand, what might seem like a bias to us could simply be the nature of the population. Not every population follows a normal distribution (see [@sec-histograms] and [@sec-normality]) and not every relationship between variables is linear (see [@sec-additivity-and-linearity]). So, no matter how carefully we choose our participants, we might still violate some of the assumptions for certain techniques. On the other hand, and much more of a concern, are sampling strategies we pick to collect our data. This section will elaborate more on the issues of choosing a viable sampling strategy and why it matters. In many ways, it is the building block of any analysis. Only good and reliable data can produce good and reliable results.
+
+Let's take a step back and consider the purpose of our analysis. We primarily conduct analysis to identify patterns in our world that can hopefully be replicated across different contexts. We often conduct research based on a smaller group of people (i.e. a sample) to generalise to a much larger group of people (i.e. the population). Under most circumstances It would be impossible for most studies to collect data from the entire population. Thus, we try to infer from our small sample how things are in the entire population. For this to work reliably, we need to ensure that our sample is sufficiently large to reflect the entire population. By ‘reflect’ I mean that the data is large enough to produce results that closely approximate what we would observe if data were collected from the entire population. Researchers often refer to this as the 'representativeness' of the sample. The lack of 'representativeness' is often referred to as 'selection bias' (see also [@lohr2021sampling]).
+
+In order to achieve 'representativeness,' we need to ensure that our sample matches the characteristics of the population closely enough. A major factor that affects this is *sampling strategy*. The sampling strategy determines the method we use to select individuals from a population. Unfortunately, not all strategies are considered good choices and introduce various degrees of selection bias. Bear in mind, in qualitative research, selection bias is not a real issue and strategies that help identify participants that could valuable contribute to the study would always be given preference over randomly selecting people for the sake of representativeness. @tbl-sampling-strategies briefly summarises some of the most common sampling strategies deployed in Social Sciences and their likelihood of introducing selection bias.
+
+| Sampling strategy | Description | Likelihood of selection bias |
+|------------------------|------------------------|------------------------|
+| *Simple Random Sampling* | Every participant in the population has the same chance of being selected for the study. However, it is usually difficult to achieve this approach in practice since it requires a complete list of the population, also known as the sampling frame, which is difficult to obtain. Also, in very small samples it can happen that small subgroups in a population might get missed as their chance of being included is also small. | Low |
+| *Stratified Random Sampling* | The population is divided into subgroups, so-called 'strata' from which participants are selected using random sampling. This technique ensures that all subgroups of a population can be included, regardless of their size. In those scenarios, this technique can be superior to simple random sampling. | Low |
+| *Cluster Sampling* | The population is divided into clusters (e.g. countries, schools, departments, etc.), and a random sample of clusters is selected. After that, either all individuals in the chosen clusters are asked to participate (i.e. one-stage cluster sampling), or a random sample is drawn from within each of the sampled clusters (i.e. two-stage cluster sampling). This technique is often used in large and geographically dispersed populations to make the research more feasible. | Low to Moderate |
+| *Quota Sampling* | The population is divided into subgroups (quota classes) and convenience sampling is used to fill quotas for each subgroup based on specific characteristics. A main difference of this technique to stratified sampling is that non-probability techniques are used to choose members for the subgroups. | Moderate |
+| *Purposive/ Judgement Sampling* | Participants are selected based on specific criteria that the researcher believes are important for identifying individuals who are most relevant to the study. | Moderate to High |
+| *Snowball Sampling* | Future participants are chosen based on recommendations from current participants. For example, after conducting an interview, the interviewer might ask whether they can recommend other possible participants. | High |
+| *Convenience Sampling* | Participants are chosen because they are easy for the researcher to access and are willing to take part in the study. | High |
+| *Self-selected Sampling* | Individuals choose by themselves whether they want to take part in a study or not. Many online questionnaires or review platforms use self-selected samples. Be vary of those Amazon reviews. | High |
+
+: Overview of some of the most common sampling strategies used in Social Sciences (adopted from [@lohr2021sampling] {#tbl-sampling-strategies}
+
+While all this might sound terribly theoretical, let me provide you with an example. Imagine we are interested in understanding how much time students spend on their weekly readings in our department. Also, assume that our department consists of 1000 students. We now wish to draw a sample of students for our analysis.
 
 ```{r}
-#| label: linear-nonlinear-relationships
+#| label: sampling_bias-sim-prep
+#| include: false
+
+# FUNCTIONS ---------------------------------------------------------------
+
+sampler <- function(data, size, seed) {
+  set.seed(seed)
+  
+  sample <-
+    data |>
+    slice_sample(n = size)
+  
+  return(sample)
+}
+
+count_gender <- function(data) {
+  result <- 
+    data |>
+    count(gender) |>
+    mutate(sample = n/sum(n),
+           population = c(0.45, 0.45, 0.10)) |>
+    pivot_longer(cols = c("sample", "population"),
+                 names_to = "source",
+                 values_to = "value")
+  
+  return(result)
+}
+
+# Create the plots
+sampling_sim <- function(seeds, sample_size, df) {
+  
+  samples <- map(seeds, ~ sampler(df, sample_size, .x)
+                 |> count_gender())
+  
+  samples_df <- tibble(
+    sample_id = seq_along(samples),
+    data = samples
+  )
+  
+  plots <-
+    samples_df %>%
+    mutate(plots = map2(data, sample_id,
+                       ~ ggplot(.x,
+                                aes(x = gender,
+                                    y = value,
+                                    fill = source)) +
+                         geom_bar(stat = "identity", position = "dodge") +
+                         labs(title = glue::glue("Sample {.y}")) +
+                         scale_fill_manual(values = c("#444444", "#FF5451")) +
+                         ylim(0, 0.6) +
+                         ggdist::theme_ggdist()
+    )
+    )
+  
+  return(plots)
+}
+```
+
+The dataset `reading_time` from the `r4np` package contains all the information we are after. Since the dataset contains information about the entire population we can identify important characteristics of our population which we later can compare against our sample. We can use the trusty `count()` function to obtain information about distributions in our population, for example for `gender`.
+
+```{r}
+#| label: population-characteristics
+#| echo: true
+
+# Gender distribtuion
+reading_time |>
+  count(gender) |>
+  mutate(perc = n/sum(n))
+```
+
+We can see that in our department 45% of students identify as `female`, 45% as `male` and 10% as `non-binary`. Consequently, when we draw a sample from this population we would ideally wish to end up with a similar distribution. The percentages mentioned here are also indicative of how likely someone will be selected based on `gender`, i.e. there is only a 10% chance that we pick a student who identifies as `non-binary`, while there is an even chance of 45% to pick a `female` or `male` student.
+
+Now that we know how our sample should look like with regards to `gender` we can start selecting people. Let's begin by drawing nine samples of 20 students.
+
+```{r}
+#| label: drawing-samples-of-20
+#| echo: true
+#| fig-cap: "Simulation of simple random sampling (n = 20)"
+
+# ANALYSIS ----------------------------------------------------------------
+
+plots <- sampling_sim(seeds = c(123456, 123457, 123458,
+                                123451, 123455, 123465,
+                                123471, 123585, 123495),
+             sample_size = 20,
+             df = reading_time)
+
+combined_plot <-
+  reduce(plots$plots, `+`) + 
+  plot_annotation(
+    title = "SIMULATION OF SIMPLE RANDOM SAMPLING",
+    subtitle = "(Sample size = 20) \n",
+    theme = theme(
+      plot.title = element_text(size = 16, face = "bold", hjust = 0.5),
+      plot.subtitle = element_text(size = 12, face = "italic", hjust = 0.5),
+      )
+    ) +
+  plot_layout(guides = "collect") # Collects legends from plots
+
+combined_plot
+```
+
+Looking at the visualisation, we can see the distribution of `gender` in our sample in red compared to the one in our population coloured in grey. You might be surprised to see that not all samples seem equally good in being representative even though we used simple random sampling. `Sample 1`, `Sample 2`, and `Sample 9` seem to match the gender distribution of our population fairly well. However, `Sample 4`, `Sample 5` and `Sample 8` are rather poor representations of our population. Thus, only 3 out of 9 samples would provide us with a dataset that is somewhat representative.
+
+An attentive reader might wonder: Is a sample of 20 students not too small? And the answer would be a resounding 'yes'. Even with simple random sampling, we would have to achieve a large enough sample to ensure no matter how often we draw a sample, we end up with a dataset that is representative enough of our population. Let's draw nine more samples, but this time we opt to select 300 students for each sample.
+
+```{r}
+#| label: drawing-samples-of-300
+#| echo: true
+#| fig-cap: "Simulation of simple random sampling (n = 300)"
+
+# ANALYSIS ----------------------------------------------------------------
+
+plots <- sampling_sim(seeds = c(123456, 123457, 123458,
+                                123451, 123455, 123465,
+                                123471, 123585, 123495),
+             sample_size = 300,
+             df = reading_time)
+
+combined_plot <-
+  reduce(plots$plots, `+`) + 
+  plot_annotation(
+    title = "SIMULATION OF SIMPLE RANDOM SAMPLING",
+    subtitle = "(Sample size = 300) \n",
+    theme = theme(
+      plot.title = element_text(size = 16, face = "bold", hjust = 0.5),
+      plot.subtitle = element_text(size = 12, face = "italic", hjust = 0.5),
+      )
+    ) +
+  plot_layout(guides = "collect") # Collects legends from plots
+
+combined_plot
+```
+
+This time, all of our 9 samples seem to represent the population very well with regards to the gender distribution. In short: your sampling strategy and sample size matter significantly to achieve a dataset which can provide insights into the chosen population. This is true irrespective of whether correct analytical techniques were chosen to analyse the data afterwards, which of course would still produce wrong results.
+
+Lastly, let me show you how results could differ when samples are not comparable by considering the mean and median reading time (`min_reading`) by students in our department. I made a couple more modifications to enable us to read the final results better. So don't feel irritated by the code I am showing you below.
+
+```{r}
+#| label: comparing-population-good-bad-sample
+#| echo: true
+
+# Reading time based on entire population (n = 1000)
+population <- reading_time |>
+  summarise(mean = mean(min_reading),
+            median = median(min_reading)) |>
+  mutate(sample_type = "population",
+         .before = everything())
+
+
+# Reading time based on representative sample (n = 300)
+set.seed(123456)
+
+rep_sample_300 <-
+  reading_time |>
+  slice_sample(n = 300) |>
+  summarise(mean = mean(min_reading),
+            median = median(min_reading)) |>
+  mutate(sample_type = "representative sample (n = 300)", .before = everything())
+
+# Reading time based on representative sample (n = 20)
+set.seed(123456)
+
+rep_sample_20 <-
+  reading_time |>
+  slice_sample(n = 20) |>
+  summarise(mean = mean(min_reading),
+            median = median(min_reading)) |>
+  mutate(sample_type = "representative sample (n = 20)",
+         .before = everything())
+
+# Reading time based on non-representative sample (n = 20)
+set.seed(123585)
+
+non_rep_sample <-
+  reading_time |>
+  slice_sample(n = 20) |>
+  summarise(mean = mean(min_reading),
+            median = median(min_reading)) |>
+  mutate(sample_type = "non-representative sample (n = 20)", .before = everything())
+
+comparison <- rbind(population, rep_sample_300, rep_sample_20, non_rep_sample)
+
+comparison
+```
+
+In light of everything we covered in this chapter, it is not surprising to find that the representative samples are much closer to the true `mean` and `median` of the population than the non-representative one. In addition, the bigger representative sample also performed much better in capturing the central tendency of `min_reading` in our population than the smaller one.
+
+In conclusion, even with the right analytical tools, our results depend heavily on how we selected a sample from the population to ensure it represents the group we are interested in. This highlights the importance of clearly defining your population as a crucial first step in the process. Consequently, choosing a sampling strategy that leads to less representative datasets implies that your findings are likely not applicable to people outside your sample. While this is not necessarily a problem, it is a limitation that you should be transparent about.
+
+## Linearity and additivity {#sec-additivity-and-linearity}
+
+The assumption of linearity postulates that the relationship of variables represents a straight line and not a curve or any other shape. @fig-linear-nonlinear-relationships depicts examples of how two variables could be related to each other. Only the first one demonstrates a linear relationship, and all other plots would represent a violation of linearity.
+
+```{r}
+#| label: fig-linear-nonlinear-relationships
 #| echo: false
 #| fig-cap: "Examples of linear and non-linear relationships of two variables"
 
@@ -95,7 +314,7 @@ p4 <-
 p1 + p2 + p3 + p4
 ```
 
-Data visualisations are particularly useful to identify whether variables are related to each other in a linear fashion. The examples above were all created with `geom_point()`, which creates a dot plot that maps the relationship between two variables. In Chapter \@ref(correlations), we will look more closely at the relationship of two variables in the form of *correlations*, which measure the strength of a linear relationship between variables.
+Data visualisations are particularly useful to identify whether variables are related to each other in a linear fashion. The examples above were all created with `geom_point()`, which creates a dot plot that maps the relationship between two variables. In @sec-correlations, we will look more closely at the relationship of two variables in the form of *correlations*, which measure the strength of a linear relationship between variables.
 
 Additivity is given when the effects of all independent variables can be added up to obtain the total effect they have on a dependent variable. In other words, the effect that multiple variables have on another variable can be added up to reflect their total effect.
 
@@ -105,9 +324,9 @@ If we assume that we have a dependent variable $Y$ which is affected by other (i
 $Y = \beta_{1} * X_1 + \beta_{2} * X_{2} + ... + \beta_{n} * X_{n}$
 :::
 
-The $\beta$ (beta) stands for the degree of change in a variable $X$ causes in $Y$. Or, in simpler terms, $\beta$ reflects the impact an independent variable has on the dependent variable. We will return to this equation in Chapter \@ref(regression), where we create a linear model via regression.
+The $\beta$ (beta) stands for the degree of change in a variable $X$ causes in $Y$. Or, in simpler terms, $\beta$ reflects the impact an independent variable has on the dependent variable. We will return to this equation and terminology in @sec-regression, where we create a linear model via regression.
 
-## Independence {sec-independence}
+## Independence {#sec-independence}
 
 The notion of independence is an important one. It assumes that each observation in our dataset is independent of other observations. For example, imagine my wife Fiona and I take part in a study that asks us to rank movies by how much we like them. Each of us has to complete the ranking by ourselves, but since we both sit in the same living room, we start chatting about these movies. By doing so, we influence each other's rankings and might even agree on the same ranking. Thus, our scores are not independent from each other. On the other hand, suppose we were both sitting in our respective offices and rank these movies. In that case, the rankings could potentially still be very similar, but this time the observations are independent of each other.
 
@@ -115,10 +334,10 @@ There is no statistical measurement or plot that can tell us whether observation
 
 ## Normality {#sec-normality}
 
-We touched upon the notion of *'normality'* and *'normal distributions'* before in Chapter \@ref(spread-of-data) because it refers to the spread of our data. Figure \@ref(fig:normal-distribution2) should look familiar by now.
+We touched upon the notion of *'normality'* and *'normal distributions'* before in @sec-spread-of-data because it refers to the spread of our data. @fig-normal-distribution2 should look familiar by now.
 
 ```{r}
-#| label: normal-distribution2
+#| label: fig-normal-distribution2
 #| echo: false
 #| fig-cap: "A normal distribution"
 
@@ -135,7 +354,7 @@ data |> ggplot(aes(x)) +
   ylab("")
 ```
 
-However, we have yet to understand why it is essential that our data follows a normal distribution. Most parametric tests are based on means. For example, if we want to compare two groups with each other, we would compute the mean for each of them and then see whether their means differ from each other in a significant way (see Chapter \@ref(comparing-groups). Of course, if our data is not very normally distributed, means are a poor reference point for most of the observations in this group. We already know that outliers heavily affect means, but even without outliers, the mean could be a poor choice. Let me provide some visual examples.
+However, we have yet to understand why it is essential that our data follows a normal distribution. Most parametric tests are based on means. For example, if we want to compare two groups with each other, we would compute the mean for each of them and then see whether their means differ from each other in a significant way (see @sec-comparing-groups. Of course, if our data is not very normally distributed, means are a poor reference point for most of the observations in this group. We already know that outliers heavily affect means, but even without outliers, the mean could be a poor choice. Let me provide some visual examples.
 
 ```{r}
 #| label: comparing-distributions-plus-means
@@ -262,7 +481,7 @@ p1 + p2 + p3 + plot_spacer()
 We notice that neither the median nor the mean by themselves is a reliable indicator for normality. Figure A and Figure C both show that the median and mean are almost identical, but only Figure A follows a normal distribution. The median and mean in Figure C are not reflective of the average observation in this dataset. Most scores lie below and above the mean/median. Therefore, when we analyse the normality of our data, we usually are not interested in the normality of a single variable but the normality of the sampling distribution. However, we cannot directly assess the sampling distribution in most cases. As such, we often revert to testing the normality of our data. There are also instances where we would not expect a normal distribution to exist. Consider the following plots:
 
 ```{r}
-#| label: two-normalities-groups
+#| label: fig-two-normalities-groups
 #| echo: false
 #| fig-cap: "Two normal distributions in one dataset."
 
@@ -343,20 +562,54 @@ Determining whether data is normally distributed can be challenging when only in
 shapiro.test(data$income)
 ```
 
-This result confirms that the data is normally distributed, because it is not significantly different ($p > 0.05$). The chapter on correlations looks at significance and its meaning more thoroughly (see Chapter \@ref(correlations)).
+This result confirms that the data is normally distributed, because it is not significantly different ($p > 0.05$). The chapter on correlations looks at significance and its meaning more thoroughly (see @sec-significance).
 
-In conclusion, the normality of data is an essential pre-test for any of our studies. If we violate the assumption of normality, we will have to fall back to non-parametric tests. However, this rule has two exceptions: *The Central Limit Theorem* and using *'robust'* measures of parametric tests.The Central Limit Theorem postulates that as our sample becomes larger, our sampling distribution becomes more and more normal around the mean of the underlying population. For example, @field2013discovering (p.54) refers to a sample of 30 as a common rule of thumb. As such, it is possible to assume normality for larger datasets even though our visualisation and the Shapiro-Wilk test tell us otherwise. The second exception is that many parametric tests offer a 'robust' alternative, often via *bootstrapping*. *Bootstrapping* refers to the process of subsampling your data, for example, 2000 times, and look at the average outcome. An example of bootstrapping is shown in Chapter \@ref(bootstrapped-regression).
+In terms of computing normality, it can become very troublesome, very quickly. When we compare different groups of people (like in @sec-multiple-unpaired-groups) we have to check normality for each group and each variable of interest separately, which means we first need to create subsets of our data for each group and then perform `shapiro.test()` separately for each group. This might be still manageable with two or three groups, but can become very time-consuming if there are more groups in a larger dataset. Luckily, I included some helpful function in `r4np` that can help make this a lot easier:
 
-Admittedly, this raises the question: Can I ignore normality and move on with my analysis if my sample is large enough or I use bootstrapping? In short: Yes. This fact probably also explains why we hardly ever find results from normality tests in journal publications since most Social Science research involves more than 30 participants. However, if you find yourself in a situation where the sample size is smaller, all of the above needs to be check and thoroughly considered. However, the sample size also has implications with regards to the power of your test/findings (see Chapter \@ref(power-analysis)). Ultimately, the answer to the above questions remains, unsatisfyingly: 'It depends'.
+-   `ntest()`: This function allows to compute multiple `shapiro.test()`s for multiple variables.
+
+-   `ntest_by()`: This function allows to compute multiple `shapiro.test()`s for multiple variables based on a group variable.
+
+Let me show you how these two functions extremely handy when testing normality in bulk.
+
+```{r}
+#| label: ntest-example
+#| echo: true
+
+# Perform 'shapiro.test()' for multiple variables at once
+ic_training |> ntest(cols = c(communication,
+                              teamwork,
+                              leadership))
+```
+
+Here is an example where we compute the normality for all three variables again, but this time we consider two different subsets of our dataset.
+
+```{r}
+#| label: ntest_by_example
+#| echo: true
+
+# Perform 'shapiro.test()' for multiple variables and groups
+ic_training |> ntest_by(cols = c(communication,
+                                 teamwork,
+                                 leadership),
+                        group = test
+                        )
+```
+
+I use the `ntest_by()` function regularly, because it saves so much time and does not require me to create subsets of my data. It is probably the most useful analytical function I have ever written.
+
+In conclusion, the normality of data is an essential pre-test for any of our studies. If we violate the assumption of normality, we will have to fall back to non-parametric tests. However, this rule has two exceptions: *The Central Limit Theorem* and using *'robust'* measures of parametric tests.The Central Limit Theorem postulates that as our sample becomes larger, our sampling distribution becomes more and more normal around the mean of the underlying population. For example, @field2013discovering (p.54) refers to a sample of 30 as a common rule of thumb. As such, it is possible to assume normality for larger datasets even though our visualisation and the Shapiro-Wilk test tell us otherwise. The second exception is that many parametric tests offer a 'robust' alternative, often via *bootstrapping*. *Bootstrapping* refers to the process of subsampling your data, for example, 2000 times, and look at the average outcome.
+
+Admittedly, this raises the question: Can I ignore normality and move on with my analysis if my sample is large enough or I use bootstrapping? In short: Yes. This fact probably also explains why we hardly ever find results from normality tests in journal publications since most Social Science research involves more than 30 participants. However, if you find yourself in a situation where the sample size is smaller, all of the above needs to be checked and thoroughly considered. However, the sample size also has implications with regards to the power of your test/findings (see @sec-power-analysis). Ultimately, the answer to the above questions remains, unsatisfyingly: 'It depends'.
 
 ## Homogeneity of variance (homoscedasticity) {#sec-homogeneity-of-variance}
 
-The term *'variance'* should sound familiar, because we mentioned it in Chapter \@ref(standard-deviation) where we looked at the standard deviation derived from the variance.
+The term *'variance'* should sound familiar, because we mentioned it in @sec-standard-deviation where we looked at the standard deviation derived from the variance.
 
-*Homogeneity of variance* implies that the variance of, for example, two subsets of data, is equal or close to being equal. Let's look at how close the observed values are to the mean for the two groups identified in Figure \@ref(fig:two-normalities-groups).
+*Homogeneity of variance* implies that the variance of, for example, two subsets of data, is equal or close to being equal. Let's look at how close the observed values are to the mean for the two groups identified in @fig-two-normalities-groups.
 
 ```{r}
-#| label: homogeneity-variance
+#| label: fig-homogeneity-variance
 #| echo: true
 
 data4 |>
@@ -369,7 +622,7 @@ data4 |>
 Judging by eye, we could argue that most values lie around the mean for each respective group. However, some observations are a bit further off. Still, using this visualisation, it is tough to judge whether the spread is about the same. However, boxplots can help with this, or even better, a boxplot reflected by a bar. The package `ggdist` has an excellent plotting function called `stat_interval()`, which allows us to show a boxplot in the form of a bar.
 
 ```{r}
-#| label: homogeneity-variance-alt-vis
+#| label: fig-homogeneity-variance-alt-vis
 #| echo: true
 
 data4 |>
@@ -402,11 +655,11 @@ However, to test whether the variance between these two groups is truly similar 
 car::leveneTest(gep$age ~ gep$gender)
 ```
 
-The Levene's test shows that our variances are similar and not different from each other because $p > 0.05$. This is good news if we wanted to continue and perform a group comparison, like in Chapter \@ref(comparing-groups).
+The Levene's test shows that our variances are similar and not different from each other because $p > 0.05$. This is good news if we wanted to continue and perform a group comparison, like in @sec-comparing-groups.
 
 ## Outliers and how to deal with them {#sec-dealing-with-outliers}
 
-In Chapter \@ref(descriptive-statistics), I referred to outliers many times but never eluded to the aspects of handling them. Dealing with outliers is similar to dealing with missing data. However, it is not quite as straightforward as one might think.
+In @sec-descriptive-statistics, I referred to outliers many times but never eluded to the aspects of handling them. Dealing with outliers is similar to dealing with missing data. However, it is not quite as straightforward as one might think.
 
 In a first step, we need to determine which values count as an outlier. @aguinis2013best reviewed 232 journal articles and found that scholars had defined outliers in 14 different ways, used 39 different techniques to detect them and applied 20 different strategies to handle them. It would be impossible to work through all these options in this book. However, I want to offer two options that have been frequently considered in publications in the field of Social Sciences:
 
@@ -416,35 +669,61 @@ In a first step, we need to determine which values count as an outlier. @aguinis
 
 ### Detecting outliers using the standard deviation {#sec-ouliers-standard_deviation}
 
-A very frequently used approach to detecting outliers is the use of the standard deviation. Usually, scholars use multiples of the standard deviation to determine thresholds. For example, a value that lies 3 standard deviations above or below the mean could be categorised as an outlier. Unfortunately, there is quite some variability regarding how many multiples of the standard deviation counts as an outlier. Some authors might use `3`, and others might settle for `2` (see also @leys2013detecting). Let's stick with the definition of `3` standard deviations to get us started. We can revisit our previous plot regarding `runtime_min` (see Figure \@ref(fig:runtime-movies-deviation)) and add lines that show the thresholds above and below the mean. As before, I will create a base plot `outlier_plot` first so that we do not have to repeat the same code over and over again. We then use `outlier_plot` and add more layers as we see fit.
+Let us assume we are interested in understanding whether there are certain areas in England that score particularly high/low on `happiness` and whether the majority of areas report levels around the `mean`. This is a deviation analysis similar to our previous plot regarding alcohol `consumption` (see @fig-alcohol-consumption-deviation). We can simply adapt it to our new research aim. By using the `hie_2021` we can first recreate the same plot. As before, I will create a base plot `outlier_plot` first so that we do not have to repeat the same code over and over again. We then use `outlier_plot` and add more layers as we see fit.
+
+```{r}
+#| label: fig-deviation-plot-happiness
+#| echo: true
+
+# Create the base plot
+outlier_plot <-
+  hie_2021 |>
+  select(area_name, happiness) |>
+  ggplot(aes(x = reorder(area_name, happiness),
+             y = happiness)) +
+  geom_point(shape = 124) +
+  
+  theme(axis.text.x = element_blank(),
+        panel.grid.major = element_blank(),
+        panel.background = element_blank()
+  ) +
+  xlab("Area in England") +
+  ylab("Happiness")
+
+outlier_plot
+```
+
+Now we can compute the `mean` of `happiness` and add it as a new layer to our existing plot.
+
+```{r}
+#| label: deviation-plot-with-mean-happiness
+#| echo: true
+
+# Compute the mean
+happiness_mean <- mean(hie_2021$happiness)
+
+# Add the mean reference line
+outlier_plot +
+  geom_hline(aes(yintercept = happiness_mean, col = "red"),
+             show.legend = FALSE)
+```
+
+We can see that our distribution follows an S-curve and there seem to be some areas that score very high and some that score very low on `happiness`. Those observations at both ends of this plot which seem further away from the rest could likely be outliers. So, how can we determine which observations are truly outliers?
+
+A very frequently used approach to detecting outliers is the use of the standard deviation. Usually, scholars use multiples of the standard deviation to determine thresholds. For example, a value that lies 3 standard deviations above or below the mean could be categorised as an outlier. Unfortunately, there is quite some variability regarding how many multiples of the standard deviation counts as an outlier. Some authors might use `3`, and others might settle for `2` (see also @leys2013detecting). Let's stick with the definition of `3` standard deviations to get us started.
 
 ```{r}
 #| label: outlier-detection-three-sd
 #| echo: true
 
 # Compute the mean and the thresholds
-runtime_mean <- mean(imdb_top_250$runtime_min)
-sd_upper <- runtime_mean + 3 * sd(imdb_top_250$runtime_min)
-sd_lower <- runtime_mean - 3 * sd(imdb_top_250$runtime_min)
-
-# Create the base plot
-outlier_plot <-
-  imdb_top_250 |>
-  select(title, runtime_min) |>
-  ggplot(aes(x = reorder(title, runtime_min),
-             y = runtime_min)) +
-  geom_point(shape = 124) +
-
-  theme(axis.text.x = element_blank(),
-        panel.grid.major = element_blank(),
-        panel.background = element_blank()
-        ) +
-  ylab("run time") +
-  xlab("movies")
+happiness_mean <- mean(hie_2021$happiness)
+sd_upper <- happiness_mean + 3 * sd(hie_2021$happiness)
+sd_lower <- happiness_mean - 3 * sd(hie_2021$happiness)
 
 # Add the thresholds and mean
 outlier_plot +
-  geom_hline(aes(yintercept = runtime_mean, col = "red"),
+  geom_hline(aes(yintercept = happiness_mean, col = "red"),
              show.legend = FALSE) +
   geom_hline(aes(yintercept = sd_upper, col = "blue"),
              show.legend = FALSE) +
@@ -452,20 +731,19 @@ outlier_plot +
              show.legend = FALSE)
 ```
 
-The results suggest that only very few outliers would be detected if we chose these thresholds. Especially `Sherlock Jr.`, the shortest movie in our dataset, would not classify as an outlier. How about we choose 2 standard deviations instead?
+The results suggest that only very few outliers would be detected if we chose these thresholds, i.e. one at the very bottom that sits right under the red line. However, what would we find if we applied the stricter threshold of `2`?
 
 ```{r}
 #| label: outlier-detection-two-sd
 #| echo: true
 
-# Compute the mean and standard deviation
-runtime_mean <- mean(imdb_top_250$runtime_min)
-sd_upper <- runtime_mean + 2 * sd(imdb_top_250$runtime_min)
-sd_lower <- runtime_mean - 2 * sd(imdb_top_250$runtime_min)
+# Compute the standard deviation
+sd_upper <- happiness_mean + 2 * sd(hie_2021$happiness)
+sd_lower <- happiness_mean - 2 * sd(hie_2021$happiness)
 
 # Create our plot
 outlier_plot +
-  geom_hline(aes(yintercept = runtime_mean, col = "red"),
+  geom_hline(aes(yintercept = happiness_mean, col = "red"),
                show.legend = FALSE) +
   geom_hline(aes(yintercept = sd_upper, col = "blue"),
              show.legend = FALSE) +
@@ -473,7 +751,7 @@ outlier_plot +
              show.legend = FALSE)
 ```
 
-As we would expect, we identify some more movies as being outliers, but the shortest movie would still not be classified as an outlier. It certainly feels somewhat arbitrary to choose a threshold of our liking. Despite its popularity, there are additional problems with this approach:
+As we would expect, we identify some more areas in England as being outliers regarding their `happiness`. It certainly feels somewhat arbitrary to choose a threshold of our liking. Despite its popularity, there are additional problems with this approach:
 
 -   outliers affect our mean and standard deviation too,
 
@@ -484,17 +762,19 @@ As we would expect, we identify some more movies as being outliers, but the shor
 @leys2013detecting propose an alternative approach because medians are much less vulnerable to outliers than the mean. Similarly to the standard deviation, it is possible to calculate thresholds using the *median absolute deviation* (MAD). Best of all, the function `mad()` in *R* does this automatically for us. @leys2013detecting suggest using `2.5` times the MAD as a threshold. However, if we want to compare how well this option performs against the standard deviation, we could use `3` as well.
 
 ```{r}
-#| label: outlier-detection-median-mad3
+#| label: fig-outlier-detection-median-mad3
 #| echo: true
+#| fig-cap: "Outlier detection via MAD using `3 * MAD` as a threshold"
+
 
 # Compute the median and thresholds
-runtime_median <- median(imdb_top_250$runtime_min)
-mad_upper <- runtime_median + 3 * mad(imdb_top_250$runtime_min)
-mad_lower <- runtime_median - 3 * mad(imdb_top_250$runtime_min)
+happiness_median <- median(hie_2021$happiness)
+mad_upper <- happiness_median + 3 * mad(hie_2021$happiness)
+mad_lower <- happiness_median - 3 * mad(hie_2021$happiness)
 
 # Create our plot
 outlier_plot +
-  geom_hline(aes(yintercept = runtime_median, col = "red"),
+  geom_hline(aes(yintercept = happiness_median, col = "red"),
              show.legend = FALSE) +
   geom_hline(aes(yintercept = mad_upper, col = "blue"),
              show.legend = FALSE) +
@@ -502,21 +782,21 @@ outlier_plot +
              show.legend = FALSE)
 ```
 
-Compared to our previous results, we notice that the median approach was much better in detecting outliers at the upper range of `runtim_min`. Because the median is not affected so much by the five-hour-long movie, the results have improved. Still, we would not classify the outlier at the bottom for the shortest film in the data. If we chose the criterion of `2.5 * MAD`, we would also get this outlier (see Figure \@ref(fig:MAD2-outlier-detection)).
+Compared to our previous results, we notice that the median approach was much better in detecting outliers at the upper range of `happiness`. Because the median is not affected so much by the 'extraordinarily happy areas of England'. Thus, the results have improved and seem more balanced. Still, one could argue that there are at least two more observations at the lower range of `happiness` that seem a little further away from the rest of the points on this S-curve. If we chose the criterion of `2.5 * MAD`, we would also capture these outliers (see @fig-MAD2-outlier-detection).
 
 ```{r}
-#| label: MAD2-outlier-detection
+#| label: fig-MAD2-outlier-detection
 #| echo: false
 #| fig-cap: "Outlier detection via MAD using `2.5 * MAD` as a threshold"
 
 # Compute the median and thresholds
-runtime_median <- median(imdb_top_250$runtime_min)
-mad_upper <- runtime_median + 2.5 * mad(imdb_top_250$runtime_min)
-mad_lower <- runtime_median - 2.5 * mad(imdb_top_250$runtime_min)
+happiness_median <- median(hie_2021$happiness)
+mad_upper <- happiness_median + 2.5 * mad(hie_2021$happiness)
+mad_lower <- happiness_median - 2.5 * mad(hie_2021$happiness)
 
 # Create our plot
 outlier_plot +
-  geom_hline(aes(yintercept = runtime_median, col = "red"),
+  geom_hline(aes(yintercept = happiness_median, col = "red"),
              show.legend = FALSE) +
   geom_hline(aes(yintercept = mad_upper, col = "blue"),
              show.legend = FALSE) +
@@ -537,19 +817,19 @@ $IQR = Q_{3}-Q_{1}$
 Therefore, we can create new thresholds for the detection of outliers. For the IQR, it is common to use $\pm 1.5 * IQR$ as the lower and upper thresholds measured from $Q_1$ and $Q_3$ respectively. To compute the quartiles we can use the function `quantile()`, which returns $Minimum, Q_1, Q_2, Q_3, and\ Q_4$
 
 ```{r}
-#| label: iqr-threshold
+#| label: fig-iqr-threshold
 #| echo: true
 
 # Compute the quartiles
-(runtime_quantiles <- quantile(imdb_top_250$runtime_min))
+(happiness_quantiles <- quantile(hie_2021$happiness))
 
 # Compute the thresholds
-iqr_upper <- runtime_quantiles[4] + 1.5 * IQR(imdb_top_250$runtime_min)
-iqr_lower <- runtime_quantiles[2] - 1.5 * IQR(imdb_top_250$runtime_min)
+iqr_upper <- happiness_quantiles[4] + 1.5 * IQR(hie_2021$happiness)
+iqr_lower <- happiness_quantiles[2] - 1.5 * IQR(hie_2021$happiness)
 
 # Create our plot
 outlier_plot +
-  geom_hline(aes(yintercept = runtime_median, col = "red"),
+  geom_hline(aes(yintercept = happiness_median, col = "red"),
              show.legend = FALSE) +
   geom_hline(aes(yintercept = iqr_upper, col = "blue"),
              show.legend = FALSE) +
@@ -557,19 +837,31 @@ outlier_plot +
              show.legend = FALSE)
 ```
 
-As we can tell, the IQR method detects about the same outliers for our data as the median absolute deviation (MAD) approach. The outliers we find here are the same as shown in Figure \@ref(fig:a-boxplot). For our data, I would argue that the IQR and MAD method by @leys2013detecting produced the 'best' selection of outliers. However, we have to acknowledge that these classifications will always be subjective because how we position the thresholds depends on the researcher's choice. Still, the computation is standardised, and we can plausibly explain the process of identifying outliers, we just have to make it explicit to the audience of our research.
+As we can tell, the IQR method detects about the same outliers for our data as the median absolute deviation (MAD) approach. The outliers we find here are the same as shown in @fig-boxplot-happiness-england below.
+
+```{r}
+#| label: fig-boxplot-happiness-england
+#| echo: true
+#| fig-cap: "Outliers identified via IQR shown in boxplot"
+
+hie_2021 |>
+  ggplot(aes(x = happiness)) +
+  geom_boxplot()
+```
+
+For our data, I would argue that the IQR and MAD method by @leys2013detecting produced the 'best' selection of outliers. However, we have to acknowledge that these classifications will always be subjective because how we position the thresholds depends on the researcher's choice. Still, the computation is standardised, and we can plausibly explain the process of identifying outliers, we just have to make it explicit to the audience of our research.
 
 ### Removing or replacing outliers {#sec-removing-or-replacing-outliers}
 
-Now that we have identified our outliers, we are confronted with the question of what we should do with them. Like missing data (see Chapter \@ref(dealing-with-missing-data)), we can either remove them or replace them with other values. While removal is a relatively simple task, replacing it with other 'reasonable' values implies finding techniques to create such values. As you may remember, we were confronted with a similar problem before when we looked into missing data (Chapter \@ref(dealing-with-missing-data)). The same techniques, especially multiple imputation [see @cousineau2010outliers], can be used for such scenarios.
+Now that we have identified our outliers, we are confronted with the question of what we should do with them. Like missing data (see @sec-dealing-with-missing-data), we can either remove them or replace them with other values. While removal is a relatively simple task, replacing it with other 'reasonable' values implies finding techniques to create such values. The same methods we used for missing data, especially multiple imputation [see @cousineau2010outliers], can be used for replacing outliers. Of course, changing our dataset implies we are changing our results, so it is good practice to consider your analysis with and without outliers (e.g. @cohen2014applied). Consequently, running your analysis with two datasets can be a meaningful way to understand how much outliers affect your outcomes. Simply removing data without knowing how this might impact one's results would be a poor decision. We should not forget that, especially with human participants, outliers can be genuine observations and should not simply be marginalised. If we know that our outliers are mistakes or respondents have intentionally provided wrong ratings in our dataset, we can certainly remove them. However, this is not always evident when detecting outliers. Thus, I recommend proceeding with caution when removing outliers. Besides, there are many alternatives to analysing your data, which are less biased by outliers, such as analytical tools that rely on the median instead of the mean. In this book, we primarily focus on conducting analysis without outliers. However, performing the analysis twice (with and without outliers) would be meaningful for your own research projects.
 
-Irrespective of whether we remove or replace outliers, we somehow need to single them out of the crowd. Since the IQR strategy worked well for our data, we can use the thresholds we defined before, i.e. `iqr_upper` and `iqr_lower`. Therefore, an observation (i.e. a movie) is considered an outlier if
+Irrespective of whether we remove or replace outliers, we somehow need to single them out of the crowd. Since the IQR strategy worked well for our data, we can use the thresholds we defined before, i.e. `iqr_upper` and `iqr_lower`. Therefore, an observation (i.e. an area in England) is considered an outlier if
 
 -   its value lies above `iqr_upper`, or
 
 -   its value lies below `iqr_lower`
 
-It becomes clear that we somehow need to define a condition because if it is an outlier, it should be labelled as one, but if not, then obviously we need to label the observation differently. Ideally, we want a new column in our dataset which indicates whether a movie is an outlier (i.e. `outlier == TRUE`) or not (`outlier == FALSE`). *R* offers a way for us to express such conditions with the function `ifelse()`. It has the following structure:
+It becomes clear that we somehow need to define a condition because if it is an outlier, it should be labelled as one, but if not, then obviously we need to label the observation differently. Ideally, we want a new column in our dataset which indicates whether an area in England is an outlier (i.e. `outlier == TRUE`) or not (`outlier == FALSE`). *R* offers a way for us to express such conditions with the function `ifelse()`. It has the following structure:
 
 ::: {#ifelse-function align="center"}
 `ifelse(condition, TRUE, FALSE)`
@@ -577,42 +869,42 @@ It becomes clear that we somehow need to define a condition because if it is an 
 
 Let's formulate a sentence that describes our scenario as an `ifelse()` function:
 
--   If a movie's `runtime_min` is longer than `iqr_upper`, [or]{.ul}
+-   If an area's `happiness` is higher than `iqr_upper`, [or]{.underline}
 
--   if a movie's `runtime_min` is lower than `iqr_lower`,
+-   if an area's `happiness` is lower than `iqr_lower`,
 
--   classify this movie as an outlier (i.e. `TRUE`),
+-   classify this area as an outlier (i.e. `TRUE`),
 
--   otherwise, classify this movie as not being an outlier (i.e. `FALSE`).
+-   otherwise, classify this area as not being an outlier (i.e. `FALSE`).
 
-We already know from Chapter \@ref(basic-computations-in-r) how to use logical and arithmetic operators. All we have to do is put them together in one function call and create a new column with `mutate()`.
+We already know from @sec-basic-computations-in-r how to use logical and arithmetic operators. All we have to do is put them together in one function call and create a new column with `mutate()`.
 
 ```{r}
 #| label: classifying-outliers-iqr
 #| echo: true
 
-imdb_top_250 <-
-  imdb_top_250 |>
-  mutate(outlier = ifelse(runtime_min > iqr_upper |
-                            runtime_min < iqr_lower,
+hie_2021_outliers <-
+  hie_2021 |>
+  mutate(outlier = ifelse(happiness > iqr_upper |
+                            happiness < iqr_lower,
                           TRUE, FALSE))
 ```
 
-Since we have now a classification, we can more thoroughly inspect our outliers and see which movies are the ones that are lying outside our defined norm. We can `arrange()` them by `runtime_min`.
+Since we have now a classification, we can more thoroughly filter for and inspect our outliers, i.e. we can see which areas in England are the ones that are lying outside our defined norm. We can `arrange()` our outliers by `happiness` to give the output even more meaning and improve readability
 
 ```{r}
 #| label: list-outliers
 #| echo: true
 
-imdb_top_250 |>
+hie_2021_outliers |>
   filter(outlier == "TRUE") |>
-  select(title, runtime_min, outlier) |>
-  arrange(runtime_min)
+  select(area_name, happiness, outlier) |>
+  arrange(happiness)
 ```
 
-The list of movies contains some of the most iconic Hollywood films ever shown on screen. However, I think we can agree that most of them are truly outside the norm of regular movies, not just in terms of runtime.
+Given that the `median` of `happiness` for this dataset is `7.47`, we can postulate that `Colchester` and `Redditch` are places in England that score considerably below the majority of the rest. However, places like `Torridge` and `Lichfield` can be considered particularly happy places in England. This list of areas in England represents to the answer to our question at the beginning of this section.
 
-From here, it is simple to remove these movies (i.e. keep the movies that are not outliers) or set their values to `NA`. If we `replace()` the values with `NA`, we can continue with one of the techniques demonstrated for missing values in Chapter \@ref(dealing-with-missing-data). Both approaches are shown in the following code chunk.
+From here, it is simple to remove these areas in England (i.e. keep the areas that are not outliers) or set their values to `NA`. If we `replace()` the values with `NA`, we can continue with one of the techniques demonstrated for missing values in @sec-dealing-with-missing-data. Both approaches are shown in the following code chunk.
 
 ```{r}
 #| label: remove-outliers
@@ -620,9 +912,9 @@ From here, it is simple to remove these movies (i.e. keep the movies that are no
 #| results: hide
 
 # Keep all observations but outliers
-imdb_top_250 |>
+hie_2021_outliers |>
   filter(outlier == "FALSE") |>
-  select(title, outlier)
+  select(area_name, outlier)
 ```
 
 ```{r}
@@ -630,12 +922,12 @@ imdb_top_250 |>
 #| echo: true
 
 # Replace values with NA
-imdb_top_250 |>
-  mutate(runtime_min = replace(runtime_min, outlier == "TRUE", NA)) |>
-  select(title, runtime_min)
+hie_2021_outliers |>
+  mutate(happiness = replace(happiness, outlier == "TRUE", NA)) |>
+  select(area_name, happiness)
 ```
 
-The `replace()` function is very intuitive to use. It first needs to know where you want to replace a value (`runtime_min`), then what the condition for replacing is (`outlier == "TRUE"`), and lastly, which value should be put instead of the original one (`NA`).
+The `replace()` function is very intuitive to use. It first needs to know where you want to replace a value (`happiness`), then what the condition for replacing is (`outlier == "TRUE"`), and lastly, which value should be put instead of the original one (`NA`).
 
 ### Concluding remarks about outliers {#sec-concluding-remarks-outliers}
 
@@ -645,32 +937,38 @@ As you hopefully noticed, understanding your data requires some effort, but it i
 #| label: plot-outliers-different-format
 #| echo: true
 
-imdb_top_250 |>
-  ggplot(aes(x = reorder(genre_01, runtime_min),
-             y = runtime_min,
+hie_2021_outliers |>
+  ggplot(aes(x = reorder(area_name, happiness),
+             y = happiness,
              col = outlier,
              shape = outlier)
          ) +
   geom_point(size = 1) +
-  theme(panel.background = element_blank()) +
+  theme(panel.background = element_blank(),
+        axis.text.y = element_text(size = 2)) +
   coord_flip()
 ```
 
-To round things off, let me share with you one more visualisation, which demonstrates that outliers might also have to be defined based on specific groupings of your data, e.g. movie genres. Thus, it might be essential to consider outliers in light of sub-samples of your data rather than the entire dataset, especially when comparing groups (see Chapter \@ref(comparing-groups)).
+To round things off, let me share with you one more visualisation, which demonstrates that outliers might also have to be defined based on specific groupings of your data. For example, if we look at the `gep` dataset that we used before, we could compare distributions based on `level_of_study` e.g. `UG`, `PGT`, `PGR` or `Other`. Thus, it might be essential to consider outliers in light of sub-samples of your data rather than the entire dataset, especially when comparing groups (see @sec-comparing-groups).
 
 ```{r}
-#| label: final-plot-outliers
+#| label: fig-final-plot-outliers
 #| echo: true
 #| warning: false
 
 # The wesanderson package can make your plots look more
 # 'Wes Anderson'
-colour_pal <- wesanderson::wes_palette("Darjeeling1", 11, type = "continuous")
+colour_pal <-
+  wesanderson::wes_palette("Darjeeling1",
+                           11,
+                           type = "continuous")
 
-imdb_top_250 |>
-  ggplot(aes(x = reorder(genre_01, runtime_min),
-             y = runtime_min,
-             col = genre_01)
+gep |>
+  ggplot(aes(x = reorder(level_of_study,
+                         si_socialise_with_people_exp,
+                         FUN = median),
+             y = si_socialise_with_people_exp,
+             col = level_of_study)
          ) +
   geom_boxplot(alpha = 0,
                show.legend = FALSE) +
@@ -682,7 +980,7 @@ imdb_top_250 |>
   scale_color_manual(values = colour_pal) +
   coord_flip() +
   theme(panel.background = element_blank()) +
-  xlab("runtime") +
-  ylab("Genre") +
-  ggtitle("Distribution of movie runtimes by genre")
+  xlab("Level of study") +
+  ylab("Socialising with people") +
+  ggtitle("Distribution of 'socialising with people' in the GEP dataset")
 ```

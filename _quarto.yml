@@ -5,11 +5,12 @@ book:
   title: "R for Non-Programmers: A Guide for Social Scientists"
   output-file: "r4np-crc"
   author: "Daniel Dauber"
-  date: "12/02/2024"
-
+  date: "03/10/2024"
+  
   chapters:
     - index.qmd
     - 00_about_the_author.qmd
+    - 00_acknowledgements.qmd
     - 01_before_you_get_started.qmd
     - 02_why_start_learning_a_programming_language.qmd
     - 03_setting_up_r_rstudio.qmd
@@ -20,12 +21,11 @@ book:
     - 08_descriptive_statistics.qmd
     - 09_sources_of_bias.qmd
     - 10_correlations.qmd
-    - 11_power_analysis.qmd
-    - 12_group_comparison.qmd
+    - 11_group_comparison.qmd
+    - 12_power_analysis.qmd
     - 13_regressions.qmd
     - 14_mixed_methods.qmd
     - 15_next_steps.qmd
-    - 16_case_studies.qmd
     - 18_epilogue.qmd
     - 99_appendix.qmd
     - references.qmd

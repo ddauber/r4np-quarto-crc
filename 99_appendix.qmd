@@ -1,6 +1,4 @@
-# Appendix {#sec-appendix .unnumbered}
-
-# Comparing groups {#sec-appendix-comparing-groups}
+# Appendix {#sec-appendix .unnumbered .unlisted}
 
 ## Comparing two unpaired groups {#sec-comparing-two-unpaired-groups}
 

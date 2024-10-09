@@ -1,22 +1,22 @@
 # Starting your *R* projects {#sec-starting-your-r-projects}
 
-Every new project likely fills you with enthusiasm and excitement. And it should. You are about to find answers to your research questions, and you hopefully come out more knowledgeable due to it. However, there are likely certain aspects of data analysis that you find less enjoyable. I can think of two:
+Every new project likely fills you with enthusiasm and excitement. And it should. You are about to find answers to your research questions, and you hopefully come out more knowledgeable because of it. However, you likely find certain aspects of data analysis less enjoyable. I can think of two:
 
 -   Keeping track of all the files my project generates
 
 -   Data wrangling
 
-While we cover data wrangling in great detail in the next Chapter (Chapter \@ref(data-wrangling)), I would like to share some insights from my work that helped me stay organised and, consequently, less frustrated. The following applies to small and large research projects, which makes it very convenient no matter the situation and the scale of the project. Of course, feel free to tweak my approach to whatever suits you. However, consistency is king.
+While we cover data wrangling in great detail in the next Chapter (@sec-data-wrangling), I would like to share some insights from my work that helped me stay organised and, consequently, less frustrated. The following applies to small and large research projects, which makes it very convenient no matter the situation and the scale of the project. Of course, feel free to tweak my approach to whatever suits you. However, consistency is king.
 
 ## Creating an *R* Project file {#sec-creating-an-r-project}
 
-When working on a project, you likely create many different files for various purposes, especially *R* Scripts (see Chapter \@ref(creating-an-r-script)). If you are not careful, this file is stored in your system's default location, which might not be where you want them to be. RStudio allows you to manage your entire project intuitively and conveniently through *R* Project files. Using *R* Project files comes with a couple of perks, for example:
+When working on a project, you likely create many different files for various purposes, especially *R* Scripts (see @sec-creating-an-r-project). If you are not careful, this file is stored in your system's default location, which might not be where you want them to be. RStudio allows you to manage your entire project intuitively and conveniently through *R* Project files. Using *R* Project files comes with a couple of perks, for example:
 
 -   All the files that you generate are in the same place. Your data, your coding, your exported plots, your reports, etc., all are in one place together without you having to manage the files manually. This is due to the fact that RStudio sets the root directory to whichever folder your project is saved to.
 
 -   If you want to share your project, you can share the entire folder, and others can quickly reproduce your research or help fix problems. This is because all file paths are relative and not absolute.
 
--   You can, more easily, use GitHub for backups and so-called 'version control', which allows you to track changes you have made to your code over time (see also Chapter \@ref(next-steps-github)).
+-   You can, more easily, use GitHub for backups and so-called 'version control', which allows you to track changes you have made to your code over time (see also @sec-next-steps-github).
 
 For now, the most important reason to use *R* Project files is the convenience of the organisation of files and the ability to share it easily with co-investigators, your supervisor, or your students.
 
@@ -52,7 +52,7 @@ If you look carefully, you can see that your RStudio is now 'branded' with your 
 
 ## Organising your projects {#sec-organising-your-projects}
 
-This section is not directly related to RStudio, *R* or data analysis in general. Instead, I want to convey to you that a good folder structure can go a long way. It is an excellent habit to start thinking about folder structures before you start working on your project. Placing your files into dedicated folders, rather than keeping them loosely in one container, will speed up your work and save you from the frustration of not finding the files you need. I have a template that I use regularly. You can either create it from scratch in RStudio or open your file browser and create the folders there. RStudio does not mind which way you do it. If you want to spend less time setting this up, you might want to use the function `create_project_folder()` from the `r4np` package. It creates all the folders as shown in Figure \@ref(fig:folder-structure).
+This section is not directly related to RStudio, *R* or data analysis in general. Instead, I want to convey to you that a good folder structure can go a long way. It is an excellent habit to start thinking about folder structures before you start working on your project. Placing your files into dedicated folders, rather than keeping them loosely in one container, will speed up your work and save you from the frustration of not finding the files you need. I have a template that I use regularly. You can either create it from scratch in RStudio or open your file browser and create the folders there. RStudio does not mind which way you do it. If you want to spend less time setting this up, you might want to use the function `create_project_folder()` from the `r4np` package. It creates all the folders as shown in @fig-folder-structure.
 
 <a name="install_r4np"></a>
 
@@ -72,7 +72,7 @@ To create a folder, click on `New Folder` in the *Files* pane. I usually have at
 
 -   A folder for my raw data. I store 'untouched' datasets in it. With 'untouched', I mean they have not been processed in any way and are usually files I downloaded from my data collection tool, e.g. an online questionnaire platform.
 
--   A folder with 'tidy' data. This is usually data I exported from *R* after cleaning it, i.e. after some basic data wrangling and cleaning (see Chapter \@ref(data-wrangling)).
+-   A folder with 'tidy' data. This is usually data I exported from *R* after cleaning it, i.e. after some basic data wrangling and cleaning (see @sec-data-wrangling).
 
 -   A folder for my *R* scripts
 
@@ -84,14 +84,13 @@ Thus, in RStudio, it would look something like this:
 
 ![An example of a scalable folder structure for your project](images/chapter_06_img/01_organising_work/00_organising_work.png){#fig-folder-structure fig-alt="Screenshot of a file structure for a project using R and the r4np package to create such file structure."}
 
-
 You probably noticed that my folders have numbers in front of them. I do this to ensure that all folders are in the order I want them to be, which is usually not the alphabetical order my computer suggests. I use two digits because I may have more than nine folders for a project, and folder ten would otherwise be listed as the third folder in this list. With this filing strategy in place, it will be easy to find whatever I need. Even others can easily understand what I stored where. It is simply 'tidy', similar to how we want our data to be.
 
 ## Creating an *R* Script {#sec-creating-an-r-script}
 
 Code quickly becomes long and complex. Thus, it is not very convenient to write it in the console. So, instead, we can write code into an *R* Script. An *R* Script is a document that RStudio recognises as *R* programming code. Files that are not *R* Scripts, like `.txt`, `.rtf` or `.md`, can also be opened in RStudio, but any code written in it will not be automatically recognised.
 
-When opening an *R* script or creating a new one, it will display in the *Source* window (see Chapter \@ref(the-source-window)). Some refer to this window as the 'script editor'. An *R* script starts as an empty file. Good coding etiquette (see Chapter \@ref(coding-etiquette)) demands that we use the first line to indicate what this file does by using a comment `#`. Here is an example for a ['TidyTuesday'](https://www.tidytuesday.com "'TidyTuesday'"){target="blank"} *R* Project.
+When opening an *R* script or creating a new one, it will display in the *Source* window (see @sec-the-source-window Some refer to this window as the 'script editor'. An *R* script starts as an empty file. Good coding etiquette (see @sec-coding-etiquette) demands that we use the first line to indicate what this file does by using a comment `#`. Here is an example for a ['TidyTuesday'](https://www.tidytuesday.com "'TidyTuesday'"){target="blank"} *R* Project.
 
 ![](images/chapter_06_img/02_r_script/00_r_script.png)
 
@@ -130,22 +129,22 @@ Lastly, the console and the *R* script editor both feature code completion. This
 
 Not only does RStudio show you all the available options, but it also tells you which package this function is from. In this case, all listed functions are from the `ggplot2` package. Furthermore, when you select one of the options but have not pressed `Return ↵` yet, you also get to see a yellow box, which provides you with a quick reference of all the arguments that this function accepts. So you do not have to memorise all the functions and their arguments.
 
-## Using *R* Markdown {#sec-r-markdown-and-r-notebooks}
+## Using *Quarto* {#sec-r-markdown-and-r-notebooks}
 
-There is too much to say about *R* Markdown, which is why I only will highlight that it exists and point out the one feature that might convince you to choose this format over plain *R* scripts: They look like a Word document (almost).
+There is too much to say about *Quarto*, which is why I only will highlight that it exists and point out the one feature that might convince you to choose this format over plain *R* scripts: They look like a Word document (almost).
 
-As the name indicates, *R* Markdown files are a combination of *R* scripts and '*Markdown'*. *'Markdown'* is a way of writing and formatting text documents without needing software like MS Word. Instead, you write everything in plain text. Such plain text can be converted into many different document types such as HTML websites, PDF or Word documents. If you would like to see how it works, I recommend looking at the [R Markdown Cheatsheet](https://www.rstudio.com/resources/cheatsheets/). To create an *R* Markdown file click on `File > New File > R Markdown...`.
+The predecessor of *Quarto* was called *R* Markdown, which is a combination of *R* and '*Markdown'*. *'Markdown'* is a way of writing and formatting text documents without needing software like MS Word. Instead, you write everything in plain text. Such plain text can be converted into many different document types such as HTML websites, PDF or Word documents. If you would like to see how it works, I recommend looking at the [Quarto Website](#0){target="_blank"}. To create a *Quarto* file, click on `File > New File > Quarto Document...`.
 
-An *R* Markdown file works oppositely to an *R* script. By default, an *R* script considers everything as code and only through commenting `#` we can include text to describe what the code does. This is what you have seen in all the coding examples so far. On the other hand, an *R* Markdown file considers everything as text, and we have to specify what is code. We can do so by inserting *'code chunks'*. Therefore, there is less of a need to use comments `#` in *R* Markdown files because you can write about it. Another convenience of *R* Markdown files is that results from your analysis are immediately shown underneath the code chunk and not in the console.
+A *Quarto* file works oppositely to an *R* script. By default, an *R* script considers everything as code and only through commenting `#` we can include text to describe what the code does. This is what you have seen in all the coding examples so far. On the other hand, a *Quarto* file considers everything as text, and we have to specify what is code. We can do so by inserting *'code chunks'*. Therefore, there is less of a need to use comments `#` in *Quarto* files because you can write about it like you would in MS Word. Another convenience of *Quarto* files is that results from your analysis are immediately shown underneath the code chunk and not in the console.
 
-![](images/chapter_06_img/03_r_markdown/01_r_markdown_plain.png)
+![](images/chapter_06_img/03_r_markdown/01_quarto_plain.png)
 
-If you switch your view to the `Visual Editor`, it almost looks like you are writing a report in MS Word.
+If you switch your view to the `Visual Editor` it almost looks like you are writing a report in MS Word. In order to switch to the `Visual Editor` you need to either click on `Visual` in the top left or click on the gear icon and select `Use Visual Editor`.
 
-![](images/chapter_06_img/03_r_markdown/02_r_markdown_visual_editor_menu.png)
+![](images/chapter_06_img/03_r_markdown/02_quarto_visual_editor_menu.png)
 
-![](images/chapter_06_img/03_r_markdown/03_r_markdown_visual_editor.png)
+![](images/chapter_06_img/03_r_markdown/03_quarto_visual_editor.png)
 
-So, when should you use an *R* script, and when should you use *R* Markdown. The rule-of-thumb is that if you intend to write a report, thesis or another form of publication, it might be better to work in an *R* Markdown file. If this does not apply, you might want to use an *R* Script. As mentioned above, *R* Markdown files emphasise text, while *R* scripts primarily focus on code. In my projects, I often have a mixture of both. I use *R* Scripts to carry out data wrangling and my primary analysis and then use *R* Markdown files to present the findings, e.g. creating plots, tables, and other components of a report. By the way, this book is written in *R* Markdown using the `bookdown` package.
+So, when should you use an *R* script, and when should you use *Quarto*. The rule-of-thumb is that if you intend to write a report, assignment, thesis or another form of publication, it might be better to work in a *Quarto* file. If this does not apply, you might want to use an *R* Script. As mentioned above, *Quarto* files emphasise writing about your analysis, while *R* scripts primarily focus on code. In my projects, I often have a mixture of both. I use *R* Scripts to carry out data wrangling and my primary analysis and then use *Quarto* files to present the findings, e.g. creating plots, tables, and other components of a report. By the way, this book is written in *Quarto*.
 
-No matter your choice, it will neither benefit nor disadvantage you in your *R* journey or when working through this book. The choice is all yours. You likely will come to appreciate both formats for what they offer. If you want to find out more about *R* Markdown and how to use it, I highly recommend taking a look at ['R Markdown: The Definitive Guide'](https://bookdown.org/yihui/rmarkdown/ "'R Markdown: The Definitive Guide'"){target="blank"} [@rmarkdown2018].
+No matter your choice, it will neither benefit nor disadvantage you in your *R* journey or when working through this book. The choice is all yours. You will likely come to appreciate both formats for what they offer.
