@@ -6,15 +6,15 @@ Every journey starts with gathering the right equipment. This intellectual journ
 
 or
 
--   Run RStudio in a browser via [RStudio Cloud](https://rstudio.cloud "RStudio Cloud"){target="_blank"}
+-   Run RStudio in a browser via [posit Cloud](https://rstudio.cloud "Posit Cloud"){target="_blank"}
 
-While installing *R* and RStudio requires more time and effort, I strongly recommend it, especially if you want to work offline or make good use of your computer's CPU. However, if you are unsure whether you enjoy learning *R*, you might wish to look at RStudio Cloud first. Either way, you can follow the examples of this book no matter which choice you make.
+While installing *R* and RStudio requires more time and effort, I strongly recommend it, especially if you want to work offline or make good use of your computer's CPU. However, if you are unsure whether you enjoy learning *R*, you might wish to look at Posit Cloud first. Either way, you can follow the examples of this book no matter which choice you make.
 
 ## Installing R {#sec-installing-r}
 
 The core module of our programming is *R* itself, and since it is an open-source project, it is available for free on Windows, Mac and Linux computers. So, here is what you need to do to install it properly on your computer of choice:
 
-1.  Go to [www.r-project.org](https://www.r-project.org%5D(https://www.r-project.org) "www.r-project.org"){target="_blank"}
+1.  Go to [www.r-project.org](https://www.r-project.org "www.r-project.org"){target="_blank"}
 
     ![](images/chapter_03_img/r_project/00_r_project_page.png){fig-alt="Screenshot of the R Project website homepage, called CRAN, showcasing the latest news and updates about the R programming language."}
 
@@ -100,38 +100,38 @@ While not strictly something that helps you become a better programmer, this adv
 
 I know what you are thinking: This already sounds complicated and cumbersome. However, rest assured, we take a look at how you can easily update all your packages with RStudio. Thus, all you need to remember is: *R* needs to be updated separately from everything else.
 
-## RStudio Cloud {#sec-rstudio-cloud}
+## Posit Cloud {#sec-rstudio-cloud}
 
-RStudio Cloud is an application that runs in your web browser. It allows you to write and access *R* code wherever you go. It even works on your tablet because it does not require installation. However, do expect it to run slower if your internet connection is not fast or stable. To work with RStudio Cloud, you also need an internet connection. However, there are many benefits to using RStudio in the cloud, such as running time-consuming scripts without using your own device. Also, it is much easier to collaborate with others, and since no installation is required, you can work on projects on any device as long as you are connected to the internet. However, RStudio Cloud's most significant advantage is that you can get started with programming within seconds compared to a desktop installation. Still, I prefer my locally-run offline version of RStudio, because I appreciate working offline as much as online. Nevertheless, I recommend setting up an account because you never know when you need it.
+Posit Cloud is an application that runs in your web browser. It allows you to write and access *R* code wherever you go. It even works on your tablet because it does not require installation. However, do expect it to run slower if your internet connection is not fast or stable. To work with Posit Cloud, you also need an internet connection. However, there are many benefits to using RStudio in the cloud, such as running time-consuming scripts without using your own device. Also, it is much easier to collaborate with others, and since no installation is required, you can work on projects on any device as long as you are connected to the internet. However, Posit Cloud's most significant advantage is that you can get started with programming within seconds compared to a desktop installation. Still, I prefer my locally-run offline version of RStudio, because I appreciate working offline as much as online. Nevertheless, I recommend setting up an account because you never know when you need it.
 
-To get started with RStudio Cloud, we have to undertake a couple of steps:
+To get started with Posit Cloud, we have to undertake a couple of steps:
 
 1.  Open your web browser of choice and navigate to <https://rstudio.cloud>.
 
-    ![](images/chapter_03_img/rstudio_cloud/01_rstudio_cloud.png){fig-alt="Screenshot of the RStudio Cloud landing page."}
+    ![](images/chapter_03_img/rstudio_cloud/01_rstudio_cloud.png){fig-alt="Screenshot of the Posit Cloud landing page."}
 
 2.  Click on `Sign Up` to create your account.
 
 3.  On the next page, make sure you have the free plan selected and click on `Sign up`.
 
-    ![](images/chapter_03_img/rstudio_cloud/02_rstudio_cloud.png){fig-alt="Screenshot showing the RStudio Cloud tiers of use, including the 'Cloud Free' tier which allows using RStudio Cloud for free."}
+    ![](images/chapter_03_img/rstudio_cloud/02_rstudio_cloud.png){fig-alt="Screenshot showing the Posit Cloud tiers of use, including the 'Cloud Free' tier which allows using Posit Cloud for free."}
 
 4.  To finalise the registration process, you are required to provide your credentials.
 
-    ![](images/chapter_03_img/rstudio_cloud/03_rstudio_cloud.png){fig-alt="Screenshot of the RStudio Cloud Sign Up page."}
+    ![](images/chapter_03_img/rstudio_cloud/03_rstudio_cloud.png){fig-alt="Screenshot of the Posit Cloud Sign Up page."}
 
 5.  Once you complete your registration, you are redirected to `Your Workspace`, the central hub for all your projects. As you can tell, I already added another workspace called `R for Non-Programmers`. However, it is fine to use the default one.
 
-    ![](images/chapter_03_img/rstudio_cloud/05_rstudio_cloud.png){fig-alt="Screenshot of the RStudio Cloud landing page after logging into the website. It shows how clicking on 'New Project enables users to choose a new RStudio project in the cloud."}
+    ![](images/chapter_03_img/rstudio_cloud/05_rstudio_cloud.png){fig-alt="Screenshot of the Posit Cloud landing page after logging into the website. It shows how clicking on 'New Project enables users to choose a new RStudio project in the cloud."}
 
 6.  To start a new *R* project, you can click on `New Project > New RStudio Project`. This will open RStudio in the Cloud, which looks identical to the desktop version. You can immediately start writing your code. The example below computes a plot.[^03_setting_up_r_rstudio-1]
 
-    ![](images/chapter_03_img/rstudio_cloud/06_rstudio_cloud.png){fig-alt="Screenshot of an RStudio Cloud project opened, showing some coding."}
+    ![](images/chapter_03_img/rstudio_cloud/06_rstudio_cloud.png){fig-alt="Screenshot of an Posit Cloud project opened, showing some coding."}
 
 7.  Now we can execute the code as we would on the desktop version (see @sec-r-basics-the-very-fundamentals ).
 
-    ![](images/chapter_03_img/rstudio_cloud/07_rstudio_cloud.png){fig-alt="Screenshot of an RStudio Cloud project opened, showing some coding and the plot that results from running this code."}
+    ![](images/chapter_03_img/rstudio_cloud/07_rstudio_cloud.png){fig-alt="Screenshot of an Posit Cloud project opened, showing some coding and the plot that results from running this code."}
 
-[^03_setting_up_r_rstudio-1]: RStudio and RStudio Cloud warn you if you need to install certain R packages to successfully run code. More about R packages and what they are can be found in @sec-r-packages.
+[^03_setting_up_r_rstudio-1]: RStudio and Posit Cloud warn you if you need to install certain R packages to successfully run code. More about R packages and what they are can be found in @sec-r-packages.
 
-No matter whether you choose to use a desktop version of RStudio or RStudio Cloud, you will be able to follow along in this book with no problem.
+No matter whether you choose to use a desktop version of RStudio or Posit Cloud, you will be able to follow along in this book with no problem.
