@@ -5,7 +5,7 @@ book:
   title: "R for Non-Programmers: A Guide for Social Scientists"
   output-file: "r4np-crc"
   author: "Daniel Dauber"
-  date: "03/10/2024"
+  date: "`r Sys.Date()`"
   favicon: r4np_icon.png
   
   chapters:
