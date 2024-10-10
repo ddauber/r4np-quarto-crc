@@ -6,6 +6,7 @@ book:
   output-file: "r4np-crc"
   author: "Daniel Dauber"
   date: "03/10/2024"
+  favicon: r4np_icon.png
   
   chapters:
     - index.qmd
