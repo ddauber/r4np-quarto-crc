@@ -6,6 +6,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="description" content="Are you interested in learning R, but intimidated by programming and statistical analysis? ‘R for Non-Programmers: A Guide for Social Scientists’ is the perfect resource for you. This book provides practical and efficient solutions to common challenges in empirical research in the Social Sciences, without assuming any prior knowledge or skills in programming or statistical analysis. Each chapter is dedicated to a specific task required to answer research questions and includes exercises and case studies based on real data. Whether you are a novice or experienced analyst, this book is a comprehensive entry to R programming that will help enhance your data analysis skills.">
 
 <title>R for Non-Programmers: A Guide for Social Scientists - 5&nbsp; R Basics: The very fundamentals</title>
 <style>
@@ -197,6 +198,9 @@ window.Quarto = {
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="./">R for Non-Programmers: A Guide for Social Scientists</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/ddauber/r4np-quarto-crc" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+</div>
     </div>
       </div>
         <div class="mt-2 flex-shrink-0 align-items-center">
@@ -355,7 +359,7 @@ window.Quarto = {
   <li><a href="#sec-coding-etiquette" id="toc-sec-coding-etiquette" class="nav-link" data-scroll-target="#sec-coding-etiquette"><span class="header-section-number">5.5</span> Coding etiquette</a></li>
   <li><a href="#sec-exercises-r_basics" id="toc-sec-exercises-r_basics" class="nav-link" data-scroll-target="#sec-exercises-r_basics"><span class="header-section-number">5.6</span> Exercises</a></li>
   </ul>
-</nav>
+<div class="toc-actions"><ul><li><a href="https://github.com/ddauber/r4np-quarto-crc/blob/main/05_r_basics.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/ddauber/r4np-quarto-crc/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -478,23 +482,23 @@ Table&nbsp;5.1: Logical operators in R
 </figcaption>
 <div aria-describedby="tbl-logical-operators-r-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
-<div id="liwfarshsx" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#liwfarshsx table {
+<div id="zrupgskalb" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#zrupgskalb table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#liwfarshsx thead, #liwfarshsx tbody, #liwfarshsx tfoot, #liwfarshsx tr, #liwfarshsx td, #liwfarshsx th {
+#zrupgskalb thead, #zrupgskalb tbody, #zrupgskalb tfoot, #zrupgskalb tr, #zrupgskalb td, #zrupgskalb th {
   border-style: none;
 }
 
-#liwfarshsx p {
+#zrupgskalb p {
   margin: 0;
   padding: 0;
 }
 
-#liwfarshsx .gt_table {
+#zrupgskalb .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -520,12 +524,12 @@ Table&nbsp;5.1: Logical operators in R
   border-left-color: #D3D3D3;
 }
 
-#liwfarshsx .gt_caption {
+#zrupgskalb .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#liwfarshsx .gt_title {
+#zrupgskalb .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -537,7 +541,7 @@ Table&nbsp;5.1: Logical operators in R
   border-bottom-width: 0;
 }
 
-#liwfarshsx .gt_subtitle {
+#zrupgskalb .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -549,7 +553,7 @@ Table&nbsp;5.1: Logical operators in R
   border-top-width: 0;
 }
 
-#liwfarshsx .gt_heading {
+#zrupgskalb .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -561,13 +565,13 @@ Table&nbsp;5.1: Logical operators in R
   border-right-color: #D3D3D3;
 }
 
-#liwfarshsx .gt_bottom_border {
+#zrupgskalb .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #0076BA;
 }
 
-#liwfarshsx .gt_col_headings {
+#zrupgskalb .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #0076BA;
@@ -582,7 +586,7 @@ Table&nbsp;5.1: Logical operators in R
   border-right-color: #D3D3D3;
 }
 
-#liwfarshsx .gt_col_heading {
+#zrupgskalb .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -602,7 +606,7 @@ Table&nbsp;5.1: Logical operators in R
   overflow-x: hidden;
 }
 
-#liwfarshsx .gt_column_spanner_outer {
+#zrupgskalb .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -614,15 +618,15 @@ Table&nbsp;5.1: Logical operators in R
   padding-right: 4px;
 }
 
-#liwfarshsx .gt_column_spanner_outer:first-child {
+#zrupgskalb .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#liwfarshsx .gt_column_spanner_outer:last-child {
+#zrupgskalb .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#liwfarshsx .gt_column_spanner {
+#zrupgskalb .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #0076BA;
@@ -634,11 +638,11 @@ Table&nbsp;5.1: Logical operators in R
   width: 100%;
 }
 
-#liwfarshsx .gt_spanner_row {
+#zrupgskalb .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#liwfarshsx .gt_group_heading {
+#zrupgskalb .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -664,7 +668,7 @@ Table&nbsp;5.1: Logical operators in R
   text-align: left;
 }
 
-#liwfarshsx .gt_empty_group_heading {
+#zrupgskalb .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -679,15 +683,15 @@ Table&nbsp;5.1: Logical operators in R
   vertical-align: middle;
 }
 
-#liwfarshsx .gt_from_md > :first-child {
+#zrupgskalb .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#liwfarshsx .gt_from_md > :last-child {
+#zrupgskalb .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#liwfarshsx .gt_row {
+#zrupgskalb .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -706,7 +710,7 @@ Table&nbsp;5.1: Logical operators in R
   overflow-x: hidden;
 }
 
-#liwfarshsx .gt_stub {
+#zrupgskalb .gt_stub {
   color: #FFFFFF;
   background-color: #0076BA;
   font-size: 100%;
@@ -719,7 +723,7 @@ Table&nbsp;5.1: Logical operators in R
   padding-right: 5px;
 }
 
-#liwfarshsx .gt_stub_row_group {
+#zrupgskalb .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -733,15 +737,15 @@ Table&nbsp;5.1: Logical operators in R
   vertical-align: top;
 }
 
-#liwfarshsx .gt_row_group_first td {
+#zrupgskalb .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#liwfarshsx .gt_row_group_first th {
+#zrupgskalb .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#liwfarshsx .gt_summary_row {
+#zrupgskalb .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -751,16 +755,16 @@ Table&nbsp;5.1: Logical operators in R
   padding-right: 5px;
 }
 
-#liwfarshsx .gt_first_summary_row {
+#zrupgskalb .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #0076BA;
 }
 
-#liwfarshsx .gt_first_summary_row.thick {
+#zrupgskalb .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#liwfarshsx .gt_last_summary_row {
+#zrupgskalb .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -770,7 +774,7 @@ Table&nbsp;5.1: Logical operators in R
   border-bottom-color: #0076BA;
 }
 
-#liwfarshsx .gt_grand_summary_row {
+#zrupgskalb .gt_grand_summary_row {
   color: #333333;
   background-color: #89D3FE;
   text-transform: inherit;
@@ -780,7 +784,7 @@ Table&nbsp;5.1: Logical operators in R
   padding-right: 5px;
 }
 
-#liwfarshsx .gt_first_grand_summary_row {
+#zrupgskalb .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -790,7 +794,7 @@ Table&nbsp;5.1: Logical operators in R
   border-top-color: #0076BA;
 }
 
-#liwfarshsx .gt_last_grand_summary_row_top {
+#zrupgskalb .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -800,11 +804,11 @@ Table&nbsp;5.1: Logical operators in R
   border-bottom-color: #0076BA;
 }
 
-#liwfarshsx .gt_striped {
+#zrupgskalb .gt_striped {
   background-color: #F4F4F4;
 }
 
-#liwfarshsx .gt_table_body {
+#zrupgskalb .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #0076BA;
@@ -813,7 +817,7 @@ Table&nbsp;5.1: Logical operators in R
   border-bottom-color: #0076BA;
 }
 
-#liwfarshsx .gt_footnotes {
+#zrupgskalb .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -827,7 +831,7 @@ Table&nbsp;5.1: Logical operators in R
   border-right-color: #D3D3D3;
 }
 
-#liwfarshsx .gt_footnote {
+#zrupgskalb .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -836,7 +840,7 @@ Table&nbsp;5.1: Logical operators in R
   padding-right: 5px;
 }
 
-#liwfarshsx .gt_sourcenotes {
+#zrupgskalb .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -850,7 +854,7 @@ Table&nbsp;5.1: Logical operators in R
   border-right-color: #D3D3D3;
 }
 
-#liwfarshsx .gt_sourcenote {
+#zrupgskalb .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -858,72 +862,72 @@ Table&nbsp;5.1: Logical operators in R
   padding-right: 5px;
 }
 
-#liwfarshsx .gt_left {
+#zrupgskalb .gt_left {
   text-align: left;
 }
 
-#liwfarshsx .gt_center {
+#zrupgskalb .gt_center {
   text-align: center;
 }
 
-#liwfarshsx .gt_right {
+#zrupgskalb .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#liwfarshsx .gt_font_normal {
+#zrupgskalb .gt_font_normal {
   font-weight: normal;
 }
 
-#liwfarshsx .gt_font_bold {
+#zrupgskalb .gt_font_bold {
   font-weight: bold;
 }
 
-#liwfarshsx .gt_font_italic {
+#zrupgskalb .gt_font_italic {
   font-style: italic;
 }
 
-#liwfarshsx .gt_super {
+#zrupgskalb .gt_super {
   font-size: 65%;
 }
 
-#liwfarshsx .gt_footnote_marks {
+#zrupgskalb .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#liwfarshsx .gt_asterisk {
+#zrupgskalb .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#liwfarshsx .gt_indent_1 {
+#zrupgskalb .gt_indent_1 {
   text-indent: 5px;
 }
 
-#liwfarshsx .gt_indent_2 {
+#zrupgskalb .gt_indent_2 {
   text-indent: 10px;
 }
 
-#liwfarshsx .gt_indent_3 {
+#zrupgskalb .gt_indent_3 {
   text-indent: 15px;
 }
 
-#liwfarshsx .gt_indent_4 {
+#zrupgskalb .gt_indent_4 {
   text-indent: 20px;
 }
 
-#liwfarshsx .gt_indent_5 {
+#zrupgskalb .gt_indent_5 {
   text-indent: 25px;
 }
 
-#liwfarshsx .katex-display {
+#zrupgskalb .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#liwfarshsx div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#zrupgskalb div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -1832,4 +1836,4 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 
 
 
-</body></html>
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/ddauber/r4np-quarto-crc/blob/main/05_r_basics.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/ddauber/r4np-quarto-crc/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div></div></footer></body></html>

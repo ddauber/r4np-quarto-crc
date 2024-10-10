@@ -6,6 +6,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="description" content="Are you interested in learning R, but intimidated by programming and statistical analysis? ‘R for Non-Programmers: A Guide for Social Scientists’ is the perfect resource for you. This book provides practical and efficient solutions to common challenges in empirical research in the Social Sciences, without assuming any prior knowledge or skills in programming or statistical analysis. Each chapter is dedicated to a specific task required to answer research questions and includes exercises and case studies based on real data. Whether you are a novice or experienced analyst, this book is a comprehensive entry to R programming that will help enhance your data analysis skills.">
 
 <title>R for Non-Programmers: A Guide for Social Scientists - 13&nbsp; Regression: Creating models to predict future observations</title>
 <style>
@@ -197,6 +198,9 @@ window.Quarto = {
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="./">R for Non-Programmers: A Guide for Social Scientists</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/ddauber/r4np-quarto-crc" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+</div>
     </div>
       </div>
         <div class="mt-2 flex-shrink-0 align-items-center">
@@ -361,7 +365,7 @@ window.Quarto = {
   </ul></li>
   <li><a href="#sec-ols-alternatives" id="toc-sec-ols-alternatives" class="nav-link" data-scroll-target="#sec-ols-alternatives"><span class="header-section-number">13.4</span> Other regression models: Alternatives to OLS</a></li>
   </ul>
-</nav>
+<div class="toc-actions"><ul><li><a href="https://github.com/ddauber/r4np-quarto-crc/blob/main/13_regressions.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/ddauber/r4np-quarto-crc/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -2137,14 +2141,14 @@ AIC       |      AICc |       BIC |    R2 | R2 (adj.) |  RMSE | Sigma
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 6 × 3
 # Groups:   country [6]
-  country   age age_c
-  &lt;fct&gt;   &lt;dbl&gt; &lt;dbl&gt;
-1 Bolivia    79  40.7
-2 Iran       69  29.5
-3 Iraq       52  15.4
-4 Japan      71  16.2
-5 Korea      30 -15.6
-6 Egypt      28 -11.7</code></pre>
+  country   age   age_c
+  &lt;fct&gt;   &lt;dbl&gt;   &lt;dbl&gt;
+1 Bolivia    20 -18.3  
+2 Iran       27 -12.5  
+3 Iraq       23 -13.6  
+4 Japan      48  -6.78 
+5 Korea      45  -0.630
+6 Egypt      19 -20.7  </code></pre>
 </div>
 </div>
 <div class="cell">
@@ -2666,4 +2670,4 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 
 
 
-</body></html>
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/ddauber/r4np-quarto-crc/blob/main/13_regressions.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/ddauber/r4np-quarto-crc/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div></div></footer></body></html>
