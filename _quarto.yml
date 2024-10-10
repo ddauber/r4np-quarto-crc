@@ -38,7 +38,9 @@ format:
     theme:
       - cosmo
       - r4np.scss
-    include-before-body: _ga.html
+    include-in-header:
+      - _ga.html
+      - header.html
       
   # pdf:
   #   documentclass: krantz
