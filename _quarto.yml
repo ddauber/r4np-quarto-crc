@@ -37,13 +37,11 @@ format:
     theme:
       - cosmo
       - r4np.scss
+    include-before-body: _ga.html
+      
   # pdf:
   #   documentclass: krantz
   #   keep-tex: true
   #   include-in-header: latex/preamble.tex
   #   include-before-body: latex/before_body.tex
   #   include-after-body: latex/after_body.tex
-
-website:
-  google-analytics:
-    tracking-id: "G-PF1VJZVM7C"
