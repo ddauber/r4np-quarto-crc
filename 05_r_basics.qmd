@@ -113,7 +113,7 @@ Reflecting on these examples, you might notice three important aspects of logica
 2.  We can compare non-numerical values, i.e. text, which is also known as `character` values, with each other,
 3.  The devil is in the details (consider #5).
 
-One of the most common mistakes of *R* novices is the confusion around the `==` and `=` notation. While `==` represents `equal to`, `=` is used to assign a value to an object (for more details on assignments see @sec-assigning-values-to-objects. However, in practice, most *R* programmers tend to avoid `=` since it can easily lead to confusion with `==`. As such, you can strike `=` out of your R vocabulary for now.
+One of the most common mistakes of *R* novices is the confusion around the `==` and `=` notation. While `==` represents `equal to`, `=` is used to assign a value to an object (for more details on assignments see @sec-assigning-values-to-objects. However, in practice, most *R* programmers tend to avoid `=` since it can easily lead to confusion with `==`. As such, you can strike `=` out of your *R* vocabulary for now.
 
 There are many different logical operations you can perform. @tbl-logical-operators-r lists the most frequently used logical operators for your reference. These will become important, for example when we filter our data for analysis, e.g. include only female or male participants.
 
@@ -213,7 +213,7 @@ friends <- c("Fiona",
 friends
 ```
 
-To concatenate values into a single object, we need to use a comma `,` to separate each value. Otherwise, *R* will report an error back.
+To concatenate values into a single object, we need to use a comma `,` to separate each value. This is not dissimilar to how we create lists when writing in English. Otherwise, *R* will report an error back.
 
 ```{r}
 #| label: concatenate-error
@@ -237,11 +237,11 @@ You can copy and paste the following example to illustrate what I explained.
 #| echo: true
 
 # Important years in my life
-milestones_of_my_life <- c(1982, 2006, 2011, 2018, 2020)
+milestones_of_my_life <- c(1982, 2006, 2011, 2018, 2020, 2022)
 milestones_of_my_life
 
 # The same as above - no second line of code needed
-(milestones_of_my_life <- c(1982, 2006, 2011, 2018, 2020))
+(milestones_of_my_life <- c(1982, 2006, 2011, 2018, 2020, 2022))
 ```
 
 Finally, we can also concatenate numbers and character values into one object:
@@ -257,7 +257,7 @@ This last example is not necessarily something I would recommend to do, because 
 
 ![](images/chapter_05_img/01_basic_computation_environment_objects.png){fig-alt="Screenshot of the Environemnt tab in RStudio, showing three objects: files, miletsones_f_my_life, and names_and_years."}
 
-The `friends` object shows that all the values inside the object are classified as `chr`, which denominates `character`. For this object, this is correct because it only includes the names of my friends. On the other hand, the object `milestones_of_my_life` only includes `numeric` values, and therefore it says `num` in the environment pane. However, for the object `names_and_years` we know we want to have `numeric` and `character` values included. Still, *R* recognises them as `character` values because values inside objects are meant to be of the same type. Remember that in *R,* numbers can always be interpreted as `character` and `numeric`, but text only can be considered as `character`.
+The `friends` object shows that all the values inside the object are classified as `chr`, which denominates `character`. For this object, this is correct because it only includes the names of my friends. On the other hand, the object `milestones_of_my_life` only includes `numeric` values, and therefore it says `num` in the environment pane. However, for the object `names_and_years` we know we want to have `numeric` and `character` values included. Still, *R* recognises them as `character` values because values inside objects are meant to be of the same type. Remember that in *R,* numbers can always be interpreted as `character` and `numeric`, but text only can be considered as `character` or a `factor`.
 
 Consequently, mixing different types of data into one object is likely a bad idea. This is especially true if you want to use the `numeric` values for computation. We will return to data types in @sec-change-data-types where we learn how to change them, but for now we should ensure that our objects are all of the same data type.
 
@@ -321,7 +321,7 @@ measurement_of_boredom_of_watching_youtube
 Sleep.per_monthsIn.hours
 ```
 
-Ultimately, you need to be able to effectively work with your data and output. Ideally, this should be true for others as well who want or need to work with your analysis and data as well, e.g. your co-investigator or supervisor. The same is applies to column names in datasets (see @sec-colnames-cleaning). Some more information about coding style and coding etiquette can be found in @sec-coding-etiquette.
+Ultimately, you need to be able to effectively work with your data and output. Ideally, this should be true for others as well who want or need to work with your analysis and data, e.g. your co-investigator or supervisor. The same is applies to column names in datasets (see @sec-colnames-cleaning). Some more information about coding style and coding etiquette can be found in @sec-coding-etiquette.
 
 ## Functions {#sec-functions}
 
@@ -332,11 +332,11 @@ I used the term '*function*' multiple times, but I never thoroughly explained wh
 #| echo: true
 
 # First we create an object that stores our desired values
-pocket_money <- c(0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89)
+pocket_money <- c(0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 88)
 
 #1 Manually compute the mean
-sum <- 0 + 1 + 1 + 2 + 3 + 5 + 8 + 13 + 21 + 34 + 55 + 89
-sum / 12 # There are 12 items in the object
+total_sum <- 0 + 1 + 1 + 2 + 3 + 5 + 8 + 13 + 21 + 34 + 55 + 88
+total_sum / 12 # There are 12 items in the object
 ```
 
 ```{r}
@@ -352,10 +352,10 @@ mean(pocket_money)
 #| echo: true
 
 #3 Let's make sure #1 and #2 are actually the same
-sum / 12 == mean(pocket_money)
+total_sum / 12 == mean(pocket_money)
 ```
 
-If we manually compute the mean, we first calculate the sum of all values in the object `pocket_money`[^05_r_basics-1]. Then we divide it by the number of values in the object, which is `12`. This is the traditional way of computing the mean as we know it from primary school. However, by simply using the function `mean()`, we not only write considerably less code, but it is also much easier to understand because the word *'mean'* does precisely what we would expect. Which approach do you find easier: Using the function `mean()` or compute it by hand?
+If we manually compute the mean, we first calculate the sum of all values in the object `pocket_money`[^05_r_basics-1]. Then we divide it by the number of values in the object, which is `12`. This is the traditional way of computing the mean as we know it from primary school. However, by simply using the function `mean()`, we not only write considerably less code, but it is also much easier to understand because the word *'mean'* does precisely what we would expect. Which approach do you find easier: Using the function `mean()` or computing it by hand?
 
 [^05_r_basics-1]: If you find the order of numbers suspicious, it is because it represents the famous [Fibonacci sequence](https://en.wikipedia.org/wiki/Fibonacci_number "Fibonacci sequence"){target="blank"}.
 
@@ -429,7 +429,7 @@ Sometimes you will also get a message from *R* that states `NaN`. `NaN` stands f
 sqrt(-9)
 ```
 
-## R packages {#sec-r-packages}
+## *R* packages {#sec-r-packages}
 
 *R* has many built-in functions that we can use right away. However, some of the most interesting ones are developed by different programmers, data scientists and enthusiasts. To add more functions to your repertoire, you can install *R* packages. *R* packages are a collection of functions that you can download and use for your own analysis. Throughout this book, you will learn about and use many different *R* packages to accomplish various tasks. To give you another analogy,
 
@@ -505,7 +505,7 @@ RStudio offers a very convenient way of installing packages. In the packages pan
 
     ![](images/chapter_05_img/install_r_packages/03_install_r_packages.png){fig-alt="Screenshot of RStudio, showing the Install Pacakges window with the box Install Dependencies ticked."}
 
-The only real downside of using the packages pane is that you cannot install packages hosted on GitHub only. However, you can download them from there and install them directly from your computer using this option. This is particularly useful if you do not have an internet connection but you already downloaded the required packages onto a hard drive. However, in 99.9% of cases it is much easier to use the function `devtools::install_github()`.
+The only real downside of using the packages pane is that you cannot install packages hosted on GitHub only. However, you can download them from there and install them directly from your computer using a this option. This is particularly useful if you do not have an internet connection but you already downloaded the required packages onto a hard drive. However, in 99.9% of cases it is much easier to use the function `devtools::install_github()` because you do not have to perform multiple steps to achieve the same result.
 
 ### Install all necessary *R* packages for this book {#sec-install-all-r-packages}
 
@@ -548,7 +548,7 @@ naniar::vis_miss(airquality)
 
 ## Coding etiquette {#sec-coding-etiquette}
 
-Now you know everything to get started, but before we jump into our first project, I would like to briefly touch upon coding etiquette. This is not something that improves your analytical or coding skills directly, but is essential in building good habbits and making your life and those of others a little easier. Consider writing code like growing plants in your garden. You want to nurture the good plants, remove the weed and add labels that tell you which plant it is that you are growing. At the end of the day, you want your garden to be well-maintained. Treat you programming code the same way.
+Now you know everything to get started, but before we jump into our first project, I would like to briefly touch upon coding etiquette. This is not something that improves your analytical or coding skills directly, but is essential in building good habits and making your life and those of others a little easier. Consider writing code like growing plants in your garden. You want to nurture the good plants, remove the weed and add labels that tell you which plant it is that you are growing. At the end of the day, you want your garden to be well-maintained. Treat you programming code the same way.
 
 A script (see @sec-creating-an-r-script) of programming code should always have at least the following qualities:
 
@@ -604,7 +604,7 @@ summ(model1,
 
 # Does is matter whether a country lies in Europe?
 
-## Visualise rel. of covid cases, idv and being a European country
+## Visualise covid cases, idv and being a European country
 df |>
   ggplot(aes(x = covid_cases_per_1m,
              y = idv,
@@ -628,9 +628,9 @@ summ(model2,
 anova(model1, model2)
 ```
 
-I hope we can agree that the second example is much easier to read and understand even though you probably do not understand most of it yet. For once, I separated the different analytical steps from each other like paragraphs in a report. Apart from that, I added comments with `#` to provide more context to my code for someone else who wants to understand my analysis. Admittedly, this example is a little excessive. Usually, you might have fewer comments. Commenting is an integral part of programming because it allows you to remember what you did. Ideally, you want to strike a good balance between commenting on and writing your code. How many comments you need will likely change throughout your *R* programming journey. Think of comments as headers for your programming script that give it structure.
+I hope we can agree that the second example is much easier to read and understand even though you probably do not understand most of it yet. For once, I separated the different analytical steps from each other like paragraphs in a report. Apart from that, I added comments with `#` to provide more context to my code for someone else who wants to understand my analysis. Admittedly, this example is a little excessive. Usually, you might have fewer comments. Commenting is an integral part of programming because it allows you to remember what you did or still have to do. Ideally, you want to strike a good balance between commenting on and writing your code. How many comments you need will likely change throughout your *R* programming journey. Think of comments as headers for your programming script that give it structure.
 
-We can use `#` not only to write comments but also to tell R not to run particular code. This is very helpful if you want to keep some code but do not want to use it yet. There is also a handy keyboard shortcut you can use to 'deactivate' multiple lines of code at once. Select whatever you want to 'comment out' in your script and press `Ctrl+Shift+C` (PC) or `Cmd+Shift+C` (Mac).
+We can use `#` not only to write comments but also to tell *R* not to run particular code. This is very helpful if you want to keep some code but do not want to use it yet. There is also a handy keyboard shortcut you can use to 'deactivate' multiple lines of code at once. Select whatever you want to 'comment out' in your script and press `Ctrl+Shift+C` (PC) or `Cmd+Shift+C` (Mac).
 
 ```{r}
 #| label: commenting-out-code

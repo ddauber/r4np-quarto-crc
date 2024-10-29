@@ -10,7 +10,7 @@ While we cover data wrangling in great detail in the next Chapter (@sec-data-wra
 
 ## Creating an *R* Project file {#sec-creating-an-r-project}
 
-When working on a project, you likely create many different files for various purposes, especially *R* Scripts (see @sec-creating-an-r-project). If you are not careful, this file is stored in your system's default location, which might not be where you want them to be. RStudio allows you to manage your entire project intuitively and conveniently through *R* Project files. Using *R* Project files comes with a couple of perks, for example:
+When working on a project, you likely create many different files for various purposes, especially *R* scripts (see @sec-creating-an-r-project). If you are not careful, this file is stored in your system's default location, which might not be where you want them to be. RStudio allows you to manage your entire project intuitively and conveniently through *R* Project files. Using *R* Project files comes with a couple of perks, for example:
 
 -   All the files that you generate are in the same place. Your data, your coding, your exported plots, your reports, etc., all are in one place together without you having to manage the files manually. This is due to the fact that RStudio sets the root directory to whichever folder your project is saved to.
 
@@ -20,33 +20,33 @@ When working on a project, you likely create many different files for various pu
 
 For now, the most important reason to use *R* Project files is the convenience of the organisation of files and the ability to share it easily with co-investigators, your supervisor, or your students.
 
-To create an R Project, you need to perform the following steps:
+To create an *R* Project, you need to perform the following steps:
 
 1.  Select `File > New Project…` from the menu bar.
 
-    ![](images/chapter_06_img/00_r_project/00_r_project_file_menu.png)
+![](images/chapter_06_img/00_r_project/00_r_project_file_menu.png){fig-alt="A screenshot of the RStudio menu 'File' and the option 'New Project...' is highlighted."}
 
 2.  Select `New Directory` from the popup window.
 
-    ![](images/chapter_06_img/00_r_project/01_r_project_new_directory.png)
+![](images/chapter_06_img/00_r_project/01_r_project_new_directory.png){fig-alt="A screenshot of the 'New Project Wizard' with multiple options of how a project can be created."}
 
 3.  Next, select `New Project`.
 
-    ![](images/chapter_06_img/00_r_project/02_r_project_new_project.png)
+![](images/chapter_06_img/00_r_project/02_r_project_new_project.png){fig-alt="A screenshot of the 'Project Type' dialogue window. The option 'New Project' is selected."}
 
 4.  Pick a meaningful name for your project folder, i.e. the `Directory Name`. Ensure this project folder is created in the right place. You can change the `subdirectory` by clicking on `Browse…`. Ideally the subdirectory is a place where you usually store your research projects.
 
-    ![](images/chapter_06_img/00_r_project/03_r_project_specs.png)
+![](images/chapter_06_img/00_r_project/03_r_project_specs.png){fig-alt="A screenshot of the project creation dialogue window with a text input field for Directory Name."}
 
 5.  You have the option to `Create a git repository`. This is only relevant if you already have a GitHub account and wish to use version control. For now, you can happily ignore it if you do not use GitHub.
 
 6.  Lastly, tick `Open in new session`. This will open your *R* Project in a new RStudio window.
 
-    ![](images/chapter_06_img/00_r_project/04_r_project_directory_name.png)
+![](images/chapter_06_img/00_r_project/04_r_project_directory_name.png){fig-alt="A screenshot of the project creation window, and the box 'Open in new session' is ticked."}
 
 7.  Once you are happy with your choices, you can click `Create Project`. This will open a new *R* Session, and you can start working on your project.
 
-    ![](images/chapter_06_img/00_r_project/05_r_project_new_session.png)
+![](images/chapter_06_img/00_r_project/05_r_project_new_session.png){fig-alt="A screenshot of the starting screen when a new project has been created."}
 
 If you look carefully, you can see that your RStudio is now 'branded' with your project name. At the top of the window, you see the project name, the files pane shows the root directory where all your files will be, and even the console shows on top the file path of your project. You could set all this up manually, but I would not recommend it, not the least because it is easy and swift to work with *R* Projects.
 
@@ -84,7 +84,7 @@ Thus, in RStudio, it would look something like this:
 
 ![An example of a scalable folder structure for your project](images/chapter_06_img/01_organising_work/00_organising_work.png){#fig-folder-structure fig-alt="Screenshot of a file structure for a project using R and the r4np package to create such file structure."}
 
-You probably noticed that my folders have numbers in front of them. I do this to ensure that all folders are in the order I want them to be, which is usually not the alphabetical order my computer suggests. I use two digits because I may have more than nine folders for a project, and folder ten would otherwise be listed as the third folder in this list. With this filing strategy in place, it will be easy to find whatever I need. Even others can easily understand what I stored where. It is simply 'tidy', similar to how we want our data to be.
+You probably noticed that my folders have numbers in front of them. I do this to ensure that all folders are in the order I want them to be, which is usually not the alphabetical order my computer suggests. I use two digits because I may have more than nine folders for a project, and folder ten could otherwise be listed as the second folder in this list (this depends on your operating system). With this filing strategy in place, it will be easy to find whatever I need. Even others can easily understand what I stored where. It is simply 'tidy', similar to how we want our data to be.
 
 ## Creating an *R* Script {#sec-creating-an-r-script}
 
@@ -92,7 +92,7 @@ Code quickly becomes long and complex. Thus, it is not very convenient to write 
 
 When opening an *R* script or creating a new one, it will display in the *Source* window (see @sec-the-source-window Some refer to this window as the 'script editor'. An *R* script starts as an empty file. Good coding etiquette (see @sec-coding-etiquette) demands that we use the first line to indicate what this file does by using a comment `#`. Here is an example for a ['TidyTuesday'](https://www.tidytuesday.com "'TidyTuesday'"){target="blank"} *R* Project.
 
-![](images/chapter_06_img/02_r_script/00_r_script.png)
+![](images/chapter_06_img/02_r_script/00_r_script.png){fig-alt="An example code of how to setup your R script. The first line provides a title, the second one a date and then the R package libraries are loaded into our session."}
 
 All examples in this book can easily be copied and pasted into your own *R* script. However, for some code you will have to install the *R* package `r4np` (see [above](#install_r4np)). Let's try it with the following code. The plot this code creates reveals which car manufacturer produces the most efficient cars. Copy and paste this code into your *R* script.
 
@@ -100,6 +100,7 @@ All examples in this book can easily be copied and pasted into your own *R* scri
 #| label: r-script-copy-paste-examples
 #| echo: true
 #| message: false
+#| fig-alt: "A series of colourful boxplots where each colour represent the name of a manufacturer."
 
 library(tidyverse)
 
@@ -115,7 +116,7 @@ mpg |> ggplot(aes(x = reorder(manufacturer, desc(hwy), FUN = median),
 
 You are probably wondering where your plot has gone. Copying the code will not automatically run it in your *R* script. However, this is necessary to create the plot. If you tried pressing `Return ↵`, you would only add a new line. Instead, you need to select the code you want to run and press `Ctrl+Return ↵` (PC) or `Cmd+Return ↵` (Mac). You can also use the `Run` command at the top of your source window, but it is much more efficient to press the keyboard shortcut. Besides, you will remember this shortcut quickly, because we need to use it very frequently. If all worked out, you should see the following:
 
-![](images/chapter_06_img/02_r_script/01_r_script_example_plot.png)
+![](images/chapter_06_img/02_r_script/01_r_script_example_plot.png){fig-alt="A screenshot that shows where the R code is and where we can find the plot that was created with the code we have written in the 'Plots' panel."}
 
 As you can see, cars from `Honda` appear to drive furthest with the same amount of fuel (a gallon) compared to other vehicles. Thus, if you are looking for very economical cars, you now know where to find them.
 
@@ -125,7 +126,7 @@ Moreover, code in *R* scripts will be automatically indented to facilitate readi
 
 Lastly, the console and the *R* script editor both feature code completion. This means that when you start typing the name of a function, *R* will provide suggestions. These are extremely helpful and make programming a lot faster. Once you found the function you were looking for, you press `Return ↵` to insert it. Here is an example of what happens when you have the package `tidyverse` loaded and type `ggpl`. Only functions that are loaded via packages or any object in your environment pane benefit from code completion.
 
-![](images/chapter_06_img/02_r_script/02_r_script_code_completion.png)
+![](images/chapter_06_img/02_r_script/02_r_script_code_completion.png){fig-alt="A screenshot showing the code completion feature in RStudio. the incomplete code 'ggpl' is shown and a window opens which shows possible function that start with these letters."}
 
 Not only does RStudio show you all the available options, but it also tells you which package this function is from. In this case, all listed functions are from the `ggplot2` package. Furthermore, when you select one of the options but have not pressed `Return ↵` yet, you also get to see a yellow box, which provides you with a quick reference of all the arguments that this function accepts. So you do not have to memorise all the functions and their arguments.
 
@@ -137,13 +138,13 @@ The predecessor of *Quarto* was called *R* Markdown, which is a combination of *
 
 A *Quarto* file works oppositely to an *R* script. By default, an *R* script considers everything as code and only through commenting `#` we can include text to describe what the code does. This is what you have seen in all the coding examples so far. On the other hand, a *Quarto* file considers everything as text, and we have to specify what is code. We can do so by inserting *'code chunks'*. Therefore, there is less of a need to use comments `#` in *Quarto* files because you can write about it like you would in MS Word. Another convenience of *Quarto* files is that results from your analysis are immediately shown underneath the code chunk and not in the console.
 
-![](images/chapter_06_img/03_r_markdown/01_quarto_plain.png)
+![](images/chapter_06_img/03_r_markdown/01_quarto_plain.png){fig-alt="screenshot of RStudio showing a Quarto document with markdown text and an R code chunk. The code runs plot(pressure) and displays a scatter plot. The Console shows R output, and the Files pane lists several project files including .qmd and .quarto.yml."}
 
 If you switch your view to the `Visual Editor` it almost looks like you are writing a report in MS Word. In order to switch to the `Visual Editor` you need to either click on `Visual` in the top left or click on the gear icon and select `Use Visual Editor`.
 
-![](images/chapter_06_img/03_r_markdown/02_quarto_visual_editor_menu.png)
+![](images/chapter_06_img/03_r_markdown/02_quarto_visual_editor_menu.png){fig-alt="A screenshot which shows how to change from Source Editor to Visual Editor by clicking on the gear icon."}
 
-![](images/chapter_06_img/03_r_markdown/03_quarto_visual_editor.png)
+![](images/chapter_06_img/03_r_markdown/03_quarto_visual_editor.png){fig-alt="A screenshot of the Quarto editor in viual mode which looks less like a coding script and more like a Word document with figures."}
 
 So, when should you use an *R* script, and when should you use *Quarto*. The rule-of-thumb is that if you intend to write a report, assignment, thesis or another form of publication, it might be better to work in a *Quarto* file. If this does not apply, you might want to use an *R* Script. As mentioned above, *Quarto* files emphasise writing about your analysis, while *R* scripts primarily focus on code. In my projects, I often have a mixture of both. I use *R* Scripts to carry out data wrangling and my primary analysis and then use *Quarto* files to present the findings, e.g. creating plots, tables, and other components of a report. By the way, this book is written in *Quarto*.
 

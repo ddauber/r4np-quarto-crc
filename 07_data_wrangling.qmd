@@ -63,11 +63,11 @@ This approach is by far the easiest. Let's assume you have a dataset called `gen
 
 2.  Select `Import Dataset`.
 
-    ![](images/chapter_07_img/01_files_pane_import/01_files_pane_import.png)
+![](images/chapter_07_img/01_files_pane_import/01_files_pane_import.png){fig-alt="A screenshot of RStudio.  In the Files pane, we navigate to a folder containing a CSV file named gender_age.csv. A context menu shows options to \"View File\" or \"Import Dataset.\""}
 
 3.  A new window will open, and you can choose different options. You also see a little preview of how the data looks like. This is great if you are not sure whether you did it correctly.
 
-    ![](images/chapter_07_img/01_files_pane_import/02_files_pane_import.png)
+![](images/chapter_07_img/01_files_pane_import/02_files_pane_import.png){fig-alt="A screenshot of the \"Import Dataset\" dialog for a CSV file named gender_age.csv. The data preview shows columns for id, gender, and age with sample rows. Import options are set, and the Code Preview panel shows the read_csv command to load the data using the readr library."}
 
 4.  You can change how data should be imported, but the default should be fine in most cases. Here is a quick breakdown of the most important options:
 
@@ -85,13 +85,13 @@ This approach is by far the easiest. Let's assume you have a dataset called `gen
 
     -   `NA` specifies how missing values in your data are acknowledged. By default, empty cells in your data will be recognised as missing data.
 
-    ![](images/chapter_07_img/01_files_pane_import/03_files_pane_import.png)
+![](images/chapter_07_img/01_files_pane_import/03_files_pane_import.png){fig-alt="A screenshot of the import dialogue window with 'Open Data Viewer' deselected."}
 
 5.  Once you are happy with your choices, you can click on `Import`.
 
 6.  You will find your dataset in the *Environment* pane.
 
-    ![](images/chapter_07_img/01_files_pane_import/04_files_pane_import.png)
+![](images/chapter_07_img/01_files_pane_import/04_files_pane_import.png){fig-alt="A screenshot of all four panes of RStudio, showing the object 'gender_age' in the Environment pane, which represents the imported data. The console shows code that was executed to import the dataset."}
 
 In the *Console*, you can see that *R* also provides the `Column specification`, which we need later when inspecting 'data types'. `readr` automatically imports all text-based columns as `chr`, i.e. `character` values. However, this might not always be the correct data type. We will cover more of this aspect of data wrangling in @sec-change-data-types.
 
@@ -147,7 +147,7 @@ id|age|gender
 3|33|male
 ```
 
-An important advantage of this approach is the ability to load large data files much more quickly. The previous options offer a preview of your data, but loading this preview can take a long time for large datasets. Therefore, I highly recommend using the `readr` functions directly in the console or your R script to avoid frustration when importing large datasets.
+An important advantage of this approach is the ability to load large data files much more quickly. The previous options offer a preview of your data, but loading this preview can take a long time for large datasets. Therefore, I highly recommend using the `readr` functions directly in the console or your *R* script to avoid frustration when importing large datasets.
 
 There is a lot more to `readr` than could be covered in this book. If you want to know more about this *R* package, I highly recommend looking at the [readr webpage](https://readr.tidyverse.org "package webpage"){target="blank"}.
 
@@ -159,6 +159,7 @@ For the rest of this chapter, we will use the World Value Survery data [@wvs2022
 #| label: open-wvs
 #| echo: true
 #| message: false
+
 # Ensure you loaded the 'r4np' package first
 library(r4np)
 
@@ -275,11 +276,11 @@ You are probably wondering what `|>` stands for. This symbol is called a *'pipin
 
 If we wanted to spell out what we just did, we could say:
 
-1.  `wvs <-`: We assigned whatever happened to the right of the assignment operator to the object `wvs`.
+1.  `wvs_clean <-`: We assigned whatever happened to the right of the assignment operator to the object `wvs_clean`.
 
-2.  `wvs |>`: We defined the dataset we want to use with the functions defined after the `|>`.
+2.  `wvs_clean |>`: We defined the dataset we want to use with the functions defined after the `|>`.
 
-3.  `rename(satisfaction = satisfcation_with_life)`: We define a new name `satisfaction` for the column `satisfaction_with_life`. Notice that the order is `new_name = old_name`. Here we also use `=`. A rare occasion where it makes sense to do so.
+3.  `rename(satisfaction = satisfaction_with_life)`: We define a new name `satisfaction` for the column `satisfaction_with_life`. Notice that the order is `new_name = old_name`. Here, we also use `=`. A rare occasion where it makes sense to do so.
 
 Just for clarification, the following two lines of code accomplish the same task. The only difference is that with `|>` we could chain another function right after it. So, you could say, it is a matter of taste which approach you prefer. However, in later chapters, it will become apparent why using `|>` is very advantageous.
 
@@ -297,7 +298,7 @@ rename(wvs_clean, satisfaction_new = satisfaction)
 
 Since you will be using the pipe operator very frequently, it is a good idea to remember the keyboard shortcut for it: `Ctrl+Shift+M` for PC and `Cmd+Shift+M` for Mac.
 
-Besides `|>` operator you might also find that some sources use a different pipe operator `%>%`. The original `tidyverse` approach used `%>%` before R introduced their own pipe operator. In short: You can use both of them if you like, but in 90% of cases, you probably will be fine using the one that comes shipped with RStudio by default, i.e. `|>`. More and more R resources adopt the `|>` operator and there are only few situations where `%>%` is preferred. For the content of this book and the techniques demonstrated here, you can use both operators interchangeably and the code will work just fine.
+Besides `|>` operator you might also find that some sources use a different pipe operator `%>%`. The original `tidyverse` approach used `%>%` before *R* introduced their own pipe operator. In short: You can use both of them if you like, but in 90% of cases, you probably will be fine using the one that comes shipped with RStudio by default, i.e. `|>`. More and more *R* resources adopt the `|>` operator and there are only few situations where `%>%` is preferred. For the content of this book and the techniques demonstrated here, you can use both operators interchangeably and the code will work just fine.
 
 ## Data types: What are they and how can you change them {#sec-change-data-types}
 
@@ -329,7 +330,7 @@ In *R* we have a slightly different distinction:
 
 For a complete list of data types, I recommend looking at ['Column Data Types'](https://tibble.tidyverse.org/articles/types.html "'Column Data Types'"){target="blank"} [@data-types-2021].
 
-R has a fine-grained categorisation of data types. The most important distinction, though, lies between `<chr>`, `<fct>`/`<ord>` and `<dbl>` for most datasets in the Social Sciences. Still, it is good to know what the abbreviations in your `tibble` mean and how they might affect your analysis.
+*R* has a fine-grained categorisation of data types. The most important distinction, though, lies between `<chr>`, `<fct>`/`<ord>` and `<dbl>` for most datasets in the Social Sciences. Still, it is good to know what the abbreviations in your `tibble` mean and how they might affect your analysis.
 
 Now that we have a solid understanding of different data types, we can look at our dataset and see whether `readr` classified our variables correctly.
 
@@ -386,7 +387,7 @@ Lastly, there might be occasions where you want to convert data into other forma
 
 -   `as.character()`: Converts values to string values, even if they are numbers. If you use `readr` to import your data, you will not often use this function because `readr` imports unknown data types as `<chr>` by default.
 
-All these function can be used in the same as we did before. Here are three examples to illustrated their use.
+All these functions can be used in the same way as we did before. Here are three examples illustrating their use.
 
 ```{r}
 #| label: convert-to-other-formats-1
@@ -446,7 +447,7 @@ wvs_clean |> count(gender, sort = TRUE)
 
 Now we know how many people were `male` and `female` and how many did not disclose their `gender`. Or do we? The issue here is that you would have to know what `0` and `1` stand for. Surely you would have a coding manual that gives you the answer, but it seems a bit of a complication. For `gender`, this might still be easy to remember, but can you recall the ID numbers for 48 countries?
 
-It certainly would be easier to replace the `0`s and `1`s with their corresponding labels. This can be achieved with a simple function called `fct_recode()` from `forcats`. However, since we 'mutate' a variable into something else, we also have to use the `mutate()` function.
+It certainly would be easier to replace the `0`s and `1`s with their corresponding labels. This can be achieved with a simple function called `fct_recode()` from the `forcats` *R* package. However, since we 'mutate' a variable into something else, we also have to use the `mutate()` function.
 
 ```{r}
 #| label: recode-gender
@@ -472,7 +473,7 @@ wvs_clean |>
                              "female" = 1))
 ```
 
-The error message is easy to understand: `fct_recode()` only expects `strings` as input and not numbers. R recognises `0` and `1` as numbers, but `fct_recode()` only converts a `factor` value into another `factor` value and since we 'mutated' gender from a `numeric` variable to a `factor` variable, all values of gender are no longer numbers. To refer to a factor level (i.e. one of the categories in our factor), we have to use `""`. In other words, data types matter and are often a source of problems with your code. Thus, always pay close attention to them. For now, it is important to remember that factor levels are always string values, i.e. text.
+The error message is easy to understand: `fct_recode()` only expects `strings` as input and not numbers. *R* recognises `0` and `1` as numbers, but `fct_recode()` only converts a `factor` value into another `factor` value and since we 'mutated' gender from a `numeric` variable to a `factor` variable, all values of gender are no longer numbers. To refer to a factor level (i.e. one of the categories in our factor), we have to use `""`. In other words, data types matter and are often a source of problems with your code. Thus, always pay close attention to them. For now, it is important to remember that factor levels are always string values, i.e. text.
 
 Now that we have change the factor levels to our liking, we can rerun our analysis and generate a frequency table for `gender`. This time we receive a much more readable output.
 
@@ -525,7 +526,7 @@ wvs_clean <-
                               "Korea" = "Korea, Republic of"))
 ```
 
-Now we have country names that nicely fit into tables and plots we want to create later and do not have to worry about it later.
+Now we have country names that nicely fit into tables and plots we want to create later and do not have to worry about it anymore.
 
 ### Reordering factor levels {#sec-reordering-factor-levels}
 
@@ -598,11 +599,11 @@ wvs_clean |>
   geom_col()
 ```
 
-There are many ways to rearrange factors, and it very much depends on the data you have and what you wish to achieve. For most of my plots, I tend to revert to a basic R function, i.e. `reorder()`, which is much shorter to type and does essentially the same as `fct_reorder()`. There is no right or wrong in this regard, just personal taste.
+There are many ways to rearrange factors, and it very much depends on the data you have and what you wish to achieve. For most of my plots, I tend to revert to a basic R function, i.e. `reorder()`, which is much shorter to type and does essentially the same as `fct_reorder()`. There is no right or wrong in this regard, just personal taste and you will find me use different options at different types. Over time you will develop your own preferences for how to code things.
 
 ### Removing factor levels {#sec-removing-factor-levels}
 
-When we work with factors, it can sometimes happen that we have factor levels that are not linked to any of our observations in the dataset, but when we try to perform certain analytical steps they might get in the way (for example in @sec-regressions-with-control-variables). Therefore it is important to perform some housekeeping and remove unneeded factor levels.
+When we work with factors, it can sometimes happen that we have factor levels that are not linked to any of our observations in the dataset, but when we try to perform certain analytical steps, they might get in the way (for example in @sec-regressions-with-control-variables). Therefore it is important to perform some housekeeping and remove unneeded factor levels.
 
 ```{r}
 #| label: dataset-dropping-levels 
@@ -649,7 +650,7 @@ levels(data_3_lvls$gender)
 ```
 
 ```{r}
-#| label: drop-factor-levelsoption-02
+#| label: drop-factor-levels-option-02
 #| echo: true
 
 # Option 2: Using 'fct_drop()
@@ -672,7 +673,7 @@ data_3_levels <-
 levels(data_3_lvls$gender)
 ```
 
-In my experience, it is always good to remove unused categories (i.e. levels) because sometimes they can lead to unexpected outcomes. Thus, it is a matter of good practice than an absolute necessity. Besides, it is fairly easy to tidy your factors with the above functions.
+In my experience, it is always good to remove unused categories (i.e. levels) because sometimes they can lead to unexpected outcomes. Thus, it is a matter of good practice than an absolute necessity. Besides, it is fairly easy to tidy your factors with the above functions. However, make sure to keep the original dataset as is in case you ever need to find out what the other categories were.
 
 ## Handling dates, times and durations {#sec-handling-dates-times-and-durations}
 
@@ -800,6 +801,7 @@ From these results, it seems that some participants have either super-humanly fa
 ```{r}
 #| label: duration-boxplot
 #| echo: true
+#| fig-alt: "A dot plot showing each participant as a black dot. Most dots fall onto the left-hand side of the plot, indicating that most participants took 20 minutes or less to complete the questionnaire"
 
 df_duration |>
   ggplot(aes(x = as.numeric(duration),
@@ -807,9 +809,9 @@ df_duration |>
   geom_jitter()
 ```
 
-For now, you should not worry about what this code means but rather consider the interpretation of the plot, i.e. that most participants (represented by a black dot) needed less than 20 minutes to complete the questionnaire. Depending on the length of your data collection tool, this could either be good or bad news. Usually, the shorter the questionnaire can be, the higher the response rate, unless you have incentives for participants to complete a longer survey.
+For now, you should not worry about what this code means but rather consider the interpretation of the plot, i.e. that most participants (represented by a black dot) needed less than 20 minutes to complete the questionnaire. Depending on the length of your data collection tool, this could either be good or bad news. Usually, the shorter the questionnaire can be, the higher the response rate, unless you have incentives for participants to complete a longer survey. Still, if participants only require 2-5 minutes to complete a questionnaire, this might be an indication of participants not completing the questionnaire or not properly reading the questions.
 
-In @sec-descriptive-statistics, we will cover data visualisations like this boxplot in greater detail. If you cannot wait any longer and want to create your own visualisations, you are welcome to skip ahead. However, several data visualisations are awaiting you in the next chapter as well.
+In @sec-descriptive-statistics, we will cover data visualisations in greater detail. If you cannot wait any longer and want to create your own visualisations, you are welcome to skip ahead. However, several data visualisations are awaiting you in the next chapter as well.
 
 ## Dealing with missing data {#sec-dealing-with-missing-data}
 
@@ -829,7 +831,7 @@ Every study that intends to be rigorous will have to identify how much data is m
 #| label: fig-mapping-missing-data
 #| echo: true
 #| fig-cap: "Mapping missing data with `naniar`"
-
+#| fig-alt: "A plot showing missing data across variables: ‘participant_id’, ‘country’, ‘gender’, ‘age’, ‘relationship_status’, ‘freedom_of_choice’, and ‘satisfaction’. Only ‘freedom_of_choice’ has 1% missing; others have 0%. Grey represents present data (99.7%), black represents missing data (0.3%)."
 
 library(naniar)
 
@@ -847,6 +849,7 @@ When working with larger datasets, it might also be helpful to rank variables by
 #| echo: true
 #| warning: false
 #| fig-cap: "Missing data per variable"
+#| fig-alt: "A bar plot showing the number of missing values for each variable. ‘Freedom_of_choice’ has the most missing values at approximately 120, followed by ‘satisfaction’ and ‘relationship_status.’ Other variables like ‘participant_id,’ ‘gender,’ ‘country,’ and ‘age’ have no missing data."
 
 gg_miss_var(wvs_clean)
 ```
@@ -913,7 +916,7 @@ wvs_clean |>
   count(sort = TRUE)
 ```
 
-It seems four countries have exceptionally high numbers of missing data for `freedom_of_choice`: Japan, Brazil, New Zealand, Russia and Bolivia. Why this is the case lies beyond this dataset and is something only the researchers themselves could explain. Collecting data in different countries is particularly challenging, and one is quickly faced with different unfavourable conditions. Furthermore, the missing data is not completely random because we have some first evidence that the location of data collection might have affected its completeness.
+It seems two countries have slightly higher numbers of missing data for `freedom_of_choice`: Japan and Bolivia. Why this is the case lies beyond this dataset and is something only the researchers themselves could explain. Collecting data in different countries is particularly challenging, and one is quickly faced with different unfavourable conditions. Furthermore, the missing data is not completely random because we have some first evidence that the location of data collection might have affected its completeness.
 
 Another way of understanding patterns of missing data can be achieved by looking at relationships between missing values, for example, the co-occurrence of missing values across different variables. This can be achieved by using *upset plots*. An *upset plot* consists of three parts: Set size, intersection size and a Venn diagram which defines the intersections.
 
@@ -924,7 +927,7 @@ Another way of understanding patterns of missing data can be achieved by looking
 gg_miss_upset(wvs_clean)
 ```
 
-The most frequent combination of missing data in our dataset occurs when only `freedom_of_choice` is missing (the first column), but nothing else. Similar results can be found for `relationships_status` and `age`. The first combination of missing data is defined by two variables: `satisfaction` and `freedom_of_choice`. In total, 107 participants had `satisfaction` and `freedom_of_choice` missing but nothing else.
+The most frequent combination of missing data in our dataset occurs when only `freedom_of_choice` is missing (the first column), but nothing else. Similar results can be found for `relationship_status` and `satisfaction`. The first combination of missing data is defined by two variables: `satisfaction` and `freedom_of_choice`. In total, 23 participants had `satisfaction` and `freedom_of_choice` missing in combination.
 
 The 'set size' shown in the upset plot refers to the number of missing values for each variable in the diagram. This corresponds to what we have found when looking at @fig-missing-data-per-variable.
 
@@ -934,13 +937,7 @@ Our analysis also suggests that values are not completely randomly missing but t
 
 Lastly, missing not at random (MNAR) implies that data is missing systematically and that other variables or reasons exist that explain why data is missing. Still, they are not fully known to us. In questionnaire-based research, an easily overlooked reason that can explain missing data is the 'page-drop-off' phenomenon. In such cases, participants stop completing a questionnaire once they advance to another page. @fig-mnar-example shows this very clearly for a large scale project where an online questionnaire was used. After almost every page break in the questionnaire, some participants decided to discontinue. Finding these types of patterns is difficult when only working with numeric values. Thus, it is always advisable to visualise your data as well. Such missing data is linked to the design of the data collection tool.
 
-```{r}
-#| label: fig-mnar-example
-#| echo: false
-#| fig-cap: "MNAR pattern in a dataset due to 'page-drop-offs'"
-
-knitr::include_graphics("images/chapter_07_img/03_missing_data/00_mnar_example.png")
-```
+![MNAR pattern in a dataset due to 'page-drop-offs'](images/chapter_07_img/03_missing_data/00_mnar_example.png){#fig-mnar-example fig-alt="A plot showing missing data as a stair in dark grey, indicating that with every page of the questionnaire more data is missing."}
 
 Defining whether a dataset is MNAR or not is mainly achieved by ruling out MCAR and MAR assumptions. It is not possible to test whether missing data is MNAR, unless we have more information about the underlying population available [@van2020rebutting].
 
@@ -954,11 +951,12 @@ Once you determined which pattern of missing data applies to your dataset, it is
 
 @jakobsen-et-al-2017 provide a rule of thumb of 5% where researchers can consider missing data as negligible, i.e. we can ignore the missing values because they won't affect our analysis in a significant way. They also argue that if the proportion of missing data exceeds 40%, we should also only work with our observed data. However, with such a large amount of missing data, it is questionable whether we can rely on our analysis as much as we want to. If the missing data lies somewhere in-between this range, we need to consider the missing data pattern at hand.
 
-If data is MCAR, we could remove missing data. This process is called *'listwise deletion'*, i.e. you remove all data from a participant with missing data. As just mentioned, removing missing values is only suitable if you have relatively few missing values in your dataset [@schafer-1999], as is the case with the `wvs` dataset. There are additional problems with deleting observations listwise, many of which are summarised by @van-buuren-2018 in his [introduction](https://stefvanbuuren.name/fimd/sec-simplesolutions.html "introduction"){target="blank"}. Usually, we try to avoid removing data as much as possible. If you wanted to perform listwise deletion, it can be done with a single function call: `na.omit()` from the built-in `stats` package. Alternatively, you could also use `drop_na()` from the `tidyr` package, which is automatically loaded when used `library(tidyverse)`. Here is an example of how we can apply these two functions to achieve the same effect.
+If data is MCAR, we could remove missing data. This process is called *'listwise deletion'*, i.e. you remove all data from a participant with missing data. As just mentioned, removing missing values is only suitable if you have relatively few missing values in your dataset [@schafer-1999], as is the case with the `wvs` dataset. There are additional problems with deleting observations listwise, many of which are summarised by @van-buuren-2018 in their [introduction](https://stefvanbuuren.name/fimd/sec-simplesolutions.html "introduction"){target="blank"}. Usually, we try to avoid removing data as much as possible. If you wanted to perform listwise deletion, it can be done with a single function call: `na.omit()` from the built-in `stats` package. Alternatively, you could also use `drop_na()` from the `tidyr` package, which is automatically loaded when using `library(tidyverse)`. Here is an example of how we can apply these two functions to achieve the same effect.
 
 ```{r}
 #| label: remove-all-missing-data
 #| echo: true
+#| fig-alt: "A plot that shows no missing values and is empty."
 
 # No more missing data in this plot
 wvs_clean |> na.omit() |> vis_miss()
@@ -967,6 +965,7 @@ wvs_clean |> na.omit() |> vis_miss()
 ```{r}
 #| label: alternative-of-removing-all-missing-data-points
 #| echo: true
+#| fig-alt: "Like the previous plot, this plot shows no missing values and is empty."
 
 # Here is the alternative method with drop_na()
 wvs_clean |> drop_na() |> vis_miss()
@@ -976,6 +975,7 @@ wvs_clean |> drop_na() |> vis_miss()
 #| label: check-obs-after-na-removal
 #| echo: true
 
+
 # How many observations are left after we removed all missing data?
 wvs_clean |> na.omit() |> count()
 ```
@@ -984,7 +984,7 @@ If you wanted to remove the missing data without the plot, you could use `wvs_no
 
 Based on our analysis of the `wvs` dataset (by no means complete!), we could assume that data is MAR. In such cases, it is possible to 'impute' the missing values, i.e. replacing the missing data with computed scores. This is possible because we can model the missing data based on variables we have. We cannot model missing data based on variables we have not measured in our study for obvious reasons.
 
-You might be thinking: "Why would it make data better if we 'make up' numbers? Is this not cheating?" Imputation of missing values is a science in itself. There is plenty to read about the process of handling missing data, which would reach far beyond the scope of this book. However, the seminal work of @van-buuren-2018, @dong-et-al-2013 and @jakobsen-et-al-2017 are excellent starting points. In short: Simply removing missing data can lead to biases in your data, e.g. if we removed missing data in our dataset, we would mainly exclude participants from Japan, Brazil, New Zealand, Russia and Bolivia (as we found out [earlier](#missing-data-by-country-table)). While imputation is not perfect, it can produce more reliable results than not using imputation at all, assuming our data meets the requirements for such imputation.
+You might be thinking: "Why would it make data better if we 'make up' numbers? Is this not cheating?" Imputation of missing values is a science in itself. There is plenty to read about the process of handling missing data, which would reach far beyond the scope of this book. However, the seminal work of @van-buuren-2018, @dong-et-al-2013 and @jakobsen-et-al-2017 are excellent starting points. In short: Simply removing missing data can lead to biases in your data, e.g. if we removed missing data in our dataset, we would mainly exclude participants from Japan and Bolivia (as we found out [earlier](#missing-data-by-country-table)). While imputation is not perfect, it can produce more reliable results than not using imputation at all, assuming our data meets the requirements for such imputation.
 
 Even though our dataset has only a minimal amount of missing data (relative to the entire size), we can still use imputation. There are many different ways to approach this task, one of which is 'multiple imputation'. As highlighted by @van2020rebutting, multiple imputation has not yet reached the same popularity as listwise deletion, despite its benefits. The main reason for this lies in the complexity of using this technique. There are many more approaches to imputation, and going through them all in detail would be impossible and distract from the book's main purpose. Still, I would like to share some interesting packages with you that use different imputation methods:
 
@@ -1041,13 +1041,15 @@ As you will have noticed, we also had to convert our `tibble` into a `data frame
 
 [^07_data_wrangling-2]: Still, I understand that it often feels annoying.
 
-Be aware that imputation of any kind can take a long time. For example, my MacBook Pro took about 4.22 seconds to complete `impute_knn()` with the `wvs` dataset. If we used multiple imputation, this would have taken considerably longer, i.e. several minutes and more.
+Be aware that imputation of any kind can take a long time. For example, my MacBook Pro takes about four seconds to complete `impute_knn()` with a dataset that has over 69,000 rows and six columns. If we used multiple imputation, this would have taken considerably longer, i.e. several minutes and more. However, computing power is constantly increasing and such tasks can be executed faster every year.
 
-We now should have a dataset that is free of any missing values. To ensure this is the case we can create the missing data matrix that we made at the beginning of this chapter (see @fig-mapping-missing-data).
+We now should have a dataset that has no more missing values. To ensure this is the case we can create the missing data matrix that we made at the beginning of this chapter (see @fig-mapping-missing-data).
 
 ```{r}
 #| label: fig-mapping-missing-data-imputed-data
 #| echo: true
+#| fig-alt: "This plot shows no missing values after conducting imputation and is empty."
+
 
 vis_miss(wvs_nona)
 ```
@@ -1128,7 +1130,7 @@ Here it is unnecessary to guess which values we have to insert because we know t
 student_enrollment |> fill(module)
 ```
 
-If you have to reverse the direction of how *R* should fill in the blank cells in your dataset, you can use `fill(.direction = "up")`. In our example, this would make not much sense, but for the sake of demonstration, here is what would happen:
+If you have to reverse the direction of how *R* should fill in the blank cells in your dataset, you can use `fill(.direction = "up")`. In our example, this would make not much sense, but for the sake of demonstration, here is what would happen:
 
 ```{r}
 #| label: na-replacement-with-fill-up
@@ -1400,8 +1402,10 @@ Let's assume we ask some of our friends to rate Q1, Q2 and Q3 on a scale from 1-
 #| label: create-reverse-coded-items
 #| echo: true
 
-df_social <- tibble(name = c("Agatha Harkness", "Daren Cross", "Hela",
-                             "Aldrich Killian", "Malekith", "Ayesha"),
+# Creating a dataset with responses
+df_social <- tibble(name = c("Agatha Harkness", "Daren Cross",
+                             "Hela", "Aldrich Killian",
+                             "Malekith", "Ayesha"),
                     q1 = c(6, 2, 4, 5, 5, 2),
                     q2 = c(2, 5, 1, 2, 3, 6),
                     q3 = c(5, 1, 5, 4, 5, 1))
@@ -1421,7 +1425,7 @@ df_social |>
   psych::alpha()
 ```
 
-The function `alpha()` is clever enough to make us aware that something went wrong. It even tells us that `Some items ( q2 ) were negatively correlated with the total scale and probably should be reversed`. Also, the Cronbach's $\alpha$ is now negative, which is another indicator that reversed items might be present in the dataset. To remedy this problem, we have to recode `q2` to reflect the opposite meaning. Inverting the coding usually implies we have to mirror the scores, i.e. the largest value become the smallest one and vice versa. Since we use a 6-point Likert scale, we have to recode values in the following way:
+The function `alpha()` is clever enough to make us aware that something went wrong. It even tells us that `Some items ( q2 ) were negatively correlated with the first principal component and probably should be reversed`. Also, the Cronbach's $\alpha$ is now negative, which is another indicator that reversed items might be present in the dataset. To remedy this problem, we have to recode `q2` to reflect the opposite meaning. Inverting the coding usually implies we have to mirror the scores, i.e. the largest value become the smallest one and vice versa. Since we use a 6-point Likert scale, we have to recode values in the following way:
 
 -   `6` -\> `1`
 -   `5` -\> `2`
@@ -1442,7 +1446,8 @@ I will introduce you to all three methods, because each comes with their own ben
 
 #### Reversing items with `mutate()` {#sec-reversing-items-mutate}
 
-Let us begin with the method that is my favourite because it is very quick to execute and only requires one function. With `mutate()`, we can calculate the reversed score for an item by applying the following formula:$$score_{reversed} = score_{max} + score_{min} - score_{obs}$$
+Let us begin with the method that is my favourite because it is very quick to execute and only requires one function. With `mutate()`, we can calculate the reversed score for an item by applying the following formula:\
+$$score_{reversed} = score_{max} + score_{min} - score_{obs}$$
 
 In other words, the reversed score $score_{reversed}$ of an item equals the theoretical maximum score on a given scale $score_{max}$ plus the theoretical minimum score on this scale $score_{min}$, and then we subtract the observed score $score_{obs}$, i.e. the actual response by our participant. For example, if someone in our study scored a `5` on `q2`, we could compute the reversed score as follows: `6 + 1 - 5 = 2` because our Likert scale ranges from `1` to `6`. In *R*, we can apply this idea to achieve this for multiple observations at once.
 
@@ -1545,7 +1550,7 @@ df_social_r |>
   psych::alpha()
 ```
 
-Now everything seems to make sense, and the internal consistency is excellent. We can assume that all three questions reflect one latent construct. From here, we can return to computing our latent variables (see @sec-computing-latent-variables) and continue with our analysis.
+Now everything seems to make sense, and the internal consistency is excellent. We can assume that all three questions reflect one latent construct. From here, we can return to computing our latent variables (see @sec-computing-latent-variables) and advance with our analysis.
 
 When working with datasets, especially those you have not generated yourself, it is always important to check whether any items are meant to be reverse coded. Missing this aspect will likely throw many surprising results and can completely ruin your analysis. I vividly remember my PhD supervisor's story about a viva where a student forgot about reversing their scores. The panellists noticed that the correlations presented were counter-intuitive, and only then it was revealed that the entire analysis had to be redone. Tiny mistakes can often have an enormous ripple effect. Make sure you have 'reversed items' on your checklist when performing data cleaning and wrangling.
 
@@ -1566,7 +1571,7 @@ Now that we have learned the basics of data wrangling, we can finally start our 
 
 ## Exercises
 
-If you would like to test your knowledge or simply practice what we covered in this chapter you can copy and paste the following code if you have the `r4np` installed already.
+If you would like to test your knowledge or simply practice what we covered in this chapter you can copy and paste the following code if you have the `r4np` package installed already.
 
 ```{r}
 #| label: exercise-option-1
@@ -1576,7 +1581,7 @@ If you would like to test your knowledge or simply practice what we covered in t
 learnr::run_tutorial("ex_data_wrangling", package = "r4np")
 ```
 
-If you have not yet installed the `r4np` package, you will have to do this first using by using this code chunk:
+If you have not yet installed the `r4np` package, you will have to do this first using this code chunk:
 
 ```{r}
 #| label: exervise-option-2

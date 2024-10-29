@@ -10,7 +10,7 @@ The RStudio interface is composed of quadrants, each of which fulfils a unique p
 
 -   The `Files / Plots / Packages / Help / Viewer` window
 
-Sometimes you might only see three windows and wonder where the `Source` window has gone in your version of RStudio. In order to use it you have to either open a file or create a new one. You can create a new file by selecting `File > New File > R Script` in the menu bar, or use the keyboard shortcut `Ctrl + Shift + N` on PC and `Cmd + Shift + N` on Mac.
+Sometimes, you might only see three windows and wonder where the `Source` window has gone in your version of RStudio. In order to use it, you have to either open a file or create a new one. You can create a new file by selecting `File > New File > R Script` in the menu bar or using the keyboard shortcut `Ctrl + Shift + N` on PC and `Cmd + Shift + N` on Mac.
 
 I will briefly explain the purpose of each window/pane and how they are relevant to your work in *R*.
 
@@ -30,9 +30,9 @@ Here is a screenshot of how it should look like at your end in RStudio:
 
 ![](images/chapter_04_img/02_console_window/console_algebra.png){fig-alt="Screenshot of the RStudio Console showing the results of the computation of 10 + 5."}
 
-You just successfully performed your first successful computation. I know, this is not quite impressive just yet. *R* is undoubtedly more than just a giant calculator.
+You just successfully performed your first successful computation. I know this is not quite impressive just yet. *R* is undoubtedly more than just a giant pocket calculator.
 
-In the top right of the console, you find a symbol that looks like a broom. This one is quite an important one because it clears your console. Sometimes the console can become very cluttered and difficult to read. If you want to remove whatever you computed, you can click the broom icon and clear the console of all text. I use it so frequently that I strongly recommend learning the keyboard shortcut, which is `Ctrl + L` on PC and Mac.
+In the top right of the console, you find a symbol resembling a broom. This one is quite important because it clears your console. Sometimes, the console can become very cluttered and difficult to read. If you want to remove whatever you computed, you can click the broom icon and clear the console of all text. I use it so frequently that I strongly recommend learning the keyboard shortcut, which is `Ctrl + L` on PC and Mac.
 
 ## The Source window {#sec-the-source-window}
 
@@ -40,7 +40,7 @@ In the top left, you can find the source window. The term 'source' can be unders
 
 -   Inspect data in an Excel-like format (see also @sec-import-your-data)
 
--   Open programming code, e.g. an R Script (see @sec-creating-an-r-script)
+-   Open programming code, e.g. an *R* Script (see @sec-creating-an-r-script)
 
 -   Open other text-based file formats, e.g.
 
@@ -60,23 +60,23 @@ In the top left, you can find the source window. The term 'source' can be unders
 
 ![](images/chapter_04_img/03_source_window/01_rstudio_source.png){fig-alt="Screenshot of the source window with an empty R file."}
 
-In other words, the source window will show you whatever file you are interested in, as long as RStudio can read it - and no, Microsoft Office Documents are not supported. Another limitation of the source window is that it can only show text-based files. So opening images, etc. would not work.
+In other words, the source window will show you whatever file you are interested in, as long as RStudio can read it - and no, Microsoft Office Documents are not supported. Another limitation of the source window is that it can only show text-based files. So, opening images, etc. would not work.
 
 ## The Environment / History / Connections / Tutorial window {#sec-the-environment-history-connections-tutorial-window}
 
-The window in the top right shows multiples panes. The first pane is called *Environment* and shows you objects which are available for computation. One of the first objects you will create is your dataset because, without data, we cannot perform any analysis. Another object could be a plot showing the number of male and female participants in your study. To find out how to create objects yourself, you can take a glimpse at it (see @sec-inspecting-raw-data). Besides datasets and plots, you will also find other objects here, e.g. lists, vectors and functions you created yourself. Don't worry if none of these words makes sense at this point. We will cover each of them in the upcoming chapters. For now, remember this is a place where you can find different objects you created.
+The window in the top right shows multiple panes. The first pane is called *Environment* and shows you objects available for computation. One of the first objects you will create is your dataset because, without data, we cannot perform any analysis. Another object could be a plot showing the number of male and female participants in your study. To find out how to create objects yourself, you can take a glimpse at it (see @sec-inspecting-raw-data). Besides datasets and plots, you will also find other objects here, e.g. lists, vectors and functions you created yourself. Don't worry if none of these words makes sense at this point. We will cover each of them in the upcoming chapters. For now, remember this is a place where you can find different objects you created and might need for your analysis.
 
 ![](images/chapter_04_img/04_environment_history_etc/01_rstudio_environment.png){fig-alt="Screenshot of the environment tab in RStudio which is currently empty."}
 
-The *History* pane is very easy to understand. Whatever computation you run in the console will be stored. So you can go back and see what you coded and rerun that code. Remember the example from above where we computed the sum of `10+5`? This computation is stored in the history of RStudio, and you can rerun it by clicking on `10+5` in the history pane and then click on `To Console`. This will insert `10+5` back into the console, and we can hit `Return ↵` to retrieve the result. You also have the option to copy the code into an existing or new *R* Script by clicking on `To Source`. By doing this, you can save this computation on your computer and reuse it later. Finally, if you would like to store your history, you can do so by clicking on the `floppy disk symbol`. There are two more buttons in this pane, one allows you to delete individual entries in the history (the white page with the red circle on it), and the last one, a `broom`, clears the entire history (irrevocably).
+The *History* pane is very easy to understand. Whatever computation you run in the console will be stored. So you can go back and see what you coded and rerun that code. Remember the example from above where we computed the sum of `10+5`? This computation is stored in the history of RStudio, and you can rerun it by clicking on `10+5` in the history pane and then clicking on `To Console`. This will insert `10+5` back into the console, and we can hit `Return ↵` to retrieve the result. You also have the option to copy the code into an existing or new *R* Script by clicking on `To Source`. By doing this, you can save this computation on your computer and reuse it later. Finally, if you would like to store your history, you can do so by clicking on the `floppy disk symbol`. There are two more buttons in this pane, one allows you to delete individual entries in the history (the white page with the red circle on it), and the last one, a `broom`, clears the entire history (irrevocably).
 
 ![](images/chapter_04_img/04_environment_history_etc/02_rstudio_history.png){fig-alt="Screenshot of the history tab in RStudio, showing the executed code performed earlier, i.e. 10 + 5."}
 
-The pane *Connections* allows you to tab into external databases directly. This can come in handy when you work collaboratively on the same data or want to work with extensive datasets without having to download them. However, for an introduction to *R*, we will not use this feature of RStudio.
+The pane *Connections* allows you to tap into external databases directly. This can come in handy when you work collaboratively on the same data or want to work with extensive datasets without downloading them. However, for an introduction to *R*, we will not use this feature of RStudio.
 
 ![](images/chapter_04_img/04_environment_history_etc/03_rstudio_connections.png){fig-alt="Screenshot of the connections tab in RStudio, showing no connections available at the moment."}
 
-The last pane is called *Tutorial*. Here you can find additional materials to learn *R* and RStudio. If you search for more great content to learn *R*, this serves as a great starting point.
+The last pane is called *Tutorial*. Here, you can find additional materials on learning *R* and RStudio. If you search for more great content to learn *R*, this sis an excellent starting point.
 
 ![](images/chapter_04_img/04_environment_history_etc/04_rstudio_tutorial.png){fig-alt="Screenshot of the Tutorial tab in RStudio, showing how to get started with RStudio which requires installing the learnr package."}
 
@@ -113,11 +113,11 @@ This is how the plot should look like in your RStudio *Plots* pane.
 
 If you wish to delete the plot, you can click on the `red circle with a white x` symbol. This will delete the currently visible plot. If you wish to remove all plots from this pane, you can use the `broom`. There is also an option to export your plot and move back and forth between different plots.
 
-The next pane is called *Packages*. Packages are additional tools you can import and use when performing your analysis. A frequent analogy people use to explain packages is your phone and the apps you install. Each package you download is equivalent to an app on your phone. It can enhance different aspects of working in *R*, such as creating animated plots, using unique machine learning algorithms, or simply making your life easier by doing multiple computations with just one single line of code. You will learn more about *R packages* in @sec-r-packages.
+The next pane is called *Packages*. Packages are additional tools you can import and use when performing your analysis. A frequent analogy people use to explain packages is your phone and the apps you install. Each package you download is equivalent to an app on your phone. It can enhance different aspects of working in *R*, such as creating animated plots, using unique machine-learning algorithms, or simply making your life easier by doing multiple computations with just one single line of code. You will learn more about *R packages* in @sec-r-packages.
 
-![](images/chapter_04_img/05_files_plots_etc/03_rstudio_packages.png){fig-alt="Screenshot of the Packages tab of RStudio showing a list of r packages that have been installed already."}
+![](images/chapter_04_img/05_files_plots_etc/03_rstudio_packages.png){fig-alt="Screenshot of the Packages tab of RStudio showing a list of R packages that have been installed already."}
 
-If you are in dire need of help, RStudio provides you with a *Help* pane. You can search for specific topics, for example how certain computations work. The *Help* pane also has documentation on different datasets that are included in *R*, RStudio or *R packages* you have installed. If you want a more comprehensive overview of how you can find help, have a look at CRAN's ['Getting Help with R'](https://www.r-project.org/help.html "'Getting Help with R'"){target="blank"} webpage.
+If you are in dire need of help, RStudio provides you with a *Help* pane. You can search for specific topics, such as how certain computations work. The *Help* pane also has documentation on different datasets that are included in *R*, RStudio or *R packages* you have installed. If you want a more comprehensive overview of how you can find help, have a look at CRAN's ['Getting Help with R'](https://www.r-project.org/help.html "'Getting Help with R'"){target="blank"} webpage.
 
 ![](images/chapter_04_img/05_files_plots_etc/04_rstudio_help.png){fig-alt="Screenshot of the Help tab in RStudio, showing carious topics, for exameple Learning R Online."}
 
@@ -144,7 +144,7 @@ There are many different ways of how you can find help with your coding beyond R
 
 -   [X/Twitter](https://twitter.com/home "Twitter"){target="blank"} (with [#RStats](https://twitter.com/hashtag/rstats "#RStats"){target="blank"})
 
-Lastly, we have the *Viewer* pane. Not every data visualisation we create in *R* is a static image. You can create dynamic data visualisations or even websites with *R*. This type of content is displayed in the *Viewer* pane rather than in the *Plots* pane. Often these visualisations are based on HTML and other web-based programming languages. As such, it is easy to open them in your browser as well. However, in this book, we mainly focus on two-dimensional static plots, which are the ones you likely need most of the time, either for your assignments, thesis, or publication.
+Lastly, we have the *Viewer* pane. Not every data visualisation we create in *R* is a static image. You can create dynamic data visualisations or even websites with *R*. This type of content is displayed in the *Viewer* pane rather than in the *Plots* pane. Often, these visualisations are based on HTML and other web-based programming languages. As such, it is easy to open them in your browser. However, in this book, we mainly focus on two-dimensional static plots, which are the ones you likely need most of the time, either for your assignments, thesis, or publication.
 
 ![](images/chapter_04_img/05_files_plots_etc/05_rstudio_viewer.png){fig-alt="Screenshot of the Viewer tab in RStudio."}
 
@@ -154,8 +154,8 @@ As a last remark in this chapter, I would like to make you aware that you can mo
 
 -   Hide panes by clicking on the window symbol in the top right corner of each window,
 
--   Resize panes by dragging the border of a window horizontally or vertically, or
+-   Resize panes by dragging the border of a window horizontally or vertically or
 
 -   Add and remove panes by going to `RStudio > Preferences > Pane Layout`, or use the keyboard shortcut `⌘ + ,` if you are on a Mac. Unfortunately, there is no default shortcut for PC users.
 
-If you want a fully customised experience you can also alter the colour scheme of RStudio itself (`RStudio > Preferences > Appearance`) and if the themes offered are not enough for you, you can create a custom theme [here](https://tmtheme-editor.herokuapp.com/#!/editor/theme/Monokai){target="blank"}.
+If you want a fully customised experience, you can also alter the colour scheme of RStudio itself (`RStudio > Preferences > Appearance`). If the themes offered are not enough for you, you can create a custom theme [here](https://tmtheme-editor.herokuapp.com/#!/editor/theme/Monokai){target="blank"}.
