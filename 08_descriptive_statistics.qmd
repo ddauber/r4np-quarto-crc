@@ -440,6 +440,7 @@ For example, we might be interested to know how much alcohol people drink on ave
 #| label: a-boxplot
 #| echo: true
 #| fig-cap: "A boxplot"
+#| fig-alt: "A box plot of ‘consumption’ showing most values centered between about 2 and 8 liters. Outliers include Romania with 16.99 liters on the high end and Kuwait, Mauritania, Saudi Arabia, and Somalia at 0 liters."
 
 # Text for annotations
 most_alcohol <-
@@ -497,6 +498,8 @@ Let's overlap a bar plot with a histogram for the same variable to make this dif
 ```{r}
 #| label: histogram-vs-barplot
 #| echo: true
+#| warning: false
+#| message: false
 
 alcohol_2019 |>
   ggplot(aes(x = consumption)) +
@@ -516,6 +519,7 @@ We can control the number of bars in our histogram using the `bins` attribute. `
 #| label: histogram-bins
 #| echo: true
 #| fig-show: hide
+#| warning: false
 
   alcohol_2019 |>
   ggplot(aes(consumption)) +
@@ -545,6 +549,9 @@ We can control the number of bars in our histogram using the `bins` attribute. `
 ```{r}
 #| label: histograms-bins-output
 #| echo: false
+#| warning: false
+#| fig-cap: "Bar plots with different settings for 'bins'"
+#| fig-alt: "Four histograms showing distribution of ‘consumption’ data with varying bin sizes: 5, 20, 60, and 300. As bin count increases, bars become narrower, revealing more detail in data distribution, especially at smaller consumption values."
 
 p1 <-
   alcohol_2019 |>
@@ -589,7 +596,8 @@ We use histograms to judge whether our data is normally distributed. A normal di
 ```{r}
 #| label: fig-normal-distribution
 #| echo: false
-#| fig-cap: A normal distribution
+#| fig-cap: "A normal distribution"
+#| fig-alt: "Simple bell curve representing a normal distribution centered at a midpoint labeled ‘x’, with symmetrical slopes on both sides."
 
 data <- tribble(~x, -5, 5)
 
@@ -645,6 +653,7 @@ Density plots are a special form of the histogram. It uses 'kernel smoothing', w
 #| label: fig-density-vs-normal
 #| echo: true
 #| fig-cap: "Density plot vs normal distribution"
+#| fig-alt: "Density plot comparing two distributions of ‘consumption’. The red line shows a a reference for a normal distribution and the black line the actual data. The lines do not align, indicating non-normality of the data."
 
 # Ingredients for our normality reference plot
 mean_ref <- mean(alcohol_2019$consumption)
@@ -815,7 +824,8 @@ The red line (created with `geom_hline()` represents the mean consumption of alc
 ```{r}
 #| label: fig-alcohol-consumption-deviation
 #| echo: true
-#| fig-cap: "Deviation of  alcohol `consumption` from the meand consumption levels"
+#| fig-cap: "Deviation of alcohol `consumption` from the mean consumption levels"
+#| fig-alt: "A scatter plot showing ‘consumption’ values for various countries, arranged in ascending order. A red horizontal line at 5 marks a reference level across the plot. Consumption increases steadily, with a few outliers exceeding 15."
 
 alcohol_2019 |>
   select(country, consumption) |>
@@ -902,7 +912,7 @@ While the `psych` package returns descriptive statistics for a single numeric va
 skimr::skim(alcohol_2019)
 ```
 
-![](images/chapter_08_img/output_skim.png)
+![](images/chapter_08_img/output_skim.png){fig-alt="Screenshot of skimr output showing descriptive statistics sorted by variable type"}
 
 In addition to providing descriptive statistics, `skim()` sorts the variables by data type and provides different descriptive statistics meaningful to each kind. Apart from that, the column `n_missing` can help spot missing data. Lastly, we also find a histogram in the last column for `numeric` data, which I find particularly useful.
 
