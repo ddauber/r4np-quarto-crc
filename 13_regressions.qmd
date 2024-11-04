@@ -186,24 +186,10 @@ m0 <- lm(cumulative_deaths ~ cumulative_cases, data = covid_sample)
 
 # We clean the output to make it easer to read
 broom::tidy(m0) |>
-  mutate(across(where(is.numeric),
-                round, 2)
-         )
+  mutate(across(where(is.numeric), \(x) round(0, 2)))
 ```
 
 We first might notice that the `p.value` indicates that the relationship between `cumulative death` and `cumulative_cases` is significant. Thus, we can conclude that countries with more COVID cases also suffer from higher numbers of people who do not recover successfully from it. However, you might be wondering where our $\beta$ scores are. They are found where it says `estimate`. The standard error (`std.error`) denotes the `error` we specified in the [previous equation](#single-linear-regression). In the first row, we get the $\beta_0$, i.e. the intercept (88.10). This one is larger than what we estimated, i.e. `-50`. However, $\beta_1$ is 0.01, which means we have done a very good job guessing this estimate. Still, it becomes apparent that it is much easier to use the function `lm()` to estimate a model than 'eyeballing' it.
-
-Let me also briefly explain what the function `mutate(across(where(is.numeric), round, 2))` does in our computation:
-
--   `mutate()` implies we are changing values of variables,
-
--   `across()` indicates that whatever function is placed insight this function will be applied 'across' certain columns. We specified our columns with
-
--   `where(is.numeric)`, which indicates that all columns should be selected if they are `numeric`.
-
--   `round, 2` represents the function `round()` and is applied with the paramter `2` to round numbers to two decimal places.
-
-While this is might seem like a more advanced method of handling your data, it is good to get into the habit of writing more efficient code, because it tends to be less prone to errors.
 
 Returning to our data, we can now visualise the computed model (in blue) and our guessed model (in red) in one plot and see the differences. The plot shows that both regression lines are fairly close to each other. Admittedly, it was relatively easy to fit this model by hand. However, it is much more difficult to do so when more than two variables are involved.
 
@@ -953,7 +939,7 @@ m2 <- lm(new_cases ~ movements + schools + businesses + travel,
 parameters::compare_parameters(m1, m2) |>
   as_tibble() |>
   select(Parameter, Coefficient.m1, p.m1, Coefficient.m2, p.m2) |>
-  mutate(across(where(is.double), round, 3))
+  mutate(across(where(is.numeric), \(x) round(0, 3)))
 
 # Compare the performance between models
 performance::compare_performance(m1, m2)
@@ -973,7 +959,7 @@ m3 <- lm(new_cases ~ schools + businesses,
 parameters::model_parameters(m3) |>
   as_tibble() |>
   select(Parameter, Coefficient, p) |>
-  mutate(across(where(is.double), round, 3))
+  mutate(across(where(is.numeric), \(x) round(0, 3)))
 
 performance::model_performance(m3)
 ```
@@ -1289,7 +1275,7 @@ m2 <- lm(formula = new_cases ~
 parameters::compare_parameters(m1, m2, standardize = "refit") |>
   as_tibble() |>
   select(Parameter, Coefficient.m1, p.m1, Coefficient.m2, p.m2) |>
-  mutate(across(where(is.double), round, 3))
+  mutate(across(where(is.numeric), \(x) round(0, 3)))
 ```
 
 ```{r}
@@ -1407,7 +1393,7 @@ m4 <- lm(formula = new_cases ~
 parameters::compare_parameters(m0, m4, standardize = "refit") |>
   as_tibble() |>
   select(Parameter, Coefficient.m0, p.m0, Coefficient.m4, p.m4) |>
-  mutate(across(where(is.double), round, 3))
+  mutate(across(where(is.numeric), \(x) round(0, 3)))
 ```
 
 ```{r}
@@ -1520,7 +1506,7 @@ model_c <- lm(formula = satisfaction ~
 parameters::compare_parameters(model, model_c) |>
   as_tibble() |>
   select(Parameter, Coefficient.model, p.model, Coefficient.model_c, p.model_c) |>
-  mutate(across(where(is.double), round, 3))
+  mutate(across(where(is.numeric), \(x) round(0, 3)))
 ```
 
 In contrast to standardising the coefficients, it is not necessary to center all predictors in your dataset. For example, we only centered `age` and not `freedom_of_choice` in our case, because a value of `0` for the latter variable seems plausible. As we can tell from the output, the $\beta$ for `freedom_of_choice` has changed, but all other coefficients remained the same. In general, grand mean centering has the following effects:
