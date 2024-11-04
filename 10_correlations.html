@@ -385,7 +385,7 @@ window.Quarto = {
 <li><p>Are happier people also more satisfied with their life?</p></li>
 <li><p>Is eating healthier related to other health factors, such as life expectancy, blood pressure and overweight/obesity?</p></li>
 </ul>
-<p>There are many different ways to compute the correlation, and it partially depends on the type of data you want to relate to each other. The <em>‘Pearson’s correlation’</em> is by far the most frequently used correlation technique for normally distributed data. On the other hand, if data is not normally distributed, we can opt for the <em>‘Spearman’s rank’</em> correlation. One could argue that the relationship between these two correlations is like the mean (Pearson) to the median (Spearman). Both approaches require numeric values to be computed correctly. If our data is ordinal or, worse, dichotomous (like a logical variable), we have to choose different options. <a href="#tbl-different-correlations" class="quarto-xref">Table&nbsp;<span>10.1</span></a> summarises different methods depending on the data type.</p>
+<p>There are many different ways to compute the correlation, and it partially depends on the type of data you want to relate to each other. The <em>Pearson’s correlation</em> is, by far, the most frequently used correlation technique for normally distributed data. On the other hand, if data is not normally distributed, we can opt for the <em>Spearman’s rank</em> correlation. One could argue that the relationship between these two correlations is like the mean (Pearson) to the median (Spearman). Both approaches require numeric values to be computed correctly. If our data is ordinal or, worse, dichotomous (like a logical variable), we have to choose different options. <a href="#tbl-different-correlations" class="quarto-xref">Table&nbsp;<span>10.1</span></a> summarises different methods depending on the data type.</p>
 <div id="tbl-different-correlations" class="quarto-float anchored">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-different-correlations-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -429,10 +429,10 @@ Table&nbsp;10.1: Different ways of computing correlations
 </div>
 </figure>
 </div>
-<p>There are many more variations of correlations, which you can explore on the <a href="https://easystats.github.io/correlation/articles/types.html" target="blank" title="website of the package">package’s website</a> we will use in this chapter: <code>correlation</code>. However, we will primarily focus on Pearson and Spearman because they are the most commonly used correlation types in academic publications to understand the relationship between two variables. In addition, we also look at <em>‘partial correlations’</em>, which allow us to introduce a third variable into this mix.</p>
+<p>There are many more variations of correlations, which you can explore on the <a href="https://easystats.github.io/correlation/articles/types.html" target="blank" title="website of the package">package’s website</a> we will use in this chapter: <code>correlation</code>. However, we will primarily focus on Pearson and Spearman because they are the most commonly used correlation types in academic publications to understand the relationship between two variables. In addition, we also look at <em>partial correlations,</em> which allow us to introduce a third variable into this mix.</p>
 <section id="sec-plotting-correlations" class="level2" data-number="10.1">
 <h2 data-number="10.1" class="anchored" data-anchor-id="sec-plotting-correlations"><span class="header-section-number">10.1</span> Plotting correlations</h2>
-<p>Since correlations only show the relationship between two variables, we can easily put one variable on the x-axis and one on the y-axis, creating a so-called ‘scatterplot’. We used two functions to plot scatterplots before, i.e.&nbsp;<code>geom_point()</code> and <code>geom_jitter</code>. Let’s explore our first research question: Do people who eat healthier also feel happier? One assumption might be that healthier eating habits contribute to better physical well-being, which in turn enhances happiness. However, a counter-argument could be that diet does not significantly impact happiness levels, as everyone is subject to various life circumstances that influence our mood. Either way, we first need to identify the two variables of interest, which we can find in the <code>hie_2021</code> dataset. It contains measures of national health in various areas of England collected in 2021, such as:</p>
+<p>Since correlations only show the relationship between two variables, we can easily put one variable on the x-axis and one on the y-axis, creating a so-called ‘scatterplot’. We used two functions to plot scatterplots before, i.e.&nbsp;<code>geom_point()</code> and <code>geom_jitter()</code>, which we can use to answer our first research questions, i.e.&nbsp;whether people who eat healthier also feel happier. One assumption might be that healthier eating habits contribute to better physical well-being, which in turn enhances happiness. However, a counter-argument could be that diet does not significantly impact happiness levels, as everyone is subject to various life circumstances that influence our mood. Either way, we first need to identify the two variables of interest, which we can find in the <code>hie_2021</code> dataset. It contains measures of national health in various areas of England collected in 2021, such as:</p>
 <ul>
 <li><p><code>happiness</code>, which measures the average happiness of respondents when asked how they felt the day before on a scale from <code>0</code> (not at all) to <code>10</code> (completely), and</p></li>
 <li><p><code>healthy_eating</code>, which represents the percentage of adults who report eating five or more portions of fruit and vegetables on a regular day.</p></li>
@@ -441,11 +441,13 @@ Table&nbsp;10.1: Different ways of computing correlations
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>hie_2021 <span class="sc">|&gt;</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(healthy_eating, happiness)) <span class="sc">+</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  see<span class="sc">::</span><span class="fu">theme_modern</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Apply a theme without a grid or background</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  see<span class="sc">::</span><span class="fu">theme_modern</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="10_correlations_files/figure-html/correlation-happiness-healthy-eating-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="10_correlations_files/figure-html/correlation-happiness-healthy-eating-1.png" class="img-fluid figure-img" alt="Scatter plot showing the relationship between happiness and healthy eating. Each point represents an individual observation, with happiness on the y-axis and healthy eating scores on the x-axis. The plot suggests a weak or scattered association between happiness and healthy eating." width="672"></p>
 </figure>
 </div>
 </div>
@@ -454,9 +456,10 @@ Table&nbsp;10.1: Different ways of computing correlations
 <p>Since correlations only explain linear relationships, a perfect correlation would be represented by a straight line. Consider the following examples of correlations:</p>
 <div class="cell">
 <div class="cell-output-display">
-<div>
+<div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="10_correlations_files/figure-html/correlation-examples-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="10_correlations_files/figure-html/correlation-examples-1.png" class="img-fluid figure-img" alt="Six scatter plots illustrating different strengths and directions of linear relationships, with corresponding correlation coefficients (r) displayed. Positive correlations (r = 1, 0.89, 0.30) are in the top row, showing varying strengths of positive association, from perfect to weak. Negative correlations (r = -0.42, -0.75, -1) are in the bottom row, showing varying strengths of negative association, from weak to perfect." width="672"></p>
+<figcaption>Relationship strength and direction of two quantitative variables</figcaption>
 </figure>
 </div>
 </div>
@@ -467,7 +470,7 @@ Table&nbsp;10.1: Different ways of computing correlations
 <li><p><code>0</code> defines no correlation (completely random), and</p></li>
 <li><p><code>1</code> defines a perfectly positive correlation.</p></li>
 </ul>
-<p>In other words, the further the score is away from <code>0</code>, the stronger is the relationship between variables. We also have benchmarks that we can use to assess the strength of a relationship, for example, the one by <span class="citation" data-cites="cohen1988statistical">Cohen (<a href="references.html#ref-cohen1988statistical" role="doc-biblioref">1988</a>)</span>. The strength of the relationship is also called <em>‘effect size’</em>. <a href="#tbl-effect-size-cohen" class="quarto-xref">Table&nbsp;<span>10.2</span></a> shows the relevant benchmarks. Note that effect sizes are always provided as absolute figures. Therefore, <code>-0.4</code> would also count as a moderate relationship.</p>
+<p>In other words, the further the score is away from <code>0</code>, the stronger is the relationship between variables. We also have benchmarks that we can use to assess the strength of a relationship, for example, the one by <span class="citation" data-cites="cohen1988statistical">Cohen (<a href="references.html#ref-cohen1988statistical" role="doc-biblioref">1988</a>)</span>. The strength of the relationship is also called <em>effect size.</em> <a href="#tbl-effect-size-cohen" class="quarto-xref">Table&nbsp;<span>10.2</span></a> shows the relevant benchmarks. Note that effect sizes are always provided as absolute figures. Therefore, <code>-0.4</code> would also count as a moderate relationship.</p>
 <div id="tbl-effect-size-cohen" class="quarto-float anchored">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-effect-size-cohen-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -550,12 +553,12 @@ Observations: 307</code></pre>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="10_correlations_files/figure-html/happiness-vs-life-satisfaction-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="10_correlations_files/figure-html/happiness-vs-life-satisfaction-1.png" class="img-fluid figure-img" alt="A scatter plot showing the relationship between life satisfaction (x-axis) and happiness (y-axis). The points are scattered positively, suggesting a positive correlation where higher life satisfaction is associated with higher happiness scores, though with some dispersion around the trend." width="672"></p>
 </figure>
 </div>
 </div>
 </div>
-<p>The scatterplot shows a somewhat positive trend which suggests that we are right: Higher <code>happiness</code> is linked to higher <code>life_satisfaction</code>. Often, it can be tough to see the trend. To improve our plot, we can use the function <code>geom_smooth()</code>, which can help us draw a straight line that best fits our data points. We need to set the <code>method</code> for drawing the line to <code>lm</code>, which stands for ‘linear model’. Remember, correlations assume a linear relationship between two variables, i.e.&nbsp;we model a linear relationship in our scatterplot. As mentioned before, the stronger the relationship the closer each dot in the plot will be to the red line.</p>
+<p>The scatterplot shows a somewhat positive trend which suggests that we are right: Higher <code>happiness</code> is linked to higher <code>life_satisfaction</code>. Often, it can be tough to see the trend. To improve our plot, we can use the function <code>geom_smooth()</code>, which can help us draw a straight line that best fits our data points. We need to set the <code>method</code> for drawing the line to <code>lm</code>, which stands for <em>linear model</em>. Remember, correlations assume a linear relationship between two variables, i.e.&nbsp;we model a linear relationship in our scatterplot. As mentioned before, the stronger the relationship the closer each dot in the plot will be to the red line.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>hie_2021 <span class="sc">|&gt;</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> life_satisfaction, <span class="at">y =</span> happiness)) <span class="sc">+</span></span>
@@ -567,7 +570,7 @@ Observations: 307</code></pre>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="10_correlations_files/figure-html/happiness-vs-life-satisfaction-regression-line-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="10_correlations_files/figure-html/happiness-vs-life-satisfaction-regression-line-1.png" class="img-fluid figure-img" alt="A scatter plot illustrating the relationship between life satisfaction (x-axis) and happiness (y-axis), with a red trend line indicating a positive linear correlation between the two variables. Higher life satisfaction generally corresponds to higher happiness." width="672"></p>
 </figure>
 </div>
 </div>
@@ -592,7 +595,7 @@ Observations: 307</code></pre>
 </section>
 <section id="sec-significance" class="level2" data-number="10.3">
 <h2 data-number="10.3" class="anchored" data-anchor-id="sec-significance"><span class="header-section-number">10.3</span> Significance: A way to help you judge your findings</h2>
-<p>One of the most common pitfalls of novice statisticians is the interpretation of what counts as significant and not significant. Most basic tests offer a <em>‘p value’</em>, which stands for <em>‘probability value’</em>. I have referred to this value multiple times in this book already, but did not thoroughly explain why it is important.</p>
+<p>One of the most common pitfalls of novice statisticians is the interpretation of what counts as significant and not significant. Most basic tests offer a <em>p value,</em> which stands for <em>probability value</em>. I have referred to this value multiple times in this book already, but did not thoroughly explain why it is important.</p>
 <p>To understand p-values and significance, we need to briefly discuss <em>hypotheses</em>. A hypothesis is an assumption we make about the data, such as whether <code>healthy_eating</code> leads to more <code>happiness</code> (as in <a href="#sec-computing-correlations" class="quarto-xref"><span>Section 10.2</span></a>). In contrast, the null hypothesis is a special type of hypothesis that assumes that no effect or relationship exists between variables, i.e.&nbsp;the opposite of what we are testing. When you read that a hypothesis has been “rejected” or “accepted,” it is often the null hypothesis being tested. The p-value helps determine whether we should reject or retain the null hypothesis based on the data.</p>
 <p>The <code>p</code>-value can range from 1 (for 100%) to 0 (for 0%) and helps us assess whether to accept or reject the null hypothesis:</p>
 <ul>
@@ -606,7 +609,7 @@ Observations: 307</code></pre>
 <li><p><span class="math inline">\(p \leq 0.05\)</span>, the result is significant, i.e.&nbsp;there is less than a 5% chance that the null hypothesis should have been accepted.</p></li>
 <li><p><span class="math inline">\(p \leq 0.01\)</span>, the result is highly significant.</p></li>
 </ul>
-<p>Most frequently, confusion about the p-value emerges because we test FOR the null hypothesis and not what we are actually interested in.Returning to our example of eating healthy and its impact on happiness, we would first formulate our hypothesis and the null hypothesis:</p>
+<p>Most frequently, confusion about the p-value emerges because we test FOR the null hypothesis and not what we are actually interested in. Returning to our example of eating healthy and its impact on happiness, we would first formulate our hypothesis and the null hypothesis:</p>
 <ul>
 <li><p>Hypothesis (<span class="math inline">\(H_1\)</span>): Healthy eating and happiness are significantly positively related to each other.</p></li>
 <li><p>Null Hypothesis (<span class="math inline">\(H_0\)</span>): There is no significant relationship between healthy eating and happiness.</p></li>
@@ -630,14 +633,14 @@ Observations: 307</code></pre>
 </div>
 </div>
 <p>Besides the correlation coefficient (<code>r</code>), we also find <span class="math inline">\(t_{(305)} = 1.24\)</span>, which is the test statistic. The test statistic helps us determine if our data shows something unusual based on our hypothesis. A test statistic close to <code>0</code> suggests that our data is consistent with the null hypothesis, i.e.&nbsp;no effect/relationship. The further the test statistic moves from <code>0</code>, the more evidence we have against the null hypothesis.</p>
-<p>In our analysis of the relationship between <code>happiness</code> and <code>healthy_eating</code>, we obtained a p-value of <code>0.215</code>. This indicates that there is a 21.5% probability of finding a t-value of <code>1.24</code> or or larger if the null hypothesis is true. You probably agree that these are not good odds. Since this p-value is greater than the conventional significance level of <span class="math inline">\(p \leq 0.05\)</span> we do not reject the null hypothesis. This means we do not have sufficient evidence to conclude that a significant relationship exists between <code>happiness</code> and <code>healthy_eating</code>.</p>
+<p>In our analysis of the relationship between <code>happiness</code> and <code>healthy_eating</code>, we obtained a p-value of <code>0.215</code>. This indicates that there is a 21.5% probability of finding a t-value of <code>1.24</code> or larger if the null hypothesis is true. You probably agree that these are not good odds. Since this p-value is greater than the conventional significance level of <span class="math inline">\(p \leq 0.05\)</span> we do not reject the null hypothesis. This means we do not have sufficient evidence to conclude that a significant relationship exists between <code>happiness</code> and <code>healthy_eating</code>.</p>
 <p>Lastly, I also want to visually explain what the test statistic is and how it relates to p-values. We already learned about the normal distribution, as such, the visualisation in <a href="#fig-null-hypothesis-testing-plot" class="quarto-xref">Figure&nbsp;<span>10.1</span></a> will look familiar.</p>
 <div class="cell">
 <div class="cell-output-display">
-<div id="fig-null-hypothesis-testing-plot" class="quarto-figure quarto-figure-center quarto-float anchored">
+<div id="fig-null-hypothesis-testing-plot" class="quarto-figure quarto-figure-center quarto-float anchored" alt="A t-distribution curve with two tails shaded in red to represent areas where p < 0.05, indicating the rejection regions. The observed t-value of 1.24 lies within the central, non-shaded area, showing it is not in the rejection region. This suggests the result is not statistically significant at the 0.05 level.">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-null-hypothesis-testing-plot-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="10_correlations_files/figure-html/fig-null-hypothesis-testing-plot-1.png" class="img-fluid figure-img" width="672">
+<img src="10_correlations_files/figure-html/fig-null-hypothesis-testing-plot-1.png" class="img-fluid figure-img" alt="A t-distribution curve with two tails shaded in red to represent areas where p < 0.05, indicating the rejection regions. The observed t-value of 1.24 lies within the central, non-shaded area, showing it is not in the rejection region. This suggests the result is not statistically significant at the 0.05 level." width="672">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-null-hypothesis-testing-plot-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;10.1: t-Distribution with test statistic
@@ -715,7 +718,7 @@ p-value adjustment method: Holm (1979)
 Observations: 307</code></pre>
 </div>
 </div>
-<p>If you have seen correlation tables before, you might find that <code>correlation()</code> does not produce the classic table by default. If you want it to look like the tables in publications, which are more compact but offer less information, you can use the function <code>summary()</code>. Which one you use it entirely up to you (or your supervisor).</p>
+<p>If you have seen correlation tables before, you might find that <code>correlation()</code> does not produce the classic table by default. If you want it to look like the tables in publications, which are more compact but offer less information, you can use the function <code>summary()</code>. Which one you use is entirely up to you (or your supervisor).</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>hie_2021 <span class="sc">|&gt;</span></span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(healthy_eating, life_expectancy, high_blood_pressure, overweight_and_obesity_in_adults) <span class="sc">|&gt;</span></span>
@@ -755,11 +758,11 @@ p-value adjustment method: Holm (1979)</code></pre>
 </section>
 <section id="sec-correlations-can-be-spurious" class="level3" data-number="10.4.2">
 <h3 data-number="10.4.2" class="anchored" data-anchor-id="sec-correlations-can-be-spurious"><span class="header-section-number">10.4.2</span> Correlations can be spurious</h3>
-<p>Just because we find a relationship between two variables does not necessarily mean that they are truly related. Instead, it might be possible that a third variable is the reason for the relationship. We call relationships between variables that are caused by a third variable <em>‘spurious correlations’</em>. This third variable can either be part of our dataset or even something we have not measured at all. The latter case would make it impossible to investigate the relationship further. However, we can always test whether some of our variables affect the relationship between the two variables of interest. This can be done by using <em>partial correlations</em>. A <em>partial correlation</em> returns the relationship between two variables minus the relationship to a third variable. <a href="#fig-illustration-spurious-correlation" class="quarto-xref">Figure&nbsp;<span>10.2</span></a> depicts this visually. While <code>a</code> and <code>b</code> appear to be correlated, the correlation might only exist because they correlate with <code>x</code>.</p>
-<div id="fig-illustration-spurious-correlation" class="quarto-figure quarto-figure-center quarto-float anchored">
+<p>Just because we find a relationship between two variables does not necessarily mean that they are truly related. Instead, it might be possible that a third variable is the reason for the relationship. We call relationships between variables that are caused by a third variable <em>spurious correlations</em>. This third variable can either be part of our dataset or even something we have not measured at all. The latter case would make it impossible to investigate the relationship further. However, we can always test whether some of our variables affect the relationship between the two variables of interest. This can be done by using <em>partial correlations</em>. A <em>partial correlation</em> returns the relationship between two variables minus the relationship to a third variable. <a href="#fig-illustration-spurious-correlation" class="quarto-xref">Figure&nbsp;<span>10.2</span></a> depicts this visually. While <code>a</code> and <code>b</code> appear to be correlated, the correlation might only exist because they correlate with <code>x</code>.</p>
+<div id="fig-illustration-spurious-correlation" class="quarto-figure quarto-figure-center quarto-float anchored" alt="This figures illustrates a causal diagram with nodes (a, b, x). It shows a spurious relationship where the red circle (x) is the cause for changes in a and b. Thus, there is a dotted line between a and b as these variables are not directly related to each other.">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-illustration-spurious-correlation-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="./images/chapter_09_img/spurious-correlation.png" class="img-fluid figure-img">
+<img src="./images/chapter_09_img/spurious-correlation.png" class="img-fluid figure-img" alt="This figures illustrates a causal diagram with nodes (a, b, x). It shows a spurious relationship where the red circle (x) is the cause for changes in a and b. Thus, there is a dotted line between a and b as these variables are not directly related to each other.">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-illustration-spurious-correlation-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;10.2: Illustration of a spurious correlation
@@ -804,11 +807,11 @@ p-value adjustment method: Holm (1979)
 Observations: 307</code></pre>
 </div>
 </div>
-<p>Suddenly, <code>eating_healthy</code> and <code>happiness</code> show a slight negative correlation (<span class="math inline">\(r = -0.11\)</span>). In other words, by controlling for the effect of <code>life_satisfaction</code> on both variables, we reversed the relationship from positive to negative. You might wonder whether this implies that eating healthily makes us less happy. If we were to take this result superficiously, it would indicate exactly this. However, as mentioned before, when we look at correlations we have to consider not only <code>r</code> but also the p-value and the sample size. While sample size seems less problematic (<span class="math inline">\(n = 307\)</span>), the p-value is only <span class="math inline">\(p = 0.053\)</span>, which is just shy of the required minimum significance level of <code>0.05</code>. If we strictly applied the rules, this relationship would not be classified as ‘significant’. Thus, the relationship would not be strong enough to derive meaningful conclusions. Even if the p-value were slightly lower, the effect size would still be very small.</p>
+<p>Suddenly, <code>eating_healthy</code> and <code>happiness</code> show a slight negative correlation (<span class="math inline">\(r = -0.11\)</span>). In other words, by controlling for the effect of <code>life_satisfaction</code> on both variables, we reversed the relationship from positive to negative. You might wonder whether this implies that eating healthily makes us less happy. If we were to take this result superficiously, it would indicate exactly this. However, as mentioned before, when we look at correlations we have to consider not only <code>r</code> but also the p-value and the sample size. While sample size seems less problematic (<span class="math inline">\(n = 307\)</span>), the p-value is only <span class="math inline">\(p = 0.053\)</span>, which is just shy of the required minimum significance level of <code>0.05</code>. If we strictly applied the rules, this relationship would not be classified as <em>significant</em>. Thus, the relationship would not be strong enough to derive meaningful conclusions. Even if the p-value were slightly lower, the effect size would still be very small. No matter how we crunch the numbers, healthy eating just does not make us happier.</p>
 </section>
 <section id="sec-simpsons-paradox" class="level3" data-number="10.4.3">
 <h3 data-number="10.4.3" class="anchored" data-anchor-id="sec-simpsons-paradox"><span class="header-section-number">10.4.3</span> Simpson’s Paradox: When correlations betray you</h3>
-<p>The final limitation is so important that it even has its own name: the <em>‘Simpson’s Paradox’</em>. Let’s find out what is so paradoxical about some correlations. For this demonstration, we have to make use of a different dataset: <code>simpson</code> of the <code>r4np</code> package. It contains information about changes in student <code>performance</code> and changes in <code>happiness</code>. The dataset includes responses from three different groups: <code>Teachers</code>, <code>Students</code> and <code>Parents</code>.</p>
+<p>The final limitation is so important that it even has its own name: the <em>Simpson’s Paradox.</em> Let’s find out what is so paradoxical about some correlations. For this demonstration, we have to make use of a different dataset: <code>simpson</code> of the <code>r4np</code> package. It contains information about changes in student <code>performance</code> and changes in <code>happiness</code>. The dataset includes responses from three different groups: <code>Teachers</code>, <code>Students</code> and <code>Parents</code>.</p>
 <p>We would assume that an increase in students’ <code>performance</code> will likely increase the <code>happiness</code> of participants. After all, all three have stakes in students’ <code>performance</code>.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>simpson <span class="sc">|&gt;</span></span>
@@ -822,7 +825,7 @@ Observations: 307</code></pre>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="10_correlations_files/figure-html/simpson-paradox-plot-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="10_correlations_files/figure-html/simpson-paradox-plot-1.png" class="img-fluid figure-img" alt="This scatter plot shows the relationship between performance and happiness, with each dot representing an individual data point. The red trend line indicates a negative correlation, suggesting that as performance increases, happiness tends to decrease slightly." width="672"></p>
 </figure>
 </div>
 </div>
@@ -861,7 +864,7 @@ Observations: 300</code></pre>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="10_correlations_files/figure-html/simpson-paradox-plot-groups-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="10_correlations_files/figure-html/simpson-paradox-plot-groups-1.png" class="img-fluid figure-img" alt="This scatter plot displays the relationship between performance and happiness across three groups: Parents (blue), Students (red), and Teachers (green). Each color-coded dot represents an individual in the respective group. The black lines represent trend lines for each group, showing a positive relationship between performance and happiness." width="672"></p>
 </figure>
 </div>
 </div>

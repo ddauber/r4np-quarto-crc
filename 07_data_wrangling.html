@@ -434,10 +434,14 @@ window.Quarto = {
 <p>This approach is by far the easiest. Let’s assume you have a dataset called <code>gender_age.csv</code> in your <code>00_raw_data</code> folder. If you wish to import it, you can do the following:</p>
 <ol type="1">
 <li><p>Click on the name of the file.</p></li>
-<li><p>Select <code>Import Dataset</code>.</p>
-<p><img src="images/chapter_07_img/01_files_pane_import/01_files_pane_import.png" class="img-fluid"></p></li>
-<li><p>A new window will open, and you can choose different options. You also see a little preview of how the data looks like. This is great if you are not sure whether you did it correctly.</p>
-<p><img src="images/chapter_07_img/01_files_pane_import/02_files_pane_import.png" class="img-fluid"></p></li>
+<li><p>Select <code>Import Dataset</code>.</p></li>
+</ol>
+<p><img src="images/chapter_07_img/01_files_pane_import/01_files_pane_import.png" class="img-fluid" alt="A screenshot of RStudio.  In the Files pane, we navigate to a folder containing a CSV file named gender_age.csv. A context menu shows options to &quot;View File&quot; or &quot;Import Dataset.&quot;"></p>
+<ol start="3" type="1">
+<li>A new window will open, and you can choose different options. You also see a little preview of how the data looks like. This is great if you are not sure whether you did it correctly.</li>
+</ol>
+<p><img src="images/chapter_07_img/01_files_pane_import/02_files_pane_import.png" class="img-fluid" alt="A screenshot of the &quot;Import Dataset&quot; dialog for a CSV file named gender_age.csv. The data preview shows columns for id, gender, and age with sample rows. Import options are set, and the Code Preview panel shows the read_csv command to load the data using the readr library."></p>
+<ol start="4" type="1">
 <li><p>You can change how data should be imported, but the default should be fine in most cases. Here is a quick breakdown of the most important options:</p>
 <ul>
 <li><p><code>Name</code> allows you to change the object name, i.e.&nbsp;the name of the object this data will be assigned to. I often use <code>df_raw</code> (<code>df</code> stand for <code>data frame</code>, which is how <em>R</em> calls such rectangular datasets).</p></li>
@@ -447,12 +451,14 @@ window.Quarto = {
 <li><p><code>Open Data Viewer</code> allows you to look at your imported dataset. I use it rarely, but it can be helpful at times.</p></li>
 <li><p><code>Delimiter</code> defines how your columns are separated from each other in your file. If it is a <code>.csv</code> file, it would imply it is a ‘comma-separated value’, i.e.&nbsp;<code>,</code>. This setting can be changed for different files, depending on how your data is delimited. You can even use the option <code>Other…</code> to specify a custom separation option.</p></li>
 <li><p><code>NA</code> specifies how missing values in your data are acknowledged. By default, empty cells in your data will be recognised as missing data.</p></li>
-</ul>
-<p><img src="images/chapter_07_img/01_files_pane_import/03_files_pane_import.png" class="img-fluid"></p></li>
-<li><p>Once you are happy with your choices, you can click on <code>Import</code>.</p></li>
-<li><p>You will find your dataset in the <em>Environment</em> pane.</p>
-<p><img src="images/chapter_07_img/01_files_pane_import/04_files_pane_import.png" class="img-fluid"></p></li>
+</ul></li>
 </ol>
+<p><img src="images/chapter_07_img/01_files_pane_import/03_files_pane_import.png" class="img-fluid" alt="A screenshot of the import dialogue window with 'Open Data Viewer' deselected."></p>
+<ol start="5" type="1">
+<li><p>Once you are happy with your choices, you can click on <code>Import</code>.</p></li>
+<li><p>You will find your dataset in the <em>Environment</em> pane.</p></li>
+</ol>
+<p><img src="images/chapter_07_img/01_files_pane_import/04_files_pane_import.png" class="img-fluid" alt="A screenshot of all four panes of RStudio, showing the object 'gender_age' in the Environment pane, which represents the imported data. The console shows code that was executed to import the dataset."></p>
 <p>In the <em>Console</em>, you can see that <em>R</em> also provides the <code>Column specification</code>, which we need later when inspecting ‘data types’. <code>readr</code> automatically imports all text-based columns as <code>chr</code>, i.e.&nbsp;<code>character</code> values. However, this might not always be the correct data type. We will cover more of this aspect of data wrangling in <a href="#sec-change-data-types" class="quarto-xref"><span>Section 7.4</span></a>.</p>
 </section>
 <section id="sec-importing-data-from-the-environment-pane" class="level3" data-number="7.1.2">
@@ -486,7 +492,7 @@ window.Quarto = {
 1|24|male
 2|56|female
 3|33|male</code></pre>
-<p>An important advantage of this approach is the ability to load large data files much more quickly. The previous options offer a preview of your data, but loading this preview can take a long time for large datasets. Therefore, I highly recommend using the <code>readr</code> functions directly in the console or your R script to avoid frustration when importing large datasets.</p>
+<p>An important advantage of this approach is the ability to load large data files much more quickly. The previous options offer a preview of your data, but loading this preview can take a long time for large datasets. Therefore, I highly recommend using the <code>readr</code> functions directly in the console or your <em>R</em> script to avoid frustration when importing large datasets.</p>
 <p>There is a lot more to <code>readr</code> than could be covered in this book. If you want to know more about this <em>R</em> package, I highly recommend looking at the <a href="https://readr.tidyverse.org" target="blank" title="package webpage">readr webpage</a>.</p>
 </section>
 </section>
@@ -625,9 +631,9 @@ $ satisfaction        &lt;dbl&gt; 5, 7, 8, 5, 7, 3, 3, 8, 7, 8, 9, 6, 7, 7, 4, 8
 <p>You are probably wondering what <code>|&gt;</code> stands for. This symbol is called a <em>‘piping operator’</em> , and it allows us to chain multiple functions together by considering the output of the previous function. So, do not confuse <code>&lt;-</code> with <code>|&gt;</code>. Each operator serves a different purpose. The <code>|&gt;</code> has become synonymous with the <code>tidyverse</code> approach to <em>R</em> programming and is the chosen approach for this book. Many functions from the <code>tidyverse</code> are designed to be chained together.</p>
 <p>If we wanted to spell out what we just did, we could say:</p>
 <ol type="1">
-<li><p><code>wvs &lt;-</code>: We assigned whatever happened to the right of the assignment operator to the object <code>wvs</code>.</p></li>
-<li><p><code>wvs |&gt;</code>: We defined the dataset we want to use with the functions defined after the <code>|&gt;</code>.</p></li>
-<li><p><code>rename(satisfaction = satisfcation_with_life)</code>: We define a new name <code>satisfaction</code> for the column <code>satisfaction_with_life</code>. Notice that the order is <code>new_name = old_name</code>. Here we also use <code>=</code>. A rare occasion where it makes sense to do so.</p></li>
+<li><p><code>wvs_clean &lt;-</code>: We assigned whatever happened to the right of the assignment operator to the object <code>wvs_clean</code>.</p></li>
+<li><p><code>wvs_clean |&gt;</code>: We defined the dataset we want to use with the functions defined after the <code>|&gt;</code>.</p></li>
+<li><p><code>rename(satisfaction = satisfaction_with_life)</code>: We define a new name <code>satisfaction</code> for the column <code>satisfaction_with_life</code>. Notice that the order is <code>new_name = old_name</code>. Here, we also use <code>=</code>. A rare occasion where it makes sense to do so.</p></li>
 </ol>
 <p>Just for clarification, the following two lines of code accomplish the same task. The only difference is that with <code>|&gt;</code> we could chain another function right after it. So, you could say, it is a matter of taste which approach you prefer. However, in later chapters, it will become apparent why using <code>|&gt;</code> is very advantageous.</p>
 <div class="cell">
@@ -638,7 +644,7 @@ $ satisfaction        &lt;dbl&gt; 5, 7, 8, 5, 7, 3, 3, 8, 7, 8, 9, 6, 7, 7, 4, 8
 <span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="fu">rename</span>(wvs_clean, <span class="at">satisfaction_new =</span> satisfaction)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Since you will be using the pipe operator very frequently, it is a good idea to remember the keyboard shortcut for it: <code>Ctrl+Shift+M</code> for PC and <code>Cmd+Shift+M</code> for Mac.</p>
-<p>Besides <code>|&gt;</code> operator you might also find that some sources use a different pipe operator <code>%&gt;%</code>. The original <code>tidyverse</code> approach used <code>%&gt;%</code> before R introduced their own pipe operator. In short: You can use both of them if you like, but in 90% of cases, you probably will be fine using the one that comes shipped with RStudio by default, i.e.&nbsp;<code>|&gt;</code>. More and more R resources adopt the <code>|&gt;</code> operator and there are only few situations where <code>%&gt;%</code> is preferred. For the content of this book and the techniques demonstrated here, you can use both operators interchangeably and the code will work just fine.</p>
+<p>Besides <code>|&gt;</code> operator you might also find that some sources use a different pipe operator <code>%&gt;%</code>. The original <code>tidyverse</code> approach used <code>%&gt;%</code> before <em>R</em> introduced their own pipe operator. In short: You can use both of them if you like, but in 90% of cases, you probably will be fine using the one that comes shipped with RStudio by default, i.e.&nbsp;<code>|&gt;</code>. More and more <em>R</em> resources adopt the <code>|&gt;</code> operator and there are only few situations where <code>%&gt;%</code> is preferred. For the content of this book and the techniques demonstrated here, you can use both operators interchangeably and the code will work just fine.</p>
 </section>
 <section id="sec-change-data-types" class="level2" data-number="7.4">
 <h2 data-number="7.4" class="anchored" data-anchor-id="sec-change-data-types"><span class="header-section-number">7.4</span> Data types: What are they and how can you change them</h2>
@@ -660,7 +666,7 @@ $ satisfaction        &lt;dbl&gt; 5, 7, 8, 5, 7, 3, 3, 8, 7, 8, 9, 6, 7, 7, 4, 8
 <li><p><code>date-time</code> / <code>dttm</code>: Data which consists of dates and times, e.g.&nbsp;<code>2021-08-05 16:29:25 BST</code>.</p></li>
 </ul>
 <p>For a complete list of data types, I recommend looking at <a href="https://tibble.tidyverse.org/articles/types.html" target="blank" title="'Column Data Types'">‘Column Data Types’</a> <span class="citation" data-cites="data-types-2021">(<a href="references.html#ref-data-types-2021" role="doc-biblioref">Müller and Wickham 2021</a>)</span>.</p>
-<p>R has a fine-grained categorisation of data types. The most important distinction, though, lies between <code>&lt;chr&gt;</code>, <code>&lt;fct&gt;</code>/<code>&lt;ord&gt;</code> and <code>&lt;dbl&gt;</code> for most datasets in the Social Sciences. Still, it is good to know what the abbreviations in your <code>tibble</code> mean and how they might affect your analysis.</p>
+<p><em>R</em> has a fine-grained categorisation of data types. The most important distinction, though, lies between <code>&lt;chr&gt;</code>, <code>&lt;fct&gt;</code>/<code>&lt;ord&gt;</code> and <code>&lt;dbl&gt;</code> for most datasets in the Social Sciences. Still, it is good to know what the abbreviations in your <code>tibble</code> mean and how they might affect your analysis.</p>
 <p>Now that we have a solid understanding of different data types, we can look at our dataset and see whether <code>readr</code> classified our variables correctly.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(wvs_clean)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -717,7 +723,7 @@ $ satisfaction        &lt;dbl&gt; 5, 7, 8, 5, 7, 3, 3, 8, 7, 8, 9, 6, 7, 7, 4, 8
 <li><p><code>as.numeric()</code>: Converts values into numbers with decimals if they are present.</p></li>
 <li><p><code>as.character()</code>: Converts values to string values, even if they are numbers. If you use <code>readr</code> to import your data, you will not often use this function because <code>readr</code> imports unknown data types as <code>&lt;chr&gt;</code> by default.</p></li>
 </ul>
-<p>All these function can be used in the same as we did before. Here are three examples to illustrated their use.</p>
+<p>All these functions can be used in the same way as we did before. Here are three examples illustrating their use.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Conversion to character values</span></span>
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>converted_data <span class="ot">&lt;-</span></span>
@@ -799,7 +805,7 @@ $ satisfaction        &lt;dbl&gt; 5, 7, 8, 5, 7, 3, 3, 8, 7, 8, 9, 6, 7, 7, 4, 8
 </div>
 </div>
 <p>Now we know how many people were <code>male</code> and <code>female</code> and how many did not disclose their <code>gender</code>. Or do we? The issue here is that you would have to know what <code>0</code> and <code>1</code> stand for. Surely you would have a coding manual that gives you the answer, but it seems a bit of a complication. For <code>gender</code>, this might still be easy to remember, but can you recall the ID numbers for 48 countries?</p>
-<p>It certainly would be easier to replace the <code>0</code>s and <code>1</code>s with their corresponding labels. This can be achieved with a simple function called <code>fct_recode()</code> from <code>forcats</code>. However, since we ‘mutate’ a variable into something else, we also have to use the <code>mutate()</code> function.</p>
+<p>It certainly would be easier to replace the <code>0</code>s and <code>1</code>s with their corresponding labels. This can be achieved with a simple function called <code>fct_recode()</code> from the <code>forcats</code> <em>R</em> package. However, since we ‘mutate’ a variable into something else, we also have to use the <code>mutate()</code> function.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>wvs_clean <span class="ot">&lt;-</span></span>
 <span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>  wvs_clean <span class="sc">|&gt;</span></span>
@@ -821,7 +827,7 @@ Caused by error in `fct_recode()`:
 ℹ Problems with 2 arguments: male and female</code></pre>
 </div>
 </div>
-<p>The error message is easy to understand: <code>fct_recode()</code> only expects <code>strings</code> as input and not numbers. R recognises <code>0</code> and <code>1</code> as numbers, but <code>fct_recode()</code> only converts a <code>factor</code> value into another <code>factor</code> value and since we ‘mutated’ gender from a <code>numeric</code> variable to a <code>factor</code> variable, all values of gender are no longer numbers. To refer to a factor level (i.e.&nbsp;one of the categories in our factor), we have to use <code>""</code>. In other words, data types matter and are often a source of problems with your code. Thus, always pay close attention to them. For now, it is important to remember that factor levels are always string values, i.e.&nbsp;text.</p>
+<p>The error message is easy to understand: <code>fct_recode()</code> only expects <code>strings</code> as input and not numbers. <em>R</em> recognises <code>0</code> and <code>1</code> as numbers, but <code>fct_recode()</code> only converts a <code>factor</code> value into another <code>factor</code> value and since we ‘mutated’ gender from a <code>numeric</code> variable to a <code>factor</code> variable, all values of gender are no longer numbers. To refer to a factor level (i.e.&nbsp;one of the categories in our factor), we have to use <code>""</code>. In other words, data types matter and are often a source of problems with your code. Thus, always pay close attention to them. For now, it is important to remember that factor levels are always string values, i.e.&nbsp;text.</p>
 <p>Now that we have change the factor levels to our liking, we can rerun our analysis and generate a frequency table for <code>gender</code>. This time we receive a much more readable output.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>wvs_clean <span class="sc">|&gt;</span> <span class="fu">count</span>(gender)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -877,7 +883,7 @@ Figure&nbsp;7.1: A bar plot of the factor levels <code>male</code> and <code>fem
 <span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a>                              <span class="st">"Iran"</span> <span class="ot">=</span> <span class="st">"Iran, Islamic Republic of"</span>,</span>
 <span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a>                              <span class="st">"Korea"</span> <span class="ot">=</span> <span class="st">"Korea, Republic of"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Now we have country names that nicely fit into tables and plots we want to create later and do not have to worry about it later.</p>
+<p>Now we have country names that nicely fit into tables and plots we want to create later and do not have to worry about it anymore.</p>
 </section>
 <section id="sec-reordering-factor-levels" class="level3" data-number="7.5.2">
 <h3 data-number="7.5.2" class="anchored" data-anchor-id="sec-reordering-factor-levels"><span class="header-section-number">7.5.2</span> Reordering factor levels</h3>
@@ -956,11 +962,11 @@ Levels: male female</code></pre>
 </div>
 </div>
 </div>
-<p>There are many ways to rearrange factors, and it very much depends on the data you have and what you wish to achieve. For most of my plots, I tend to revert to a basic R function, i.e.&nbsp;<code>reorder()</code>, which is much shorter to type and does essentially the same as <code>fct_reorder()</code>. There is no right or wrong in this regard, just personal taste.</p>
+<p>There are many ways to rearrange factors, and it very much depends on the data you have and what you wish to achieve. For most of my plots, I tend to revert to a basic R function, i.e.&nbsp;<code>reorder()</code>, which is much shorter to type and does essentially the same as <code>fct_reorder()</code>. There is no right or wrong in this regard, just personal taste and you will find me use different options at different types. Over time you will develop your own preferences for how to code things.</p>
 </section>
 <section id="sec-removing-factor-levels" class="level3" data-number="7.5.3">
 <h3 data-number="7.5.3" class="anchored" data-anchor-id="sec-removing-factor-levels"><span class="header-section-number">7.5.3</span> Removing factor levels</h3>
-<p>When we work with factors, it can sometimes happen that we have factor levels that are not linked to any of our observations in the dataset, but when we try to perform certain analytical steps they might get in the way (for example in <a href="13_regressions.html#sec-regressions-with-control-variables" class="quarto-xref"><span>Section 13.3.1</span></a>). Therefore it is important to perform some housekeeping and remove unneeded factor levels.</p>
+<p>When we work with factors, it can sometimes happen that we have factor levels that are not linked to any of our observations in the dataset, but when we try to perform certain analytical steps, they might get in the way (for example in <a href="13_regressions.html#sec-regressions-with-control-variables" class="quarto-xref"><span>Section 13.3.1</span></a>). Therefore it is important to perform some housekeeping and remove unneeded factor levels.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="co"># A dataset which contains a factor with 4 levels</span></span>
 <span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">gender =</span> <span class="fu">factor</span>(<span class="fu">c</span>(<span class="st">"female"</span>,</span>
@@ -1026,7 +1032,7 @@ Levels: male female</code></pre>
 <pre><code>[1] "female"     "male"       "non-binary"</code></pre>
 </div>
 </div>
-<p>In my experience, it is always good to remove unused categories (i.e.&nbsp;levels) because sometimes they can lead to unexpected outcomes. Thus, it is a matter of good practice than an absolute necessity. Besides, it is fairly easy to tidy your factors with the above functions.</p>
+<p>In my experience, it is always good to remove unused categories (i.e.&nbsp;levels) because sometimes they can lead to unexpected outcomes. Thus, it is a matter of good practice than an absolute necessity. Besides, it is fairly easy to tidy your factors with the above functions. However, make sure to keep the original dataset as is in case you ever need to find out what the other categories were.</p>
 </section>
 </section>
 <section id="sec-handling-dates-times-and-durations" class="level2" data-number="7.6">
@@ -1202,13 +1208,13 @@ Nov, 26 2022
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="07_data_wrangling_files/figure-html/duration-boxplot-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="07_data_wrangling_files/figure-html/duration-boxplot-1.png" class="img-fluid figure-img" alt="A dot plot showing each participant as a black dot. Most dots fall onto the left-hand side of the plot, indicating that most participants took 20 minutes or less to complete the questionnaire" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
-<p>For now, you should not worry about what this code means but rather consider the interpretation of the plot, i.e.&nbsp;that most participants (represented by a black dot) needed less than 20 minutes to complete the questionnaire. Depending on the length of your data collection tool, this could either be good or bad news. Usually, the shorter the questionnaire can be, the higher the response rate, unless you have incentives for participants to complete a longer survey.</p>
-<p>In <a href="08_descriptive_statistics.html" class="quarto-xref"><span>Chapter 8</span></a>, we will cover data visualisations like this boxplot in greater detail. If you cannot wait any longer and want to create your own visualisations, you are welcome to skip ahead. However, several data visualisations are awaiting you in the next chapter as well.</p>
+<p>For now, you should not worry about what this code means but rather consider the interpretation of the plot, i.e.&nbsp;that most participants (represented by a black dot) needed less than 20 minutes to complete the questionnaire. Depending on the length of your data collection tool, this could either be good or bad news. Usually, the shorter the questionnaire can be, the higher the response rate, unless you have incentives for participants to complete a longer survey. Still, if participants only require 2-5 minutes to complete a questionnaire, this might be an indication of participants not completing the questionnaire or not properly reading the questions.</p>
+<p>In <a href="08_descriptive_statistics.html" class="quarto-xref"><span>Chapter 8</span></a>, we will cover data visualisations in greater detail. If you cannot wait any longer and want to create your own visualisations, you are welcome to skip ahead. However, several data visualisations are awaiting you in the next chapter as well.</p>
 </section>
 </section>
 <section id="sec-dealing-with-missing-data" class="level2" data-number="7.7">
@@ -1227,10 +1233,10 @@ Nov, 26 2022
 <span id="cb81-2"><a href="#cb81-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb81-3"><a href="#cb81-3" aria-hidden="true" tabindex="-1"></a><span class="fu">vis_miss</span>(wvs_clean)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div id="fig-mapping-missing-data" class="quarto-figure quarto-figure-center quarto-float anchored">
+<div id="fig-mapping-missing-data" class="quarto-figure quarto-figure-center quarto-float anchored" alt="A plot showing missing data across variables: ‘participant_id’, ‘country’, ‘gender’, ‘age’, ‘relationship_status’, ‘freedom_of_choice’, and ‘satisfaction’. Only ‘freedom_of_choice’ has 1% missing; others have 0%. Grey represents present data (99.7%), black represents missing data (0.3%).">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-mapping-missing-data-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="07_data_wrangling_files/figure-html/fig-mapping-missing-data-1.png" class="img-fluid figure-img" width="672">
+<img src="07_data_wrangling_files/figure-html/fig-mapping-missing-data-1.png" class="img-fluid figure-img" alt="A plot showing missing data across variables: ‘participant_id’, ‘country’, ‘gender’, ‘age’, ‘relationship_status’, ‘freedom_of_choice’, and ‘satisfaction’. Only ‘freedom_of_choice’ has 1% missing; others have 0%. Grey represents present data (99.7%), black represents missing data (0.3%)." width="672">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-mapping-missing-data-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;7.2: Mapping missing data with <code>naniar</code>
@@ -1245,10 +1251,10 @@ Figure&nbsp;7.2: Mapping missing data with <code>naniar</code>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb82"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb82-1"><a href="#cb82-1" aria-hidden="true" tabindex="-1"></a><span class="fu">gg_miss_var</span>(wvs_clean)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div id="fig-missing-data-per-variable" class="quarto-figure quarto-figure-center quarto-float anchored">
+<div id="fig-missing-data-per-variable" class="quarto-figure quarto-figure-center quarto-float anchored" alt="A bar plot showing the number of missing values for each variable. ‘Freedom_of_choice’ has the most missing values at approximately 120, followed by ‘satisfaction’ and ‘relationship_status.’ Other variables like ‘participant_id,’ ‘gender,’ ‘country,’ and ‘age’ have no missing data.">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-missing-data-per-variable-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="07_data_wrangling_files/figure-html/fig-missing-data-per-variable-1.png" class="img-fluid figure-img" width="672">
+<img src="07_data_wrangling_files/figure-html/fig-missing-data-per-variable-1.png" class="img-fluid figure-img" alt="A bar plot showing the number of missing values for each variable. ‘Freedom_of_choice’ has the most missing values at approximately 120, followed by ‘satisfaction’ and ‘relationship_status.’ Other variables like ‘participant_id,’ ‘gender,’ ‘country,’ and ‘age’ have no missing data." width="672">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-missing-data-per-variable-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;7.3: Missing data per variable
@@ -1327,7 +1333,7 @@ Figure&nbsp;7.3: Missing data per variable
 4 Iran        7</code></pre>
 </div>
 </div>
-<p>It seems four countries have exceptionally high numbers of missing data for <code>freedom_of_choice</code>: Japan, Brazil, New Zealand, Russia and Bolivia. Why this is the case lies beyond this dataset and is something only the researchers themselves could explain. Collecting data in different countries is particularly challenging, and one is quickly faced with different unfavourable conditions. Furthermore, the missing data is not completely random because we have some first evidence that the location of data collection might have affected its completeness.</p>
+<p>It seems two countries have slightly higher numbers of missing data for <code>freedom_of_choice</code>: Japan and Bolivia. Why this is the case lies beyond this dataset and is something only the researchers themselves could explain. Collecting data in different countries is particularly challenging, and one is quickly faced with different unfavourable conditions. Furthermore, the missing data is not completely random because we have some first evidence that the location of data collection might have affected its completeness.</p>
 <p>Another way of understanding patterns of missing data can be achieved by looking at relationships between missing values, for example, the co-occurrence of missing values across different variables. This can be achieved by using <em>upset plots</em>. An <em>upset plot</em> consists of three parts: Set size, intersection size and a Venn diagram which defines the intersections.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb89"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb89-1"><a href="#cb89-1" aria-hidden="true" tabindex="-1"></a><span class="fu">gg_miss_upset</span>(wvs_clean)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1339,26 +1345,22 @@ Figure&nbsp;7.3: Missing data per variable
 </div>
 </div>
 </div>
-<p>The most frequent combination of missing data in our dataset occurs when only <code>freedom_of_choice</code> is missing (the first column), but nothing else. Similar results can be found for <code>relationships_status</code> and <code>age</code>. The first combination of missing data is defined by two variables: <code>satisfaction</code> and <code>freedom_of_choice</code>. In total, 107 participants had <code>satisfaction</code> and <code>freedom_of_choice</code> missing but nothing else.</p>
+<p>The most frequent combination of missing data in our dataset occurs when only <code>freedom_of_choice</code> is missing (the first column), but nothing else. Similar results can be found for <code>relationship_status</code> and <code>satisfaction</code>. The first combination of missing data is defined by two variables: <code>satisfaction</code> and <code>freedom_of_choice</code>. In total, 23 participants had <code>satisfaction</code> and <code>freedom_of_choice</code> missing in combination.</p>
 <p>The ‘set size’ shown in the upset plot refers to the number of missing values for each variable in the diagram. This corresponds to what we have found when looking at <a href="#fig-missing-data-per-variable" class="quarto-xref">Figure&nbsp;<span>7.3</span></a>.</p>
 <p>Our analysis also suggests that values are not completely randomly missing but that we have data to help explain why they are missing.</p>
 </section>
 <section id="sec-missing-not-at-random-mnar" class="level4" data-number="7.7.2.3">
 <h4 data-number="7.7.2.3" class="anchored" data-anchor-id="sec-missing-not-at-random-mnar"><span class="header-section-number">7.7.2.3</span> Missing not at random (MNAR)</h4>
 <p>Lastly, missing not at random (MNAR) implies that data is missing systematically and that other variables or reasons exist that explain why data is missing. Still, they are not fully known to us. In questionnaire-based research, an easily overlooked reason that can explain missing data is the ‘page-drop-off’ phenomenon. In such cases, participants stop completing a questionnaire once they advance to another page. <a href="#fig-mnar-example" class="quarto-xref">Figure&nbsp;<span>7.4</span></a> shows this very clearly for a large scale project where an online questionnaire was used. After almost every page break in the questionnaire, some participants decided to discontinue. Finding these types of patterns is difficult when only working with numeric values. Thus, it is always advisable to visualise your data as well. Such missing data is linked to the design of the data collection tool.</p>
-<div class="cell">
-<div class="cell-output-display">
-<div id="fig-mnar-example" class="quarto-figure quarto-figure-center quarto-float anchored">
+<div id="fig-mnar-example" class="quarto-figure quarto-figure-center quarto-float anchored" alt="A plot showing missing data as a stair in dark grey, indicating that with every page of the questionnaire more data is missing.">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-mnar-example-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="images/chapter_07_img/03_missing_data/00_mnar_example.png" class="img-fluid figure-img" width="960">
+<img src="images/chapter_07_img/03_missing_data/00_mnar_example.png" class="img-fluid figure-img" alt="A plot showing missing data as a stair in dark grey, indicating that with every page of the questionnaire more data is missing.">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-mnar-example-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;7.4: MNAR pattern in a dataset due to ‘page-drop-offs’
 </figcaption>
 </figure>
-</div>
-</div>
 </div>
 <p>Defining whether a dataset is MNAR or not is mainly achieved by ruling out MCAR and MAR assumptions. It is not possible to test whether missing data is MNAR, unless we have more information about the underlying population available <span class="citation" data-cites="van2020rebutting">(<a href="references.html#ref-van2020rebutting" role="doc-biblioref">Ginkel et al. 2020</a>)</span>.</p>
 <p>We have sufficient evidence that our data is MAR as was shown <a href="#missing-at-random-mar">above</a>, because we managed to identify some relationships between unobserved and observed data. In practice, it is very rare to find datasets that are truly MCAR <span class="citation" data-cites="van-buuren-2018">(<a href="references.html#ref-van-buuren-2018" role="doc-biblioref">Buuren 2018</a>)</span>. Therefore we might consider ‘imputation’ as a possible strategy to solve our missing data problem. More about imputation in the next Chapter.</p>
@@ -1369,14 +1371,14 @@ Figure&nbsp;7.4: MNAR pattern in a dataset due to ‘page-drop-offs’
 <h3 data-number="7.7.3" class="anchored" data-anchor-id="sec-replacing-removing-missing-data"><span class="header-section-number">7.7.3</span> Replacing or removing missing data</h3>
 <p>Once you determined which pattern of missing data applies to your dataset, it is time to evaluate how we want to deal with those missing values. Generally, you can either keep the missing values as they are, replace them or remove them entirely.</p>
 <p><span class="citation" data-cites="jakobsen-et-al-2017">Jakobsen et al. (<a href="references.html#ref-jakobsen-et-al-2017" role="doc-biblioref">2017</a>)</span> provide a rule of thumb of 5% where researchers can consider missing data as negligible, i.e.&nbsp;we can ignore the missing values because they won’t affect our analysis in a significant way. They also argue that if the proportion of missing data exceeds 40%, we should also only work with our observed data. However, with such a large amount of missing data, it is questionable whether we can rely on our analysis as much as we want to. If the missing data lies somewhere in-between this range, we need to consider the missing data pattern at hand.</p>
-<p>If data is MCAR, we could remove missing data. This process is called <em>‘listwise deletion’</em>, i.e.&nbsp;you remove all data from a participant with missing data. As just mentioned, removing missing values is only suitable if you have relatively few missing values in your dataset <span class="citation" data-cites="schafer-1999">(<a href="references.html#ref-schafer-1999" role="doc-biblioref">Schafer 1999</a>)</span>, as is the case with the <code>wvs</code> dataset. There are additional problems with deleting observations listwise, many of which are summarised by <span class="citation" data-cites="van-buuren-2018">Buuren (<a href="references.html#ref-van-buuren-2018" role="doc-biblioref">2018</a>)</span> in his <a href="https://stefvanbuuren.name/fimd/sec-simplesolutions.html" target="blank" title="introduction">introduction</a>. Usually, we try to avoid removing data as much as possible. If you wanted to perform listwise deletion, it can be done with a single function call: <code>na.omit()</code> from the built-in <code>stats</code> package. Alternatively, you could also use <code>drop_na()</code> from the <code>tidyr</code> package, which is automatically loaded when used <code>library(tidyverse)</code>. Here is an example of how we can apply these two functions to achieve the same effect.</p>
+<p>If data is MCAR, we could remove missing data. This process is called <em>‘listwise deletion’</em>, i.e.&nbsp;you remove all data from a participant with missing data. As just mentioned, removing missing values is only suitable if you have relatively few missing values in your dataset <span class="citation" data-cites="schafer-1999">(<a href="references.html#ref-schafer-1999" role="doc-biblioref">Schafer 1999</a>)</span>, as is the case with the <code>wvs</code> dataset. There are additional problems with deleting observations listwise, many of which are summarised by <span class="citation" data-cites="van-buuren-2018">Buuren (<a href="references.html#ref-van-buuren-2018" role="doc-biblioref">2018</a>)</span> in their <a href="https://stefvanbuuren.name/fimd/sec-simplesolutions.html" target="blank" title="introduction">introduction</a>. Usually, we try to avoid removing data as much as possible. If you wanted to perform listwise deletion, it can be done with a single function call: <code>na.omit()</code> from the built-in <code>stats</code> package. Alternatively, you could also use <code>drop_na()</code> from the <code>tidyr</code> package, which is automatically loaded when using <code>library(tidyverse)</code>. Here is an example of how we can apply these two functions to achieve the same effect.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb90"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb90-1"><a href="#cb90-1" aria-hidden="true" tabindex="-1"></a><span class="co"># No more missing data in this plot</span></span>
 <span id="cb90-2"><a href="#cb90-2" aria-hidden="true" tabindex="-1"></a>wvs_clean <span class="sc">|&gt;</span> <span class="fu">na.omit</span>() <span class="sc">|&gt;</span> <span class="fu">vis_miss</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="07_data_wrangling_files/figure-html/remove-all-missing-data-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="07_data_wrangling_files/figure-html/remove-all-missing-data-1.png" class="img-fluid figure-img" alt="A plot that shows no missing values and is empty." width="672"></p>
 </figure>
 </div>
 </div>
@@ -1387,7 +1389,7 @@ Figure&nbsp;7.4: MNAR pattern in a dataset due to ‘page-drop-offs’
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="07_data_wrangling_files/figure-html/alternative-of-removing-all-missing-data-points-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="07_data_wrangling_files/figure-html/alternative-of-removing-all-missing-data-points-1.png" class="img-fluid figure-img" alt="Like the previous plot, this plot shows no missing values and is empty." width="672"></p>
 </figure>
 </div>
 </div>
@@ -1404,7 +1406,7 @@ Figure&nbsp;7.4: MNAR pattern in a dataset due to ‘page-drop-offs’
 </div>
 <p>If you wanted to remove the missing data without the plot, you could use <code>wvs_no_na &lt;- na.omit(wvs)</code> or <code>wvs_no_na &lt;- drop_na()</code>. However, I always recommend ‘saving’ the result in a new object to ensure we keep the original data available. This can be helpful when trying to compare how this decision affects my analysis, i.e.&nbsp;I can run the analysis with and without missing data removed. For the <code>wvs</code> dataset, using <code>na.omit()</code> does not seem to be the best option.</p>
 <p>Based on our analysis of the <code>wvs</code> dataset (by no means complete!), we could assume that data is MAR. In such cases, it is possible to ‘impute’ the missing values, i.e.&nbsp;replacing the missing data with computed scores. This is possible because we can model the missing data based on variables we have. We cannot model missing data based on variables we have not measured in our study for obvious reasons.</p>
-<p>You might be thinking: “Why would it make data better if we ‘make up’ numbers? Is this not cheating?” Imputation of missing values is a science in itself. There is plenty to read about the process of handling missing data, which would reach far beyond the scope of this book. However, the seminal work of <span class="citation" data-cites="van-buuren-2018">Buuren (<a href="references.html#ref-van-buuren-2018" role="doc-biblioref">2018</a>)</span>, <span class="citation" data-cites="dong-et-al-2013">Dong and Peng (<a href="references.html#ref-dong-et-al-2013" role="doc-biblioref">2013</a>)</span> and <span class="citation" data-cites="jakobsen-et-al-2017">Jakobsen et al. (<a href="references.html#ref-jakobsen-et-al-2017" role="doc-biblioref">2017</a>)</span> are excellent starting points. In short: Simply removing missing data can lead to biases in your data, e.g.&nbsp;if we removed missing data in our dataset, we would mainly exclude participants from Japan, Brazil, New Zealand, Russia and Bolivia (as we found out <a href="#missing-data-by-country-table">earlier</a>). While imputation is not perfect, it can produce more reliable results than not using imputation at all, assuming our data meets the requirements for such imputation.</p>
+<p>You might be thinking: “Why would it make data better if we ‘make up’ numbers? Is this not cheating?” Imputation of missing values is a science in itself. There is plenty to read about the process of handling missing data, which would reach far beyond the scope of this book. However, the seminal work of <span class="citation" data-cites="van-buuren-2018">Buuren (<a href="references.html#ref-van-buuren-2018" role="doc-biblioref">2018</a>)</span>, <span class="citation" data-cites="dong-et-al-2013">Dong and Peng (<a href="references.html#ref-dong-et-al-2013" role="doc-biblioref">2013</a>)</span> and <span class="citation" data-cites="jakobsen-et-al-2017">Jakobsen et al. (<a href="references.html#ref-jakobsen-et-al-2017" role="doc-biblioref">2017</a>)</span> are excellent starting points. In short: Simply removing missing data can lead to biases in your data, e.g.&nbsp;if we removed missing data in our dataset, we would mainly exclude participants from Japan and Bolivia (as we found out <a href="#missing-data-by-country-table">earlier</a>). While imputation is not perfect, it can produce more reliable results than not using imputation at all, assuming our data meets the requirements for such imputation.</p>
 <p>Even though our dataset has only a minimal amount of missing data (relative to the entire size), we can still use imputation. There are many different ways to approach this task, one of which is ‘multiple imputation’. As highlighted by <span class="citation" data-cites="van2020rebutting">Ginkel et al. (<a href="references.html#ref-van2020rebutting" role="doc-biblioref">2020</a>)</span>, multiple imputation has not yet reached the same popularity as listwise deletion, despite its benefits. The main reason for this lies in the complexity of using this technique. There are many more approaches to imputation, and going through them all in detail would be impossible and distract from the book’s main purpose. Still, I would like to share some interesting packages with you that use different imputation methods:</p>
 <ul>
 <li><p><a href="https://cran.r-project.org/web/packages/Amelia/index.html" target="blank" title="mice">mice</a> (Uses multivariate imputation via chained equations)</p></li>
@@ -1448,15 +1450,15 @@ $ satisfaction        &lt;chr&gt; "5", "7", "8", "5", "7", "3", "3", "8", "7", "
 </div>
 <p>The function <code>impute_knn(. ~ .)</code> might look like a combination of text with an emoji <code>(. ~ .)</code>. This imputation function requires us to specify a model to impute the data. Since we want to impute all missing values in the dataset and use all variables available, we put <code>.</code> on both sides of the equation, separated by a <code>~</code>. The <code>.</code> reflects that we do not specify a specific variable but instead tell the function to use all variables that are not mentioned. In our case, we did not mention any variables at all, and therefore it chooses all of them. For example, if we wanted to impute only <code>freedom_of_choice</code>, we would have to put <code>impute_knn(freedom_of_choice ~ .)</code>. We will elaborate more on how to specify models when we cover regression models (see <a href="13_regressions.html" class="quarto-xref"><span>Chapter 13</span></a>).</p>
 <p>As you will have noticed, we also had to convert our <code>tibble</code> into a <code>data frame</code> using <code>as.data.frame()</code>. As mentioned in <a href="05_r_basics.html#sec-functions" class="quarto-xref"><span>Section 5.3</span></a>, some functions require a specific data type or format. The <code>simputation</code> package works with <code>dplyr</code>, but it prefers <code>data frame</code>s. Based on my experiences, the wrong data type or format is one of the most frequent causes of errors that novice <em>R</em> programmers report. So, keep an eye on it and read the documentation carefully. Also, once you inspect the new data frame, you will notice that some of our <code>double</code> variables have now turned into <code>character</code> values. Therefore, I strongly recommend checking your newly created data frames to avoid any surprises further down the line of your analysis. <em>R</em> requires us to be very precise in our work, which I think is rather an advantage than an annoyance<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>.</p>
-<p>Be aware that imputation of any kind can take a long time. For example, my MacBook Pro took about 4.22 seconds to complete <code>impute_knn()</code> with the <code>wvs</code> dataset. If we used multiple imputation, this would have taken considerably longer, i.e.&nbsp;several minutes and more.</p>
-<p>We now should have a dataset that is free of any missing values. To ensure this is the case we can create the missing data matrix that we made at the beginning of this chapter (see <a href="#fig-mapping-missing-data" class="quarto-xref">Figure&nbsp;<span>7.2</span></a>).</p>
+<p>Be aware that imputation of any kind can take a long time. For example, my MacBook Pro takes about four seconds to complete <code>impute_knn()</code> with a dataset that has over 69,000 rows and six columns. If we used multiple imputation, this would have taken considerably longer, i.e.&nbsp;several minutes and more. However, computing power is constantly increasing and such tasks can be executed faster every year.</p>
+<p>We now should have a dataset that has no more missing values. To ensure this is the case we can create the missing data matrix that we made at the beginning of this chapter (see <a href="#fig-mapping-missing-data" class="quarto-xref">Figure&nbsp;<span>7.2</span></a>).</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb98"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb98-1"><a href="#cb98-1" aria-hidden="true" tabindex="-1"></a><span class="fu">vis_miss</span>(wvs_nona)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div id="fig-mapping-missing-data-imputed-data" class="quarto-figure quarto-figure-center quarto-float anchored" width="672">
+<div id="fig-mapping-missing-data-imputed-data" class="quarto-figure quarto-figure-center quarto-float anchored" alt="This plot shows no missing values after conducting imputation and is empty." width="672">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-mapping-missing-data-imputed-data-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="07_data_wrangling_files/figure-html/fig-mapping-missing-data-imputed-data-1.png" id="fig-mapping-missing-data-imputed-data" class="img-fluid figure-img" width="672">
+<img src="07_data_wrangling_files/figure-html/fig-mapping-missing-data-imputed-data-1.png" id="fig-mapping-missing-data-imputed-data" class="img-fluid figure-img" alt="This plot shows no missing values after conducting imputation and is empty." width="672">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-mapping-missing-data-imputed-data-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;7.5
@@ -1561,7 +1563,7 @@ Figure&nbsp;7.5
 6 Marketing  Himari </code></pre>
 </div>
 </div>
-<p>If you have to reverse the direction of how&nbsp;<em>R</em>&nbsp;should fill in the blank cells in your dataset, you can use <code>fill(.direction = "up")</code>. In our example, this would make not much sense, but for the sake of demonstration, here is what would happen:</p>
+<p>If you have to reverse the direction of how <em>R</em> should fill in the blank cells in your dataset, you can use <code>fill(.direction = "up")</code>. In our example, this would make not much sense, but for the sake of demonstration, here is what would happen:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb109"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb109-1"><a href="#cb109-1" aria-hidden="true" tabindex="-1"></a>student_enrollment <span class="sc">|&gt;</span> <span class="fu">fill</span>(module, <span class="at">.direction =</span> <span class="st">"up"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -1955,13 +1957,15 @@ cs_learn_different_styles_exp 0.06 0.09 0.21 0.24 0.22 0.17    0</code></pre>
 <p>Suppose we work with a dataset containing reversed items. In that case, we have to recode the answers for each participant to reflect the same meaning as the other questions before computing the Cronbach’s <span class="math inline">\(\alpha\)</span> or performing an EFA or CFA.</p>
 <p>Let’s assume we ask some of our friends to rate Q1, Q2 and Q3 on a scale from 1-6. We might obtain the following results:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb132"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb132-1"><a href="#cb132-1" aria-hidden="true" tabindex="-1"></a>df_social <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">name =</span> <span class="fu">c</span>(<span class="st">"Agatha Harkness"</span>, <span class="st">"Daren Cross"</span>, <span class="st">"Hela"</span>,</span>
-<span id="cb132-2"><a href="#cb132-2" aria-hidden="true" tabindex="-1"></a>                             <span class="st">"Aldrich Killian"</span>, <span class="st">"Malekith"</span>, <span class="st">"Ayesha"</span>),</span>
-<span id="cb132-3"><a href="#cb132-3" aria-hidden="true" tabindex="-1"></a>                    <span class="at">q1 =</span> <span class="fu">c</span>(<span class="dv">6</span>, <span class="dv">2</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">5</span>, <span class="dv">2</span>),</span>
-<span id="cb132-4"><a href="#cb132-4" aria-hidden="true" tabindex="-1"></a>                    <span class="at">q2 =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">5</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">6</span>),</span>
-<span id="cb132-5"><a href="#cb132-5" aria-hidden="true" tabindex="-1"></a>                    <span class="at">q3 =</span> <span class="fu">c</span>(<span class="dv">5</span>, <span class="dv">1</span>, <span class="dv">5</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">1</span>))</span>
-<span id="cb132-6"><a href="#cb132-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb132-7"><a href="#cb132-7" aria-hidden="true" tabindex="-1"></a>df_social</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb132"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb132-1"><a href="#cb132-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Creating a dataset with responses</span></span>
+<span id="cb132-2"><a href="#cb132-2" aria-hidden="true" tabindex="-1"></a>df_social <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">name =</span> <span class="fu">c</span>(<span class="st">"Agatha Harkness"</span>, <span class="st">"Daren Cross"</span>,</span>
+<span id="cb132-3"><a href="#cb132-3" aria-hidden="true" tabindex="-1"></a>                             <span class="st">"Hela"</span>, <span class="st">"Aldrich Killian"</span>,</span>
+<span id="cb132-4"><a href="#cb132-4" aria-hidden="true" tabindex="-1"></a>                             <span class="st">"Malekith"</span>, <span class="st">"Ayesha"</span>),</span>
+<span id="cb132-5"><a href="#cb132-5" aria-hidden="true" tabindex="-1"></a>                    <span class="at">q1 =</span> <span class="fu">c</span>(<span class="dv">6</span>, <span class="dv">2</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">5</span>, <span class="dv">2</span>),</span>
+<span id="cb132-6"><a href="#cb132-6" aria-hidden="true" tabindex="-1"></a>                    <span class="at">q2 =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">5</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">6</span>),</span>
+<span id="cb132-7"><a href="#cb132-7" aria-hidden="true" tabindex="-1"></a>                    <span class="at">q3 =</span> <span class="fu">c</span>(<span class="dv">5</span>, <span class="dv">1</span>, <span class="dv">5</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">1</span>))</span>
+<span id="cb132-8"><a href="#cb132-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb132-9"><a href="#cb132-9" aria-hidden="true" tabindex="-1"></a>df_social</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 6 × 4
   name               q1    q2    q3
@@ -2022,7 +2026,7 @@ q2 0.17 0.33 0.17 0.00 0.17 0.17    0
 q3 0.33 0.00 0.00 0.17 0.50 0.00    0</code></pre>
 </div>
 </div>
-<p>The function <code>alpha()</code> is clever enough to make us aware that something went wrong. It even tells us that <code>Some items ( q2 ) were negatively correlated with the total scale and probably should be reversed</code>. Also, the Cronbach’s <span class="math inline">\(\alpha\)</span> is now negative, which is another indicator that reversed items might be present in the dataset. To remedy this problem, we have to recode <code>q2</code> to reflect the opposite meaning. Inverting the coding usually implies we have to mirror the scores, i.e.&nbsp;the largest value become the smallest one and vice versa. Since we use a 6-point Likert scale, we have to recode values in the following way:</p>
+<p>The function <code>alpha()</code> is clever enough to make us aware that something went wrong. It even tells us that <code>Some items ( q2 ) were negatively correlated with the first principal component and probably should be reversed</code>. Also, the Cronbach’s <span class="math inline">\(\alpha\)</span> is now negative, which is another indicator that reversed items might be present in the dataset. To remedy this problem, we have to recode <code>q2</code> to reflect the opposite meaning. Inverting the coding usually implies we have to mirror the scores, i.e.&nbsp;the largest value become the smallest one and vice versa. Since we use a 6-point Likert scale, we have to recode values in the following way:</p>
 <ul>
 <li><code>6</code> -&gt; <code>1</code></li>
 <li><code>5</code> -&gt; <code>2</code></li>
@@ -2040,7 +2044,8 @@ q3 0.33 0.00 0.00 0.17 0.50 0.00    0</code></pre>
 <p>I will introduce you to all three methods, because each comes with their own benefits and drawbacks. Thus, for me, it is very context-specific.</p>
 <section id="sec-reversing-items-mutate" class="level4" data-number="7.8.4.1">
 <h4 data-number="7.8.4.1" class="anchored" data-anchor-id="sec-reversing-items-mutate"><span class="header-section-number">7.8.4.1</span> Reversing items with <code>mutate()</code></h4>
-<p>Let us begin with the method that is my favourite because it is very quick to execute and only requires one function. With <code>mutate()</code>, we can calculate the reversed score for an item by applying the following formula:<span class="math display">\[score_{reversed} = score_{max} + score_{min} - score_{obs}\]</span></p>
+<p>Let us begin with the method that is my favourite because it is very quick to execute and only requires one function. With <code>mutate()</code>, we can calculate the reversed score for an item by applying the following formula:<br>
+<span class="math display">\[score_{reversed} = score_{max} + score_{min} - score_{obs}\]</span></p>
 <p>In other words, the reversed score <span class="math inline">\(score_{reversed}\)</span> of an item equals the theoretical maximum score on a given scale <span class="math inline">\(score_{max}\)</span> plus the theoretical minimum score on this scale <span class="math inline">\(score_{min}\)</span>, and then we subtract the observed score <span class="math inline">\(score_{obs}\)</span>, i.e.&nbsp;the actual response by our participant. For example, if someone in our study scored a <code>5</code> on <code>q2</code>, we could compute the reversed score as follows: <code>6 + 1 - 5 = 2</code> because our Likert scale ranges from <code>1</code> to <code>6</code>. In <em>R</em>, we can apply this idea to achieve this for multiple observations at once.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb138"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb138-1"><a href="#cb138-1" aria-hidden="true" tabindex="-1"></a>df_social_r <span class="ot">&lt;-</span></span>
@@ -2182,7 +2187,7 @@ q3   0.33 0.00 0.17 0.50 0.00    0
 q2_r 0.17 0.17 0.17 0.33 0.17    0</code></pre>
 </div>
 </div>
-<p>Now everything seems to make sense, and the internal consistency is excellent. We can assume that all three questions reflect one latent construct. From here, we can return to computing our latent variables (see <a href="#sec-computing-latent-variables" class="quarto-xref"><span>Section 7.8.1</span></a>) and continue with our analysis.</p>
+<p>Now everything seems to make sense, and the internal consistency is excellent. We can assume that all three questions reflect one latent construct. From here, we can return to computing our latent variables (see <a href="#sec-computing-latent-variables" class="quarto-xref"><span>Section 7.8.1</span></a>) and advance with our analysis.</p>
 <p>When working with datasets, especially those you have not generated yourself, it is always important to check whether any items are meant to be reverse coded. Missing this aspect will likely throw many surprising results and can completely ruin your analysis. I vividly remember my PhD supervisor’s story about a viva where a student forgot about reversing their scores. The panellists noticed that the correlations presented were counter-intuitive, and only then it was revealed that the entire analysis had to be redone. Tiny mistakes can often have an enormous ripple effect. Make sure you have ‘reversed items’ on your checklist when performing data cleaning and wrangling.</p>
 </section>
 </section>
@@ -2198,12 +2203,12 @@ q2_r 0.17 0.17 0.17 0.33 0.17    0</code></pre>
 </section>
 <section id="exercises" class="level2" data-number="7.10">
 <h2 data-number="7.10" class="anchored" data-anchor-id="exercises"><span class="header-section-number">7.10</span> Exercises</h2>
-<p>If you would like to test your knowledge or simply practice what we covered in this chapter you can copy and paste the following code if you have the <code>r4np</code> installed already.</p>
+<p>If you would like to test your knowledge or simply practice what we covered in this chapter you can copy and paste the following code if you have the <code>r4np</code> package installed already.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb149"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb149-1"><a href="#cb149-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Option 1:</span></span>
 <span id="cb149-2"><a href="#cb149-2" aria-hidden="true" tabindex="-1"></a>learnr<span class="sc">::</span><span class="fu">run_tutorial</span>(<span class="st">"ex_data_wrangling"</span>, <span class="at">package =</span> <span class="st">"r4np"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>If you have not yet installed the <code>r4np</code> package, you will have to do this first using by using this code chunk:</p>
+<p>If you have not yet installed the <code>r4np</code> package, you will have to do this first using this code chunk:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb150"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb150-1"><a href="#cb150-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Option 2:</span></span>
 <span id="cb150-2"><a href="#cb150-2" aria-hidden="true" tabindex="-1"></a>devtools<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">"ddauber/r4np"</span>)</span>

@@ -262,10 +262,10 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#sec-installing-r" id="toc-sec-installing-r" class="nav-link active" data-scroll-target="#sec-installing-r"><span class="header-section-number">3.1</span> Installing R</a></li>
+  <li><a href="#sec-installing-r" id="toc-sec-installing-r" class="nav-link active" data-scroll-target="#sec-installing-r"><span class="header-section-number">3.1</span> Installing <em>R</em></a></li>
   <li><a href="#sec-installing-rstudio" id="toc-sec-installing-rstudio" class="nav-link" data-scroll-target="#sec-installing-rstudio"><span class="header-section-number">3.2</span> Installing RStudio</a></li>
   <li><a href="#sec-when-you-first-start-rstudio" id="toc-sec-when-you-first-start-rstudio" class="nav-link" data-scroll-target="#sec-when-you-first-start-rstudio"><span class="header-section-number">3.3</span> When you first start RStudio</a></li>
-  <li><a href="#sec-updating-r-and-rstudio" id="toc-sec-updating-r-and-rstudio" class="nav-link" data-scroll-target="#sec-updating-r-and-rstudio"><span class="header-section-number">3.4</span> Updating R and RStudio: Living at the pulse of innovation</a></li>
+  <li><a href="#sec-updating-r-and-rstudio" id="toc-sec-updating-r-and-rstudio" class="nav-link" data-scroll-target="#sec-updating-r-and-rstudio"><span class="header-section-number">3.4</span> Updating <em>R</em> and RStudio: Living at the pulse of innovation</a></li>
   <li><a href="#sec-rstudio-cloud" id="toc-sec-rstudio-cloud" class="nav-link" data-scroll-target="#sec-rstudio-cloud"><span class="header-section-number">3.5</span> Posit Cloud</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/ddauber/r4np-quarto-crc/blob/main/03_setting_up_r_rstudio.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/ddauber/r4np-quarto-crc/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
@@ -302,25 +302,25 @@ ul.task-list li input[type="checkbox"] {
 </ul>
 <p>While installing <em>R</em> and RStudio requires more time and effort, I strongly recommend it, especially if you want to work offline or make good use of your computer’s CPU. However, if you are unsure whether you enjoy learning <em>R</em>, you might wish to look at Posit Cloud first. Either way, you can follow the examples of this book no matter which choice you make.</p>
 <section id="sec-installing-r" class="level2" data-number="3.1">
-<h2 data-number="3.1" class="anchored" data-anchor-id="sec-installing-r"><span class="header-section-number">3.1</span> Installing R</h2>
+<h2 data-number="3.1" class="anchored" data-anchor-id="sec-installing-r"><span class="header-section-number">3.1</span> Installing <em>R</em></h2>
 <p>The core module of our programming is <em>R</em> itself, and since it is an open-source project, it is available for free on Windows, Mac and Linux computers. So, here is what you need to do to install it properly on your computer of choice:</p>
 <ol type="1">
 <li><p>Go to <a href="https://www.r-project.org" target="_blank" title="www.r-project.org">www.r-project.org</a></p>
-<p><img src="images/chapter_03_img/r_project/00_r_project_page.png" class="img-fluid" alt="Screenshot of the R Project website homepage, called CRAN, showcasing the latest news and updates about the R programming language."></p></li>
+<p><img src="images/chapter_03_img/r_project/00_r_project_page.png" class="img-fluid" alt="Screenshot of the *R* Project website homepage, called CRAN, showcasing the latest news and updates about the *R* programming language."></p></li>
 <li><p>Click on <code>CRAN</code> where it says <code>Download</code>.</p></li>
 <li><p>Choose a server in your country (all of them work, but downloads will perform quicker if you choose your country or one that is close to where you are).</p>
-<p><img src="images/chapter_03_img/r_project/01_r_project_cran_mirror.png" class="img-fluid" alt="Screenshot of the CRAN Mirrors page on the R Project website, displaying a list of global locations and corresponding institutions for various CRAN mirror URLs."></p></li>
+<p><img src="images/chapter_03_img/r_project/01_r_project_cran_mirror.png" class="img-fluid" alt="Screenshot of the CRAN Mirrors page on the *R* Project website, displaying a list of global locations and corresponding institutions for various CRAN mirror URLs."></p></li>
 <li><p>Select the operating system for your computer, for example <code>Download R for macOS</code>.</p>
 <p><img src="images/chapter_03_img/r_project/02_r_project_os_choice.png" class="img-fluid" alt="Screenshot of the CRAN website, displaying options to download and install R, including precompiled binary distributions and source code for all platforms."></p></li>
 <li><p>Select the version you want to install (I recommend the latest version)</p>
-<p><img src="images/chapter_03_img/r_project/03_r_project_version_choice.png" class="img-fluid" alt="Screenshot of the R for macOS page on the R Project website, displaying different versions of the software to download."></p></li>
+<p><img src="images/chapter_03_img/r_project/03_r_project_version_choice.png" class="img-fluid" alt="Screenshot of the *R* for macOS page on the *R* Project website, displaying different versions of the software to download."></p></li>
 <li><p>Open the downloaded file and follow the installation instructions. I recommend leaving the suggested settings as they are.</p></li>
 </ol>
-<p>This was relatively easy. You now have <em>R</em> installed. Technically you can start using <em>R</em> for your research, but there is one more tool I strongly advise installing: RStudio.</p>
+<p>This was relatively easy. You now have <em>R</em> installed. Technically, you can start using <em>R</em> for your research, but there is one more tool I strongly advise installing: RStudio.</p>
 </section>
 <section id="sec-installing-rstudio" class="level2" data-number="3.2">
 <h2 data-number="3.2" class="anchored" data-anchor-id="sec-installing-rstudio"><span class="header-section-number">3.2</span> Installing RStudio</h2>
-<p><em>R</em> by itself is just the ‘<em>beating heart</em>’ of <em>R</em> programming, but it has no particular user interface. If you want buttons to click and actually ‘<em>see</em>’ what you are doing, there is no better way than RStudio. RStudio is an <em>integrated development environment</em> (IDE) and will be our primary tool to interact with <em>R</em>. It is the only software you need to do all the fun parts and, of course, to follow along with the examples of this book. To install RStudio perform the following steps:</p>
+<p><em>R</em> by itself is just the ‘beating heart’ of <em>R</em> programming, but it has no particular user interface. If you want buttons to click and actually ‘see’ what you are doing, there is no better way than RStudio. RStudio is an <em>integrated development environment</em> (IDE) and will be our primary tool to interact with <em>R</em>. It is the only software you need to do all the fun parts and, of course, to follow along with the examples in this book. To install RStudio, perform the following steps:</p>
 <ol type="1">
 <li><p>Go to <a href="http://posit.co" target="_blank" title="http://posit.co">http://posit.co</a> and click on <code>DOWNLOAD RSTUDIO</code>.</p>
 <p><img src="images/chapter_03_img/rstudio/01_posit_main_page.png" class="img-fluid" alt="Screenshot of the POSIT website."></p></li>
@@ -328,20 +328,20 @@ ul.task-list li input[type="checkbox"] {
 <p><img src="images/chapter_03_img/rstudio/02_posit_rstudio_desktop.png" class="img-fluid" alt="Screenshot of the RStudio Desktop download website showing a button indicating 'Download RStudio'."></p></li>
 <li><p>This leads you to the page where you can install <em>R</em> as a first step and RStudio as a second step. Since we installed <em>R</em> already, we can click on <code>DOWNLOAD RSTUDIO DESKTOP FOR WINDOWS</code> (or for Mac if you are not using a PC).</p>
 <p><img src="images/chapter_03_img/rstudio/03_posit_installer.png" class="img-fluid" alt="Screenshot of the RStudio download website showing step 2, i.e. 'Install RStudio Desktop'."></p></li>
-<li><p>If for some reason the version for your operating system is not showing up correctly, you can scroll down and find other version ready to be installed.</p>
+<li><p>If, for some reason, the version for your operating system is not showing up correctly, you can scroll down and find other versions ready to be installed.</p>
 <p><img src="images/chapter_03_img/rstudio/04_other_installers.png" class="img-fluid" alt="Screenshot of the RStudio Download website showing different versions of RStudio available for different operating systems such as Windows, macOS and Ubuntu."></p></li>
-<li><p>Open the downloaded file and follow the installation instructions. Again, keep it to the default settings as much as possible.</p></li>
+<li><p>Open the downloaded file and follow the installation instructions. Again, stick with the default settings as much as possible.</p></li>
 </ol>
-<p>Congratulations, you are all set up to learn <em>R</em>. From now on you only need to start RStudio and not <em>R</em>. Of course, if you are the curious type, nothing shall stop you to try <em>R</em> without RStudio.</p>
+<p>Congratulations, you are all set up to learn <em>R</em>. From now on, you only need to start RStudio and not <em>R</em>. Of course, if you are the curious type, nothing shall stop you from trying <em>R</em> without RStudio.</p>
 </section>
 <section id="sec-when-you-first-start-rstudio" class="level2" data-number="3.3">
 <h2 data-number="3.3" class="anchored" data-anchor-id="sec-when-you-first-start-rstudio"><span class="header-section-number">3.3</span> When you first start RStudio</h2>
-<p>Before you start programming away, you might want to make some tweaks to your settings right away to have a better experience (in my humble opinion). To open the Rstudio settings you have to click on</p>
+<p>Before you start programming away, you might want to tweak some of your settings right away to have a better experience (in my humble opinion). To open the Rstudio settings, you have to click on</p>
 <ul>
 <li><p><code>RStudio &gt; Tools &gt; Global Options</code> or press <code>⌘ + ,</code> if you are on a Mac.</p></li>
-<li><p><code>RStudio &gt; Tools &gt; Global Options</code> or press <code>Ctrl + ,</code> if you work on a Windows computer.</p></li>
+<li><p><code>RStudio &gt; Tools &gt; Global Options</code> or press <code>Ctrl + ,</code> if you are working on a Windows computer.</p></li>
 </ul>
-<p>I recommend to at least make the following changes to set yourself up for success right from the beginning:</p>
+<p>I recommend to at least make the following changes to set yourself up for success right from the start:</p>
 <ol type="1">
 <li><p>Already on the first tab, i.e.&nbsp;<code>General &gt; Basic</code>, we should make one of the most significant changes. Deactivate every option that starts with <code>Restore</code>. This will ensure that every time you start RStudio, you begin with a clean slate. At first sight, it might sound counter-intuitive not to restart everything where you left off, but it is essential to make all your projects easily reproducible. Furthermore, if you work together with others, not restoring your personal settings also ensures that your programming works across different computers. Therefore, I recommend having the following unticked:</p>
 <ul>
@@ -350,8 +350,8 @@ ul.task-list li input[type="checkbox"] {
 <li><p><code>Restore .Rdata into workspace at startup</code></p>
 <p><img src="images/chapter_03_img/rstudio_preferences/00_rstudio_preferences_basic.png" class="img-fluid" alt="Screenshot of the settings window of RStudio showing the General settings and various options to enable or disable."></p></li>
 </ul></li>
-<li><p>In the same tab under <code>Workspace</code>, select <code>Never</code> for the setting <code>Save workspace to .RData on exit</code>. One might think it is wise to keep intermediary results stored from one R session to another. However, I often found myself fixing issues due to this lazy method, and my code became less reliable and, therefore, reproducible. With experience, you will find that this avoids many headaches.</p></li>
-<li><p>In the <code>Code &gt; Editing</code> tab, make sure to have at least the first five options ticked, especially the <code>Auto-indent code after paste</code>. This setting will save time when trying to format your coding appropriately, making it easier to read. Indentation is the primary way of making your code look more readable and less like a series of characters that appear almost random.</p>
+<li><p>In the same tab under <code>Workspace</code>, select <code>Never</code> for the setting <code>Save workspace to .RData on exit</code>. One might think it is wise to keep intermediary results stored from one <em>R</em> session to another. However, I often found myself fixing issues due to this lazy method, and my code became less reliable and, therefore, less reproducible. With experience, you will find that this avoids many headaches.</p></li>
+<li><p>In the <code>Code &gt; Editing</code> tab, make sure to have at least the first five options ticked, especially the <code>Auto-indent code after paste</code>. This setting will save time when formatting your coding appropriately, making it easier to read. Indentation is the primary way of making your code look more readable and less like a series of characters that appear almost random.</p>
 <p><img src="images/chapter_03_img/rstudio_preferences/01_rstudio_preferences_editing.png" class="img-fluid" alt="Screenshot of the settings window of RStudio showing the Code tab and its features that can be enabled or disabled."></p></li>
 <li><p>In the <code>Display</code> tab, you might want to have the first three options selected. In particular, <code>Highlight selected line</code> is helpful because, in more complicated code, it is helpful to see where your cursor is.</p>
 <p><img src="images/chapter_03_img/rstudio_preferences/02_rstudio_preferences_display.png" class="img-fluid" alt="Screenshort of the settings window of RStudio showing the section Display as a subsection of the Code tab."></p></li>
@@ -360,13 +360,13 @@ ul.task-list li input[type="checkbox"] {
 <p><img src="images/chapter_03_img/rstudio_preferences/03_rstudio_preferences_appearance.png" class="img-fluid" alt="Screenshot of the settings window of RStudio showing the Appearance tab and its options to change the visual look of the RStudio IDE."></p>
 </section>
 <section id="sec-updating-r-and-rstudio" class="level2" data-number="3.4">
-<h2 data-number="3.4" class="anchored" data-anchor-id="sec-updating-r-and-rstudio"><span class="header-section-number">3.4</span> Updating R and RStudio: Living at the pulse of innovation</h2>
-<p>While not strictly something that helps you become a better programmer, this advice might come in handy to avoid turning into a frustrated programmer. When you update your software, you need to update <em>R</em> and RStudio separately from each other. While both <em>R</em> and RStudio work closely with each other, they still constitute separate pieces of software. Thus, it is essential to keep in mind that updating RStudio will not automatically update R. This can become problematic if specific tools you installed via RStudio (like a fancy learning algorithm) might not be compatible with earlier versions of <em>R</em>. Also, additional <em>R</em> packages (see <a href="05_r_basics.html#sec-r-packages" class="quarto-xref"><span>Section 5.4</span></a>) developed by other developers are separate pieces which require updating too, independently from <em>R</em> and RStudio.</p>
-<p>I know what you are thinking: This already sounds complicated and cumbersome. However, rest assured, we take a look at how you can easily update all your packages with RStudio. Thus, all you need to remember is: <em>R</em> needs to be updated separately from everything else.</p>
+<h2 data-number="3.4" class="anchored" data-anchor-id="sec-updating-r-and-rstudio"><span class="header-section-number">3.4</span> Updating <em>R</em> and RStudio: Living at the pulse of innovation</h2>
+<p>While not strictly something that helps you become a better programmer, this advice might come in handy to avoid turning into a frustrated programmer. When you update your software, you need to update <em>R</em> and RStudio separately from each other. While both <em>R</em> and RStudio work closely with each other, they still constitute separate pieces of software. Thus, it is essential to remember that updating RStudio will not automatically update <em>R</em>. This can become problematic if specific tools you installed via RStudio (like a fancy learning algorithm) might not be compatible with earlier versions of <em>R</em>. Also, additional <em>R</em> packages (see <a href="05_r_basics.html#sec-r-packages" class="quarto-xref"><span>Section 5.4</span></a>) developed by other developers are separate pieces that require updating too, independently from <em>R</em> and RStudio.</p>
+<p>I know what you are thinking: This already sounds complicated and cumbersome. However, rest assured, we look at how you can easily update all your packages with RStudio. Thus, all you need to remember is that <em>R</em> needs to be updated separately from everything else.</p>
 </section>
 <section id="sec-rstudio-cloud" class="level2" data-number="3.5">
 <h2 data-number="3.5" class="anchored" data-anchor-id="sec-rstudio-cloud"><span class="header-section-number">3.5</span> Posit Cloud</h2>
-<p>Posit Cloud is an application that runs in your web browser. It allows you to write and access <em>R</em> code wherever you go. It even works on your tablet because it does not require installation. However, do expect it to run slower if your internet connection is not fast or stable. To work with Posit Cloud, you also need an internet connection. However, there are many benefits to using RStudio in the cloud, such as running time-consuming scripts without using your own device. Also, it is much easier to collaborate with others, and since no installation is required, you can work on projects on any device as long as you are connected to the internet. However, Posit Cloud’s most significant advantage is that you can get started with programming within seconds compared to a desktop installation. Still, I prefer my locally-run offline version of RStudio, because I appreciate working offline as much as online. Nevertheless, I recommend setting up an account because you never know when you need it.</p>
+<p>Posit Cloud is an application that runs in your web browser. It allows you to write and access <em>R</em> code wherever you go. It even works on your tablet because it does not require installation. However, do expect it to run slower if your internet connection is not fast or stable. To work with Posit Cloud, you also need an internet connection. However, there are many benefits to using RStudio in the cloud, such as running time-consuming scripts without using your own device. Also, it is much easier to collaborate with others, and since no installation is required, you can work on projects on any device as long as you are connected to the internet. However, Posit Cloud’s most significant advantage is that you can get started with programming within seconds compared to a desktop installation. Still, I prefer my locally run offline version of RStudio because I appreciate working offline as much as online. Nevertheless, I recommend setting up an account because you never know when you need it.</p>
 <p>To get started with Posit Cloud, we have to undertake a couple of steps:</p>
 <ol type="1">
 <li><p>Open your web browser of choice and navigate to <a href="https://rstudio.cloud" class="uri">https://rstudio.cloud</a>.</p>
@@ -380,17 +380,17 @@ ul.task-list li input[type="checkbox"] {
 <p><img src="images/chapter_03_img/rstudio_cloud/05_rstudio_cloud.png" class="img-fluid" alt="Screenshot of the Posit Cloud landing page after logging into the website. It shows how clicking on 'New Project enables users to choose a new RStudio project in the cloud."></p></li>
 <li><p>To start a new <em>R</em> project, you can click on <code>New Project &gt; New RStudio Project</code>. This will open RStudio in the Cloud, which looks identical to the desktop version. You can immediately start writing your code. The example below computes a plot.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
 <p><img src="images/chapter_03_img/rstudio_cloud/06_rstudio_cloud.png" class="img-fluid" alt="Screenshot of an Posit Cloud project opened, showing some coding."></p></li>
-<li><p>Now we can execute the code as we would on the desktop version (see <a href="05_r_basics.html" class="quarto-xref"><span>Chapter 5</span></a> ).</p>
+<li><p>Now, we can execute the code as we would on the desktop version (see <a href="05_r_basics.html" class="quarto-xref"><span>Chapter 5</span></a> ).</p>
 <p><img src="images/chapter_03_img/rstudio_cloud/07_rstudio_cloud.png" class="img-fluid" alt="Screenshot of an Posit Cloud project opened, showing some coding and the plot that results from running this code."></p></li>
 </ol>
-<p>No matter whether you choose to use a desktop version of RStudio or Posit Cloud, you will be able to follow along in this book with no problem.</p>
+<p>Whether you choose to use a desktop version of RStudio or Posit Cloud, you will be able to follow along in this book with no problem.</p>
 
 
 </section>
 <section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
 <hr>
 <ol>
-<li id="fn1"><p>RStudio and Posit Cloud warn you if you need to install certain R packages to successfully run code. More about R packages and what they are can be found in <a href="05_r_basics.html#sec-r-packages" class="quarto-xref"><span>Section 5.4</span></a>.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn1"><p>RStudio and Posit Cloud warn you if you need to install certain <em>R</em> packages to successfully run code. More about <em>R</em> packages and what they are can be found in <a href="05_r_basics.html#sec-r-packages" class="quarto-xref"><span>Section 5.4</span></a>.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section>
 

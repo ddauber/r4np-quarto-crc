@@ -348,7 +348,7 @@ window.Quarto = {
   <li><a href="#sec-basic-computations-in-r" id="toc-sec-basic-computations-in-r" class="nav-link active" data-scroll-target="#sec-basic-computations-in-r"><span class="header-section-number">5.1</span> Basic computations in <em>R</em></a></li>
   <li><a href="#sec-assigning-values-to-objects" id="toc-sec-assigning-values-to-objects" class="nav-link" data-scroll-target="#sec-assigning-values-to-objects"><span class="header-section-number">5.2</span> Assigning values to objects: ‘&lt;-’</a></li>
   <li><a href="#sec-functions" id="toc-sec-functions" class="nav-link" data-scroll-target="#sec-functions"><span class="header-section-number">5.3</span> Functions</a></li>
-  <li><a href="#sec-r-packages" id="toc-sec-r-packages" class="nav-link" data-scroll-target="#sec-r-packages"><span class="header-section-number">5.4</span> R packages</a>
+  <li><a href="#sec-r-packages" id="toc-sec-r-packages" class="nav-link" data-scroll-target="#sec-r-packages"><span class="header-section-number">5.4</span> <em>R</em> packages</a>
   <ul class="collapse">
   <li><a href="#sec-installing-packages-using-a-function" id="toc-sec-installing-packages-using-a-function" class="nav-link" data-scroll-target="#sec-installing-packages-using-a-function"><span class="header-section-number">5.4.1</span> Installing packages using <code>install.packages()</code></a></li>
   <li><a href="#sec-installing-packages-via-rstudio" id="toc-sec-installing-packages-via-rstudio" class="nav-link" data-scroll-target="#sec-installing-packages-via-rstudio"><span class="header-section-number">5.4.2</span> Installing packages via RStudio’s package pane</a></li>
@@ -471,7 +471,7 @@ window.Quarto = {
 <li>We can compare non-numerical values, i.e.&nbsp;text, which is also known as <code>character</code> values, with each other,</li>
 <li>The devil is in the details (consider #5).</li>
 </ol>
-<p>One of the most common mistakes of <em>R</em> novices is the confusion around the <code>==</code> and <code>=</code> notation. While <code>==</code> represents <code>equal to</code>, <code>=</code> is used to assign a value to an object (for more details on assignments see <a href="#sec-assigning-values-to-objects" class="quarto-xref"><span>Section 5.2</span></a>. However, in practice, most <em>R</em> programmers tend to avoid <code>=</code> since it can easily lead to confusion with <code>==</code>. As such, you can strike <code>=</code> out of your R vocabulary for now.</p>
+<p>One of the most common mistakes of <em>R</em> novices is the confusion around the <code>==</code> and <code>=</code> notation. While <code>==</code> represents <code>equal to</code>, <code>=</code> is used to assign a value to an object (for more details on assignments see <a href="#sec-assigning-values-to-objects" class="quarto-xref"><span>Section 5.2</span></a>. However, in practice, most <em>R</em> programmers tend to avoid <code>=</code> since it can easily lead to confusion with <code>==</code>. As such, you can strike <code>=</code> out of your <em>R</em> vocabulary for now.</p>
 <p>There are many different logical operations you can perform. <a href="#tbl-logical-operators-r" class="quarto-xref">Table&nbsp;<span>5.1</span></a> lists the most frequently used logical operators for your reference. These will become important, for example when we filter our data for analysis, e.g.&nbsp;include only female or male participants.</p>
 <div class="cell">
 <div id="tbl-logical-operators-r" class="cell quarto-float anchored">
@@ -481,23 +481,23 @@ Table&nbsp;5.1: Logical operators in R
 </figcaption>
 <div aria-describedby="tbl-logical-operators-r-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
-<div id="npmtjjzshb" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#npmtjjzshb table {
+<div id="kbysszndel" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#kbysszndel table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#npmtjjzshb thead, #npmtjjzshb tbody, #npmtjjzshb tfoot, #npmtjjzshb tr, #npmtjjzshb td, #npmtjjzshb th {
+#kbysszndel thead, #kbysszndel tbody, #kbysszndel tfoot, #kbysszndel tr, #kbysszndel td, #kbysszndel th {
   border-style: none;
 }
 
-#npmtjjzshb p {
+#kbysszndel p {
   margin: 0;
   padding: 0;
 }
 
-#npmtjjzshb .gt_table {
+#kbysszndel .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -523,12 +523,12 @@ Table&nbsp;5.1: Logical operators in R
   border-left-color: #D3D3D3;
 }
 
-#npmtjjzshb .gt_caption {
+#kbysszndel .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#npmtjjzshb .gt_title {
+#kbysszndel .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -540,7 +540,7 @@ Table&nbsp;5.1: Logical operators in R
   border-bottom-width: 0;
 }
 
-#npmtjjzshb .gt_subtitle {
+#kbysszndel .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -552,7 +552,7 @@ Table&nbsp;5.1: Logical operators in R
   border-top-width: 0;
 }
 
-#npmtjjzshb .gt_heading {
+#kbysszndel .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -564,13 +564,13 @@ Table&nbsp;5.1: Logical operators in R
   border-right-color: #D3D3D3;
 }
 
-#npmtjjzshb .gt_bottom_border {
+#kbysszndel .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #0076BA;
 }
 
-#npmtjjzshb .gt_col_headings {
+#kbysszndel .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #0076BA;
@@ -585,7 +585,7 @@ Table&nbsp;5.1: Logical operators in R
   border-right-color: #D3D3D3;
 }
 
-#npmtjjzshb .gt_col_heading {
+#kbysszndel .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -605,7 +605,7 @@ Table&nbsp;5.1: Logical operators in R
   overflow-x: hidden;
 }
 
-#npmtjjzshb .gt_column_spanner_outer {
+#kbysszndel .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -617,15 +617,15 @@ Table&nbsp;5.1: Logical operators in R
   padding-right: 4px;
 }
 
-#npmtjjzshb .gt_column_spanner_outer:first-child {
+#kbysszndel .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#npmtjjzshb .gt_column_spanner_outer:last-child {
+#kbysszndel .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#npmtjjzshb .gt_column_spanner {
+#kbysszndel .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #0076BA;
@@ -637,11 +637,11 @@ Table&nbsp;5.1: Logical operators in R
   width: 100%;
 }
 
-#npmtjjzshb .gt_spanner_row {
+#kbysszndel .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#npmtjjzshb .gt_group_heading {
+#kbysszndel .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -667,7 +667,7 @@ Table&nbsp;5.1: Logical operators in R
   text-align: left;
 }
 
-#npmtjjzshb .gt_empty_group_heading {
+#kbysszndel .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -682,15 +682,15 @@ Table&nbsp;5.1: Logical operators in R
   vertical-align: middle;
 }
 
-#npmtjjzshb .gt_from_md > :first-child {
+#kbysszndel .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#npmtjjzshb .gt_from_md > :last-child {
+#kbysszndel .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#npmtjjzshb .gt_row {
+#kbysszndel .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -709,7 +709,7 @@ Table&nbsp;5.1: Logical operators in R
   overflow-x: hidden;
 }
 
-#npmtjjzshb .gt_stub {
+#kbysszndel .gt_stub {
   color: #FFFFFF;
   background-color: #0076BA;
   font-size: 100%;
@@ -722,7 +722,7 @@ Table&nbsp;5.1: Logical operators in R
   padding-right: 5px;
 }
 
-#npmtjjzshb .gt_stub_row_group {
+#kbysszndel .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -736,15 +736,15 @@ Table&nbsp;5.1: Logical operators in R
   vertical-align: top;
 }
 
-#npmtjjzshb .gt_row_group_first td {
+#kbysszndel .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#npmtjjzshb .gt_row_group_first th {
+#kbysszndel .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#npmtjjzshb .gt_summary_row {
+#kbysszndel .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -754,16 +754,16 @@ Table&nbsp;5.1: Logical operators in R
   padding-right: 5px;
 }
 
-#npmtjjzshb .gt_first_summary_row {
+#kbysszndel .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #0076BA;
 }
 
-#npmtjjzshb .gt_first_summary_row.thick {
+#kbysszndel .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#npmtjjzshb .gt_last_summary_row {
+#kbysszndel .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -773,7 +773,7 @@ Table&nbsp;5.1: Logical operators in R
   border-bottom-color: #0076BA;
 }
 
-#npmtjjzshb .gt_grand_summary_row {
+#kbysszndel .gt_grand_summary_row {
   color: #333333;
   background-color: #89D3FE;
   text-transform: inherit;
@@ -783,7 +783,7 @@ Table&nbsp;5.1: Logical operators in R
   padding-right: 5px;
 }
 
-#npmtjjzshb .gt_first_grand_summary_row {
+#kbysszndel .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -793,7 +793,7 @@ Table&nbsp;5.1: Logical operators in R
   border-top-color: #0076BA;
 }
 
-#npmtjjzshb .gt_last_grand_summary_row_top {
+#kbysszndel .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -803,11 +803,11 @@ Table&nbsp;5.1: Logical operators in R
   border-bottom-color: #0076BA;
 }
 
-#npmtjjzshb .gt_striped {
+#kbysszndel .gt_striped {
   background-color: #F4F4F4;
 }
 
-#npmtjjzshb .gt_table_body {
+#kbysszndel .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #0076BA;
@@ -816,7 +816,7 @@ Table&nbsp;5.1: Logical operators in R
   border-bottom-color: #0076BA;
 }
 
-#npmtjjzshb .gt_footnotes {
+#kbysszndel .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -830,7 +830,7 @@ Table&nbsp;5.1: Logical operators in R
   border-right-color: #D3D3D3;
 }
 
-#npmtjjzshb .gt_footnote {
+#kbysszndel .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -839,7 +839,7 @@ Table&nbsp;5.1: Logical operators in R
   padding-right: 5px;
 }
 
-#npmtjjzshb .gt_sourcenotes {
+#kbysszndel .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -853,7 +853,7 @@ Table&nbsp;5.1: Logical operators in R
   border-right-color: #D3D3D3;
 }
 
-#npmtjjzshb .gt_sourcenote {
+#kbysszndel .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -861,72 +861,72 @@ Table&nbsp;5.1: Logical operators in R
   padding-right: 5px;
 }
 
-#npmtjjzshb .gt_left {
+#kbysszndel .gt_left {
   text-align: left;
 }
 
-#npmtjjzshb .gt_center {
+#kbysszndel .gt_center {
   text-align: center;
 }
 
-#npmtjjzshb .gt_right {
+#kbysszndel .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#npmtjjzshb .gt_font_normal {
+#kbysszndel .gt_font_normal {
   font-weight: normal;
 }
 
-#npmtjjzshb .gt_font_bold {
+#kbysszndel .gt_font_bold {
   font-weight: bold;
 }
 
-#npmtjjzshb .gt_font_italic {
+#kbysszndel .gt_font_italic {
   font-style: italic;
 }
 
-#npmtjjzshb .gt_super {
+#kbysszndel .gt_super {
   font-size: 65%;
 }
 
-#npmtjjzshb .gt_footnote_marks {
+#kbysszndel .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#npmtjjzshb .gt_asterisk {
+#kbysszndel .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#npmtjjzshb .gt_indent_1 {
+#kbysszndel .gt_indent_1 {
   text-indent: 5px;
 }
 
-#npmtjjzshb .gt_indent_2 {
+#kbysszndel .gt_indent_2 {
   text-indent: 10px;
 }
 
-#npmtjjzshb .gt_indent_3 {
+#kbysszndel .gt_indent_3 {
   text-indent: 15px;
 }
 
-#npmtjjzshb .gt_indent_4 {
+#kbysszndel .gt_indent_4 {
   text-indent: 20px;
 }
 
-#npmtjjzshb .gt_indent_5 {
+#kbysszndel .gt_indent_5 {
   text-indent: 25px;
 }
 
-#npmtjjzshb .katex-display {
+#kbysszndel .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#npmtjjzshb div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#kbysszndel div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -1033,7 +1033,7 @@ Table&nbsp;5.1: Logical operators in R
 <pre><code>[1] "Fiona"  "Lukas"  "Ida"    "Georg"  "Daniel" "Pavel"  "Tigger"</code></pre>
 </div>
 </div>
-<p>To concatenate values into a single object, we need to use a comma <code>,</code> to separate each value. Otherwise, <em>R</em> will report an error back.</p>
+<p>To concatenate values into a single object, we need to use a comma <code>,</code> to separate each value. This is not dissimilar to how we create lists when writing in English. Otherwise, <em>R</em> will report an error back.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>friends <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Fiona"</span> <span class="st">"Ida"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-error">
@@ -1051,15 +1051,15 @@ Table&nbsp;5.1: Logical operators in R
 <p>You can copy and paste the following example to illustrate what I explained.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Important years in my life</span></span>
-<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>milestones_of_my_life <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1982</span>, <span class="dv">2006</span>, <span class="dv">2011</span>, <span class="dv">2018</span>, <span class="dv">2020</span>)</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>milestones_of_my_life <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1982</span>, <span class="dv">2006</span>, <span class="dv">2011</span>, <span class="dv">2018</span>, <span class="dv">2020</span>, <span class="dv">2022</span>)</span>
 <span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>milestones_of_my_life</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 1982 2006 2011 2018 2020</code></pre>
+<pre><code>[1] 1982 2006 2011 2018 2020 2022</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co"># The same as above - no second line of code needed</span></span>
-<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>(milestones_of_my_life <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1982</span>, <span class="dv">2006</span>, <span class="dv">2011</span>, <span class="dv">2018</span>, <span class="dv">2020</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>(milestones_of_my_life <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1982</span>, <span class="dv">2006</span>, <span class="dv">2011</span>, <span class="dv">2018</span>, <span class="dv">2020</span>, <span class="dv">2022</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 1982 2006 2011 2018 2020</code></pre>
+<pre><code>[1] 1982 2006 2011 2018 2020 2022</code></pre>
 </div>
 </div>
 <p>Finally, we can also concatenate numbers and character values into one object:</p>
@@ -1071,7 +1071,7 @@ Table&nbsp;5.1: Logical operators in R
 </div>
 <p>This last example is not necessarily something I would recommend to do, because it likely leads to undesirable outcomes. For example, if you look into your environment pane you currently have three objects: <code>friends</code>, <code>milestones_of_my_life</code>, and <code>names_and_years</code>.</p>
 <p><img src="images/chapter_05_img/01_basic_computation_environment_objects.png" class="img-fluid" alt="Screenshot of the Environemnt tab in RStudio, showing three objects: files, miletsones_f_my_life, and names_and_years."></p>
-<p>The <code>friends</code> object shows that all the values inside the object are classified as <code>chr</code>, which denominates <code>character</code>. For this object, this is correct because it only includes the names of my friends. On the other hand, the object <code>milestones_of_my_life</code> only includes <code>numeric</code> values, and therefore it says <code>num</code> in the environment pane. However, for the object <code>names_and_years</code> we know we want to have <code>numeric</code> and <code>character</code> values included. Still, <em>R</em> recognises them as <code>character</code> values because values inside objects are meant to be of the same type. Remember that in <em>R,</em> numbers can always be interpreted as <code>character</code> and <code>numeric</code>, but text only can be considered as <code>character</code>.</p>
+<p>The <code>friends</code> object shows that all the values inside the object are classified as <code>chr</code>, which denominates <code>character</code>. For this object, this is correct because it only includes the names of my friends. On the other hand, the object <code>milestones_of_my_life</code> only includes <code>numeric</code> values, and therefore it says <code>num</code> in the environment pane. However, for the object <code>names_and_years</code> we know we want to have <code>numeric</code> and <code>character</code> values included. Still, <em>R</em> recognises them as <code>character</code> values because values inside objects are meant to be of the same type. Remember that in <em>R,</em> numbers can always be interpreted as <code>character</code> and <code>numeric</code>, but text only can be considered as <code>character</code> or a <code>factor</code>.</p>
 <p>Consequently, mixing different types of data into one object is likely a bad idea. This is especially true if you want to use the <code>numeric</code> values for computation. We will return to data types in <a href="07_data_wrangling.html#sec-change-data-types" class="quarto-xref"><span>Section 7.4</span></a> where we learn how to change them, but for now we should ensure that our objects are all of the same data type.</p>
 <p>However, there is an exception to this rule. ‘Of course’, you might say. There is one object that can have values of different types: a <code>list</code>. As the name indicates, a <code>list</code> object holds several items. These items are usually other objects. In the spirit of ‘<a href="https://www.imdb.com/title/tt1375666/?ref_=ext_shr_lnk">Inception</a>’, you can have lists inside lists, which contain more lists or other objects.</p>
 <p>Let’s create a <code>list</code> called <code>x_files</code> using the <code>list</code> function and place all our objects inside.</p>
@@ -1088,7 +1088,7 @@ Table&nbsp;5.1: Logical operators in R
 [1] "Fiona"  "Lukas"  "Ida"    "Georg"  "Daniel" "Pavel"  "Tigger"
 
 [[2]]
-[1] 1982 2006 2011 2018 2020
+[1] 1982 2006 2011 2018 2020 2022
 
 [[3]]
 [1] "Fiona"  "1988"   "Daniel" "1982"  </code></pre>
@@ -1137,37 +1137,37 @@ Figure&nbsp;5.1: The environment pane showing our objects and our list <code>x_f
 <span id="cb42-8"><a href="#cb42-8" aria-hidden="true" tabindex="-1"></a>measurement_of_boredom_of_watching_youtube</span>
 <span id="cb42-9"><a href="#cb42-9" aria-hidden="true" tabindex="-1"></a>Sleep.per_monthsIn.hours</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Ultimately, you need to be able to effectively work with your data and output. Ideally, this should be true for others as well who want or need to work with your analysis and data as well, e.g.&nbsp;your co-investigator or supervisor. The same is applies to column names in datasets (see <a href="07_data_wrangling.html#sec-colnames-cleaning" class="quarto-xref"><span>Section 7.3</span></a>). Some more information about coding style and coding etiquette can be found in <a href="#sec-coding-etiquette" class="quarto-xref"><span>Section 5.5</span></a>.</p>
+<p>Ultimately, you need to be able to effectively work with your data and output. Ideally, this should be true for others as well who want or need to work with your analysis and data, e.g.&nbsp;your co-investigator or supervisor. The same is applies to column names in datasets (see <a href="07_data_wrangling.html#sec-colnames-cleaning" class="quarto-xref"><span>Section 7.3</span></a>). Some more information about coding style and coding etiquette can be found in <a href="#sec-coding-etiquette" class="quarto-xref"><span>Section 5.5</span></a>.</p>
 </section>
 <section id="sec-functions" class="level2" data-number="5.3">
 <h2 data-number="5.3" class="anchored" data-anchor-id="sec-functions"><span class="header-section-number">5.3</span> Functions</h2>
 <p>I used the term ‘<em>function</em>’ multiple times, but I never thoroughly explained what they are and why we need them. In simple terms, functions are objects. They contain lines of code that someone has written for us or we have written ourselves. One could say they are code snippets ready to use. Someone else might see them as shortcuts for our programming. Functions increase the speed with which we perform our analysis and write our computations and make our code more readable and reliable. Consider computing the <code>mean</code> of values stored in the object <code>pocket_money</code>.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="co"># First we create an object that stores our desired values</span></span>
-<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>pocket_money <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">5</span>, <span class="dv">8</span>, <span class="dv">13</span>, <span class="dv">21</span>, <span class="dv">34</span>, <span class="dv">55</span>, <span class="dv">89</span>)</span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>pocket_money <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">5</span>, <span class="dv">8</span>, <span class="dv">13</span>, <span class="dv">21</span>, <span class="dv">34</span>, <span class="dv">55</span>, <span class="dv">88</span>)</span>
 <span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb43-4"><a href="#cb43-4" aria-hidden="true" tabindex="-1"></a><span class="co">#1 Manually compute the mean</span></span>
-<span id="cb43-5"><a href="#cb43-5" aria-hidden="true" tabindex="-1"></a>sum <span class="ot">&lt;-</span> <span class="dv">0</span> <span class="sc">+</span> <span class="dv">1</span> <span class="sc">+</span> <span class="dv">1</span> <span class="sc">+</span> <span class="dv">2</span> <span class="sc">+</span> <span class="dv">3</span> <span class="sc">+</span> <span class="dv">5</span> <span class="sc">+</span> <span class="dv">8</span> <span class="sc">+</span> <span class="dv">13</span> <span class="sc">+</span> <span class="dv">21</span> <span class="sc">+</span> <span class="dv">34</span> <span class="sc">+</span> <span class="dv">55</span> <span class="sc">+</span> <span class="dv">89</span></span>
-<span id="cb43-6"><a href="#cb43-6" aria-hidden="true" tabindex="-1"></a>sum <span class="sc">/</span> <span class="dv">12</span> <span class="co"># There are 12 items in the object</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb43-5"><a href="#cb43-5" aria-hidden="true" tabindex="-1"></a>total_sum <span class="ot">&lt;-</span> <span class="dv">0</span> <span class="sc">+</span> <span class="dv">1</span> <span class="sc">+</span> <span class="dv">1</span> <span class="sc">+</span> <span class="dv">2</span> <span class="sc">+</span> <span class="dv">3</span> <span class="sc">+</span> <span class="dv">5</span> <span class="sc">+</span> <span class="dv">8</span> <span class="sc">+</span> <span class="dv">13</span> <span class="sc">+</span> <span class="dv">21</span> <span class="sc">+</span> <span class="dv">34</span> <span class="sc">+</span> <span class="dv">55</span> <span class="sc">+</span> <span class="dv">88</span></span>
+<span id="cb43-6"><a href="#cb43-6" aria-hidden="true" tabindex="-1"></a>total_sum <span class="sc">/</span> <span class="dv">12</span> <span class="co"># There are 12 items in the object</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 19.33333</code></pre>
+<pre><code>[1] 19.25</code></pre>
 </div>
 </div>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="co">#2 Use a function to compute the mean</span></span>
 <span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(pocket_money)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 19.33333</code></pre>
+<pre><code>[1] 19.25</code></pre>
 </div>
 </div>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="co">#3 Let's make sure #1 and #2 are actually the same</span></span>
-<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a>sum <span class="sc">/</span> <span class="dv">12</span> <span class="sc">==</span> <span class="fu">mean</span>(pocket_money)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a>total_sum <span class="sc">/</span> <span class="dv">12</span> <span class="sc">==</span> <span class="fu">mean</span>(pocket_money)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] FALSE</code></pre>
+<pre><code>[1] TRUE</code></pre>
 </div>
 </div>
-<p>If we manually compute the mean, we first calculate the sum of all values in the object <code>pocket_money</code><a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>. Then we divide it by the number of values in the object, which is <code>12</code>. This is the traditional way of computing the mean as we know it from primary school. However, by simply using the function <code>mean()</code>, we not only write considerably less code, but it is also much easier to understand because the word <em>‘mean’</em> does precisely what we would expect. Which approach do you find easier: Using the function <code>mean()</code> or compute it by hand?</p>
+<p>If we manually compute the mean, we first calculate the sum of all values in the object <code>pocket_money</code><a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>. Then we divide it by the number of values in the object, which is <code>12</code>. This is the traditional way of computing the mean as we know it from primary school. However, by simply using the function <code>mean()</code>, we not only write considerably less code, but it is also much easier to understand because the word <em>‘mean’</em> does precisely what we would expect. Which approach do you find easier: Using the function <code>mean()</code> or computing it by hand?</p>
 <p>To further illustrate how functions look like, let’s create one ourselves and call it <code>my_mean</code>.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a>my_mean <span class="ot">&lt;-</span> <span class="cf">function</span>(numbers){</span>
@@ -1183,7 +1183,7 @@ Figure&nbsp;5.1: The environment pane showing our objects and our list <code>x_f
 <span id="cb49-11"><a href="#cb49-11" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb49-12"><a href="#cb49-12" aria-hidden="true" tabindex="-1"></a><span class="fu">my_mean</span>(pocket_money)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 19.33333</code></pre>
+<pre><code>[1] 19.25</code></pre>
 </div>
 </div>
 <p>Don’t worry if half of this code does not make sense to you. Writing functions is an advanced <em>R</em> skill. However, it is good to know how functions look on the ‘inside’. You certainly can see the similarities between the code we have written before, but instead of using actual numbers, we work with placeholders like <code>numbers</code>. This way, we can use a function for different data and do not have to rewrite it every time. Writing and using functions relates to the skill of abstraction mentioned in <a href="02_why_start_learning_a_programming_language.html#sec-programming-languages-enhance-your-conceptual-thinking" class="quarto-xref"><span>Section 2.2</span></a>.</p>
@@ -1225,7 +1225,7 @@ NA</code></pre>
 </div>
 </section>
 <section id="sec-r-packages" class="level2" data-number="5.4">
-<h2 data-number="5.4" class="anchored" data-anchor-id="sec-r-packages"><span class="header-section-number">5.4</span> R packages</h2>
+<h2 data-number="5.4" class="anchored" data-anchor-id="sec-r-packages"><span class="header-section-number">5.4</span> <em>R</em> packages</h2>
 <p><em>R</em> has many built-in functions that we can use right away. However, some of the most interesting ones are developed by different programmers, data scientists and enthusiasts. To add more functions to your repertoire, you can install <em>R</em> packages. <em>R</em> packages are a collection of functions that you can download and use for your own analysis. Throughout this book, you will learn about and use many different <em>R</em> packages to accomplish various tasks. To give you another analogy,</p>
 <ul>
 <li><p><em>R</em> is like a global supermarket where everyone can offer their products,</p></li>
@@ -1282,7 +1282,7 @@ Figure&nbsp;5.2: The R package documentation for ‘ggplot2’
 <li><p>Finally, I recommend to select <code>Install dependencies</code>, because some packages need other packages to function properly. This way, you do not have to do this manually.</p>
 <p><img src="images/chapter_05_img/install_r_packages/03_install_r_packages.png" class="img-fluid" alt="Screenshot of RStudio, showing the Install Pacakges window with the box Install Dependencies ticked."></p></li>
 </ol>
-<p>The only real downside of using the packages pane is that you cannot install packages hosted on GitHub only. However, you can download them from there and install them directly from your computer using this option. This is particularly useful if you do not have an internet connection but you already downloaded the required packages onto a hard drive. However, in 99.9% of cases it is much easier to use the function <code>devtools::install_github()</code>.</p>
+<p>The only real downside of using the packages pane is that you cannot install packages hosted on GitHub only. However, you can download them from there and install them directly from your computer using a this option. This is particularly useful if you do not have an internet connection but you already downloaded the required packages onto a hard drive. However, in 99.9% of cases it is much easier to use the function <code>devtools::install_github()</code> because you do not have to perform multiple steps to achieve the same result.</p>
 </section>
 <section id="sec-install-all-r-packages" class="level3" data-number="5.4.3">
 <h3 data-number="5.4.3" class="anchored" data-anchor-id="sec-install-all-r-packages"><span class="header-section-number">5.4.3</span> Install all necessary <em>R</em> packages for this book</h3>
@@ -1316,7 +1316,7 @@ Figure&nbsp;5.2: The R package documentation for ‘ggplot2’
 </section>
 <section id="sec-coding-etiquette" class="level2" data-number="5.5">
 <h2 data-number="5.5" class="anchored" data-anchor-id="sec-coding-etiquette"><span class="header-section-number">5.5</span> Coding etiquette</h2>
-<p>Now you know everything to get started, but before we jump into our first project, I would like to briefly touch upon coding etiquette. This is not something that improves your analytical or coding skills directly, but is essential in building good habbits and making your life and those of others a little easier. Consider writing code like growing plants in your garden. You want to nurture the good plants, remove the weed and add labels that tell you which plant it is that you are growing. At the end of the day, you want your garden to be well-maintained. Treat you programming code the same way.</p>
+<p>Now you know everything to get started, but before we jump into our first project, I would like to briefly touch upon coding etiquette. This is not something that improves your analytical or coding skills directly, but is essential in building good habits and making your life and those of others a little easier. Consider writing code like growing plants in your garden. You want to nurture the good plants, remove the weed and add labels that tell you which plant it is that you are growing. At the end of the day, you want your garden to be well-maintained. Treat you programming code the same way.</p>
 <p>A script (see <a href="06_starting_r_projects.html#sec-creating-an-r-script" class="quarto-xref"><span>Section 6.3</span></a>) of programming code should always have at least the following qualities:</p>
 <ul>
 <li><p>Only contains code that is necessary,</p></li>
@@ -1358,7 +1358,7 @@ Figure&nbsp;5.2: The R package documentation for ‘ggplot2’
 <span id="cb66-17"><a href="#cb66-17" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb66-18"><a href="#cb66-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Does is matter whether a country lies in Europe?</span></span>
 <span id="cb66-19"><a href="#cb66-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb66-20"><a href="#cb66-20" aria-hidden="true" tabindex="-1"></a><span class="do">## Visualise rel. of covid cases, idv and being a European country</span></span>
+<span id="cb66-20"><a href="#cb66-20" aria-hidden="true" tabindex="-1"></a><span class="do">## Visualise covid cases, idv and being a European country</span></span>
 <span id="cb66-21"><a href="#cb66-21" aria-hidden="true" tabindex="-1"></a>df <span class="sc">|&gt;</span></span>
 <span id="cb66-22"><a href="#cb66-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> covid_cases_per_1m,</span>
 <span id="cb66-23"><a href="#cb66-23" aria-hidden="true" tabindex="-1"></a>             <span class="at">y =</span> idv,</span>
@@ -1381,8 +1381,8 @@ Figure&nbsp;5.2: The R package documentation for ‘ggplot2’
 <span id="cb66-40"><a href="#cb66-40" aria-hidden="true" tabindex="-1"></a><span class="do">## Test whether model2 is an improvement over model1</span></span>
 <span id="cb66-41"><a href="#cb66-41" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(model1, model2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>I hope we can agree that the second example is much easier to read and understand even though you probably do not understand most of it yet. For once, I separated the different analytical steps from each other like paragraphs in a report. Apart from that, I added comments with <code>#</code> to provide more context to my code for someone else who wants to understand my analysis. Admittedly, this example is a little excessive. Usually, you might have fewer comments. Commenting is an integral part of programming because it allows you to remember what you did. Ideally, you want to strike a good balance between commenting on and writing your code. How many comments you need will likely change throughout your <em>R</em> programming journey. Think of comments as headers for your programming script that give it structure.</p>
-<p>We can use <code>#</code> not only to write comments but also to tell R not to run particular code. This is very helpful if you want to keep some code but do not want to use it yet. There is also a handy keyboard shortcut you can use to ‘deactivate’ multiple lines of code at once. Select whatever you want to ‘comment out’ in your script and press <code>Ctrl+Shift+C</code> (PC) or <code>Cmd+Shift+C</code> (Mac).</p>
+<p>I hope we can agree that the second example is much easier to read and understand even though you probably do not understand most of it yet. For once, I separated the different analytical steps from each other like paragraphs in a report. Apart from that, I added comments with <code>#</code> to provide more context to my code for someone else who wants to understand my analysis. Admittedly, this example is a little excessive. Usually, you might have fewer comments. Commenting is an integral part of programming because it allows you to remember what you did or still have to do. Ideally, you want to strike a good balance between commenting on and writing your code. How many comments you need will likely change throughout your <em>R</em> programming journey. Think of comments as headers for your programming script that give it structure.</p>
+<p>We can use <code>#</code> not only to write comments but also to tell <em>R</em> not to run particular code. This is very helpful if you want to keep some code but do not want to use it yet. There is also a handy keyboard shortcut you can use to ‘deactivate’ multiple lines of code at once. Select whatever you want to ‘comment out’ in your script and press <code>Ctrl+Shift+C</code> (PC) or <code>Cmd+Shift+C</code> (Mac).</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb67"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a><span class="co"># mean(pocket_money) # R will NOT run this code</span></span>
 <span id="cb67-2"><a href="#cb67-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(pocket_money)   <span class="co"># R will run this code</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>

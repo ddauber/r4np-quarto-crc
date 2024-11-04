@@ -333,29 +333,39 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>While we cover data wrangling in great detail in the next Chapter (<a href="07_data_wrangling.html" class="quarto-xref"><span>Chapter 7</span></a>), I would like to share some insights from my work that helped me stay organised and, consequently, less frustrated. The following applies to small and large research projects, which makes it very convenient no matter the situation and the scale of the project. Of course, feel free to tweak my approach to whatever suits you. However, consistency is king.</p>
 <section id="sec-creating-an-r-project" class="level2" data-number="6.1">
 <h2 data-number="6.1" class="anchored" data-anchor-id="sec-creating-an-r-project"><span class="header-section-number">6.1</span> Creating an <em>R</em> Project file</h2>
-<p>When working on a project, you likely create many different files for various purposes, especially <em>R</em> Scripts (see <a href="#sec-creating-an-r-project" class="quarto-xref"><span>Section 6.1</span></a>). If you are not careful, this file is stored in your system’s default location, which might not be where you want them to be. RStudio allows you to manage your entire project intuitively and conveniently through <em>R</em> Project files. Using <em>R</em> Project files comes with a couple of perks, for example:</p>
+<p>When working on a project, you likely create many different files for various purposes, especially <em>R</em> scripts (see <a href="#sec-creating-an-r-project" class="quarto-xref"><span>Section 6.1</span></a>). If you are not careful, this file is stored in your system’s default location, which might not be where you want them to be. RStudio allows you to manage your entire project intuitively and conveniently through <em>R</em> Project files. Using <em>R</em> Project files comes with a couple of perks, for example:</p>
 <ul>
 <li><p>All the files that you generate are in the same place. Your data, your coding, your exported plots, your reports, etc., all are in one place together without you having to manage the files manually. This is due to the fact that RStudio sets the root directory to whichever folder your project is saved to.</p></li>
 <li><p>If you want to share your project, you can share the entire folder, and others can quickly reproduce your research or help fix problems. This is because all file paths are relative and not absolute.</p></li>
 <li><p>You can, more easily, use GitHub for backups and so-called ‘version control’, which allows you to track changes you have made to your code over time (see also <a href="15_next_steps.html#sec-next-steps-github" class="quarto-xref"><span>Section 15.1</span></a>).</p></li>
 </ul>
 <p>For now, the most important reason to use <em>R</em> Project files is the convenience of the organisation of files and the ability to share it easily with co-investigators, your supervisor, or your students.</p>
-<p>To create an R Project, you need to perform the following steps:</p>
+<p>To create an <em>R</em> Project, you need to perform the following steps:</p>
 <ol type="1">
-<li><p>Select <code>File &gt; New Project…</code> from the menu bar.</p>
-<p><img src="images/chapter_06_img/00_r_project/00_r_project_file_menu.png" class="img-fluid"></p></li>
-<li><p>Select <code>New Directory</code> from the popup window.</p>
-<p><img src="images/chapter_06_img/00_r_project/01_r_project_new_directory.png" class="img-fluid"></p></li>
-<li><p>Next, select <code>New Project</code>.</p>
-<p><img src="images/chapter_06_img/00_r_project/02_r_project_new_project.png" class="img-fluid"></p></li>
-<li><p>Pick a meaningful name for your project folder, i.e.&nbsp;the <code>Directory Name</code>. Ensure this project folder is created in the right place. You can change the <code>subdirectory</code> by clicking on <code>Browse…</code>. Ideally the subdirectory is a place where you usually store your research projects.</p>
-<p><img src="images/chapter_06_img/00_r_project/03_r_project_specs.png" class="img-fluid"></p></li>
-<li><p>You have the option to <code>Create a git repository</code>. This is only relevant if you already have a GitHub account and wish to use version control. For now, you can happily ignore it if you do not use GitHub.</p></li>
-<li><p>Lastly, tick <code>Open in new session</code>. This will open your <em>R</em> Project in a new RStudio window.</p>
-<p><img src="images/chapter_06_img/00_r_project/04_r_project_directory_name.png" class="img-fluid"></p></li>
-<li><p>Once you are happy with your choices, you can click <code>Create Project</code>. This will open a new <em>R</em> Session, and you can start working on your project.</p>
-<p><img src="images/chapter_06_img/00_r_project/05_r_project_new_session.png" class="img-fluid"></p></li>
+<li>Select <code>File &gt; New Project…</code> from the menu bar.</li>
 </ol>
+<p><img src="images/chapter_06_img/00_r_project/00_r_project_file_menu.png" class="img-fluid" alt="A screenshot of the RStudio menu 'File' and the option 'New Project...' is highlighted."></p>
+<ol start="2" type="1">
+<li>Select <code>New Directory</code> from the popup window.</li>
+</ol>
+<p><img src="images/chapter_06_img/00_r_project/01_r_project_new_directory.png" class="img-fluid" alt="A screenshot of the 'New Project Wizard' with multiple options of how a project can be created."></p>
+<ol start="3" type="1">
+<li>Next, select <code>New Project</code>.</li>
+</ol>
+<p><img src="images/chapter_06_img/00_r_project/02_r_project_new_project.png" class="img-fluid" alt="A screenshot of the 'Project Type' dialogue window. The option 'New Project' is selected."></p>
+<ol start="4" type="1">
+<li>Pick a meaningful name for your project folder, i.e.&nbsp;the <code>Directory Name</code>. Ensure this project folder is created in the right place. You can change the <code>subdirectory</code> by clicking on <code>Browse…</code>. Ideally the subdirectory is a place where you usually store your research projects.</li>
+</ol>
+<p><img src="images/chapter_06_img/00_r_project/03_r_project_specs.png" class="img-fluid" alt="A screenshot of the project creation dialogue window with a text input field for Directory Name."></p>
+<ol start="5" type="1">
+<li><p>You have the option to <code>Create a git repository</code>. This is only relevant if you already have a GitHub account and wish to use version control. For now, you can happily ignore it if you do not use GitHub.</p></li>
+<li><p>Lastly, tick <code>Open in new session</code>. This will open your <em>R</em> Project in a new RStudio window.</p></li>
+</ol>
+<p><img src="images/chapter_06_img/00_r_project/04_r_project_directory_name.png" class="img-fluid" alt="A screenshot of the project creation window, and the box 'Open in new session' is ticked."></p>
+<ol start="7" type="1">
+<li>Once you are happy with your choices, you can click <code>Create Project</code>. This will open a new <em>R</em> Session, and you can start working on your project.</li>
+</ol>
+<p><img src="images/chapter_06_img/00_r_project/05_r_project_new_session.png" class="img-fluid" alt="A screenshot of the starting screen when a new project has been created."></p>
 <p>If you look carefully, you can see that your RStudio is now ‘branded’ with your project name. At the top of the window, you see the project name, the files pane shows the root directory where all your files will be, and even the console shows on top the file path of your project. You could set all this up manually, but I would not recommend it, not the least because it is easy and swift to work with <em>R</em> Projects.</p>
 </section>
 <section id="sec-organising-your-projects" class="level2" data-number="6.2">
@@ -388,13 +398,13 @@ Figure&nbsp;6.1: An example of a scalable folder structure for your project
 </figcaption>
 </figure>
 </div>
-<p>You probably noticed that my folders have numbers in front of them. I do this to ensure that all folders are in the order I want them to be, which is usually not the alphabetical order my computer suggests. I use two digits because I may have more than nine folders for a project, and folder ten would otherwise be listed as the third folder in this list. With this filing strategy in place, it will be easy to find whatever I need. Even others can easily understand what I stored where. It is simply ‘tidy’, similar to how we want our data to be.</p>
+<p>You probably noticed that my folders have numbers in front of them. I do this to ensure that all folders are in the order I want them to be, which is usually not the alphabetical order my computer suggests. I use two digits because I may have more than nine folders for a project, and folder ten could otherwise be listed as the second folder in this list (this depends on your operating system). With this filing strategy in place, it will be easy to find whatever I need. Even others can easily understand what I stored where. It is simply ‘tidy’, similar to how we want our data to be.</p>
 </section>
 <section id="sec-creating-an-r-script" class="level2" data-number="6.3">
 <h2 data-number="6.3" class="anchored" data-anchor-id="sec-creating-an-r-script"><span class="header-section-number">6.3</span> Creating an <em>R</em> Script</h2>
 <p>Code quickly becomes long and complex. Thus, it is not very convenient to write it in the console. So, instead, we can write code into an <em>R</em> Script. An <em>R</em> Script is a document that RStudio recognises as <em>R</em> programming code. Files that are not <em>R</em> Scripts, like <code>.txt</code>, <code>.rtf</code> or <code>.md</code>, can also be opened in RStudio, but any code written in it will not be automatically recognised.</p>
 <p>When opening an <em>R</em> script or creating a new one, it will display in the <em>Source</em> window (see <a href="04_rstudio_interface.html#sec-the-source-window" class="quarto-xref"><span>Section 4.2</span></a> Some refer to this window as the ‘script editor’. An <em>R</em> script starts as an empty file. Good coding etiquette (see <a href="05_r_basics.html#sec-coding-etiquette" class="quarto-xref"><span>Section 5.5</span></a>) demands that we use the first line to indicate what this file does by using a comment <code>#</code>. Here is an example for a <a href="https://www.tidytuesday.com" target="blank" title="'TidyTuesday'">‘TidyTuesday’</a> <em>R</em> Project.</p>
-<p><img src="images/chapter_06_img/02_r_script/00_r_script.png" class="img-fluid"></p>
+<p><img src="images/chapter_06_img/02_r_script/00_r_script.png" class="img-fluid" alt="An example code of how to setup your R script. The first line provides a title, the second one a date and then the R package libraries are loaded into our session."></p>
 <p>All examples in this book can easily be copied and pasted into your own <em>R</em> script. However, for some code you will have to install the <em>R</em> package <code>r4np</code> (see <a href="#install_r4np">above</a>). Let’s try it with the following code. The plot this code creates reveals which car manufacturer produces the most efficient cars. Copy and paste this code into your <em>R</em> script.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
@@ -410,18 +420,18 @@ Figure&nbsp;6.1: An example of a scalable folder structure for your project
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="06_starting_r_projects_files/figure-html/r-script-copy-paste-examples-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="06_starting_r_projects_files/figure-html/r-script-copy-paste-examples-1.png" class="img-fluid figure-img" alt="A series of colourful boxplots where each colour represent the name of a manufacturer." width="672"></p>
 </figure>
 </div>
 </div>
 </div>
 <p>You are probably wondering where your plot has gone. Copying the code will not automatically run it in your <em>R</em> script. However, this is necessary to create the plot. If you tried pressing <code>Return ↵</code>, you would only add a new line. Instead, you need to select the code you want to run and press <code>Ctrl+Return ↵</code> (PC) or <code>Cmd+Return ↵</code> (Mac). You can also use the <code>Run</code> command at the top of your source window, but it is much more efficient to press the keyboard shortcut. Besides, you will remember this shortcut quickly, because we need to use it very frequently. If all worked out, you should see the following:</p>
-<p><img src="images/chapter_06_img/02_r_script/01_r_script_example_plot.png" class="img-fluid"></p>
+<p><img src="images/chapter_06_img/02_r_script/01_r_script_example_plot.png" class="img-fluid" alt="A screenshot that shows where the R code is and where we can find the plot that was created with the code we have written in the 'Plots' panel."></p>
 <p>As you can see, cars from <code>Honda</code> appear to drive furthest with the same amount of fuel (a gallon) compared to other vehicles. Thus, if you are looking for very economical cars, you now know where to find them.</p>
 <p>The <em>R</em> script editor has some conveniences for writing your code that are worth pointing out. You probably noticed that some of the code we have pasted is blue, and some other code is in green. These colours help to make your code more readable because they carry a specific meaning. In the default settings, green stands for any values in <code>""</code>, which usually stands for <code>character</code>s. Automatic colouring of our progamming code is also called <em>‘syntax highlighting’</em>.</p>
 <p>Moreover, code in <em>R</em> scripts will be automatically indented to facilitate reading. If, for whatever reason, the indentation does not happen, or you accidentally undo it, you can reindent a line with <code>Ctrl+I</code> (PC) or <code>Cmd+I</code> (Mac).</p>
 <p>Lastly, the console and the <em>R</em> script editor both feature code completion. This means that when you start typing the name of a function, <em>R</em> will provide suggestions. These are extremely helpful and make programming a lot faster. Once you found the function you were looking for, you press <code>Return ↵</code> to insert it. Here is an example of what happens when you have the package <code>tidyverse</code> loaded and type <code>ggpl</code>. Only functions that are loaded via packages or any object in your environment pane benefit from code completion.</p>
-<p><img src="images/chapter_06_img/02_r_script/02_r_script_code_completion.png" class="img-fluid"></p>
+<p><img src="images/chapter_06_img/02_r_script/02_r_script_code_completion.png" class="img-fluid" alt="A screenshot showing the code completion feature in RStudio. the incomplete code 'ggpl' is shown and a window opens which shows possible function that start with these letters."></p>
 <p>Not only does RStudio show you all the available options, but it also tells you which package this function is from. In this case, all listed functions are from the <code>ggplot2</code> package. Furthermore, when you select one of the options but have not pressed <code>Return ↵</code> yet, you also get to see a yellow box, which provides you with a quick reference of all the arguments that this function accepts. So you do not have to memorise all the functions and their arguments.</p>
 </section>
 <section id="sec-r-markdown-and-r-notebooks" class="level2" data-number="6.4">
@@ -429,10 +439,10 @@ Figure&nbsp;6.1: An example of a scalable folder structure for your project
 <p>There is too much to say about <em>Quarto</em>, which is why I only will highlight that it exists and point out the one feature that might convince you to choose this format over plain <em>R</em> scripts: They look like a Word document (almost).</p>
 <p>The predecessor of <em>Quarto</em> was called <em>R</em> Markdown, which is a combination of <em>R</em> and ’<em>Markdown’</em>. <em>‘Markdown’</em> is a way of writing and formatting text documents without needing software like MS Word. Instead, you write everything in plain text. Such plain text can be converted into many different document types such as HTML websites, PDF or Word documents. If you would like to see how it works, I recommend looking at the&nbsp;<a href="#0" target="_blank">Quarto Website</a>. To create a <em>Quarto</em> file, click on <code>File &gt; New File &gt; Quarto Document...</code>.</p>
 <p>A <em>Quarto</em> file works oppositely to an <em>R</em> script. By default, an <em>R</em> script considers everything as code and only through commenting <code>#</code> we can include text to describe what the code does. This is what you have seen in all the coding examples so far. On the other hand, a <em>Quarto</em> file considers everything as text, and we have to specify what is code. We can do so by inserting <em>‘code chunks’</em>. Therefore, there is less of a need to use comments <code>#</code> in <em>Quarto</em> files because you can write about it like you would in MS Word. Another convenience of <em>Quarto</em> files is that results from your analysis are immediately shown underneath the code chunk and not in the console.</p>
-<p><img src="images/chapter_06_img/03_r_markdown/01_quarto_plain.png" class="img-fluid"></p>
+<p><img src="images/chapter_06_img/03_r_markdown/01_quarto_plain.png" class="img-fluid" alt="screenshot of RStudio showing a Quarto document with markdown text and an R code chunk. The code runs plot(pressure) and displays a scatter plot. The Console shows R output, and the Files pane lists several project files including .qmd and .quarto.yml."></p>
 <p>If you switch your view to the <code>Visual Editor</code> it almost looks like you are writing a report in MS Word. In order to switch to the <code>Visual Editor</code> you need to either click on <code>Visual</code> in the top left or click on the gear icon and select <code>Use Visual Editor</code>.</p>
-<p><img src="images/chapter_06_img/03_r_markdown/02_quarto_visual_editor_menu.png" class="img-fluid"></p>
-<p><img src="images/chapter_06_img/03_r_markdown/03_quarto_visual_editor.png" class="img-fluid"></p>
+<p><img src="images/chapter_06_img/03_r_markdown/02_quarto_visual_editor_menu.png" class="img-fluid" alt="A screenshot which shows how to change from Source Editor to Visual Editor by clicking on the gear icon."></p>
+<p><img src="images/chapter_06_img/03_r_markdown/03_quarto_visual_editor.png" class="img-fluid" alt="A screenshot of the Quarto editor in viual mode which looks less like a coding script and more like a Word document with figures."></p>
 <p>So, when should you use an <em>R</em> script, and when should you use <em>Quarto</em>. The rule-of-thumb is that if you intend to write a report, assignment, thesis or another form of publication, it might be better to work in a <em>Quarto</em> file. If this does not apply, you might want to use an <em>R</em> Script. As mentioned above, <em>Quarto</em> files emphasise writing about your analysis, while <em>R</em> scripts primarily focus on code. In my projects, I often have a mixture of both. I use <em>R</em> Scripts to carry out data wrangling and my primary analysis and then use <em>Quarto</em> files to present the findings, e.g.&nbsp;creating plots, tables, and other components of a report. By the way, this book is written in <em>Quarto</em>.</p>
 <p>No matter your choice, it will neither benefit nor disadvantage you in your <em>R</em> journey or when working through this book. The choice is all yours. You will likely come to appreciate both formats for what they offer.</p>
 
