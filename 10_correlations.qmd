@@ -18,7 +18,7 @@ Sometimes, counting and measuring means, medians, and standard deviations is not
 
 -   Is eating healthier related to other health factors, such as life expectancy, blood pressure and overweight/obesity?
 
-There are many different ways to compute the correlation, and it partially depends on the type of data you want to relate to each other. The *'Pearson's correlation'* is by far the most frequently used correlation technique for normally distributed data. On the other hand, if data is not normally distributed, we can opt for the *'Spearman's rank'* correlation. One could argue that the relationship between these two correlations is like the mean (Pearson) to the median (Spearman). Both approaches require numeric values to be computed correctly. If our data is ordinal or, worse, dichotomous (like a logical variable), we have to choose different options. @tbl-different-correlations summarises different methods depending on the data type.
+There are many different ways to compute the correlation, and it partially depends on the type of data you want to relate to each other. The *Pearson's correlation* is, by far, the most frequently used correlation technique for normally distributed data. On the other hand, if data is not normally distributed, we can opt for the *Spearman's rank* correlation. One could argue that the relationship between these two correlations is like the mean (Pearson) to the median (Spearman). Both approaches require numeric values to be computed correctly. If our data is ordinal or, worse, dichotomous (like a logical variable), we have to choose different options. @tbl-different-correlations summarises different methods depending on the data type.
 
 | Correlation | Used when ... |
 |------------------------------------|------------------------------------|
@@ -30,11 +30,11 @@ There are many different ways to compute the correlation, and it partially depen
 
 : Different ways of computing correlations {#tbl-different-correlations}
 
-There are many more variations of correlations, which you can explore on the [package's website](https://easystats.github.io/correlation/articles/types.html "website of the package"){target="blank"} we will use in this chapter: `correlation`. However, we will primarily focus on Pearson and Spearman because they are the most commonly used correlation types in academic publications to understand the relationship between two variables. In addition, we also look at *'partial correlations'*, which allow us to introduce a third variable into this mix.
+There are many more variations of correlations, which you can explore on the [package's website](https://easystats.github.io/correlation/articles/types.html "website of the package"){target="blank"} we will use in this chapter: `correlation`. However, we will primarily focus on Pearson and Spearman because they are the most commonly used correlation types in academic publications to understand the relationship between two variables. In addition, we also look at *partial correlations,* which allow us to introduce a third variable into this mix.
 
 ## Plotting correlations {#sec-plotting-correlations}
 
-Since correlations only show the relationship between two variables, we can easily put one variable on the x-axis and one on the y-axis, creating a so-called 'scatterplot'. We used two functions to plot scatterplots before, i.e. `geom_point()` and `geom_jitter`. Let’s explore our first research question: Do people who eat healthier also feel happier? One assumption might be that healthier eating habits contribute to better physical well-being, which in turn enhances happiness. However, a counter-argument could be that diet does not significantly impact happiness levels, as everyone is subject to various life circumstances that influence our mood. Either way, we first need to identify the two variables of interest, which we can find in the `hie_2021` dataset. It contains measures of national health in various areas of England collected in 2021, such as:
+Since correlations only show the relationship between two variables, we can easily put one variable on the x-axis and one on the y-axis, creating a so-called 'scatterplot'. We used two functions to plot scatterplots before, i.e. `geom_point()` and `geom_jitter()`, which we can use to answer our first research questions, i.e. whether people who eat healthier also feel happier. One assumption might be that healthier eating habits contribute to better physical well-being, which in turn enhances happiness. However, a counter-argument could be that diet does not significantly impact happiness levels, as everyone is subject to various life circumstances that influence our mood. Either way, we first need to identify the two variables of interest, which we can find in the `hie_2021` dataset. It contains measures of national health in various areas of England collected in 2021, such as:
 
 -   `happiness`, which measures the average happiness of respondents when asked how they felt the day before on a scale from `0` (not at all) to `10` (completely), and
 
@@ -43,10 +43,13 @@ Since correlations only show the relationship between two variables, we can easi
 ```{r}
 #| label: correlation-happiness-healthy-eating
 #| echo: true
+#| fig-alt: "Scatter plot showing the relationship between happiness and healthy eating. Each point represents an individual observation, with happiness on the y-axis and healthy eating scores on the x-axis. The plot suggests a weak or scattered association between happiness and healthy eating."
 
 hie_2021 |>
   ggplot(aes(healthy_eating, happiness)) +
   geom_point() +
+  
+  # Apply a theme without a grid or background
   see::theme_modern()
 ```
 
@@ -57,6 +60,8 @@ Since correlations only explain linear relationships, a perfect correlation woul
 ```{r}
 #| label: correlation-examples
 #| echo: false
+#| fig-cap: "Relationship strength and direction of two quantitative variables"
+#| fig-alt: "Six scatter plots illustrating different strengths and directions of linear relationships, with corresponding correlation coefficients (r) displayed. Positive correlations (r = 1, 0.89, 0.30) are in the top row, showing varying strengths of positive association, from perfect to weak. Negative correlations (r = -0.42, -0.75, -1) are in the bottom row, showing varying strengths of negative association, from weak to perfect."
 
 set.seed(1234)
 
@@ -174,7 +179,7 @@ A correlation can be either positive or negative, and its value (i.e. `r` in cas
 
 -   `1` defines a perfectly positive correlation.
 
-In other words, the further the score is away from `0`, the stronger is the relationship between variables. We also have benchmarks that we can use to assess the strength of a relationship, for example, the one by @cohen1988statistical. The strength of the relationship is also called *'effect size'*. @tbl-effect-size-cohen shows the relevant benchmarks. Note that effect sizes are always provided as absolute figures. Therefore, `-0.4` would also count as a moderate relationship.
+In other words, the further the score is away from `0`, the stronger is the relationship between variables. We also have benchmarks that we can use to assess the strength of a relationship, for example, the one by @cohen1988statistical. The strength of the relationship is also called *effect size.* @tbl-effect-size-cohen shows the relevant benchmarks. Note that effect sizes are always provided as absolute figures. Therefore, `-0.4` would also count as a moderate relationship.
 
 | effect size         | interpretation |
 |---------------------|----------------|
@@ -218,17 +223,19 @@ Another question we posed at the beginning was: Are people who are happier also 
 ```{r}
 #| label: happiness-vs-life-satisfaction
 #| echo: true
+#| fig-alt: "A scatter plot showing the relationship between life satisfaction (x-axis) and happiness (y-axis). The points are scattered positively, suggesting a positive correlation where higher life satisfaction is associated with higher happiness scores, though with some dispersion around the trend."
 
 hie_2021 |>
   ggplot(aes(x = life_satisfaction, y = happiness)) +
   geom_point()
 ```
 
-The scatterplot shows a somewhat positive trend which suggests that we are right: Higher `happiness` is linked to higher `life_satisfaction`. Often, it can be tough to see the trend. To improve our plot, we can use the function `geom_smooth()`, which can help us draw a straight line that best fits our data points. We need to set the `method` for drawing the line to `lm`, which stands for 'linear model'. Remember, correlations assume a linear relationship between two variables, i.e. we model a linear relationship in our scatterplot. As mentioned before, the stronger the relationship the closer each dot in the plot will be to the red line.
+The scatterplot shows a somewhat positive trend which suggests that we are right: Higher `happiness` is linked to higher `life_satisfaction`. Often, it can be tough to see the trend. To improve our plot, we can use the function `geom_smooth()`, which can help us draw a straight line that best fits our data points. We need to set the `method` for drawing the line to `lm`, which stands for *linear model*. Remember, correlations assume a linear relationship between two variables, i.e. we model a linear relationship in our scatterplot. As mentioned before, the stronger the relationship the closer each dot in the plot will be to the red line.
 
 ```{r}
 #| label: happiness-vs-life-satisfaction-regression-line
 #| echo: true
+#| fig-alt: "A scatter plot illustrating the relationship between life satisfaction (x-axis) and happiness (y-axis), with a red trend line indicating a positive linear correlation between the two variables. Higher life satisfaction generally corresponds to higher happiness."
 
 hie_2021 |>
   ggplot(aes(x = life_satisfaction, y = happiness)) +
@@ -254,7 +261,7 @@ With an `r` of `0.67`, we did not only find a positive relationship, but one tha
 
 ## Significance: A way to help you judge your findings {#sec-significance}
 
-One of the most common pitfalls of novice statisticians is the interpretation of what counts as significant and not significant. Most basic tests offer a *'p value'*, which stands for *'probability value'*. I have referred to this value multiple times in this book already, but did not thoroughly explain why it is important.
+One of the most common pitfalls of novice statisticians is the interpretation of what counts as significant and not significant. Most basic tests offer a *p value,* which stands for *probability value*. I have referred to this value multiple times in this book already, but did not thoroughly explain why it is important.
 
 To understand p-values and significance, we need to briefly discuss *hypotheses*. A hypothesis is an assumption we make about the data, such as whether `healthy_eating` leads to more `happiness` (as in @sec-computing-correlations). In contrast, the null hypothesis is a special type of hypothesis that assumes that no effect or relationship exists between variables, i.e. the opposite of what we are testing. When you read that a hypothesis has been “rejected” or “accepted,” it is often the null hypothesis being tested. The p-value helps determine whether we should reject or retain the null hypothesis based on the data.
 
@@ -274,7 +281,7 @@ There are also commonly considered and accepted thresholds for the `p`-value:
 
 -   $p \leq 0.01$, the result is highly significant.
 
-Most frequently, confusion about the p-value emerges because we test FOR the null hypothesis and not what we are actually interested in.Returning to our example of eating healthy and its impact on happiness, we would first formulate our hypothesis and the null hypothesis:
+Most frequently, confusion about the p-value emerges because we test FOR the null hypothesis and not what we are actually interested in. Returning to our example of eating healthy and its impact on happiness, we would first formulate our hypothesis and the null hypothesis:
 
 -   Hypothesis ($H_1$): Healthy eating and happiness are significantly positively related to each other.
 
@@ -296,7 +303,7 @@ hie_2021 |>
 
 Besides the correlation coefficient (`r`), we also find $t_{(305)} = 1.24$, which is the test statistic. The test statistic helps us determine if our data shows something unusual based on our hypothesis. A test statistic close to `0` suggests that our data is consistent with the null hypothesis, i.e. no effect/relationship. The further the test statistic moves from `0`, the more evidence we have against the null hypothesis.
 
-In our analysis of the relationship between `happiness` and `healthy_eating`, we obtained a p-value of `0.215`. This indicates that there is a 21.5% probability of finding a t-value of `1.24` or or larger if the null hypothesis is true. You probably agree that these are not good odds. Since this p-value is greater than the conventional significance level of $p \leq 0.05$ we do not reject the null hypothesis. This means we do not have sufficient evidence to conclude that a significant relationship exists between `happiness` and `healthy_eating`.
+In our analysis of the relationship between `happiness` and `healthy_eating`, we obtained a p-value of `0.215`. This indicates that there is a 21.5% probability of finding a t-value of `1.24` or larger if the null hypothesis is true. You probably agree that these are not good odds. Since this p-value is greater than the conventional significance level of $p \leq 0.05$ we do not reject the null hypothesis. This means we do not have sufficient evidence to conclude that a significant relationship exists between `happiness` and `healthy_eating`.
 
 Lastly, I also want to visually explain what the test statistic is and how it relates to p-values. We already learned about the normal distribution, as such, the visualisation in @fig-null-hypothesis-testing-plot will look familiar.
 
@@ -305,6 +312,7 @@ Lastly, I also want to visually explain what the test statistic is and how it re
 #| echo: false
 #| output: true
 #| fig-cap: "t-Distribution with test statistic"
+#| fig-alt: "A t-distribution curve with two tails shaded in red to represent areas where p < 0.05, indicating the rejection regions. The observed t-value of 1.24 lies within the central, non-shaded area, showing it is not in the rejection region. This suggests the result is not statistically significant at the 0.05 level."
 
 # Load required libraries
 library(ggplot2)
@@ -446,7 +454,7 @@ hie_2021 |>
   correlation()
 ```
 
-If you have seen correlation tables before, you might find that `correlation()` does not produce the classic table by default. If you want it to look like the tables in publications, which are more compact but offer less information, you can use the function `summary()`. Which one you use it entirely up to you (or your supervisor).
+If you have seen correlation tables before, you might find that `correlation()` does not produce the classic table by default. If you want it to look like the tables in publications, which are more compact but offer less information, you can use the function `summary()`. Which one you use is entirely up to you (or your supervisor).
 
 ```{r}
 #| label: correlation-table-format
@@ -484,9 +492,9 @@ Correlations do not offer insights into causality, i.e. whether a change in one 
 
 ### Correlations can be spurious {#sec-correlations-can-be-spurious}
 
-Just because we find a relationship between two variables does not necessarily mean that they are truly related. Instead, it might be possible that a third variable is the reason for the relationship. We call relationships between variables that are caused by a third variable *'spurious correlations'*. This third variable can either be part of our dataset or even something we have not measured at all. The latter case would make it impossible to investigate the relationship further. However, we can always test whether some of our variables affect the relationship between the two variables of interest. This can be done by using *partial correlations*. A *partial correlation* returns the relationship between two variables minus the relationship to a third variable. @fig-illustration-spurious-correlation depicts this visually. While `a` and `b` appear to be correlated, the correlation might only exist because they correlate with `x`.
+Just because we find a relationship between two variables does not necessarily mean that they are truly related. Instead, it might be possible that a third variable is the reason for the relationship. We call relationships between variables that are caused by a third variable *spurious correlations*. This third variable can either be part of our dataset or even something we have not measured at all. The latter case would make it impossible to investigate the relationship further. However, we can always test whether some of our variables affect the relationship between the two variables of interest. This can be done by using *partial correlations*. A *partial correlation* returns the relationship between two variables minus the relationship to a third variable. @fig-illustration-spurious-correlation depicts this visually. While `a` and `b` appear to be correlated, the correlation might only exist because they correlate with `x`.
 
-![Illustration of a spurious correlation](/images/chapter_09_img/spurious-correlation.png){#fig-illustration-spurious-correlation}
+![Illustration of a spurious correlation](/images/chapter_09_img/spurious-correlation.png){#fig-illustration-spurious-correlation fig-alt="This figures illustrates a causal diagram with nodes (a, b, x). It shows a spurious relationship where the red circle (x) is the cause for changes in a and b. Thus, there is a dotted line between a and b as these variables are not directly related to each other."}
 
 Let's return to our first research questions. We found that `healthy_eating` is not related to `happiness`, but to `life_satisfaction`. `Life_satisfaction`, however, is related to `happiness`.
 
@@ -512,17 +520,18 @@ hie_2021 |>
   correlation(partial = TRUE)
 ```
 
-Suddenly, `eating_healthy` and `happiness` show a slight negative correlation ($r = -0.11$). In other words, by controlling for the effect of `life_satisfaction` on both variables, we reversed the relationship from positive to negative. You might wonder whether this implies that eating healthily makes us less happy. If we were to take this result superficiously, it would indicate exactly this. However, as mentioned before, when we look at correlations we have to consider not only `r` but also the p-value and the sample size. While sample size seems less problematic ($n = 307$), the p-value is only $p = 0.053$, which is just shy of the required minimum significance level of `0.05`. If we strictly applied the rules, this relationship would not be classified as 'significant'. Thus, the relationship would not be strong enough to derive meaningful conclusions. Even if the p-value were slightly lower, the effect size would still be very small.
+Suddenly, `eating_healthy` and `happiness` show a slight negative correlation ($r = -0.11$). In other words, by controlling for the effect of `life_satisfaction` on both variables, we reversed the relationship from positive to negative. You might wonder whether this implies that eating healthily makes us less happy. If we were to take this result superficiously, it would indicate exactly this. However, as mentioned before, when we look at correlations we have to consider not only `r` but also the p-value and the sample size. While sample size seems less problematic ($n = 307$), the p-value is only $p = 0.053$, which is just shy of the required minimum significance level of `0.05`. If we strictly applied the rules, this relationship would not be classified as *significant*. Thus, the relationship would not be strong enough to derive meaningful conclusions. Even if the p-value were slightly lower, the effect size would still be very small. No matter how we crunch the numbers, healthy eating just does not make us happier.
 
 ### Simpson's Paradox: When correlations betray you {#sec-simpsons-paradox}
 
-The final limitation is so important that it even has its own name: the *'Simpson's Paradox'*. Let's find out what is so paradoxical about some correlations. For this demonstration, we have to make use of a different dataset: `simpson` of the `r4np` package. It contains information about changes in student `performance` and changes in `happiness`. The dataset includes responses from three different groups: `Teachers`, `Students` and `Parents`.
+The final limitation is so important that it even has its own name: the *Simpson's Paradox.* Let's find out what is so paradoxical about some correlations. For this demonstration, we have to make use of a different dataset: `simpson` of the `r4np` package. It contains information about changes in student `performance` and changes in `happiness`. The dataset includes responses from three different groups: `Teachers`, `Students` and `Parents`.
 
 We would assume that an increase in students' `performance` will likely increase the `happiness` of participants. After all, all three have stakes in students' `performance`.
 
 ```{r}
 #| label: simpson-paradox-plot
 #| echo: true
+#| fig-alt: "This scatter plot shows the relationship between performance and happiness, with each dot representing an individual data point. The red trend line indicates a negative correlation, suggesting that as performance increases, happiness tends to decrease slightly."
 
 simpson |>
   ggplot(aes(x = performance,
@@ -550,6 +559,7 @@ If you have the instincts of a [true detective](https://www.imdb.com/title/tt235
 ```{r}
 #| label: simpson-paradox-plot-groups
 #| echo: true
+#| fig-alt: "This scatter plot displays the relationship between performance and happiness across three groups: Parents (blue), Students (red), and Teachers (green). Each color-coded dot represents an individual in the respective group. The black lines represent trend lines for each group, showing a positive relationship between performance and happiness." 
 
 simpson |>
   ggplot(aes(x = performance,
