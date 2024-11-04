@@ -57,6 +57,7 @@ Running this line of code will produce an empty plot. We only get labels for our
 ```{r}
 #| label: country-barplot
 #| echo: true
+#| fig-alt: "Bar plot showing the count of occurrences across various countries. The highest count exceeds 4000, while several other countries have counts around 1000 to 3000. Some country names on the x-axis are overlapped due to the high number of categories."
 
 ggplot(eqls_2011, aes(x = country_name)) +
   geom_bar()
@@ -67,6 +68,7 @@ With only two lines of coding, we created a great looking plot. Well, not quite.
 ```{r}
 #| label: country-barplot-coord-flip
 #| echo: true
+#| fig-alt: "Bar plot showing the count of occurrences across various countries like before but this time the country names do not overlap because the x and y-axis are swapped."
 
 ggplot(eqls_2011, aes(x = country_name)) +
   geom_bar() +
@@ -80,6 +82,7 @@ Our plot, while informative, is not finished, because it lacks formatting. Plots
 ```{r}
 #| label: country-barplot-extras-formatted
 #| echo: true
+#| fig-cap: "Bar plot showing the count of occurrences across various countries like before but with a title and subtitle added. Also the axis names are now meaningful."
 
 ggplot(eqls_2011, aes(x = country_name)) +
   geom_bar() +
@@ -109,6 +112,7 @@ eqls_2011 |> count(country_name)
 ```{r}
 #| label: country-barplot-step-two 
 #| echo: true
+#| fig-alt: "The final plot of this exercise coded in one go. It is a bar plot with title, subtitle, axes labels that make sense."
 
 # Step 2: Plotting a barplot based on the frequency table
 eqls_2011 |>
@@ -131,6 +135,7 @@ eqls_2011 |>
 ```{r}
 #| label: popular-genre-barplot-step-three 
 #| echo: true
+#| fig-alt: "Bar plot showing the count of occurrences across various countries like before but this time the bars are ordered by size, i.e. the longest bar at the top and the shortest one at the bottom."
 
 #Step 3: reorder() country_name by frequency, i.e. by 'n'
 eqls_2011 |>
@@ -220,6 +225,7 @@ Assume we are curious to know in which country people feel they can trust others
 ```{r}
 #| label: plotting-mean-trust_people
 #| echo: true
+#| fig-alt: "Horizontal bar plot showing mean trust levels across various countries. Finland, Denmark, and Sweden have the highest mean trust values, while Cyprus, North Macedonia, and the Czech Republic have the lowest. The countries are ordered from highest to lowest mean trust. An “NA” category appears at the top."
 
 eqls_2011 |>
   
@@ -377,6 +383,7 @@ Considering our boxplot, it shows that we have about 16 observations that are co
 ```{r}
 #| label: boxplot-plus-geom-point-working-hrs
 #| echo: true
+#| fig-alt: "Box plot of work hours distribution, with data points scattered horizontally along the x-axis from 0 to 80 hours. The box is centred around typical work hours, while dots outside the box indicate potential outliers in both lower and higher ranges of work hours."
 
 eqls_comp |>
   filter(country_name == "Greece") |>
@@ -412,6 +419,7 @@ We can also easily visualise this frequency table in the same way as before. To 
 ```{r}
 #| label: mode-visualised-as-freq-table
 #| echo: true
+#| fig-alt: "Bar chart showing the distribution of counts across age categories. The number of individuals increases with age, peaking in the 35-49 and 50-64 categories with counts of 11,265 and 11,178, respectively. The youngest group (18-24) has the lowest count at 4,166. The 65+ age group has a count of 10,397."
 
 eqls_2011 |>
   count(age_category) |>
@@ -500,6 +508,7 @@ Let's overlap a bar plot with a histogram for the same variable to make this dif
 #| echo: true
 #| warning: false
 #| message: false
+#| fig-alt: "A combination plot showing the same data, once as a bar plot and once as a histogram. The histogram is shown in grey and the bar plot in red. The two plots look very dissimilar with the histogramm showing more highs and lows and being 'taller'."
 
 alcohol_2019 |>
   ggplot(aes(x = consumption)) +
@@ -628,6 +637,7 @@ It is more important to understand what the aim of this task is, rather than ful
 #| label: compare-normal-distribution-to-our-data
 #| echo: true
 #| warning: false
+#| fig-alt: "Histogram displaying the distribution of scores for the variable consumption. The bars are highest at lower consumption levels. A red curve overlays the histogram, peaking around the middle of the distribution and tapering off towards the higher consumption values resembling what a normal distribution would look like with the given dataset."
 
 alcohol_2019 |>
   ggplot(aes(consumption)) +
@@ -680,6 +690,7 @@ We can also define how big the `bins` are for density plots, which make the plot
 #| label: fig-density-vs-normal-bw-settings-eighteen
 #| echo: true
 #| results: hide
+#| fig-alt: "Density plot showing the distribution of consumption using two differently coloured lines for the same data. A red line represents a more classic normal distribution, while a black line with a much lower and flatter shape represents the same data but with a very wide binwidth of 18."
 
 # bw = 18
 n_plot +
@@ -690,6 +701,7 @@ n_plot +
 ```{r}
 #| label: fig-density-vs-normal-bw-settings-three
 #| echo: true
+#| fig-alt: "Density plot showing the distribution of consumption using two differently coloured lines for the same data. A red line represents a more classic normal distribution, while a black line with a much lower and flatter shape represents the same data but with a binwidth of 3."
 
 # bw = 3
 n_plot +
@@ -706,6 +718,7 @@ If a density plot is the sibling of a histogram, the violin plot would be the si
 ```{r}
 #| label: fig-violin-plot
 #| echo: true
+#| fig-alt: "Violin plot displaying the distribution of consumption with density spread on both sides of a central axis. The shape shows two main density peaks around consumption values near 0 and 8, with a narrowing toward the upper end at around 15."
 
 alcohol_2019 |>
   ggplot(aes(x = consumption,
@@ -718,6 +731,7 @@ Looking at our plot, it becomes evident where the violin plot got its name from,
 ```{r}
 #| label: fig-half-violin-plot
 #| echo: true
+#| fig-alt: "The same plot as before, but this time only one half of the violin shape is visible."
 
 alcohol_2019 |>
   ggplot(aes(x = 0,
@@ -733,6 +747,7 @@ At this point, it is fair to say that we enter 'fashion' territory. It is really
 ```{r}
 #| label: fig-sina-plots
 #| echo: true
+#| fig-alt: "Plot with two layers of geometry: One layer which represents a classic violin plot and one layer which represents a dot plot and all the dots fall within the shaped of the violin geometry."
 
 alcohol_2019 |>
   ggplot(aes(y = consumption, x = 0)) +
@@ -746,6 +761,7 @@ Lastly, I cannot finish this chapter without sharing with you one of the most po
 ```{r}
 #| label: fig-rain-cloud-plot
 #| echo: true
+#| fig-alt: "A combination plot based on a half-violin plot at the top and a histogram underneath it created with individual dots to represent individual observations. This makes it look like the half-violin plot is a cloud and the histogram is rain."
 
 alcohol_2019 |>
   ggplot(aes(x = year,
@@ -773,6 +789,7 @@ With these definitions out of the way, let's plot some quantiles against each ot
 ```{r}
 #| label: qq-plot
 #| echo: true
+#| fig-alt: "Q-Q plot showing data points (black) aligned along a red reference line, representing a normal distribution. Deviations are more pronounced at the extremes, labelled as 'no alcohol' on the left and 'most alcohol' on the right."
 
 alcohol_2019 |>
   ggplot(aes(sample = consumption)) +
@@ -801,6 +818,7 @@ To understand what the standard deviation is, we can consider the following visu
 ```{r}
 #| label: sd-visualised-p1
 #| echo: true
+#| fig-alt: "Point plot showing consumption levels across various countries, with each point representing a different country’s consumption value. A horizontal red line indicates the average consumption level across the dataset. Points are scattered above and below the line, displaying variability in consumption among countries."
 
 alcohol_mean <- mean(alcohol_2019$consumption)
 
@@ -825,7 +843,7 @@ The red line (created with `geom_hline()` represents the mean consumption of alc
 #| label: fig-alcohol-consumption-deviation
 #| echo: true
 #| fig-cap: "Deviation of alcohol `consumption` from the mean consumption levels"
-#| fig-alt: "A scatter plot showing ‘consumption’ values for various countries, arranged in ascending order. A red horizontal line at 5 marks a reference level across the plot. Consumption increases steadily, with a few outliers exceeding 15."
+#| fig-alt: "A point plot showing ‘consumption’ values for various countries, arranged in ascending order. A red horizontal line at 5 marks a reference level across the plot. Consumption increases steadily, with a few outliers exceeding 15."
 
 alcohol_2019 |>
   select(country, consumption) |>
