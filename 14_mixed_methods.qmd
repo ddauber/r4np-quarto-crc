@@ -8,11 +8,11 @@ library(tidyverse)
 library(r4np)
 ```
 
-Conducting mixed-methods research is challenging for everyone. It requires an understanding of different methods and data types and particular knowledge in determining how one can mix different methods to improve the insights compared to a single method approach. This chapter looks at one possibility of conducting mixed-methods research in *R*. It is likely the most evident use of computational software for qualitative data.
+Conducting mixed-methods research is challenging for everyone. It requires an understanding of different methods and data types and particular knowledge in determining how one can mix different methods to improve the insights compared to a single-method approach. This chapter looks at one possibility of conducting mixed-methods research in *R*. It is likely the most evident use of computational software for qualitative data. However, there are many more options available and worth exploring.
 
-While I consider myself comfortable in qualitative and quantitative research paradigms, this chapter could be somewhat uncomfortable if you are used to only one or the other approach, i.e. only quantitative or only qualitative research. However, with advancements in big data science, it is impossible to code, for example, two million tweets qualitatively. Thus, the presented methodologies should not be considered in isolation from other forms of analysis. For some, they might serve as a screening tool to sift through large amounts of data and find those nuggets of most significant interest that deserve more in-depth analysis. For others, these tools constitute the primary research design to allow to generalise to a larger population. In short: the purpose of your research will dictate the approach.
+While I consider myself comfortable in qualitative and quantitative research paradigms, this chapter could be somewhat uncomfortable if you are used to only one or the other approach, i.e. only quantitative or only qualitative research. However, with advancements in big data science, it is impossible to manually code, for example, two million tweets qualitatively. Thus, the presented methodologies should not be considered in isolation from other forms of analysis. For some, they might serve as a screening tool to sift through large amounts of data and find those nuggets of most significant interest that deserve more in-depth analysis. For others, these tools constitute the primary research design to allow to generalise to a larger population. In short: the purpose of your research will dictate the approach.
 
-Analysing text quantitatively, though, is not new. The field of Corpus Analysis has been doing this for many years. If you happen to be a Corpus Analyst, then this section might be of particular interest.
+Analysing text quantitatively, though, is not new. The field of Corpus Analysis has been doing this for many years. If you happen to be a Corpus Analyst, then you will feel right at home.
 
 This chapter will cover two analytical approaches for textual data:
 
@@ -26,7 +26,7 @@ Before we dive head-first into this exciting facet of research, we first need to
 
 > We (...) define the tidy text format as being **a table with one-token-per-row.** A token is a meaningful unit of text, such as a word, that we are interested in using for analysis, and tokenization is the process of splitting text into tokens.
 
-In other words, what used to be an 'observation' is now called a 'token'. Therefore, a token is the smallest chosen unit of analysis. The term 'word token' can easily be confused with 'word type'. The first one usually represents the instance of a 'type'. Thus, the frequency of a word type is determined by the number of its tokens. For example, consider the following sentence, which consists of five tokens, but only four types:
+In other words, what used to be an *observation* is now called a *token*. Therefore, a token is the smallest chosen unit of analysis. The term *word token* can easily be confused with *word type*. The first one usually represents the instance of a *type*. Thus, the frequency of a word type is determined by the number of its tokens. For example, consider the following sentence, which consists of five tokens, but only four types:
 
 ```{r}
 #| label: sentence-example
@@ -76,6 +76,7 @@ Since we have our data nicely summarised, we can also easily visualise it using 
 ```{r Visualise word frequencies, echo=TRUE}
 #| label: visualise-word-freq
 #| echo: true
+#| fig-alt: "This bar chart represents the frequency of words in a sample dataset. The word 'car' appears most frequently with a count of 2, while 'is', 'my', and 'this' each appear once."
 
 df_text |>
   count(word) |>
@@ -101,7 +102,7 @@ In my industry, i.e. Higher Education, understanding students' study experiences
 stop_words
 ```
 
-It is important to acknowledge that there is no unified standard of what constitutes a stop word. The data frame `stop_words` covers many words, but in your research context, you might not even want to remove them. For example, if we aim to identify topics in a text, stop words would be equivalent to white noise, i.e. many of them are of no help to identify relevant topics. Instead, stop words would confound our analysis. For obvious reasons, stop words highly depend on the language of your data. Thus, what works for English will not work for German, Russian or Chinese. You will need a separate set of stop words for each language.
+It is important to acknowledge that there is no unified standard of what constitutes a stop word. The data frame `stop_words` covers many words, but in your research context, you might not even want to remove them. For example, if we aim to identify topics in a text, stop words would be equivalent to white noise, i.e. many of them are of no help to identify relevant topics. Instead, stop words would confound our analysis. For obvious reasons, stop words highly depend on the language of your data. Thus, what works for English will not work for German, Russian, Chinese or any other language. You will need a separate set of stop words for each language.
 
 The removal of stop words can be achieved with a function we already know: `anti-join()`. In other words, we want to subtract all words from `stop_words` from a given text. Let's begin with the tokenization of our comments.
 
@@ -122,6 +123,7 @@ Our new data frame has considerably more rows, i.e. `3299`, which hints at aroun
 ```{r}
 #| label: freq-words-before-stopwords-removal
 #| echo: true
+#| fig-alt: "A bar chart which shows the frequency of specific words, with 'other words' being the most frequent by a large margin. Following '“'other words', the most common terms are 'i', 'to', 'the', 'group', and 'my', each with significantly lower counts."
 
 comments_token |>
   mutate(word2 = fct_lump_n(word, 5,
@@ -135,7 +137,7 @@ comments_token |>
 
 The result is somewhat disappointing. None of these words carries any particular meaning because they are all stop words, except for `group`. Thus, we must clean our data before conducting such an analysis.
 
-I also sneaked in a new function called `fct_lump_n()` from the `forcats` package. It creates a new factor level called `other words` and 'lumps' together all the other factor levels. You likely have seen plots before which show a category called 'Other'. We usually apply this approach if we have many factor levels with very low frequencies. It would not be meaningful to plot 50 words as a barplot which only occurred once in our data. They are less important. Thus, it is sometimes meaningful to pool factor levels together. The function `fct_lump_n(word, 5)` returns the five most frequently occurring words and pools the other words together into a new category. There are many different ways to 'lump' factors. For a detailed explanation and showcase of all available alternatives, have a look at the [forcats website](https://forcats.tidyverse.org/reference/fct_lump.html "forcats website"){target="blank"}.
+I also sneaked in a new function called `fct_lump_n()` from the `forcats` package. It creates a new factor level called `other words` and *lumps* together all the other factor levels. You likely have seen plots before which show a category called *Other*. We usually apply this approach if we have many factor levels with very low frequencies. It would not be meaningful to plot 50 words as a barplot which only occurred once in our data. They are less important. Thus, it is sometimes meaningful to pool factor levels together. The function `fct_lump_n(word, 5)` returns the five most frequently occurring words and pools the other words together into a new category. There are many different ways to 'lump' factors. For a detailed explanation and showcase of all available alternatives, have a look at the [forcats website](https://forcats.tidyverse.org/reference/fct_lump.html "forcats website"){target="blank"}.
 
 In our next step, we have to remove stop words using the `stop_words` data frame and apply the function `anti_join()`.
 
@@ -154,6 +156,7 @@ The dataset shrank from `3299` rows to `1510` rows. Thus, about 54% of our data 
 ```{r}
 #| label: freq-after-stopwords-removal
 #| echo: true
+#| fig-alt: "This bar chart displays the frequency of specific words, with 'feel', 'cultural', and 'friends' being the most common. Other frequently used words include 'friendships', 'campus', 'events', and 'projects', indicating common themes likely related to social and academic experiences."
 
 comments_no_sw |>
   count(word) |>
@@ -169,6 +172,7 @@ To keep the number of bars somewhat manageable, I removed those words with less 
 ```{r}
 #| label: manually-remove-stopwords
 #| echo: true
+#| fig-alt: "This bar plot is the same as the previous one, but with the bar for 'i've' removed."
 
 comments_no_sw <- 
   comments_no_sw |>
@@ -200,6 +204,7 @@ To create a word cloud you have to provide at least a column with words and a co
 ```{r}
 #| label: wordcloud-plain
 #| echo: true
+#| fig-alt: "A word cloud which highlights prominent words, with ‘feel’, ‘cultural’, ‘friends’, ‘friendships’, and ‘campus’ standing out. Other common terms include ‘events’, ‘projects’, ‘classmates’, and ‘community’, reflecting themes related to social interactions, cultural experiences, and campus life."
 
 # Create a dataframe with the word count
 word_frequencies <-
@@ -219,7 +224,7 @@ wordcloud::wordcloud(words = word_frequencies$word,
                      )
 ```
 
-Our word cloud nicely summarises keywords that were particularly important, assuming we consider frequency of words an indicator of importance. Students seem to talk about their feelings, culture and friends/friendships. While this constitutes a good starting point for further analysis we would require more context about what was said, for example what kind of feelings were expressed. This is something we will explore more shortly. Before we advance to this stage, though, we can investigate which words were mostly associated with each `social_inclusion` scores, i.e. what words were most frequently used by students who scores a `1`, `2`, `3`, etc. In other words, each `social_inclusion` will become its own little group/sub-sample that we look at.
+Our word cloud nicely summarises keywords that were particularly important, assuming we consider frequency of words an indicator of importance. Students seem to talk about their feelings, culture and friends/friendships. While this constitutes a good starting point for further analysis we would require more context about what was said, for example what kind of feelings were expressed. This is something we will explore more shortly. Before we advance to this stage, though, we can investigate which words were mostly associated with each `social_inclusion` score, i.e. what words were most frequently used by students who scored a `1`, `2`, `3`, etc. In other words, each `social_inclusion` will become its own little group/sub-sample that we look at.
 
 We can still use `count()` but we have do approach this slightly differently:
 
@@ -246,7 +251,7 @@ comments_grouped
 
 When you first look at this you might be slightly confused what it actually shows. It is best to think of `social_inclusion` as a grouping variable and not as a number anymore. For example, in group `10`, which refers to comments that scored very high on `social_inclusion`, `friendships` are mentioned `7` times, while `feel` and `friends` are mentioned `5` times. Similarly, in group `8`, `friends` and `friendships` are each mentioned `14` times. The frequency is very much affected by the size of each group, i.e. how many students scored a `10` or an `8`. Thus, comparing results across groups based on `n` is not wise. However, looking at words within each group we can get a sense of what made students score very high or low.
 
-We can visualise this data which will make it even clearer what the value of this analysis is. However, first we have to do some housekeeping since the meaning of our variables has changed. Our variable `social_inclusion` should now be a `factor`. Let's transform it in the same way as we did at the very beginning of the book - going full circle.
+We can visualise this data and it will make become clearer what the value of this analysis is. However, first we have to do some housekeeping since the meaning of our variables has changed. Our variable `social_inclusion` should now be a `factor`. Let's transform it in the same way as we did at the very beginning of the book - going full circle.
 
 ```{r}
 #| label: comments-data-type-change
@@ -264,6 +269,7 @@ With this in place we can go ahead and create a plot for each group by using`fac
 ```{r}
 #| label: visualise-social-inclusion-groups-words-n-01
 #| echo: true
+#| fig-alt: "This faceted bar chart displays word frequencies across different groups (1, 3, 5, 6, 7, 8, and 10) along the horizontal axis, labeled by count ‘n’. The words on the vertical axis vary in frequency within each group."
 
 comments_grouped |>
   ggplot(aes(x = word,
@@ -280,6 +286,7 @@ One need not be a graphic designer to understand that this is not a well-designe
 ```{r}
 #| label: visualise-social-inclusion-groups-words-n-02
 #| echo: true
+#| fig-alt: "The same plot as the previous one, but this time thy categories on the y-axis can be read more easily, because each facet has its own y axis and does not share it across all facets as before."
 
 comments_grouped |>
   ggplot(aes(x = word,
@@ -296,6 +303,7 @@ This looks a lot better and we start to see which words appeared most frequently
 ```{r}
 #| label: visualise-social-inclusion-groups-words-n-03
 #| echo: true
+#| fig-alt: "This is the same bar plot as the previous one. However, some of the plots are now sorted by size of 'n'. This is not consistent, though."
 
 comments_grouped |>
   ggplot(aes(x = reorder(word, n),
@@ -313,6 +321,7 @@ Well, this brought us a little closer, but not quite were we intended to be. Som
 ```{r}
 #| label: visualise-social-inclusion-groups-words-n-04
 #| echo: true
+#| fig-alt: "The final version of the bar plot which shows now words ordered by their frequency for each facet we look at. In addition, each group has its own colour to create a better contrast visually."
 
 comments_grouped |>
   
@@ -374,7 +383,7 @@ comments_bigram
 comments_bigram |> count(bigram, sort = TRUE)
 ```
 
-As before, the most frequent bigrams are those that contain stop words. Thus, we need to clean our data and remove them. This time, though, we face the challenge that the variable bigram has two words and not one. Thus, we cannot simply use `anti_join()` because the dataset `stop_words` only contains individual words, not pairs. To remove stop words successfully, we have to `separate()` the variable into two variables so that each word has its own column. The package `tidyr` makes this is an effortless task.
+As before, the most frequent bigrams are those that contain stop words. Thus, we need to clean our data and remove them. This time, though, we face the challenge that the variable `bigram` has two words and not one. Thus, we cannot simply use `anti_join()` because the dataset `stop_words` only contains individual words, not pairs. To remove stop words successfully, we have to `separate()` the variable into two variables so that each word has its own column. The package `tidyr` makes this an effortless task.
 
 ```{r}
 #| label: split-bigram-into-two-columns
@@ -436,7 +445,7 @@ family |>
   slice(same_names)
 ```
 
-While this might be a nice little exercise, it is important to understand how `%in%` can help us remove stop words. Technically, we try to achieve the opposite, i.e. we want to keep the values in `word1` and `word2` that are not a word in `stop_words`. If we use the language of `dplyr`, we `filter()` based on whether a word in `bigram_split` is not `%in%` the data frame `stop_words`. Be aware that `%in%` requires a variable and not an entire data frame to work as we intend.
+While this might be a nice little exercise, it is important to understand how `%in%` can help us remove stop words. Technically, we try to achieve the opposite, i.e. we want to keep the values in `word1` and `word2` that are not a word in `stop_words`. If we use the language of `dplyr`, we `filter()` based on whether a word in `bigram_split` is not `%in%` the data frame `stop_words`. Be aware that `%in%` requires a variable and not an entire data frame to work as intended.
 
 ```{r}
 #| label: removing-stop-words-bigram
@@ -480,6 +489,7 @@ There is one more complication, but with a simple solution. The function `ggraph
 ```{r}
 #| label: ngrams-network-plot-step-one
 #| echo: true
+#| fig-alt: "This graph visualizes a network structure, showing nodes (points) and edges (lines) connecting them. The dense cluster in the center suggests a high degree of connectivity among nodes, while the arc of nodes around the periphery shows connections that may be less integrated with the core."
 
 library(ggraph)
 
@@ -501,6 +511,7 @@ The result looks like a piece of modern art. Still, it is not easy to understand
 ```{r}
 #| label: ngrams-network-plot-step-two
 #| echo: true
+#| fig-alt: "This network graph depicts a set of nodes connected by edges, with multiple smaller clusters scattered around. Unlike the dense, centralized networks, this structure shows more loosely connected and isolated clusters."
 
 # Filter bigrams
 network_plot <- bigram_cleaned |>
@@ -519,6 +530,7 @@ It seems that many bigrams were removed. Thus, the network plot looks much small
 ```{r}
 #| label: ngrams-network-plot-step-three
 #| echo: true
+#| fig-alt: "This network graph showcases connections between different words, with edges colored based on the factor ‘n’ levels, representing frequencies of word combinations. The clustering indicates groupings of related words, reflecting how these terms are associated in the dataset. The improved layout makes individual terms more readable, and color-coded edges add visual clarity to distinguish relationships."
 
 # Plot network plot
 network_plot |>
@@ -536,6 +548,7 @@ This visualisation looks considerably more informative than any of the previous 
 ```{r}
 #| label: ngrams-network-plot-step-four
 #| echo: true
+#| fig-alt: "The same plot as above, but with a different algothirm used to draw the layout. Clusters of words are now more distinctly separated from each other."
 
 set.seed(1234)
 
@@ -550,9 +563,9 @@ network_plot |>
                  size = 3)
 ```
 
-The final plot shows us how themes like `events`, `friendships`, and `feel` (i.e. 'feelings') connect to other words. They constitute important topics that students talked about when describing their study experiences. While this type of analysis cannot fully replace manual analysis, it does offer unique insights into our data from a macro perspective without spending days analysing these comments.
+The final plot shows us how themes like `events`, `friendships`, and `feel` (i.e. *feelings*) connect to other words. They constitute important topics that students talked about when describing their study experiences. While this type of analysis cannot fully replace manual analysis, it does offer unique insights into our data from a macro perspective without spending days analysing these comments.
 
-Our example is a simple analysis based on a relatively small 'corpus', i.e. a small dataset. However, the application of n-grams in larger datasets can reveal topic areas and links between them even more effectively. There are more approaches to exploring topics in large datasets, for example, ['topic modelling'](https://www.tidytextmining.com/topicmodeling.html "Topic Modeling"){target="blank"}, which are far more complex, but offer more sophisticated analytical insights.
+Our example is a simple analysis based on a relatively small *corpus*, i.e. a small dataset. However, the application of n-grams in larger datasets can reveal topic areas and links between them even more effectively. There are more approaches to exploring topics in large datasets, for example, ['topic modelling'](https://www.tidytextmining.com/topicmodeling.html "Topic Modeling"){target="blank"}, which are far more complex, but offer more sophisticated analytical insights.
 
 ## Exploring more mixed-methods research approaches in *R*
 
