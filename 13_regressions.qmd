@@ -52,27 +52,29 @@ $$
 
 If we ignore $\beta_0$ and $error$ for a moment, we find that that if $IV = 3$, our $DV = 3*2 = 6$. Similarly, if $IV = 5$, we find that $DV = 10$, and so on. According to this model, DV will always be twice as large as IV.
 
-You might be wondering what $\beta_0$ stands for. It indicates an offset for each value, also called the intercept. Thus, no matter which value we choose for IV, DV will always be $\beta_0$ different from IV. It is a constant in our model. This can be best explained by visualising a regression line. Pay particular attention to the expressions after `function(x)`
+You might be wondering what $\beta_0$ stands for. It indicates an offset for each value, also called the intercept. Thus, no matter which value we choose for IV, DV will always be $\beta_0$ different from IV. It is a constant in our model. This can be best explained by visualising a regression line. Pay particular attention to the expressions after `\(x)`
 
 ```{r}
 #| label: beta-zero-beta-one-explained
 #| echo: true
+#| fig-alt: "A plot with two diagonal lines that run in parallel. The blue line represents a beta zero of 1, while the red line represents a regression line with beta zero of 0."
 
 # A: Two models with different beta(0)
 ggplot() +
-  geom_function(fun = function(x) 0 + x * 2, col = "red") +
-  geom_function(fun = function(x) 1 + x * 2, col = "blue") +
+  geom_function(fun = \(x) 0 + x * 2, col = "red") +
+  geom_function(fun = \(x) 1 + x * 2, col = "blue") +
   see::theme_modern()  
 ```
 
 ```{r}
-#| label: beta-zer-beta-one-explained-diff
+#| label: beta-zero-beta-one-explained-diff
 #| echo: true
+#| fig-alt: "A plot with a red and blue regression line. Both lines have a shared origin at zero, but have different steepness."
 
 # B: Two models with the same beta(0), but different beta(1)
 ggplot() +
-  geom_function(fun = function(x) 0 + x * 2, col = "red") +
-  geom_function(fun = function(x) 0 + x * 3, col = "blue") +
+  geom_function(fun = \(x) 0 + x * 2, col = "red") +
+  geom_function(fun = \(x) 0 + x * 3, col = "blue") +
   see::theme_modern()
 ```
 
@@ -87,13 +89,14 @@ If everything so far sounds all awfully theoretical, let's try to fit a regressi
 ```{r}
 #| label: fitting-model-by-hand-step-one
 #| echo: true
+#| fig-alt: "This scatter plot displays the relationship between ‘cumulative_cases’ and ‘cumulative_deaths’. Each point represents a data entry, showing that as cumulative cases increase, cumulative deaths tend to increase as well, indicating a positive association between these two variables. However, observations are clustered together in the bottom right-hand corner."
 
 # We only select most recent numbers, i.e. "2021-08-26"
 # and countries which have COVID cases
 covid_sample <-
   covid |>
   filter(date_reported == "2021-08-26" &
-           cumulative_cases != 0)
+         cumulative_cases != 0)
 
 covid_sample |>
   ggplot(aes(x = cumulative_cases,
@@ -107,6 +110,7 @@ This data visualisation does not show us much. For example, we can see three cou
 #| label: fitting-model-by-hand-step-two
 #| echo: true
 #| warning: false
+#| fig-alt: "This scatter plot illustrates the positive correlation between ‘cumulative_cases’ and ‘cumulative_deaths’. As cumulative cases increase, cumulative deaths tend to rise, with a strong upward trend suggesting a proportional relationship between these two variables."
 
 covid_sample |>
   ggplot(aes(x = cumulative_cases,
@@ -122,9 +126,12 @@ As a result, the scatterplot is now easier to read, and the dots are more spread
 #| label: fitting-model-by hand-step-three
 #| echo: true
 #| warning: false
+#| fig-alt: "This scatter plot shows the relationship between ‘cumulative_cases’ and ‘cumulative_deaths’. The points suggest a general upward trend, indicating that as cumulative cases increase, cumulative deaths also tend to rise, although with some variability among the data points."
 
 covid_sample <-
   covid_sample |>
+  
+  # Filter observations based on multiple criteria
   filter(date_reported == "2021-08-26" &
            cumulative_cases >= 2500 &
            cumulative_cases <= 150000 &
@@ -144,9 +151,10 @@ We can try to fit a straight line on top by adjusting the beta values through tr
 #| label: fitting-model-by-hand-step-four
 #| echo: true
 #| warning: false
+#| fig-alt: "This scatter plot displays ‘cumulative_cases’ on the x-axis and ‘cumulative_deaths’ on the y-axis, with a red regression line indicating the trend between the two variables. The line suggests a positive association, but all observations fall below this line indicating a poor fit."
 
 plot +
-  geom_function(fun = function(x) x, col = "red")
+  geom_function(fun = \(x) x, col = "red")
 ```
 
 What we try to achieve is that the red line fits nicely inside the cloud of dots. Our simple model provides a very poor fit to our data points, because the dots are considerably below it. This makes sense because $y = x$ would imply that every COVID-19 case leads to a death, i.e. everyone with COVID did not survive. From our own experience, we know that this is luckily not true. Ideally, we want the line to be less steep. We can do this by adding a $\beta_1$ to our equation. Maybe only 2% of people who got COVID-19 might not have recovered, i.e. $\beta_1 = 0.02$.
@@ -155,9 +163,10 @@ What we try to achieve is that the red line fits nicely inside the cloud of dots
 #| label: fitting-model-by-hand-step-five
 #| echo: true
 #| warning: false
+#| fig-alt: "This scatter plot displays ‘cumulative_cases’ on the x-axis and ‘cumulative_deaths’ on the y-axis, with a red regression line indicating the trend between the two variables. The line suggests a positive association, and this time all observations fall roughly on this line indicating a better fit."
 
 plot +
-  geom_function(fun = function(x) 0.02 * x, col = "red")
+  geom_function(fun = \(x) 0.02 * x, col = "red")
 ```
 
 This time the line looks much more aligned with our observations. However, one could argue that it might have to move a little to the right to cover the observations at the bottom better. Therefore, we should add a $\beta_0$ to our equation, e.g. `-50`. This moves the line to the right. I also adjusted $\beta_1$ ever so slightly to make it fit even better.
@@ -166,9 +175,10 @@ This time the line looks much more aligned with our observations. However, one c
 #| label: fitting-model-by-hand-step-six
 #| echo: true
 #| warning: false
+#| fig-alt: "This scatter plot is similar to the previous one, but with minor adjustments to fit the red line onto the black dots even better."
 
 plot +
-  geom_function(fun = function(x) -50 + 0.015 * x, col = "red")
+  geom_function(fun = \(x) -50 + 0.015 * x, col = "red")
 ```
 
 We finished creating our regression model. If we wanted to express it as a formula, we would write $DV = -5 + 0.015 * IV$. We could use this model to predict how high COVID cases will likely be in other countries not included in our dataset.
@@ -185,21 +195,24 @@ Estimating a regression model by hand is not ideal and far from accurate. Instea
 m0 <- lm(cumulative_deaths ~ cumulative_cases, data = covid_sample)
 
 # We clean the output to make it easer to read
+# This is optional
+
 broom::tidy(m0) |>
-  mutate(across(where(is.numeric), \(x) round(0, 2)))
+  mutate(across(where(is.numeric), \(x) round(x, 2)))
 ```
 
-We first might notice that the `p.value` indicates that the relationship between `cumulative death` and `cumulative_cases` is significant. Thus, we can conclude that countries with more COVID cases also suffer from higher numbers of people who do not recover successfully from it. However, you might be wondering where our $\beta$ scores are. They are found where it says `estimate`. The standard error (`std.error`) denotes the `error` we specified in the [previous equation](#single-linear-regression). In the first row, we get the $\beta_0$, i.e. the intercept (88.10). This one is larger than what we estimated, i.e. `-50`. However, $\beta_1$ is 0.01, which means we have done a very good job guessing this estimate. Still, it becomes apparent that it is much easier to use the function `lm()` to estimate a model than 'eyeballing' it.
+We first might notice that the `p.value` indicates that the relationship between `cumulative death` and `cumulative_cases` is significant. Thus, we can conclude that countries with more COVID cases also suffer from higher numbers of people who do not recover successfully from it. However, you might be wondering where our $\beta$ scores are. They are found where it says `estimate`. The standard error (`std.error`) denotes the `error` we specified in the [previous equation](#single-linear-regression). In the first row, we get the $\beta_0$, i.e. the intercept (88.10). This one is larger than what we estimated, i.e. `-50`. However, $\beta_1$ is 0.01, which means we have done a very good job guessing this estimate. Still, it becomes apparent that it is much easier to use the function `lm()` to estimate a model than eyeballing it.
 
 Returning to our data, we can now visualise the computed model (in blue) and our guessed model (in red) in one plot and see the differences. The plot shows that both regression lines are fairly close to each other. Admittedly, it was relatively easy to fit this model by hand. However, it is much more difficult to do so when more than two variables are involved.
 
 ```{r}
 #| label: comparing-computed-vs-hand-fitted
 #| echo: true
+#| fig-alt: "This scatter plot shows ‘cumulative_cases’ on the x-axis and ‘cumulative_deaths’ on the y-axis, with two competing regression lines. The red line represents a manually fitted regression, while the blue line represents a computed regression line based on the data points. The slight divergence between the two lines suggests differences in accuracy. The red line is a less optimal fit."
 
 plot +
-  geom_function(fun = function(x) -50 + 0.015 * x, col = "red") +
-    geom_function(fun = function(x) 88.1 + 0.01 * x, col = "blue")
+  geom_function(fun = \(x) -50 + 0.015 * x, col = "red") +
+    geom_function(fun = \(x) 88.1 + 0.01 * x, col = "blue")
 ```
 
 With our final model computed, we also need to check its quality in terms of predictive power based on how well it can explain our observed data. We tested models before when we looked at confirmatory factor analyses for latent variables (see @sec-latent-constructs). This time we want to know how accurate our model is in explaining observed data and, therefore, how accurate it predicts future observations. The package `performance` offers a nice shortcut to compute many different indicators at once:
@@ -208,7 +221,7 @@ With our final model computed, we also need to check its quality in terms of pre
 
 -   `model_performance()`: Tests the quality of our model.
 
-For now, we are mainly interested in the performance of our model. So, we can compute it the following way:
+For now, we are mainly interested in the performance of our model. So, we can obtain this information the following way:
 
 ```{r}
 #| label: single-regression-model-performance
@@ -225,7 +238,7 @@ We are presented with quite a number of performance indicators, and here is how 
 
 -   `R2` stands for *R squared* ($R^2$) and is also known as the coefficient of determination. It measures how much the independent variable can explain the variance in the dependent variable. In other words, the higher $R^2$, the better is our model, because our model can explain more of the variance. $R^2$ falls between 0-1, where 1 would imply that our model can explain 100% of the variance in our sample. $R^2$ is also considered a *goodness-of-fit measure*.
 
--   `R2 (adj.)` stands for *adjusted R squared*. The adjusted version of $R^2$ becomes essential if we have more than one predictor (i.e. multiple independent variables) in our regression. The adjustment of $R^2$ accounts for the number of independent variables in our model. Thus, we can compare different models, even though they might have different numbers of predictors. It is important to note that unadjusted $R^2$ will always increase if we add more predictors.
+-   `R2 (adj.)` stands for *adjusted R squared*. The adjusted version of $R^2$ becomes essential if we have more than one predictor (i.e. multiple independent variables) in our regression. The adjustment of $R^2$ accounts for the number of independent variables in our model. Thus, we can compare different models, even though they might have different numbers of predictors. It is important to note that the unadjusted $R^2$ will always increase if we add more predictors.
 
 -   `RMSE` stands for *Root Mean Square Error* and indicates how small or large the prediction error of the model is. Conceptually, it aims to measure the average deviations of values from our model when we attempt predictions. The lower its score, the better, i.e. a score of 0 would imply that our model perfectly fits the data, which is likely never the case in the field of Social Sciences. The *RMSE* is particularly useful when trying to compare models.
 
@@ -241,6 +254,7 @@ Once you have a model and it is reasonably accurate, you can start making predic
 #| label: predict-values-linear-regression
 #| echo: true
 
+# A dataset with values for cumulative cases of COVID
 df_predict <-
   tibble(cumulative_cases = c(100, 1000, 10000))
 
@@ -373,10 +387,10 @@ We already covered aspects of linearity, normality and homogeneity of variance. 
 
 ### Outliers in multiple regressions {#sec-outliers-in-multiple-regressions}
 
-While it should be fairly clear by now why we need to handle outliers (remember @sec-dealing-with-outliers), our approach is somewhat different when we need to consider multiple variables at once. Instead of identifying outliers for each variable independently, we have to consider the interplay of variables. In other words, we need to find out how an outlier in our independent variable affects the overall model rather than just one other variable. Thus, we need a different technique to assess outliers. By now, you might not be shocked to find that there is more than one way of identifying outliers in regressions and that there are many different ways to compute them in *R*. [@cohen2014applied] distinguishes between where one can find outliers in the model as summarised in @tbl-outliers-in-multiple-regressions). I offer a selection of possible ways to compute the relevant statistics, but this list is not exhaustive. For example, many of these statistics can also be found using the function `influence.measures()`.
+While it should be fairly clear by now why we need to handle outliers (remember @sec-dealing-with-outliers), our approach is somewhat different when we need to consider multiple variables at once. Instead of identifying outliers for each variable independently, we have to consider the interplay of variables. In other words, we need to find out how an outlier in our independent variable affects the overall model rather than just one other variable. Thus, we need a different technique to assess outliers. By now, you might not be shocked to find that there is more than one way of identifying outliers in regressions and that there are many different ways to compute them in *R*. [@cohen2014applied] distinguishes between where one can find outliers in the model as summarised in @tbl-outliers-in-multiple-regressions). I offer a selection of possible ways to compute the relevant statistics, but this list is not exhaustive. For example, many of these statistics can also be found using the function `influence.measures()` that comes with the base *R* functions when installing it.
 
 +------------------------+--------------------------------------+---------------------------------------------------------------------------------------+
-| Outlier in?            | Measures                             | function in R                                                                         |
+| Outlier in?            | Measures                             | function in *R*                                                                       |
 +========================+======================================+=======================================================================================+
 | *Dependent variable*   | -   Internally studentised residuals | -   `rstandard()` or `fortify()`                                                      |
 +------------------------+--------------------------------------+---------------------------------------------------------------------------------------+
@@ -415,7 +429,7 @@ The approach taken is the same for the other outlier detection methods, but with
 
 #### Outliers in the dependent variable {#sec-outliers-in-the-dependent-variable}
 
-Irrespective of whether we look at independent or dependent variables, we always want to know whether extreme values are present. Here I will use the externally studentised residual, which 'is the preferred statistic to use to identify cases whose (...) values are highly discrepant from their predicted values [@cohen2014applied] (p.401).
+Irrespective of whether we look at independent or dependent variables, we always want to know whether extreme values are present. Here I will use the externally studentised residual, which 'is the preferred statistic to use to identify cases whose (...) values are highly discrepant from their predicted values' [@cohen2014applied] (p.401).
 
 First, we need to compute the residuals for our model as a new column in our dataset. Since we also want to use other methods to investigate outliers, we can use the function `fortify()`, which will add some of the later indicators and creates a `tibble` that only includes the variables from our model. This one handy function does a lot of things at once. In a second step, we add the studentised residuals using `rstudent()`.
 
@@ -448,6 +462,7 @@ With our dataset ready for plotting, we can do exactly that and see which observ
 ```{r}
 #| label: externally-studentised-residuals-plot
 #| echo: true
+#| fig-alt: "This plot displays standardized residuals (studresid) across different row identifiers on the x-axis, representing individual observations. The scores fluctuate around zero, with noticeable clusters and outliers."
 
 # Create an ID column
 m1_outliers <- m1_outliers |> rownames_to_column()
@@ -498,19 +513,22 @@ out_detect |> count(pm_35)
 out_detect |> count(pm_4)
 ```
 
-The results indicate we could have as many as `56` outliers and as little as `9`. It becomes apparent that choosing the right threshold is a tricky undertaking. Let's plot the data again to make it easier to read and add some of the thresholds. I skip `3.5` since it is very close to `3`. I also reorder the observations (i.e. the x-axis) based on `.studresid` using `reorder()`.
+The results indicate we could have as many as `56` outliers and as little as `9`. It becomes apparent that choosing the right threshold is a tricky undertaking. Let's plot the data again to make it easier to read and add some of the thresholds. I skip `3.5` since it is very close to `3`. I also reorder the observations (i.e. the x-axis) based on `.studresid` using `reorder()` which improves readability substantially.
 
 ```{r}
 #| label: plot-outliers-ext-stud-resid
 #| echo: true
+#| fig-alt: "This plot shows ordered standardized residuals (studresid) with reference lines in green, orange and red, marking significant thresholds. Points outside these lines highlight potential outliers."
 
 m1_outliers |>
   ggplot(aes(x = reorder(rowname, .studresid),
              y = .studresid)) +
   geom_point(size = 0.5) +
+  
+  # Adding horizontal lines as thresholds
   geom_hline(yintercept = c(-2, 2), col = "green") +
   geom_hline(yintercept = c(-3, 3), col = "orange") +
-    geom_hline(yintercept = c(-4, 4), col = "red")
+  geom_hline(yintercept = c(-4, 4), col = "red")
 ```
 
 At this point, it is a matter of choosing the threshold that you feel is most appropriate. More importantly, though, you have to make sure you are transparent in your choices and provide some explanations around your decision-making. For example, a threshold of `2` appears too harsh for my taste and identifies too many observations as outliers. On the other hand, using the orange threshold of `3` seems to capture most observations I would consider an outlier because we can also visually see how the dots start to look less like a straight line and separate more strongly. Besides, @cohen2014applied also suggests that a threshold of `3` is more suitable for larger datasets. Finally, since we have an ID column (i.e. `rownames`), we can also store our outliers in a separate object to easily reference them later for comparisons with other measures. Again, the purpose of doing this will become evident in @sec-reviewing-the-outliers.
@@ -553,6 +571,7 @@ Let's plot the leverages and use @stevens2012applied benchmark to draw our refer
 ```{r}
 #| label: avg-lvg-plot
 #| echo: true
+#| fig-alt: "This plot shows ordered leverage values (.hat) for observations, with n orange horizontal line marking a threshold for high leverage, indicating potential outliers."
 
 m1_outliers |>
   ggplot(aes(x = reorder(rowname, .hat),
@@ -586,8 +605,14 @@ The second method I will cover in this section is the Mahalanobis distance. Luck
 
 mhnbs_outliers <-
   m1_outliers |>
+  
+  # Select only columns which represent independent variables
   select(new_cases:travel) |>
+  
+  # Compute the Mahalanobis distance
   rstatix::mahalanobis_distance() |>
+  
+  # Reformat the output to fit our 'outliers' dataset
   rownames_to_column() |>
   select(rowname, mahal.dist, is.outlier) |>
   rename(mhnbs = is.outlier)
@@ -614,8 +639,8 @@ While it is very convenient that this function picks the cut-off point for us, i
 #| echo: true
 
 (mhnbs_th <- qchisq(p = 0.05,
-                   df = 4,
-                   lower.tail = FALSE))
+                    df = 4,
+                    lower.tail = FALSE))
 ```
 
 The `p`-value reflects the probability we are willing to accept that our result is significant/not significant (remember Type I error in @sec-power-analysis). The value `df` refers to the degrees of freedom, which relates to the number of independent variables, i.e. `4`. Thus, it is fairly simple to identify a cut-off point yourself by choosing the `p`-value you consider most appropriate. The function `mahalanobis_distance()` assumes $p = 0.01$, which is certainly a good but strict choice.
@@ -625,6 +650,7 @@ If we want to plot outliers as before, we can reuse our code from above and repl
 ```{r}
 #| label: mahalanobis-distance-plot
 #| echo: true
+#| fig-alt: "This plot displays ordered Mahalanobis distances, with an orange horizontal line indicating a threshold, used to identify potential outliers in the dataset."
 
 mhnbs_outliers |>
   ggplot(aes(x = reorder(rowname, mahal.dist),
@@ -648,13 +674,14 @@ Besides looking at each side of the regression separately, we might also conside
 
 #### Outlier detection considering the entire model: Global measures {#sec-outlier-detection-global-measures}
 
-To assess the global impact of outliers on the entire regression model, *Cook's d* [@cook1982residuals] is a popular method in the Social Sciences. It measures to which extend a single observation can affect the predictive power of our model to explain all other observations. Obviously, we do not wish to keep observations that make predicting most of the other observations more challenging. However, as shown in @tbl-outliers-in-multiple-regressions, there are different approaches to this, but some are somewhat redundant. For example, @cohen2014applied highlight that DDFITS and Cook's d are 'interchangeable statistics' (p. 404). Thus, there is no point in demonstrating both since they function similarly. Your decision might be swayed by the preferences of a publisher, editor, lecturer, supervisor or reviewer. Here, I will focus on *Cook's d* since it is the approach I see most frequently used in my field. By all means, feel encouraged to go the extra mile and perform the same steps for the DDFITS.
+To assess the global impact of outliers on the entire regression model, *Cook's d* [@cook1982residuals] is a popular method in the Social Sciences. It measures to which extend a single observation can affect the predictive power of our model to explain all other observations. Obviously, we do not wish to keep observations that make predicting most of the other observations more challenging. However, as shown in @tbl-outliers-in-multiple-regressions, there are different approaches to this, but some are rather redundant. For example, @cohen2014applied highlight that DDFITS and Cook's d are 'interchangeable statistics' (p. 404). Thus, there is no point in demonstrating both since they function similarly. Your decision might be swayed by the preferences of a publisher, editor, lecturer, supervisor or reviewer. Here, I will focus on *Cook's d* since it is the approach I see most frequently used in my field. By all means, feel encouraged to go the extra mile and perform the same steps for the DDFITS.
 
 The good news, `fortify()` automatically added `.cooksd` to our dataset `m1_outliers`. Thus, we can immediately compute whether outliers exist and inspect them visually as we did before. A promising starting point to find outliers via the Cook's D is to plot its distribution.
 
 ```{r}
 #| label: cooks-d-plot
 #| echo: true
+#| fig-alt: "This plot shows Cook’s distance values across observations as a bar plot, highlighting points with high influence on the model fit. Peaks indicate potential influential data points of which there are at least three very obvious ones, but none reaches a value of one or higher."
 
 m1_outliers |>
   ggplot(aes(x = rowname,
@@ -691,7 +718,7 @@ In the last chapter about outliers (@sec-reviewing-the-outliers), we will rerun 
 
 While Cook's d helps us identify outliers that affect the quality of the entire model, there is also a way to investigate how outliers affect specific predictors. This is achieved with DFBETAS, which, similar to previous methods, assesses the impact of outliers by removing them and measures the impact of such removal on other parts of the regression model.
 
-The function `dbetas()` takes our model `m1` and returns the statistics for each predictor in the model. Thus, we do not receive a single score for each observation but multiple for each specific predictor, i.e. each specific measure.
+The function `dfbetas()` takes our model `m1` and returns the statistics for each predictor in the model. Thus, we do not receive a single score for each observation but multiple for each specific predictor, i.e. each specific measure.
 
 ```{r}
 #| label: dfbetas-computation
@@ -760,6 +787,7 @@ Of course, we can also visualise the outliers as we did before.
 ```{r}
 #| label: dfbetas-plot-outliers
 #| echo: true
+#| fig-alt: "This plot visualizes the ‘movements’ variable across observations, with red lines marking threshold boundaries. Observations outside these boundaries may be considered outliers."
 
 m1_dfbetas |>
   ggplot(aes(x = rowname,
@@ -774,20 +802,29 @@ I want to take this opportunity to show that sometimes we can make visualisation
 ```{r}
 #| label: dfbetas-plot-outliers-alternative
 #| echo: true
+#| fig-alt: "This plot shows the absolute values of ‘movements’ and ‘travel’ data points sorted in ascending order. A red line indicates a threshold level.Values above this line can be considered outliers related to COVID measures."
 
 m1_dfbetas |>
   ggplot() +
+  
+  # Create dot plot for the variable movements
   geom_point(aes(x = reorder(rowname, abs(movements)),
                  y = abs(movements),
                  col = "movements"),
              size = 0.5,
              alpha = 0.5) +
+  
+  # Create dot plot for the variable travel
   geom_point(aes(x = rowname,
                  y = abs(travel),
                  col = "travel"),
              size = 0.5,
              alpha = 0.5) +
+  
+  # Add threshold line
   geom_hline(yintercept = dfbetas_th, col = "#FF503A") +
+  
+  # Apply different colours to each dot plot
   scale_color_manual(values = c("movements" = "#2EA5FF",
                                 "travel" = "#7DB33B")) +
 
@@ -799,7 +836,7 @@ After `reorder()`ing the variable `movements` and plotting `travel` as well, we 
 
 #### Reviewing the outliers {#sec-reviewing-the-outliers}
 
-After all this hard work and what turned out to be a very lengthy chapter, we finally arrive at the point where we check which observations we might wish to remove or handle in some shape or form. First, we want to know which observations are affected. Therefore we need to review our reference data in the object `outliers`. We want to see all observations identified by one or more diagnostic tools as an outlier. There are two ways to achieve this. First, we can use what we have learned so far and `filter()` each column for the value TRUE. This is the hard way of doing it, and if you have many more columns, this will take a little while and potentially drive you insane. The easy (and clever) way of filtering across multiple columns can be achieved by turning multiple columns into a single column. In the `tidyverse`, this is called `pivot_longer()` and we performed it earlier in @sec-sphericity. Thus, it might seem less complicated than expected. Let's do this step-by-step as we did for `pivot_wider()` in @sec-chi-squared-test. Currently, our data has five columns, of which four are different measures to detect outliers. Our goal is to create a table that has only three columns:
+After all this hard work and what turned out to be a very lengthy chapter, we finally arrive at the point where we check which observations we might wish to remove or handle in some shape or form. First, we want to know which observations are affected. Therefore we need to review our reference data in the object `outliers`. We want to see all observations that were identified as an outlier by one or more diagnostic tool. There are two ways to achieve this. First, we can use what we have learned so far and `filter()` each column for the value TRUE. This is the hard way of doing it, and if you have many more columns, this will take a little while and potentially drive you insane. The easy (and clever) way of filtering across multiple columns can be achieved by turning multiple columns into a single column. In the `tidyverse`, this is called `pivot_longer()` and we performed it earlier in @sec-sphericity. Thus, it might seem less complicated than expected. Let's do this step-by-step as we did for `pivot_wider()` in @sec-chi-squared-test. Currently, our data has five columns, of which four are different measures to detect outliers. Our goal is to create a table that has only three columns:
 
 -   `rowname`, which we keep unchanged because it is the ID that identifies each observation in our data
 
@@ -845,7 +882,7 @@ data_long
 
 Instead of three rows, we have six, and all the outlier detection values (i.e. all `TRUE` and `FALSE` values) are now in one column, i.e. `is.outlier`. However, what exactly did just happen in this line of code? In light of what we specified above, we did three things inside the function `pivot_longer()`:
 
--   We excluded `rownames` from being pivoted, i.e. `cols = !rowname`.
+-   We excluded `rownames` from being pivoted, i.e. `cols = !rowname`. The `!` means *not* in this context.
 
 -   We specified a column where all the column names go to, i.e. `names_to = "outlier_measure"`.
 
@@ -886,6 +923,7 @@ Since the output is relatively long, we might want to plot the outcome to get an
 ```{r}
 #| label: number-of-outliers-plot
 #| echo: true
+#| fg-alt: "A bar plot which displays how many analytical tools identified the same observation as an outlier. Most rows show only a score of 1, with fewer rows at values of 2 and 3."
 
 outliers_true |>
   ggplot(aes(x = reorder(rowname, n),
@@ -936,6 +974,7 @@ m2 <- lm(new_cases ~ movements + schools + businesses + travel,
 # I added some reformatting, because
 # I prefer a regular tibble over a pre-formatted
 # table. Technically you only need the first line.
+
 parameters::compare_parameters(m1, m2) |>
   as_tibble() |>
   select(Parameter, Coefficient.m1, p.m1, Coefficient.m2, p.m2) |>
@@ -945,7 +984,7 @@ parameters::compare_parameters(m1, m2) |>
 performance::compare_performance(m1, m2)
 ```
 
-If you look at `R2 (adj.)` you might feel a sense of disappointment. How does the model explain less variance? If we consider `AIC`, `BIC` and `RMSE`, we improved the model because their values are lower for `m2`. However, it seems that the outliers affected `R2`, which means they inflated this model indicator. In other words, our regression explains less than we hoped for. However, we can be more confident that the predictions of this model will be more accurate.
+If you look at `R2 (adj.)` you might feel a sense of disappointment. How does the model explain less variance? If we consider `AIC`, `BIC` and `RMSE`, we improved the model because their values are lower for `m2`. However, it seems that the outliers affected `R2`, which means they inflated this model indicator. In other words, our regression explains less than we hoped for. However, we can be more confident that the predictions of the new model will be more accurate.
 
 If we inspect the estimates more closely, we also notice that `movements` (where we removed outliers) and `travel` are not significant anymore (i.e. `p.m2 > 0.05`). We should remove these from our model since they do not help explain the variance of `new_cases`.
 
@@ -991,11 +1030,12 @@ tibble(
 )
 ```
 
-If you feel that my choice of values has likely affected the outcome, please feel free to change the values for x in this code chunk to whatever you like. The results for `x_scaled` will always remain the same. There is something else that remains the same: the actual distribution. Because we are only rescaling our data, we are not affecting the differences between these scores. We can show this in a scatterplot and by running a correlation. Both will show that these variables are perfectly correlated. Therefore, our transformations did not affect the relative relationship of values to each other.
+If you feel that my choice of values has likely affected the outcome, please feel free to change the values for `x` in this code chunk to whatever you like. The results for `x_scaled` will always remain the same. There is something else that remains the same: the actual distribution. Because we are only rescaling our data, we are not affecting the differences between these scores. We can show this in a scatterplot and by running a correlation. Both will show that these variables are perfectly correlated. Therefore, our transformations did not affect the relative relationship of values to each other.
 
 ```{r}
 #| label: scaled-unscaled-data-comparison
 #| echo: true
+#| fig-alt: "This line plot shows the variable 'x' plotted against its scaled version 'x_scaled', displaying a linear relationship. Each point on the line represents an increase in 'x' with a corresponding increase in 'x_scaled', indicating consistent scaling."
 
 data |>
   ggplot(aes(x = x,
@@ -1044,11 +1084,15 @@ This time the `Estimate`s are quite different from each other, i.e. $work\_exper
 ```{r}
 #| label: visualising-swm-regression
 #| echo: true
+#| fig-alt: "This scatter plot shows the relationship between 'mindfulness' (blue points), 'work_experience' (red points) with regards to 'salary'. Two trend lines indicate distinct patterns for each variable’s impact on salary."
 
 swm |>
+  # Preparing data for plotting
   pivot_longer(cols = c(work_experience, mindfulness),
                values_to = "value",
                names_to = "variable") |>
+  
+  # Creating the plot
   ggplot(aes(x = value,
              y = salary,
              col = variable,
@@ -1058,6 +1102,7 @@ swm |>
               formula = y ~ x,
               se = FALSE,
               col = "#3e3c42") +
+  
   # Choose custom colours for the dots
   scale_color_manual(values = c("#5c589a", "#fc5c5d")) +
   ggdist::theme_ggdist()
@@ -1076,9 +1121,9 @@ swm |>
             )
 ```
 
-We can also see that the slope of the regression line is different, indicating that a small change in `work_experience` has a much greater impact on `salary` than `minfulness`. Thus, we need to be very careful when interpreting standardised coefficients. Of course, when in doubt (or simply confused), a data visualisation like this one can provide more certainty about the relationship of variables and their strength.
+We can also see that the slope of the regression line is different, indicating that a small change in `work_experience` has a much greater impact on `salary` than `mindfulness`. Thus, we need to be very careful when interpreting standardised coefficients. Of course, when in doubt (or simply confused), a data visualisation like this one can provide more certainty about the relationship of variables and their strength.
 
-Unfortunately, this is not the end of the story because 'standardisation' can mean different things. We can generate standardised $\beta$ after the fact (post-hoc) or decide to 'refit' our regression with standardised predictors, i.e. before we run the regression. Both options are appropriate, but the scores will differ slightly. However, the main idea remains the same: We want to interpret different regression coefficients based on their standard deviations and not their absolute scores. In R, many different packages offer standardised estimates. One package I particularly recommend is `parameters`. It provides various options for returning our estimates from a linear model by specifying the `standardize` argument (see [detailed documentation](https://easystats.github.io/parameters/reference/model_parameters.default.html "detailed documentation"){target="blank"}). Of course, you can also opt to scale the variables by hand, using the `scale()` function, as we did in the previous examples. All three approaches are shown in the following code chunk.
+Unfortunately, this is not the end of the story because 'standardisation' can mean different things. We can generate standardised $\beta$ after the fact (post-hoc) or decide to 'refit' our regression with standardised predictors, i.e. before we run the regression. Both options are appropriate, but the scores will differ slightly. However, the main idea remains the same: We want to interpret different regression coefficients based on their standard deviations and not their absolute scores. In *R*, many different packages offer standardised estimates. One package I particularly recommend is `parameters`. It provides various options for returning our estimates from a linear model by specifying the `standardize` argument (see [detailed documentation](https://easystats.github.io/parameters/reference/model_parameters.default.html "detailed documentation"){target="blank"}). Of course, you can also opt to scale the variables by hand, using the `scale()` function, as we did in the previous examples. All three approaches are shown in the following code chunk.
 
 ```{r}
 #| label: standardised-betas
@@ -1275,7 +1320,7 @@ m2 <- lm(formula = new_cases ~
 parameters::compare_parameters(m1, m2, standardize = "refit") |>
   as_tibble() |>
   select(Parameter, Coefficient.m1, p.m1, Coefficient.m2, p.m2) |>
-  mutate(across(where(is.numeric), \(x) round(0, 3)))
+  mutate(across(where(is.numeric), \(x) round(x, 3)))
 ```
 
 ```{r}
@@ -1329,7 +1374,7 @@ All these decisions have to be guided by the purpose of your research and whethe
 
 ### Moderated regression {#sec-moderated-regression}
 
-While regressions with control variables help us decide whether to include or exclude variables by controlling for another variable, moderation models imply that we expect a certain interaction between an independent variable and a so-called moderator. A moderator also enters the equation on the right-hand side and therefore constitutes an independent variable, but it is usually entered after control variables and main effects variables.
+While regressions with control variables help us decide whether to include or exclude variables by controlling for another variable, moderation models imply that we expect a certain interaction between an independent variable and a so-called *moderator*. A moderator also enters the equation on the right-hand side and therefore constitutes an independent variable, but it is usually entered after control variables and main effects variables.
 
 In our quest to find a model that predicts new COVID cases, let's assume that country is not a control variable but a moderating one. We could suspect that the measures for `businesses` and `schools` were significantly differently implemented in each country. Therefore, the strength of the relationship between `businesses`/`schools` and `new_cases` varies depending on the country. In other words, we could assume that measures showed different effectiveness in each of the countries.
 
@@ -1339,6 +1384,7 @@ When performing a moderation regression, we assume that the relationship between
 #| label: fig-plotting-moderation-effects-schools
 #| echo: true
 #| fig-cap: "Plotting moderation effects for `schools`."
+#| fig-alt: "This scatter plot shows the relationship between the school measures taken (x-axis) and new COVID-19 cases (y-axis) in Germany and the United Kingdom. Germany’s data points and trend line are shown in red, while the United Kingdom’s are in teal. The trend lines indicate a stronger positive correlation between school measures taken and new cases in the United Kingdom compared to Germany."
 
 # Plotting the interaction between schools and country
 hr_data |>
@@ -1357,6 +1403,7 @@ hr_data |>
 #| label: plotting-moderation-effects-businesses
 #| echo: true
 #| fig-cap: "Plotting moderation effects for `business`."
+#| fig-alt: "This scatter plot shows the relationship between the amount of business measures taken (x-axis) and new COVID-19 cases (y-axis) in Germany and the United Kingdom. Germany’s data points and trend line are shown in red, while the United Kingdom’s are in teal. The trend lines indicate a stronger positive correlation between business measures taken and new cases in the United Kingdom compared to Germany."
 
 # Plotting the interaction between schools and country
 hr_data |>
@@ -1393,7 +1440,7 @@ m4 <- lm(formula = new_cases ~
 parameters::compare_parameters(m0, m4, standardize = "refit") |>
   as_tibble() |>
   select(Parameter, Coefficient.m0, p.m0, Coefficient.m4, p.m4) |>
-  mutate(across(where(is.numeric), \(x) round(0, 3)))
+  mutate(across(where(is.numeric), \(x) round(x, 3)))
 ```
 
 ```{r}
@@ -1506,16 +1553,16 @@ model_c <- lm(formula = satisfaction ~
 parameters::compare_parameters(model, model_c) |>
   as_tibble() |>
   select(Parameter, Coefficient.model, p.model, Coefficient.model_c, p.model_c) |>
-  mutate(across(where(is.numeric), \(x) round(0, 3)))
+  mutate(across(where(is.numeric), \(x) round(x, 3)))
 ```
 
 In contrast to standardising the coefficients, it is not necessary to center all predictors in your dataset. For example, we only centered `age` and not `freedom_of_choice` in our case, because a value of `0` for the latter variable seems plausible. As we can tell from the output, the $\beta$ for `freedom_of_choice` has changed, but all other coefficients remained the same. In general, grand mean centering has the following effects:
 
 -   centering does not affect the $\beta$ of the centered variable (i.e. `age`), because we subtract a constant (i.e. the mean) from all observations equally,
 
--   centering does not affect the interaction term (i.e. `freedom_of_choice * age_c)`, which is also known as the 'higher-order' predictor,
+-   centering does not affect the interaction term (i.e. `freedom_of_choice * age_c)`, which is also known as the *higher-order predictor*,
 
--   centering changes the $\beta$ of the independent variable in the interaction term (also known as 'lower-order predictor), (i.e. `freedom_of_choice`)
+-   centering changes the $\beta$ of the independent variable in the interaction term (also known as *lower-order predictor*), i.e. `freedom_of_choice`,
 
 -   centering does not change $\beta$s of other variables that are not interacting with a centered variable.
 
