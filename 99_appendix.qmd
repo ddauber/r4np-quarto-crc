@@ -1,48 +1,167 @@
 # Appendix {#sec-appendix .unnumbered .unlisted}
 
+```{r}
+#| label: load-packages-appendix
+#| echo: false
+#| message: false
+
+library(tidyverse)
+library(gt)
+```
+
 ## Comparing two unpaired groups {#sec-comparing-two-unpaired-groups}
 
-+----------------+----------------+-------------------------------+-----------------+-------------------+
-| Assumption     | Test           | Function                      | Effect size     | Function          |
-+================+================+===============================+=================+===================+
-| Parametric     | T-Test         | `t.test(var.equal = TRUE)`    | Cohen's d       | `cohens_d()`      |
-|                |                |                               |                 |                   |
-|                | Welch T-Test   | `t.test(var.equal = FALSE)`   |                 |                   |
-+----------------+----------------+-------------------------------+-----------------+-------------------+
-| Non-parametric | Mann-Whitney U | `wilcox.test(paired = FALSE)` | Rank-biserial r | `rank_biserial()` |
-|                |                |                               |                 |                   |
-|                |                |                               | or              | or                |
-|                |                |                               |                 |                   |
-|                |                |                               | Wilcoxon R      | `wilcoxonR()`     |
-+----------------+----------------+-------------------------------+-----------------+-------------------+
+```{r}
+#| label: tbl-comparing-two-groups-unpaired-baser
+#| echo: false
+#| tbl-cap: "Comparing two unpaired groups (effect size functions from package `effectsize`, except for `wilcoxonR()` from `rcompanion`"
 
-: Comparing two unpaired groups (effect size functions from package `effectsize`, except for `wilcoxonR()` from `rcompanion` {#tbl-comparing-two-groups-unpaired-baser}
+# Create the dataset with the same variable names
+data <- tibble(
+  data = c("P", "P", "NP"),
+  test = c("T-Test", "Welch T-Test", "Mann–Whitney U"),
+  function_test = c("`t.test(var.equal = TRUE)`", "`t.test(var.equal = FALSE)`", "`wilcox.test(paired = FALSE)`"),
+  effect_size = c("Cohen's d", "Cohen's d", "Rank-biserial r\nor\nWilcoxon R"),
+  function_es = c("`cohens_d()`", "`cohens_d()`", "`rank_biserial()`\nor\n`wilcoxonR()`")
+)
+
+# Create the gt table
+data |> 
+  gt() |>
+  fmt_markdown(columns = everything()) |>
+  cols_label(
+    data = "Data",
+    test = "Test",
+    function_test = "Function",
+    effect_size = "Effect size",
+    function_es = "Function"
+  ) |>
+  tab_style(
+    style = cell_text(weight = "bold"),
+    locations = cells_column_labels(everything())
+  ) |>
+  tab_options(
+    data_row.padding = px(15),           # Increase padding for readability
+    column_labels.padding = px(15),      # Adjust column label padding
+    table.border.top.width = px(1),
+    table.border.bottom.width = px(1),
+    table.font.size = px(12)  # Set font size for readability
+  ) |>
+# Set specific widths for spacer columns to simulate horizontal space between main columns
+  cols_width(
+    data ~ px(40),
+    test ~ px(80),
+    function_test ~ px(130),
+    effect_size ~ px(100),
+    function_es ~ px(100)
+    ) |>
+  tab_footnote(
+    footnote = md("*Note: P ... Parametric | NP ... Non-parametric*")
+  )
+```
 
 ## Comparing two paired groups {#sec-comparing-two-paired-groups}
 
-+----------------+---------------------------+------------------------------+-----------------+--------------------------+
-| Assumption     | Test                      | Function for test            | Effect size     | Function for effect size |
-+================+===========================+==============================+=================+==========================+
-| Parametric     | T-Test                    | `t.test(paired = TRUE)`      | Cohen's d       | `cohens_d()`             |
-+----------------+---------------------------+------------------------------+-----------------+--------------------------+
-| Non-parametric | Wilcoxon Signed Rank Test | `wilcox.test(paired = TRUE)` | Rank biserial r | `rank_biserial()`        |
-|                |                           |                              |                 |                          |
-|                |                           |                              | or              | or                       |
-|                |                           |                              |                 |                          |
-|                |                           |                              | Wilcoxon r      | `wilcoxonPairedR()`      |
-+----------------+---------------------------+------------------------------+-----------------+--------------------------+
+```{r}
+#| label: tbl-comparing-two-groups-paired-baser
+#| echo: false
+#| tbl-cap: "Comparing two paired groups (effect size functions from package `effectsize`, except for `wilcoxonR()` from `rcompanion`"
 
-: Comparing two unpaired groups (effect size functions from package `effectsize`, except for `wilcoxonPairedR()` from `rcompanion`) {#tbl-comparing-two-groups-paired-baser}
+# Create the dataset with appropriate variable names
+data <- tibble(
+  data = c("P", "NP"),
+  test = c("T-Test", "Wilcoxon Signed Rank Test"),
+  function_test = c("`t.test(paired = TRUE)`", "`wilcox.test(paired = TRUE)`"),
+  effect_size = c("Cohen's d", "Rank biserial r\nor\nWilcoxon R"),
+  function_es = c("`cohens_d()`", "`rank_biserial()`\nor\n`wilcoxonPairedR()`")
+)
+
+# Create the gt table
+data |> 
+  gt() |>
+  fmt_markdown(columns = everything()) |>
+  cols_label(
+    data = "Data",
+    test = "Test",
+    function_test = "Function",
+    effect_size = "Effect size",
+    function_es = "Function"
+  ) |>
+  tab_style(
+    style = cell_text(weight = "bold"),
+    locations = cells_column_labels(everything())
+  ) |>
+  tab_options(
+    data_row.padding = px(15),           # Increase padding for readability
+    column_labels.padding = px(15),      # Adjust column label padding
+    table.border.top.width = px(1),
+    table.border.bottom.width = px(1),
+    table.font.size = px(12)  # Set font size for readability
+  ) |>
+# Set specific widths for spacer columns to simulate horizontal space between main columns
+  cols_width(
+    data ~ px(40),
+    test ~ px(90),
+    function_test ~ px(120),
+    effect_size ~ px(80),
+    function_es ~ px(120)
+    ) |>
+  tab_footnote(
+    footnote = md("*Note: P ... Parametric | NP ... Non-parametric*")
+  )
+```
 
 ## Comparing multiple unpaired groups {#sec-comparing-multiple-unpaired-groups}
 
-+----------------+----------------------+-------------------------------------------+------------------------+--------------------------+
-| Assumption     | Test                 | Function for test                         | Effect size            | Function for effect size |
-+================+======================+===========================================+========================+==========================+
-| Parametric     | ANOVA                | -   `aov()` (assumes equal variances)     | Epsilon squared        | `eta_squared()`          |
-|                |                      | -   `oneway.test(var.equal = TRUE/FALSE)` |                        |                          |
-+----------------+----------------------+-------------------------------------------+------------------------+--------------------------+
-| Non-parametric | Kruskall-Wallis test | `kruskal.test()`                          | Epsilon squared (rank) | `rank_epsilon_squared()` |
-+----------------+----------------------+-------------------------------------------+------------------------+--------------------------+
+```{r}
+#| label: tbl-comparing-multiple-groups-unpaired-baser
+#| echo: false
+#| tbl-cap: "Comparing multiple unpaired groups (effect size functions from package `effectsize`"
 
-: Comparing multiple unpaired groups (effect size functions from package `effectsize`) {#tbl-comparing-multiple-groups-unpaired-baser}
+# Create the dataset with appropriate variable names
+data <- tibble(
+  data = c("P", "NP"),
+  test = c("ANOVA", "Kruskal–Wallis test"),
+  function_test = c(
+    "`aov()`*\n`oneway.test(var.equal = TRUE/FALSE)`",
+    "`kruskal.test()`"
+  ),
+  effect_size = c("Epsilon squared", "Epsilon squared (rank)"),
+  function_es = c("`eta_squared()`", "`rank_epsilon_squared()`")
+)
+
+
+# Create the gt table
+data |> 
+  gt() |>
+  fmt_markdown(columns = everything()) |>
+  cols_label(
+    data = "Data",
+    test = "Test",
+    function_test = "Function",
+    effect_size = "Effect size",
+    function_es = "Function"
+  ) |>
+  tab_style(
+    style = cell_text(weight = "bold"),
+    locations = cells_column_labels(everything())
+  ) |>
+  tab_options(
+    data_row.padding = px(15),           # Increase padding for readability
+    column_labels.padding = px(15),      # Adjust column label padding
+    table.border.top.width = px(1),
+    table.border.bottom.width = px(1),
+    table.font.size = px(12)  # Set font size for readability
+  ) |>
+# Set specific widths for spacer columns to simulate horizontal space between main columns
+  cols_width(
+    data ~ px(40),
+    test ~ px(70),
+    function_test ~ px(140),
+    effect_size ~ px(65),
+    function_es ~ px(135)
+    ) |>
+  tab_footnote(
+    footnote = md("*Note: P ... Parametric | NP ... Non-parametric | \\* assumes equal variances*")
+  )
+```

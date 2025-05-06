@@ -6,6 +6,27 @@
 
 library(tidyverse)
 library(r4np)
+
+# Truncate output, specified as 'out.lines = n'
+# save the built-in output hook
+hook_output <- knitr::knit_hooks$get("output")
+
+# set a new output hook to truncate text output
+knitr::knit_hooks$set(output = function(x, options) {
+  if (!is.null(n <- options$out.lines)) {
+    x <- xfun::split_lines(x)
+    if (length(x) > n) {
+      # truncate the output
+      x <- c(head(x, n), "....\n")
+    }
+    x <- paste(x, collapse = "\n")
+  }
+  hook_output(x, options)
+})
+
+# Set knitr chunk options and output width
+knitr::opts_chunk$set(width = 70)
+options(width = 70)
 ```
 
 Regressions are an exciting area of data analysis since it enables us to make very specific predictions, incorporating different variables simultaneously. As the name implies, regressions 'regress', i.e., draw on past observations to make predictions about future observations. Thus, any analysis incorporating a regression makes the implicit assumption that the past best explains the future.
@@ -227,7 +248,8 @@ For now, we are mainly interested in the performance of our model. So, we can ob
 #| label: single-regression-model-performance
 #| echo: true
 
-performance::model_performance(m0)
+performance::model_performance(m0) |>
+  glimpse()
 ```
 
 We are presented with quite a number of performance indicators, and here is how to read them:
@@ -330,7 +352,8 @@ broom::tidy(m0) |>
 #| echo: true
 
 # Evaluate the quality of our model
-performance::model_performance(m0)
+performance::model_performance(m0) |>
+  glimpse()
 ```
 
 Overall (and purely subjectively judged), the model is not particularly great because even though we added so many variables, the $adjusted \ R^2$ is not particularly high, i.e. 'only' `0.229`. As mentioned earlier, for multiple regression, it is better to look at $adjusted \ R^2$, because it adjusts for the number of variables in our model and makes the comparison of different models easier. There are a couple more important insights gained from this analysis:
@@ -363,7 +386,8 @@ broom::tidy(m1) |>
 #| echo: true
 
 # Evaluate the quality of our model
-performance::model_performance(m1)
+performance::model_performance(m1) |>
+  glimpse()
 ```
 
 Comparing our original model `m0` with our revised model `m1`, we can see that our `R2 (adj.)` barely changed. Thus, `m1` is a superior model because it can explain (almost) the same amount of variance but with fewer predictors. The model `m1` would also be called a *parsimonious model*, i.e. a model that is simple but has good predictive power. When reading about multiple regressions, you might often hear people mention the *'complexity'* of a model, which refers to the number of predictors. The complexity of a model is known as the *'degrees of freedom (df) of the numerator'* and is computed as $number\ of\ preditors - 1$. For example, in our model of 4 independent variables, the *df* of the numerator is 3. This value is relevant when computing the power of a regression model (see also @sec-power-analysis).
@@ -372,7 +396,8 @@ Comparing our original model `m0` with our revised model `m1`, we can see that o
 #| label: mr-comparing-model-zero-one
 #| echo: true
 
-performance::compare_performance(m0, m1)
+performance::compare_performance(m0, m1) |>
+  glimpse()
 ```
 
 However, there are a couple of things we overlooked when running this regression. If you are familiar with regressions already, you might have been folding your hands over your face and burst into tears about the blasphemous approach to linear regression modelling. Let me course-correct at this point.
@@ -948,7 +973,8 @@ outliers_select <-
   filter(n > 1)
 
 # Keep only columns which are NOT included in outliers_select
-m1_no_outliers <- anti_join(m1_outliers, outliers_select, by = "rowname")
+m1_no_outliers <- anti_join(m1_outliers, outliers_select,
+                            by = "rowname")
 
 m1_no_outliers
 ```
@@ -981,7 +1007,8 @@ parameters::compare_parameters(m1, m2) |>
   mutate(across(where(is.numeric), \(x) round(0, 3)))
 
 # Compare the performance between models
-performance::compare_performance(m1, m2)
+performance::compare_performance(m1, m2) |>
+  glimpse()
 ```
 
 If you look at `R2 (adj.)` you might feel a sense of disappointment. How does the model explain less variance? If we consider `AIC`, `BIC` and `RMSE`, we improved the model because their values are lower for `m2`. However, it seems that the outliers affected `R2`, which means they inflated this model indicator. In other words, our regression explains less than we hoped for. However, we can be more confident that the predictions of the new model will be more accurate.
@@ -1000,7 +1027,8 @@ parameters::model_parameters(m3) |>
   select(Parameter, Coefficient, p) |>
   mutate(across(where(is.numeric), \(x) round(0, 3)))
 
-performance::model_performance(m3)
+performance::model_performance(m3) |>
+  glimpse()
 ```
 
 Similar to before, after removing the insignificant predictors, we end up with an equally good model (in terms of $adjusted\ R^2$, but we need fewer variables to explain the same amount of variance in `new_cases`. Our final model `m3` is a parsimonious and less complex model.
@@ -1179,7 +1207,8 @@ The *Variance Inflation Factor (VIF)* and its little sibling *Tolerance* are met
 #| label: mc-vif
 #| echo: true
 
-performance::check_collinearity(m3)
+performance::check_collinearity(m3) |>
+  glimpse()
 ```
 
 As the output already indicates, there is a `Low Correlation` between our independent variables. So, good news for us. In terms of interpretations, we find the following benchmarks as recommendations to determine multicollinearity [@field2013discovering] :
@@ -1302,7 +1331,8 @@ parameters::model_parameters(m1, standardize = "refit")
 #| label: hr-m1-performance 
 #| echo: true
 
-performance::model_performance(m1)
+performance::model_performance(m1) |>
+  glimpse()
 ```
 
 Our control variable turns out to be significant for our model, but it explains only a small proportion of the variance in `new_cases`. If you are testing hypotheses, you would consider this a good result because you do not want your control variables to explain too much variance. At the same time, it is a significant variable and should be retained in our model. Let's construct our next model, `m1`, by adding the main effects variables and comparing our models.
@@ -1327,7 +1357,8 @@ parameters::compare_parameters(m1, m2, standardize = "refit") |>
 #| label: hr-m1-m2-performance-comparison
 #| echo: true
 
-performance::compare_performance(m1, m2)
+performance::compare_performance(m1, m2) |>
+  glimpse()
 ```
 
 After adding all our variables, $adjusted\ R^2$ went up from `0.033` to `0.255`. While this might seem like a considerably improvement, we have to perform a statistical test to compare the two models. This leads us back to comparing groups, and in many ways, this is what we do here by using the function `anova()`, but we compare models based on the residual sum of squares, i.e. the amount of error the models produce. Thus, if the ANOVA returns a significant result, `m1` shows a significantly reduced residual sum of squares compared to `m2`. Therefore, `m2` would be the better model.
@@ -1350,7 +1381,8 @@ m0 <- lm(formula = new_cases ~
            businesses,
          data = hr_data)
 
-performance::compare_performance(m0, m2)
+performance::compare_performance(m0, m2) |>
+  glimpse()
 ```
 
 ```{r}
@@ -1447,7 +1479,8 @@ parameters::compare_parameters(m0, m4, standardize = "refit") |>
 #| label: moderated-regression-m0-m4-performance
 #| echo: true
 
-performance::compare_performance(m0, m4)
+performance::compare_performance(m0, m4) |>
+  glimpse()
 ```
 
 ```{r}
@@ -1485,7 +1518,8 @@ parameters::model_parameters(model) |>
 #| label: regression-for-centering-performance
 #| echo: true
 
-performance::model_performance(model)
+performance::model_performance(model) |>
+  glimpse()
 ```
 
 The $\beta$ score of `freedom_of_choice` unfolds the most substantial effect on `satisfaction`, but assumes that `age = 0`. In regressions with interaction terms, the coefficient $\beta$ of a variable reflects the change in the dependent variables if other variables are set to zero. If this is a logical value for the variables, then no further steps are required. However, if a score of zero on any predictor is not meaningful, it is recommended to engage in centering variables [see @cohen2014applied; @field2013discovering]. In our model, the coefficient of `freedom_of_choice` assumes that `age` is equal to `0`. However, no participant in our sample will have been of age `0`, which renders any interpretation of the $\beta$ coefficient meaningless. Instead, it is more meaningful to retrieve a $\beta$ score which is based on the average `age` of people in our sample. This is what centering can achieve.
@@ -1552,7 +1586,8 @@ model_c <- lm(formula = satisfaction ~
 
 parameters::compare_parameters(model, model_c) |>
   as_tibble() |>
-  select(Parameter, Coefficient.model, p.model, Coefficient.model_c, p.model_c) |>
+  select(Parameter, Coefficient.model, p.model,
+         Coefficient.model_c, p.model_c) |>
   mutate(across(where(is.numeric), \(x) round(x, 3)))
 ```
 
@@ -1574,7 +1609,8 @@ To conclude, centering plays a crucial role if the interpretation of $\beta$ coe
 #| label: impact-of-centering-model-performance
 #| echo: true
 
-performance::compare_performance(model, model_c)
+performance::compare_performance(model, model_c) |>
+  glimpse()
 ```
 
 ## Other regression models: Alternatives to OLS {#sec-ols-alternatives}
@@ -1586,3 +1622,15 @@ This book only covers linear regressions, which are considered *Ordinary Least S
 -   *Generalised Linear models*, such as *Logistic regressions* (when the predictor is a logical variable) or *Poisson regressions* (when we model count data, i.e. frequencies and contingency tables).
 
 These are specialised models, and learning them requires a more in-depth knowledge of their mechanics which would go beyond the scope of a book that intends to cover the basics of conducting statistical analysis in *R*. However, @cohen2014applied offers an excellent introduction to both approaches.
+
+## Exercises {#sec-exercises-regressions}
+
+After such a long chapter it is time to recap what we learned. Use the code provided to practice modeling and interpreting relationships. Remember, you have to install the `r4np` package first, if you have not done so yet.
+
+```{r}
+#| label: exercises-regressions
+#| eval: false
+
+# Option 1:
+learnr::run_tutorial("ex_regressions", package = "r4np")
+```

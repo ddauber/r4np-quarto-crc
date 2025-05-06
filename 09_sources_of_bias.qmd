@@ -12,6 +12,7 @@ library(tidyverse)
 library(purrr)
 library(patchwork)
 library(r4np)
+library(gt)
 ```
 
 '*Bias'* in your analysis is hardly ever a good thing unless you are a qualitative researcher. Whether you consider it positive or negative, we have to be aware of issues preventing us from performing a specific type of analysis. All of the statistical computations discussed in the following chapters can easily be affected by different sources of bias and, therefore, need to be discussed in advance. The lack of certain biases can be an assumption of particular statistical tests. Thus, violating these assumptions would imply that the analytical technique we use will produce wrong results, i.e. biased results. @field2013discovering summarises three main assumptions we have to consider:
@@ -38,18 +39,65 @@ Let's take a step back and consider the purpose of our analysis. We primarily co
 
 In order to achieve 'representativeness,' we need to ensure that our sample matches the characteristics of the population closely enough. A major factor that affects this is *sampling strategy*. The sampling strategy determines the method we use to select individuals from a population. Unfortunately, not all strategies are considered good choices and introduce various degrees of selection bias. Bear in mind, in qualitative research, selection bias is not a real issue, and strategies that help identify participants that could valuable contribute to the study would always be given preference over randomly selecting people for the sake of representativeness. @tbl-sampling-strategies briefly summarises some of the most common sampling strategies deployed in Social Sciences and their likelihood of introducing selection bias.
 
-| Sampling strategy | Description | Likelihood of selection bias |
-|------------------------|------------------------|------------------------|
-| *Simple Random Sampling* | Every participant in the population has the same chance of being selected for the study. However, it is usually difficult to achieve this approach in practice since it requires a complete list of the population, also known as the sampling frame, which is difficult to obtain. Also, in very small samples it can happen that small subgroups in a population might get missed as their chance of being included is also small. | Low |
-| *Stratified Random Sampling* | The population is divided into subgroups, so-called 'strata' from which participants are selected using random sampling. This technique ensures that all subgroups of a population can be included, regardless of their size. In those scenarios, this technique can be superior to simple random sampling. | Low |
-| *Cluster Sampling* | The population is divided into clusters (e.g. countries, schools, departments, etc.), and a random sample of clusters is selected. After that, either all individuals in the chosen clusters are asked to participate (i.e. one-stage cluster sampling), or a random sample is drawn from within each of the sampled clusters (i.e. two-stage cluster sampling). This technique is often used in large and geographically dispersed populations to make the research more feasible. | Low to Moderate |
-| *Quota Sampling* | The population is divided into subgroups (quota classes) and convenience sampling is used to fill quotas for each subgroup based on specific characteristics. A main difference of this technique to stratified sampling is that non-probability techniques are used to choose members for the subgroups. | Moderate |
-| *Purposive/ Judgement Sampling* | Participants are selected based on specific criteria that the researcher believes are important for identifying individuals who are most relevant to the study. | Moderate to High |
-| *Snowball Sampling* | Future participants are chosen based on recommendations from current participants. For example, after conducting an interview, the interviewer might ask whether they can recommend other possible participants. | High |
-| *Convenience Sampling* | Participants are chosen because they are easy for the researcher to access and are willing to take part in the study. | High |
-| *Self-selected Sampling* | Individuals choose by themselves whether they want to take part in a study or not. Many online questionnaires or review platforms use self-selected samples. Be vary of those Amazon reviews. | High |
+```{r}
+#| label: tbl-sampling-strategies
+#| echo: false
+#| tbl-cap: "Overview of some of the most common sampling strategies used in Social Sciences (adopted from @lohr2021sampling)"
 
-: Overview of some of the most common sampling strategies used in Social Sciences (adopted from [@lohr2021sampling] {#tbl-sampling-strategies}
+
+# Create the dataset
+data <- tibble(
+  sampling_strategy = c(
+    "Simple Random Sampling",
+    "Stratified Random Sampling",
+    "Cluster Sampling",
+    "Quota Sampling",
+    "Purposive / Judgement Sampling",
+    "Snowball Sampling",
+    "Convenience Sampling",
+    "Self-selected Sampling"
+  ),
+  description = c(
+    "Every participant in the population has the same chance of being selected for the study. However, it is usually difficult to achieve this approach in practice since it requires a complete list of the population, also known as the sampling frame, which is difficult to obtain. Also, in very small samples it can happen that small subgroups in a population might get missed as their chance of being included is also small.",
+    "The population is divided into subgroups, so-called 'strata' from which participants are selected using random sampling. This technique ensures that all subgroups of a population can be included, regardless of their size. In those scenarios, this technique can be superior to simple random sampling.",
+    "The population is divided into clusters (e.g., countries, schools, departments, etc.), and a random sample of clusters is selected. After that, either all individuals in the chosen clusters are asked to participate (i.e., one-stage cluster sampling), or a random sample is drawn from within each of the sampled clusters (i.e., two-stage cluster sampling). This technique is often used in large and geographically dispersed populations to make the research more feasible.",
+    "The population is divided into subgroups (quota classes) and convenience sampling is used to fill quotas for each subgroup based on specific characteristics. A main difference of this technique to stratified sampling is that non-probability techniques are used to choose members for the subgroups.",
+    "Participants are selected based on specific criteria that the researcher believes are important for identifying individuals who are most relevant to the study.",
+    "Future participants are chosen based on recommendations from current participants. For example, after conducting an interview, the interviewer might ask whether they can recommend other possible participants.",
+    "Participants are chosen because they are easy for the researcher to access and are willing to take part in the study.",
+    "Individuals choose by themselves whether they want to take part in a study or not. Many online questionnaires or review platforms use self-selected samples. Be wary of those Amazon reviews."
+  ),
+  selection_bias = c("Low", "Low", "Low to Moderate", "Moderate", "Moderate to High", "High", "High", "High")
+)
+
+
+# Create the gt table
+data |> 
+  gt() |>
+  fmt_markdown(columns = everything()) |>
+  cols_label(
+    sampling_strategy = "Sampling strategy",
+    description = "Description",
+    selection_bias = "Likelihood of selection bias"
+  ) |>
+  tab_style(
+    style = cell_text(weight = "bold"),
+    locations = cells_column_labels(everything())
+  ) |>
+  tab_options(
+    data_row.padding = px(15),           # Increase padding for readability
+    column_labels.padding = px(15),      # Adjust column label padding
+    table.border.top.width = px(1),
+    table.border.bottom.width = px(1),
+    table.font.size = px(12)  # Set font size for readability
+  ) |>
+  # Adjust column widths for improved readability (450px)
+  cols_width(
+    sampling_strategy ~ px(75),
+    description ~ px(310),
+    selection_bias ~ px(70)
+  )
+```
 
 While all this might sound terribly theoretical, let me provide you with an example. Imagine we are interested in understanding how much time students spend on their weekly readings in our department. Also, assume that our department consists of 1000 students. We now wish to draw a sample of students for our analysis.
 
@@ -130,7 +178,8 @@ Now that we know how our sample should look like with regards to `gender` we can
 
 ```{r}
 #| label: drawing-samples-of-20
-#| echo: true
+#| echo: false
+#| output: true
 #| fig-cap: "Simulation of simple random sampling (n = 20)"
 #| fig-alt: "Grid of nine bar charts titled 'Simulation of Simple Random Sampling (Sample size = 20)', comparing gender distributions (female, male, non-binary) in sample data (red) and population (black) across different samples. Variability across samples is shown, with slight differences in gender proportions."
 
@@ -163,7 +212,8 @@ An attentive reader might wonder: Is a sample of 20 students not too small? And 
 
 ```{r}
 #| label: drawing-samples-of-300
-#| echo: true
+#| echo: false
+#| output: true
 #| fig-cap: "Simulation of simple random sampling (n = 300)"
 #| fig-alt: "Grid of nine bar charts titled 'Simulation of Simple Random Sampling (Sample size = 300)', comparing gender distributions (female, male, non-binary) in sample data (red) and population (black) across different samples. Gender proportions are consistent across samples, showing minimal variability."
 
@@ -214,7 +264,8 @@ rep_sample_300 <-
   slice_sample(n = 300) |>
   summarise(mean = mean(min_reading),
             median = median(min_reading)) |>
-  mutate(sample_type = "representative sample (n = 300)", .before = everything())
+  mutate(sample_type = "representative sample (n = 300)",
+         .before = everything())
 
 # Reading time based on representative sample (n = 20)
 set.seed(123456)
@@ -235,9 +286,11 @@ non_rep_sample <-
   slice_sample(n = 20) |>
   summarise(mean = mean(min_reading),
             median = median(min_reading)) |>
-  mutate(sample_type = "non-representative sample (n = 20)", .before = everything())
+  mutate(sample_type = "non-representative sample (n = 20)",
+         .before = everything())
 
-comparison <- rbind(population, rep_sample_300, rep_sample_20, non_rep_sample)
+comparison <- rbind(population, rep_sample_300,
+                    rep_sample_20, non_rep_sample)
 
 comparison
 ```
@@ -595,8 +648,9 @@ ic_training |> ntest(cols = c(communication,
 Here is an example where we compute the normality for all three variables again, but this time we consider two different subsets of our dataset.
 
 ```{r}
-#| label: ntest_by_example
+#| label: ntest_by_example_code
 #| echo: true
+#| output: false
 
 # Perform 'shapiro.test()' for multiple variables and groups
 ic_training |> ntest_by(cols = c(communication,
@@ -604,6 +658,20 @@ ic_training |> ntest_by(cols = c(communication,
                                  leadership),
                         group = test
                         )
+```
+
+```{r}
+#| label: ntest_by_example_output
+#| echo: false
+#| output: true
+
+# Perform 'shapiro.test()' for multiple variables and groups
+ic_training |> ntest_by(cols = c(communication,
+                                 teamwork,
+                                 leadership),
+                        group = test
+                        ) |>
+  select(test, variable, statistic, p.value)
 ```
 
 I use the `ntest_by()` function regularly, because it saves so much time and does not require me to create subsets of my data. It is probably the most useful analytical function I have ever written (to date).
@@ -645,7 +713,8 @@ data4 |>
                         .width = c(0.25, 0.5, 0.75, 1)) +
 
   # Let's add some nice complementary colours
-  scale_color_manual(values = c("#4D87B3", "#A1D6FF", "#FFDAA1", "#B3915F"))
+  scale_color_manual(values = c("#4D87B3", "#A1D6FF",
+                                "#FFDAA1", "#B3915F"))
 ```
 
 If we compare the bars, we can tell that the variance in both groups looks very similar, i.e. the length of the bars appear to be about the same height. Furthermore, if we compare the IQR for both groups, we find that they are quite close to each other.
@@ -1013,5 +1082,17 @@ gep |>
   theme(panel.background = element_blank()) +
   xlab("Level of study") +
   ylab("Socialising with people") +
-  ggtitle("Distribution of 'socialising with people' in the GEP dataset")
+  ggtitle("Distribution of 'socialising with people' (GEP dataset)")
+```
+
+## Exercises {#sec-exercises-sources-of-bias}
+
+We have covered quite some ground regarding different sources of bias in this section of the book. Start the exercises below to reinforce what you have learned in this chapter. Make sure you have the `r4np` package installed.
+
+```{r}
+#| label: exercises-sources-of-bias
+#| eval: false
+
+# Option 1:
+learnr::run_tutorial("ex_sources_of_bias", package = "r4np")
 ```

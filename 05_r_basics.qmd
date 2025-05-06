@@ -178,7 +178,7 @@ friends <- "Fiona"
 
 In this example, I created an object called `friends` and added `"Fiona"` to it. Since `"Fiona"` represents a `string`, we need to use `""`. So, if you wanted to read this line of code, you would say, '`friends` gets the value `"Fiona"`'. Alternatively, you could also say '`"Fiona"` is assigned to `friends`'.
 
-If you look into your environment pane, you will find the object `friends`. You can see it carries the value `"Fiona"`. We can also print values of an object in the console by simply typing the name of the object `friends` and hit `Return ↵`.
+If you look into your environment pane, you will find the object `friends`. You can see it carries the value `"Fiona"`. We can also print values of an object in the console by simply typing the name of the object `friends` and hit `Return`.
 
 ```{r}
 #| label: printing-objects
@@ -571,9 +571,11 @@ library(tidyverse)
 library(jtools)
 model1 <- lm(covid_cases_per_1m ~ idv, data = df)
 summ(model1, scale = TRUE, transform.response = TRUE, vifs = TRUE)
-df |> ggplot(aes(x = covid_cases_per_1m, y = idv, col = europe, label = country))+
+df |> ggplot(aes(x = covid_cases_per_1m, y = idv, col = europe,
+                 label = country))+
 theme_minimal()+ geom_label(nudge_y = 2) + geom_point()
-model2 <- lm(cases_per_1m ~ idv + uai + idv*europe + uai*europe, data = df)
+model2 <- lm(cases_per_1m ~ idv + uai + idv*europe + uai*europe,
+             data = df)
 summ(model2, scale = TRUE, transform.response = TRUE, vifs = TRUE)
 anova(model1, model2)
 ```
@@ -648,7 +650,7 @@ RStudio helps a lot with keeping your coding tidy and properly formatted. Howeve
 It is time to practice the newly acquired skills. The `r4np` package comes with interactive tutorials. In order to start them, you have two options. If you have installed the `r4np` package already and used the function `install_r4np()` you can use `Option 1`:
 
 ```{r}
-#| label: exercises-option-1
+#| label: exercises-option-1-r-basics
 #| eval: false
 
 # Option 1:
@@ -658,7 +660,7 @@ learnr::run_tutorial("ex_r_basics", package = "r4np")
 If you have not installed the `r4np` package and/or not run the function `install_r4np()`, you will have to do this first using `Option 2`:
 
 ```{r}
-#| label: exercises-option-2
+#| label: exercises-option-2-r-basics
 #| eval: false
 
 # Option 2:

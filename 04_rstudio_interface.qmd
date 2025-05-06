@@ -16,7 +16,6 @@ I will briefly explain the purpose of each window/pane and how they are relevant
 
 ## The Console window {#sec-the-console-window}
 
-The console is located in the bottom-left, and it is where you often will find the output of your coding and computations. It is also possible to write code directly into the console. Let's try the following example by calculating the sum of `10 + 5`. Click into the console with your mouse, type the calculation into your console and hit `Enter/Return ↵` on your keyboard. The result should be pretty obvious:
 
 ```{r}
 #| label: algebra-in-the-consolte
@@ -68,7 +67,7 @@ The window in the top right shows multiple panes. The first pane is called *Envi
 
 ![](images/chapter_04_img/04_environment_history_etc/01_rstudio_environment.png){fig-alt="Screenshot of the environment tab in RStudio which is currently empty."}
 
-The *History* pane is very easy to understand. Whatever computation you run in the console will be stored. So you can go back and see what you coded and rerun that code. Remember the example from above where we computed the sum of `10+5`? This computation is stored in the history of RStudio, and you can rerun it by clicking on `10+5` in the history pane and then clicking on `To Console`. This will insert `10+5` back into the console, and we can hit `Return ↵` to retrieve the result. You also have the option to copy the code into an existing or new *R* Script by clicking on `To Source`. By doing this, you can save this computation on your computer and reuse it later. Finally, if you would like to store your history, you can do so by clicking on the `floppy disk symbol`. There are two more buttons in this pane, one allows you to delete individual entries in the history (the white page with the red circle on it), and the last one, a `broom`, clears the entire history (irrevocably).
+The *History* pane is very easy to understand. Whatever computation you run in the console will be stored. So you can go back and see what you coded and rerun that code. Remember the example from above where we computed the sum of `10+5`? This computation is stored in the history of RStudio, and you can rerun it by clicking on `10+5` in the history pane and then clicking on `To Console`. This will insert `10+5` back into the console, and we can hit `Return` to retrieve the result. You also have the option to copy the code into an existing or new *R* Script by clicking on `To Source`. By doing this, you can save this computation on your computer and reuse it later. Finally, if you would like to store your history, you can do so by clicking on the `floppy disk symbol`. There are two more buttons in this pane, one allows you to delete individual entries in the history (the white page with the red circle on it), and the last one, a `broom`, clears the entire history (irrevocably).
 
 ![](images/chapter_04_img/04_environment_history_etc/02_rstudio_history.png){fig-alt="Screenshot of the history tab in RStudio, showing the executed code performed earlier, i.e. 10 + 5."}
 

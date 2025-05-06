@@ -114,7 +114,7 @@ mpg |> ggplot(aes(x = reorder(manufacturer, desc(hwy), FUN = median),
   ylab("Highway miles per gallon")
 ```
 
-You are probably wondering where your plot has gone. Copying the code will not automatically run it in your *R* script. However, this is necessary to create the plot. If you tried pressing `Return ↵`, you would only add a new line. Instead, you need to select the code you want to run and press `Ctrl+Return ↵` (PC) or `Cmd+Return ↵` (Mac). You can also use the `Run` command at the top of your source window, but it is much more efficient to press the keyboard shortcut. Besides, you will remember this shortcut quickly, because we need to use it very frequently. If all worked out, you should see the following:
+You are probably wondering where your plot has gone. Copying the code will not automatically run it in your *R* script. However, this is necessary to create the plot. If you tried pressing `Return`, you would only add a new line. Instead, you need to select the code you want to run and press `Ctrl+Return` (PC) or `Cmd+Return` (Mac). You can also use the `Run` command at the top of your source window, but it is much more efficient to press the keyboard shortcut. Besides, you will remember this shortcut quickly, because we need to use it very frequently. If all worked out, you should see the following:
 
 ![](images/chapter_06_img/02_r_script/01_r_script_example_plot.png){fig-alt="A screenshot that shows where the R code is and where we can find the plot that was created with the code we have written in the 'Plots' panel."}
 
@@ -124,11 +124,11 @@ The *R* script editor has some conveniences for writing your code that are worth
 
 Moreover, code in *R* scripts will be automatically indented to facilitate reading. If, for whatever reason, the indentation does not happen, or you accidentally undo it, you can reindent a line with `Ctrl+I` (PC) or `Cmd+I` (Mac).
 
-Lastly, the console and the *R* script editor both feature code completion. This means that when you start typing the name of a function, *R* will provide suggestions. These are extremely helpful and make programming a lot faster. Once you found the function you were looking for, you press `Return ↵` to insert it. Here is an example of what happens when you have the package `tidyverse` loaded and type `ggpl`. Only functions that are loaded via packages or any object in your environment pane benefit from code completion.
+Lastly, the console and the *R* script editor both feature code completion. This means that when you start typing the name of a function, *R* will provide suggestions. These are extremely helpful and make programming a lot faster. Once you found the function you were looking for, you press `Return` to insert it. Here is an example of what happens when you have the package `tidyverse` loaded and type `ggpl`. Only functions that are loaded via packages or any object in your environment pane benefit from code completion.
 
 ![](images/chapter_06_img/02_r_script/02_r_script_code_completion.png){fig-alt="A screenshot showing the code completion feature in RStudio. the incomplete code 'ggpl' is shown and a window opens which shows possible function that start with these letters."}
 
-Not only does RStudio show you all the available options, but it also tells you which package this function is from. In this case, all listed functions are from the `ggplot2` package. Furthermore, when you select one of the options but have not pressed `Return ↵` yet, you also get to see a yellow box, which provides you with a quick reference of all the arguments that this function accepts. So you do not have to memorise all the functions and their arguments.
+Not only does RStudio show you all the available options, but it also tells you which package this function is from. In this case, all listed functions are from the `ggplot2` package. Furthermore, when you select one of the options but have not pressed `Return` yet, you also get to see a yellow box, which provides you with a quick reference of all the arguments that this function accepts. So you do not have to memorise all the functions and their arguments.
 
 ## Using *Quarto* {#sec-r-markdown-and-r-notebooks}
 

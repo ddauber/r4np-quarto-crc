@@ -204,3 +204,15 @@ Conducting a *power analysis* is fairly straightforward for the techniques we co
 For statistical tests like group comparisons (@sec-comparing-groups) and regressions (@sec-regression), the number of groups or variables also plays an important role. Usually, the more groups/variables are included in a test/model, the larger the sample has to be.
 
 As mentioned earlier, it is not wrong to collect [slightly]{.underline} more data, but you need to be cautious not to waste 'resources'. In other fields, like medical studies, it is absolutely critical to know how many patients should be given a drug to test its effectiveness. It would be unethical to administer a new drug to 300 people when 50 would be enough. This is especially true if the drug turns out to have an undesirable side effect. In Social Sciences, we are not often confronted with health-threatening experiments or studies. Still, being mindful of how research impacts others is essential. A *power analysis* can help to determine how you can carry out a reliable study without affecting others unnecessarily. You also have no excuse to say you did not know about it.
+
+## Exercises {#sec-exercises-power-analysis}
+
+With a foundation in power analysis, let's try out the code below to solidify our understanding through hands-on practice. Ensure you have the `r4np` package installed to begin the exercises.
+
+```{r}
+#| label: exercises-power-analysis
+#| eval: false
+
+# Option 1:
+learnr::run_tutorial("ex_power_analysis", package = "r4np")
+```

@@ -325,7 +325,7 @@ Well, this brought us a little closer, but not quite were we intended to be. Som
 
 comments_grouped |>
   
-  # Reorder our data for for each group level ion social_inclusion
+  # Reorder our data for for each group level of social_inclusion
   mutate(word = reorder_within(x = word,
                                by= n,
                                within = social_inclusion)) |>
@@ -586,3 +586,15 @@ If you want to explore the world of textual analysis in greater depth, there are
 -   [Supervised Machine Learning for Text Analysis in R](https://smltar.com "Supervised Machine Learning for Text Analysis in R"){target="blank"}: This book is the ideal follow-up resource if you worked your way through @silge2017text. It introduces the foundations of natural language analysis and covers advanced text analysis methods such as regression, classification, and deep learning.
 
 I hope I managed to showcase the versatility of *R* to some degree in this chapter. Needless to say, there is also a lot I still have to learn, which makes using *R* exciting and, more than once, has inspired me to approach my data in unconventional ways.
+
+## Exercises {#sec-exercises-mixed-methods}
+
+We almost reached the end of our journey. Let's review what we have learned about Mixed Methods in *R*. Copy the code below to get started. The `r4np` package has to be installed to start the exercises.
+
+```{r}
+#| label: exercises-mixed-methods
+#| eval: false
+
+# Option 1:
+learnr::run_tutorial("ex_mixed_methods", package = "r4np")
+```

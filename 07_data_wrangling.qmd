@@ -23,6 +23,11 @@ knitr::knit_hooks$set(output = function(x, options) {
   }
   hook_output(x, options)
 })
+
+# Set knitr chunk options and output width
+knitr::opts_chunk$set(width = 70)
+options(width = 70)
+
 ```
 
 > **Data wrangling** --- also called **data cleaning**, **data remediation**, or **data munging**---refers to a variety of processes designed to transform raw data into more readily used formats. The exact methods differ from project to project depending on the data you're leveraging and the goal you're trying to achieve. [@hsbDataWrangling]
@@ -184,8 +189,19 @@ If you want to see each variable covered in the dataset and their data types, yo
 ```{r}
 #| label: using-glipmse
 #| echo: true
+#| output: false
 
 glimpse(wvs)
+```
+
+```{r}
+#| echo: false
+#| output: true
+
+wvs |>
+  slice(1:5) |>
+  glimpse()
+
 ```
 
 The output of glimpse shows us the name of each column/variable after the `$`, for example, `` `Participant ID` ``. The `$` is used to lookup certain variables in our dataset. For example, if we want to inspect the column `relationship_status` only, we could write the following:
@@ -521,9 +537,9 @@ I use the value `15` arbitrarily after some trial and error. You can change the 
 wvs_clean <-
   wvs_clean |>
   mutate(country = fct_recode(country,
-                              "Bolivia" = "Bolivia, Plurinational State of",
-                              "Iran" = "Iran, Islamic Republic of",
-                              "Korea" = "Korea, Republic of"))
+                    "Bolivia" = "Bolivia, Plurinational State of",
+                    "Iran" = "Iran, Islamic Republic of",
+                    "Korea" = "Korea, Republic of"))
 ```
 
 Now we have country names that nicely fit into tables and plots we want to create later and do not have to worry about it anymore.
@@ -1071,7 +1087,9 @@ The first method involves the function `replace_na()`. It allows you to replace 
 # The dataset which contains the feedback
 student_feedback <- tibble(name = c("Thomas", NA, "Helen", NA),
                            feedback = as.numeric(c(6, 5, NA, 4)),
-                           overall = as_factor(c("excellent", "very good", NA, NA))
+                           overall = as_factor(c("excellent",
+                                                 "very good",
+                                                 NA, NA))
                            )
 
 student_feedback
@@ -1086,7 +1104,8 @@ We have different types of data to deal with in `student_feedback`, and there ar
 student_feedback |>
   mutate(name = replace_na(name, "Unkown"),
          feedback = replace_na(feedback, 5),
-         overall = replace_na(as.character(overall), "unrated"),
+         overall = replace_na(as.character(overall),
+                              "unrated"),
          overall = as_factor(overall)
          )
 ```
@@ -1100,7 +1119,8 @@ We successfully replaced all the missing values with values of our choice. Only 
 student_feedback |>
   mutate(name = replace_na(name, "Unkown"),
          feedback = replace_na(feedback, 0),
-         overall = as_factor(replace_na(as.character(overall), "unrated"))
+         overall = as_factor(replace_na(as.character(overall),
+                                        "unrated"))
          )
 ```
 
@@ -1326,7 +1346,7 @@ The code chunk below breaks down these steps in the context of the `lavaan` pack
 
 library(lavaan)
 
-#1: Define the model which explains how items relate to latent variables
+#1: Define how items relate to latent variables
 model <- '
 social_integration =~
 si_socialise_with_people_exp +
@@ -1569,12 +1589,12 @@ This chapter has been a reasonably long one. Nonetheless, it only covered the ba
 
 Now that we have learned the basics of data wrangling, we can finally start our data analysis.
 
-## Exercises
+## Exercises {#sec-exercises-data-wrangling}
 
 If you would like to test your knowledge or simply practice what we covered in this chapter you can copy and paste the following code if you have the `r4np` package installed already.
 
 ```{r}
-#| label: exercise-option-1
+#| label: exercise-option-1-data-wrangling
 #| eval: false
 
 # Option 1:
@@ -1584,7 +1604,7 @@ learnr::run_tutorial("ex_data_wrangling", package = "r4np")
 If you have not yet installed the `r4np` package, you will have to do this first using this code chunk:
 
 ```{r}
-#| label: exervise-option-2
+#| label: exervise-option-2-data-wrangling
 #| eval: false
 
 # Option 2:

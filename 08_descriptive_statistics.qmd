@@ -89,7 +89,7 @@ ggplot(eqls_2011, aes(x = country_name)) +
   coord_flip() +
   ggtitle("Country representation",              # Add a title
           subtitle = "The EQLS 2011 dataset") +  # Add a sub-title
-  xlab("country") +                          # Rename x-axis
+  xlab("country") +                              # Rename x-axis
   ylab("frequency")                              # Rename y-axis
 ```
 
@@ -128,7 +128,7 @@ eqls_2011 |>
   # Add titles for plot
   ggtitle("Country representation",              # Add a title
           subtitle = "The EQLS 2011 dataset") +  # Add a sub-title
-  xlab("country") +                          # Rename x-axis
+  xlab("country") +                              # Rename x-axis
   ylab("frequency")                              # Rename y-axis  
 ```
 
@@ -465,7 +465,8 @@ least_alcohol <-
 # because there are multiple countries sharing
 # the minimum score.
 
-least_alcohol_as_string <- paste(least_alcohol$country, collapse = "\n")
+least_alcohol_as_string <- paste(least_alcohol$country,
+                                 collapse = "\n")
 
 # Create the plot
 alcohol_2019 |>
@@ -473,13 +474,13 @@ alcohol_2019 |>
   geom_boxplot() +
   annotate("text",
            label = glue::glue("{most_alcohol$country}
-                              ({max(alcohol_2019$consumption)} litres)"),
+                              ({max(alcohol_2019$consumption)} L)"),
            x = 16,
            y = 0.05,
            size = 2.5) +
   annotate("text",
            label = glue::glue("{least_alcohol_as_string}
-                              ({min(alcohol_2019$consumption)} litres)"),
+                              ({min(alcohol_2019$consumption)} L)"),
            x = 0,
            y = 0.1,
            size = 2.5)
@@ -494,7 +495,7 @@ As we can see from our visualisation, none of the countries would count as outli
 Another frequently used approach to show the spread (or distribution) of data is the histogram. The histogram easily gets confused with a bar plot. However, you would be very mistaken to assume that they are the same. Some key differences between these two types of plots is summarised in @tbl-histogram-vs-bar-plot.
 
 | Histogram | Bar plot |
-|------------------------------------|------------------------------------|
+|----|----|
 | Used to show the distribution of non-categorical data | Used for showing the frequency of categorical data, i.e. `factor`s |
 | Each bar (also called 'bin') represents a group of observations. | Each bar represents one category (or level) in our `factor`. |
 | The order of the bars is important and cannot/should not be changed. | The order of bars is arbitrary and can be reordered if meaningful. |
@@ -826,7 +827,9 @@ alcohol_2019 |>
   select(country, consumption) |>
   ggplot(aes(x = country, y = consumption)) +
   geom_point() +
-  geom_hline(aes(yintercept = alcohol_mean, col = "red"), show.legend = FALSE) +
+  geom_hline(aes(yintercept = alcohol_mean,
+                 col = "red"),
+             show.legend = FALSE) +
 
   # Making the plot a bit more pretty
   theme(axis.text.x = element_blank(),         # Removes country names
@@ -849,7 +852,9 @@ alcohol_2019 |>
   select(country, consumption) |>
   ggplot(aes(x = reorder(country, consumption), y = consumption)) +
   geom_point(shape = 124) +
-  geom_hline(aes(yintercept = alcohol_mean, col = "red"), show.legend = FALSE) +
+  geom_hline(aes(yintercept = alcohol_mean,
+                 col = "red"),
+             show.legend = FALSE) +
 
   theme(axis.text.x = element_blank(),
         panel.grid.major = element_blank(),
@@ -935,3 +940,15 @@ skimr::skim(alcohol_2019)
 In addition to providing descriptive statistics, `skim()` sorts the variables by data type and provides different descriptive statistics meaningful to each kind. Apart from that, the column `n_missing` can help spot missing data. Lastly, we also find a histogram in the last column for `numeric` data, which I find particularly useful.
 
 When just starting to work on a new dataset, the `psych` and the `skimr` package are solid starting points to get an overview of the main characteristics of your data, especially in larger datasets. On your *R* journey, you will encounter many other packages which provide useful functions like these.
+
+## Exercises {#sec-exercises-descriptive-statistics}
+
+Let’s apply your understanding of descriptive statistics. Run the code below to practice on some sample data. Make sure you have the `r4np` package installed.
+
+```{r}
+#| label: exercises-descriptive-statistics
+#| eval: false
+
+# Option 1:
+learnr::run_tutorial("ex_descriptive_statistics", package = "r4np")
+```

@@ -4,4 +4,9 @@ Welcome to *R for Non-Programmers: A Guide for Social Scientists (R4NP)*. This b
 
 This book is designed to be accessible to beginners while also providing valuable insights for experienced analysts looking to transition to *R* from other computational software. You don't need any prior knowledge or programming skills to get started. *R4NP* provides a comprehensive entry into R programming, regardless of your background.
 
-\mainmatter
+
+
+<BR>
+
+
+[![](images/cover_art_icons/buy_me_a_coffee_custom.png){width=200 style="display: block; margin-left: auto; margin-right: auto;" target=_blank}](https://www.buymeacoffee.com/thesocialsciencesofa)

@@ -8,6 +8,7 @@
 library(tidyverse)
 library(r4np)
 library(patchwork)
+library(gt)
 ```
 
 Social Sciences is about the study of human beings and their interactions. As such, we frequently want to compare two or more groups of human beings, organisations, teams, countries, etc., with each other to see whether they are similar or different from each other. Sometimes we also want to track individuals over time and see how they may have changed in some way or other. In short, comparing groups is an essential technique to make inferences and helps us better understand the diversity surrounding us.
@@ -140,19 +141,57 @@ comp |>
 
 While the distribution looks similar, we notice that the median and the mean (marked by the cross inside the boxplot) are slightly higher for `male` participants. Thus, we can suspect some differences between these two groups, but we do not know whether these differences are significant or not. Therefore, to consider the significance (remember @sec-significance) and the effect size (see @tbl-effect-size-cohen), we have to perform statistical tests.
 
-@tbl-comparing-two-groups-unpaired summarises the different tests and functions to perform the group comparison computationally. It is important to note that the parametric test compares the means of two groups, while the non-parametric test compares medians. All of these tests turn significant if the differences between groups are large enough. Thus, significant results can be read as 'these groups are significantly different from each other'. Of course, if the test is not significant, the groups are considered to be not different. For parametric tests, i.e. `t_test(),` it is also essential to indicate whether the variances between these two groups are equal or not. Remember, the equality of variances was one of the assumptions for parametric tests. The *Welch t-test* can be used if the variances are not equal, but all other criteria for normality are met. By setting `var.equal = TRUE`, a regular *T-Test* would be performed. By default, `t_test()` assumes that variances are not equal. Make sure you test for *homogeneity of variance* before making your decision (see @sec-homogeneity-of-variance).
+@tbl-comparing-two-groups-unpaired summarises the different tests and functions to perform the group comparison computationally. It is important to note that the parametric test compares the means of two groups, while the non-parametric test compares medians. All of these tests turn significant if the differences between groups are large enough. Thus, significant results can be read as 'these groups are significantly different from each other'. Of course, if the test is not significant, the groups are considered to be not different. For parametric tests, i.e. `t_test(),` it is also essential to indicate whether the variances between these two groups are equal or not. Remember, the equality of variances was one of the assumptions for parametric tests. The *Welch t-test* can be used if the variances are not equal, but all other criteria for normality are met. By setting `var.equal = TRUE`, a regular *T-Test* would be performed. By default, `t_test()` assumes that variances are not equal. Make sure you test for *homogeneity of variance* before making your decision (see @sec-homogeneity-of-variance)
 
-+----------------+----------------+-------------------------------+-------------+--------------------+
-| Assumption     | Test           | Function                      | Effect size | Function           |
-+================+================+===============================+=============+====================+
-| Parametric     | T-Test         | `t_test(var.equal = TRUE)`    | Cohen's d   | `cohens_d()`       |
-|                |                |                               |             |                    |
-|                | Welch T-Test   | `t_test(var.equal = FALSE)`   |             |                    |
-+----------------+----------------+-------------------------------+-------------+--------------------+
-| Non-parametric | Mann-Whitney U | `wilcox_test(paired = FALSE)` | Wilcoxon R  | `wilcox_effsize()` |
-+----------------+----------------+-------------------------------+-------------+--------------------+
+```{r}
+#| label: tbl-comparing-two-groups-unpaired
+#| echo: false
+#| tbl-cap: "Comparing two unpaired groups"
 
-: Comparing two unpaired groups {#tbl-comparing-two-groups-unpaired}
+
+# Create the data as a tibble
+data <- tibble(
+  data = c("P", "P", "NP"),
+  test = c("T-Test", "Welch T-Test", "Mann-Whitney U"),
+  function_test = c("`t_test(var.equal = TRUE)`", "`t_test(var.equal = FALSE)`", "`wilcox_test(paired = FALSE)`"),
+  effect_size = c("Cohen's d", "Cohen's d", "Wilcoxon R"),
+  function_es = c("`cohens_d()`", "`cohens_d()`", "`wilcox_effsize()`")
+)
+
+data  |> 
+  gt() |>
+  fmt_markdown(columns = everything()) |>
+  cols_label(
+    data = "Data",
+    test = "Test",
+    function_test = "Function",
+    effect_size = "Effect size",
+    function_es = "Function"
+  ) |>
+  tab_style(
+    style = cell_text(weight = "bold"),
+    locations = cells_column_labels(everything())
+  ) |>
+  # Adjust padding to create visual spacing between columns without adding borders
+  tab_options(
+    data_row.padding = px(20),           # Increase padding to simulate column spacing
+    column_labels.padding = px(20),      # Apply same padding to column labels
+    table.border.top.width = px(1),
+    table.border.bottom.width = px(1),
+    table.font.size = px(12)  # Change 8 to desired size in pixels
+  ) |> 
+# Set specific widths for spacer columns to simulate horizontal space between main columns
+  cols_width(
+    data ~ px(30),
+    test ~ px(110),
+    function_test ~ px(130),
+    effect_size ~ px(80),
+    function_es ~ px(100)
+    ) |>
+  tab_footnote(
+    footnote = md("*Note: P ... Parametric | NP ... Non-parametric*")
+  )
+```
 
 With this information in hand, we can start comparing the `female` Egyptians with the `male` ones using both the parametric and the non-parametric test for illustration purposes only. By setting `detailed = TRUE`, we can obtain the maximum amount of information for certain comparisons. In such cases, it is advisable to use `glimpse()`. This will make the output (a `tibble`) easier to read because each row presents one piece of information, rather than having one row with many columns.
 
@@ -255,17 +294,57 @@ hie_comp |>
 
 Considering this plot, we can ascertain that there is a slight increase in `feelings_of_anxiety` which is concerning. However, it is tough to say whether these differences are large, significant and, therefore, important. Instead we likely have to find a way to assess this statistically by crunching the numbers.
 
-@tbl-comparing-two-groups-paired summarises which tests and functions need to be performed when our data is parametric or non-parametric. In both cases, the functions are the same as those of the unpaired group comparisons, but we need to add the attribute `paired = TRUE`. Still, the interpretations between the unpaired and paired tests remain the same. Also, be aware that some tests have changed in name, e.g. the Mann-Whitney U test has become the Wilcoxon Signed Rank Test. Even though we use the same functions as before, by changing the attribute `paired` to `TRUE`, we also change the computational technique to obtain the results. Thus, remember that the same function can perform different computations which are not comparable. While this practice is handy, because it is easier to remember a function, it can also easily lead to mistakes if the wrong parameters were set.
+@tbl-comparing-two-groups-paired summarises which tests and functions need to be performed when our data is parametric or non-parametric. In both cases, the functions are the same as those of the unpaired group comparisons, but we need to add the attribute `paired = TRUE`. Still, the interpretations between the unpaired and paired tests remain the same. Also, be aware that some tests have changed in name, e.g. the Mann-Whitney U test has become the Wilcoxon Signed Rank Test. Even though we use the same functions as before, by changing the attribute `paired` to `TRUE`, we also change the computational technique to obtain the results. Thus, remember that the same function can perform different computations which are not comparable. While this practice is handy, because it is easier to remember a function, it can also easily lead to mistakes if the wrong parameters were set
 
-+----------------+---------------------------+------------------------------+-------------+--------------------+
-| Assumption     | Test                      | Function                     | Effect size | Function           |
-+================+===========================+==============================+=============+====================+
-| Parametric     | T-Test                    | `t_test(paired = TRUE)`      | Cohen's d   | `cohens_d()`       |
-+----------------+---------------------------+------------------------------+-------------+--------------------+
-| Non-parametric | Wilcoxon Signed Rank Test | `wilcox_test(paired = TRUE)` | Wilcoxon r  | `wilcox_effsize()` |
-+----------------+---------------------------+------------------------------+-------------+--------------------+
+```{r}
+#| label: tbl-comparing-two-groups-paired
+#| echo: false
+#| tbl-cap: "Comparing two paired groups"
 
-: Comparing two paired groups {#tbl-comparing-two-groups-paired}
+# Create the data as a tibble
+data <- tibble(
+  data = c("P", "NP"),
+  test = c("T-Test", "Wilcoxon Signed Rank Test"),
+  function_test = c("`t_test(paired = TRUE)`", "`wilcox_test(paired = TRUE)`"),
+  effect_size = c("Cohen's d", "Wilcoxon r"),
+  function_es = c("`cohens_d()`", "`wilcox_effsize()`")
+)
+
+# Create gt table
+data  |> 
+  gt() |>
+  fmt_markdown(columns = everything()) |>
+  cols_label(
+    data = "Data",
+    test = "Test",
+    function_test = "Function",
+    effect_size = "Effect size",
+    function_es = "Function"
+  ) |>
+  tab_style(
+    style = cell_text(weight = "bold"),
+    locations = cells_column_labels(everything())
+  ) |>
+  # Adjust padding to create visual spacing between columns without adding borders
+  tab_options(
+    data_row.padding = px(20),           # Increase padding to simulate column spacing
+    column_labels.padding = px(20),      # Apply same padding to column labels
+    table.border.top.width = px(1),
+    table.border.bottom.width = px(1),
+    table.font.size = px(12)  # Change 8 to desired size in pixels
+  ) |> 
+# Set specific widths for spacer columns to simulate horizontal space between main columns
+  cols_width(
+    data ~ px(30),
+    test ~ px(110),
+    function_test ~ px(130),
+    effect_size ~ px(80),
+    function_es ~ px(100)
+    ) |>
+  tab_footnote(
+    footnote = md("*Note: P ... Parametric | NP ... Non-parametric*")
+  )
+```
 
 Let's apply these functions to find out whether the differences we can see in our plot matter.
 
@@ -357,7 +436,10 @@ mcomp |>
              y = reorder(country, satisfaction),
              fill = country)) +
   ggridges::stat_density_ridges(bandwidth = 0.6,
-                                quantile_lines = TRUE,   # adds median indicator
+                                
+                                # adds median indicator
+                                quantile_lines = TRUE,
+                                
                                 quantiles = (0.5)) +
   # Remove legend
   theme(legend.position = "none")
@@ -385,6 +467,61 @@ The plot shows us that `Japan` and `Korea` appear to be very similar, if not ide
 : Comparing multiple unpaired groups (effect size functions from package `effectsize`) {#tbl-comparing-multiple-groups-unpaired}
 
 [^11_group_comparison-1]: These functions are taken from the `effectsize` package.
+
+```{r}
+#| label: tbl-comparing-multiple-groups-unpaired
+#| echo: false
+#| tbl-cap: "Comparing multiple unpaired groups (effect size functions from package `effectsize`)"
+
+# Create the data as a tibble
+data <- tibble(
+  data = c("P", "NP"),
+  test = c("ANOVA", "Kruskal-Wallis test"),
+  function_test = c(
+    "`anova_test` (equal variances only)\n`oneway.test(var.equal = TRUE/FALSE)`",
+    "`kruskal_test()`"
+  ),
+  effect_size = c("Eta squared", "Epsilon squared (rank)"),
+  function_es = c("`eta_squared()`", "`rank_epsilon_squared()`")
+)
+
+
+# Create gt table
+data  |> 
+  gt() |>
+  fmt_markdown(columns = everything()) |>
+  cols_label(
+    data = "Data",
+    test = "Test",
+    function_test = "Function",
+    effect_size = "Effect size",
+    function_es = "Function"
+  ) |>
+  tab_style(
+    style = cell_text(weight = "bold"),
+    locations = cells_column_labels(everything())
+  ) |>
+  # Adjust padding to create visual spacing between columns without adding borders
+  tab_options(
+    data_row.padding = px(30),           # Increase padding to simulate column spacing
+    column_labels.padding = px(20),      # Apply same padding to column labels
+    table.border.top.width = px(1),
+    table.border.bottom.width = px(1),
+    table.font.size = px(12)  # Change 8 to desired size in pixels
+  ) |> 
+# Set specific widths for spacer columns to simulate horizontal space between main columns
+# 140px widths works well for this book
+  cols_width(
+    data ~ px(35),
+    test ~ px(65),
+    function_test ~ px(150),
+    effect_size ~ px(60),
+    function_es ~ px(140)
+    ) |>
+  tab_footnote(
+    footnote = md("*Note: P ... Parametric | NP ... Non-parametric*")
+  )
+```
 
 Let's begin by conducting the group comparison. As you will notice, `rstatix` currently does not support a parametric test where `var.equal = FALSE`. Therefore we need to fall back to the underlying function `oneway.test(var.equal = FALSE)`
 
@@ -439,25 +576,62 @@ effectsize::rank_epsilon_squared(mcomp$satisfaction ~ mcomp$gender)
 
 The results show that there is a significant and large difference between these groups. You might argue that this is not quite true. Considering our plot, we know that Japan and Korea do not look as if they are significantly different. Multiple group comparisons only consider differences across all three groups. Therefore, if one group differs from the other groups, the test will turn significant and even provide a large enough effect size to consider it essential. However, these tests do not provide information on which differences between groups are significant. To gain more clarification about this, we need to incorporate another step called *post-hoc tests.* These tests compare two groups at a time, which is why they are also known as *pairwise comparisons*. Compared to regular two-sample tests, these perform corrections of the `p`-values for multiple testing, which is necessary. However, there are many different *post-hoc tests* you can choose. @field2013discovering (p.459) nicely outlines the different scenarios and provides recommendations to navigate this slightly complex field of *post-hoc tests*. @tbl-post-hoc-tests provides an overview of his suggestions.
 
-+----------------------------------+-----------------+--------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Equal sample size                | Equal variances | Post-hot tests     | Functions in R                                                                                                                                                                                   |
-+==================================+=================+====================+==================================================================================================================================================================================================+
-| YES                              | YES             | -   REGWQ,         | -   `mutoss::regwq()`[^11_group_comparison-2]                                                                                                                                                    |
-|                                  |                 |                    |                                                                                                                                                                                                  |
-|                                  |                 | -   Tukey,         | -   `rstatix::tukey_hsd()`                                                                                                                                                                       |
-|                                  |                 |                    |                                                                                                                                                                                                  |
-|                                  |                 | -   Bonferroni     | -   `pairwise.t.test(p.adjust.method = "bonferroni")`                                                                                                                                            |
-+----------------------------------+-----------------+--------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| NO (slightly different)          | YES             | -   Gabriel        |                                                                                                                                                                                                  |
-+----------------------------------+-----------------+--------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| YES                              | YES             | -   Hochberg's GT2 | -   Not available in R and should not be confused with `pairwise.t.test(p.adjust.method = "hochberg")`, which is based on @hochberg1988sharper. The GT2, however, is based on @hochberg1974some. |
-+----------------------------------+-----------------+--------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| NO (not ideal for small samples) | NO              | -   Games-Howell   | -   `rstatix::games_howell_test()`                                                                                                                                                               |
-+----------------------------------+-----------------+--------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+```{r}
+#| label: tbl-post-hoc-tests
+#| echo: false
+#| tbl-cap: "Different post-hoc tests for different scenarios (parametric)"
 
-: Different post-hoc tests for different scenarios (parametric) {#tbl-post-hoc-tests}
+# Create the dataset with underscores in variable names and no special characters
+data <- tibble(
+  equal_sample_size = c("YES", "NO*", "YES", "NO**"),
+  equal_variances = c("YES", "YES", "YES", "NO"),
+  post_hoc_tests = c(
+    "- REGWQ,\n- Tukey,\n- Bonferroni",
+    "- Gabriel",
+    "- Hochberg's GT2",
+    "- Games-Howell"
+  ),
+  functions_in_r = c(
+    "- `mutoss::regwq()`\n- `rstatix::tukey_hsd()`\n- `pairwise.t.test(p.adjust.method = 'bonferroni')`",
+    "",
+    "- Not available in R and should not be confused with\n  `pairwise.t.test(p.adjust.method = 'hochberg')`,\n  which is based on Hochberg (1988). The GT2, however, is based on Hochberg (1974).",
+    "- `rstatix::games_howell_test()`"
+  )
+)
 
-[^11_group_comparison-2]: In order to use this package, it is necessary to install a series of other packages found on [bioconductor.org](https://www.bioconductor.org "bioconductor.org"){target="blank"}
+# Create the gt table
+data |> 
+  gt() |>
+  fmt_markdown(columns = everything()) |>
+  cols_label(
+    equal_sample_size = "Equal sample size",
+    equal_variances = "Equal variances",
+    post_hoc_tests = "Post-hoc tests",
+    functions_in_r = "Functions in R"
+  ) |>
+  tab_style(
+    style = cell_text(weight = "bold"),
+    locations = cells_column_labels(everything())
+  ) |>
+  tab_options(
+    data_row.padding = px(20),           # Increase padding for readability
+    column_labels.padding = px(20),      # Adjust column label padding
+    table.border.top.width = px(1),
+    table.border.bottom.width = px(1),
+    table.font.size = px(12)
+  ) |>
+  
+# Table with 450px is good
+  cols_width(
+    equal_sample_size ~ px(55),
+    equal_variances ~ px(50),
+    post_hoc_tests ~ px(85),
+    functions_in_r ~ px(260)
+  ) |>
+  tab_footnote(
+    footnote = md("*Note: * slightly different only* | \\**\\* ideal for small samples*")
+  )
+```
 
 You might be surprised to see that there are also *post-hoc tests* for parametric group comparisons when equal variances are not assumed. Would we not have to use a non-parametric test for our group comparison instead? Well, empirical studies have demonstrated that ANOVAs tend to produce robust results, even if the assumption of normality [e.g. @blanca2017non] is not given, or there is some degree of heterogeneity of variance between groups [@tomarken1986comparison]. In other words, there can be some lenieancy (or flexibility?) when it comes to the violation of parametric assumptions. If you want to reside on the save side, you should ensure you know your data and its properties. If in doubt, non-parametric tests are also available.
 
@@ -621,15 +795,55 @@ The output from `anova_test()` also provides information about `Sphericity Corre
 
 So far, we blindly assumed that our data are parametric. If our assumptions for parametric tests are violated, we can draw on a non-parametric equivalent called `Friedman Test`. @tbl-comparing-multiple-groups-paired summarises the parametric and non-parametric tests as well as their respective effect sizes.
 
-+----------------+-------------------------+-------------------+-------------+-----------------+
-| Assumption     | Test                    | Function          | Effect size | Function        |
-+================+=========================+===================+=============+=================+
-| Parametric     | Repeated measures ANOVA | `anova_test()`    | Eta squared | `eta_squared()` |
-+----------------+-------------------------+-------------------+-------------+-----------------+
-| Non-parametric | Friedman Test           | `friedman_test()` | Kendall's R | `kendalls_w()`  |
-+----------------+-------------------------+-------------------+-------------+-----------------+
+```{r}
+#| label: tbl-comparing-multiple-groups-paired
+#| echo: false
+#| tbl-cap: "Comparing multiple paired groups (effect size functions from package `effectsize`"
 
-: Comparing multiple paired groups (effect size functions from package `effectsize`) {#tbl-comparing-multiple-groups-paired}
+# Create the data as a tibble
+data <- tibble(
+  data = c("P", "NP"),
+  test = c("Repeated measures ANOVA", "Friedman Test"),
+  function_test = c("`anova_test()`", "`friedman_test()`"),
+  effect_size = c("Eta squared", "Kendall's R"),
+  function_es = c("`eta_squared()`", "`kendalls_w()`")
+)
+
+# Create gt table
+data  |> 
+  gt() |>
+  fmt_markdown(columns = everything()) |>
+  cols_label(
+    data = "Data",
+    test = "Test",
+    function_test = "Function",
+    effect_size = "Effect size",
+    function_es = "Function"
+  ) |>
+  tab_style(
+    style = cell_text(weight = "bold"),
+    locations = cells_column_labels(everything())
+  ) |>
+  # Adjust padding to create visual spacing between columns without adding borders
+  tab_options(
+    data_row.padding = px(20),           # Increase padding to simulate column spacing
+    column_labels.padding = px(20),      # Apply same padding to column labels
+    table.border.top.width = px(1),
+    table.border.bottom.width = px(1),
+    table.font.size = px(12)  # Change 8 to desired size in pixels
+  ) |> 
+# Set specific widths for spacer columns to simulate horizontal space between main columns
+  cols_width(
+    data ~ px(40),
+    test ~ px(120),
+    function_test ~ px(105),
+    effect_size ~ px(85),
+    function_es ~ px(100)
+    ) |>
+  tab_footnote(
+    footnote = md("*Note: P ... Parametric | NP ... Non-parametric*")
+  )
+```
 
 Instead of using a fictional example as we did in the previous chapter, let's draw on real observations using the dataset `wvs_waves`. This dataset contains similar data to `wvs` but offers multiple measures as indicated by the variable `wave` for several countries. For example, we might be interested to know whether `satisfaction` changed over the years. This time, our unit of analysis is not individuals, but countries. Therefore, we compare the same countries (not individuals) over time.
 
@@ -727,19 +941,21 @@ effectsize::interpret_kendalls_w(kw$Kendalls_W)
 
 The non-parametric test confirms the parametric test from before. However, the interpretation of the effect size `Kendall's W` requires some explanation. First, the effect size for Kendall's W can range from `0` (small effect size) to `1` (large effect size). Usually, this effect size is considered when comparing inter-rater agreement, for example, the level of agreement of a jury in ice skating during the Olympic games. Thus, the interpretation offered by the function `interpret_kendalls_w()` follows this logic. As such, it is worth considering a slightly amended interpretation of Kendall's W if our data is not based on ratings. This is shown in @tbl-effect-size-kendalls-w based on @landis1977measurement (p. 165). Thus, we could report that the effect size of the significant differences is 'very small'.
 
-+---------------+-----------------------------------------+----------------------------+
-| Kendall's W   | Interpretation [@landis1977measurement] | Alternative interpretation |
-+===============+=========================================+============================+
-| 0.00-0.02     | Slight agreement                        | Very small                 |
-+---------------+-----------------------------------------+----------------------------+
-| 0.21-0.40     | Fair agreement                          | Small                      |
-+---------------+-----------------------------------------+----------------------------+
-| 0.41-0.60     | Moderate agreement                      | Moderate                   |
-+---------------+-----------------------------------------+----------------------------+
-| 0.61-0.80     | Substantial agreement                   | Large                      |
-+---------------+-----------------------------------------+----------------------------+
-| 0.81-1.00     | Almost perfect agreement                | Very large                 |
-+---------------+-----------------------------------------+----------------------------+
++-------------+--------------------------+----------------------------+
+| Kendall's W | Interpretation           | Alternative interpretation |
+|             |                          |                            |
+|             | [@landis1977measurement] |                            |
++=============+==========================+============================+
+| 0.00-0.02   | Slight agreement         | Very small                 |
++-------------+--------------------------+----------------------------+
+| 0.21-0.40   | Fair agreement           | Small                      |
++-------------+--------------------------+----------------------------+
+| 0.41-0.60   | Moderate agreement       | Moderate                   |
++-------------+--------------------------+----------------------------+
+| 0.61-0.80   | Substantial agreement    | Large                      |
++-------------+--------------------------+----------------------------+
+| 0.81-1.00   | Almost perfect agreement | Very large                 |
++-------------+--------------------------+----------------------------+
 
 : Interpretation benchmarks for the effect size Kendall's W {#tbl-effect-size-kendalls-w}
 
@@ -801,7 +1017,7 @@ The relative frequency (`perc`) reveals that `female` and `male` participants ar
 
 A more common and compact way to show such dependencies between categorical variables is a contingency table. To convert our current table into a contingency table, we need to map the levels of `satisfaction_bin` as rows (i.e. `satisfied` and `unsatisfied`), and for `gender`, we want each level represented as a column (i.e. `male` and `female`). This can be achieved with the function `pivot_wider()`. It turns our 'long' data frame into a 'wide' one. Therefore, we basically perform the opposite of what the function `pivot_longer()` did earlier. However, this means that our data is not 'tidy' anymore. Let's take a look at the output first to understand better what we try to achieve.
 
-```{r Contigency table relative satisfaction_bin with gender wide, echo=TRUE}
+```{r}
 #| label: satsifaction-contigency-tbl-gender-wide
 #| echo: true
 
@@ -930,19 +1146,56 @@ Throughout the remaining chapters, I will use the mosaic plot to illustrate dist
 
 When it comes to the computational side of things, we have to distinguish whether our two variables create a 2-by-2 matrix, i.e. both variables only have two levels. Depending on which scenario applies to our analysis, a different statistical test has to be performed. For some tests, a minimum frequency for each value in our contingency table (i.e. cells) also needs to be achieved. This is usually a matter of sample size and diversity in a sample. @tbl-statistical-tests-unpaired-cat-variables provides an overview of the different scenarios and indicates the functions we have to use to conduct our analysis in *R*.
 
-+----------+--------------------------+----------------------------------------------------+-------------------------------------------------------------+---------------+
-| Matrix   | Condition                | Test                                               | Function in R                                               | Effect size   |
-+==========+==========================+====================================================+=============================================================+===============+
-| 2x2      | \< 10 obs.               | Fisher's Exact Test                                | `fisher.test()`                                             | `phi()`       |
-+----------+--------------------------+----------------------------------------------------+-------------------------------------------------------------+---------------+
-| 2x2      | \> 10 obs.               | Chi-squared Test with Yate's Continuity Correction | `infer::chisq_test(correct = TRUE)`[^11_group_comparison-3] | `phi()`       |
-+----------+--------------------------+----------------------------------------------------+-------------------------------------------------------------+---------------+
-| n x n    | \> 5 obs. (80% of cells) | Chi-squared Test                                   | `infer::chisq_test()`                                       | `cramers_v()` |
-+----------+--------------------------+----------------------------------------------------+-------------------------------------------------------------+---------------+
+```{r}
+#| label: tbl-statistical-tests-unpaired-cat-variables
+#| echo: false
+#| tbl-cap: "Statistical tests to compare two unpaired categorical variables. Effect sizes are computed using the `effectsize` package"
 
-: Statistical tests to compare two unpaired categorical variables. Effect sizes are computed using the `effectsize` package. {#tbl-statistical-tests-unpaired-cat-variables}
+# Create the data as a tibble
+data <- tibble(
+  matrix = c("2 x 2", "2 x 2", "n x n"),
+  condition = c("< 10 obs.", "\\> 10 obs.", "\\> 5 obs.*"),
+  test = c("Fisher's Exact Test", "Chi-squared Test with Yate's Continuity Correction", "Chi-squared Test"),
+  function_test = c("`fisher.test()`", "`infer::chisq_test( correct = TRUE)`", "`infer::chisq_test()`"),
+  effect_size = c("`phi()`", "`phi()`", "`cramers_v()`")
+)
 
-[^11_group_comparison-3]: `infer` is an R package which is part of `tidymodels`.
+# Create gt table
+data  |>
+  gt() |>
+  fmt_markdown(columns = everything()) |>
+  cols_label(
+    matrix = "Matrix",
+    condition = "Cond.",
+    test = "Test",
+    function_test = "Function in R",
+    effect_size = "Effect size"
+  ) |>
+  tab_style(
+    style = cell_text(weight = "bold"),
+    locations = cells_column_labels(everything())
+  ) |>
+  # Adjust padding to create visual spacing between columns without adding borders
+  tab_options(
+    data_row.padding = px(20),           # Increase padding to simulate column spacing
+    column_labels.padding = px(20),      # Apply same padding to column labels
+    table.border.top.width = px(1),
+    table.border.bottom.width = px(1),
+    table.font.size = px(12)  # Change 8 to desired size in pixels
+  ) |>
+# Set specific widths for spacer columns to simulate horizontal space between main columns
+# table width 450px
+cols_width(
+  matrix ~ px(50),
+  condition ~ px(65),
+  test ~ px(140),
+  function_test ~ px(120),
+  effect_size ~ px(75)
+  ) |>
+  tab_footnote(
+    footnote = md("*Note: 80% of the cells*")
+  )
+```
 
 To cut a long story short, we only need to be worried about 2x2 contingency tables where the values in some (or all) cells are lower than 10. In those cases, we need to rely on the *Fisher's Exact Test*. In all other cases, we can depend on the *Pearson Chi-squared Test* to do our bidding. The function `infer::chisq_test()` is based on the function `chisq.test()`, which automatically applies the required *Yate's Continuity Correction* if necessary.
 
@@ -996,22 +1249,13 @@ wvs_nona |> infer::chisq_test(satisfaction_bin ~ gender,
                                correct = TRUE)
 ```
 
-```{r}
-#| label: effect-size-cramer-v
-#| echo: true
-
-## Effect size
-(cv <- effectsize::cramers_v(wvs_nona$satisfaction_bin, wvs_nona$gender))
-effectsize::interpret_r(cv$Cramers_v, rules = "cohen1988")
-```
-
 Both tests reveal that the relationship between our variables is not significant ($p > 0.05$), and the effect sizes are very small. This result aligns with our visualisation shown in @fig-mosaic-plot because everything looks very symmetrical.
 
 Contingency tables do not always come as 2x2 matrices. Therefore, it makes sense to look at one more example where we have a much larger matrix. Bear in mind that the larger your matrix, the larger your dataset has to be to produce reliable results.
 
-Let's explore an example for a contingency table that is a 6x2 matrix. Imagine yourself at a soirée[^11_group_comparison-4], and someone might raise the question: Is it true that men are less likely to be married than women? To give you an edge over others at this French evening party, we can take a closer look at this matter with our `wvs_nona` dataset. We can create a mosaic plot and contingency table which feature `relationship_status` and `gender`.
+Let's explore an example for a contingency table that is a 6x2 matrix. Imagine yourself at a soirée[^11_group_comparison-2], and someone might raise the question: Is it true that men are less likely to be married than women? To give you an edge over others at this French evening party, we can take a closer look at this matter with our `wvs_nona` dataset. We can create a mosaic plot and contingency table which feature `relationship_status` and `gender`.
 
-[^11_group_comparison-4]: A fancy way of saying 'evening party' in French.
+[^11_group_comparison-2]: A fancy way of saying 'evening party' in French.
 
 As usual, let's start with a plot first. We create a mosaic plot to visualise all six levels of the factor `relationship_status` against the two levels of `gender`.
 
@@ -1212,7 +1456,8 @@ mcnemar.test(paired_data$pre_training, paired_data$post_training)
 #| echo: true
 
 # Effect size
-effectsize::cohens_g(paired_data$pre_training, paired_data$post_training)
+effectsize::cohens_g(paired_data$pre_training,
+                     paired_data$post_training)
 ```
 
 To correctly interpret the effect size @cohen1988statistical suggest the following benchmarks:
@@ -1285,3 +1530,15 @@ In short, I recommend to only use the techniques outlined in this chapter if you
 ## Reviewing group comparisons {#sec-reviewing-group-comparisons}
 
 In Social Sciences, we often compare individuals against each other or with themselves over time. As such, understanding how to compare groups of participants is an essential analytical skill. The techniques outlined in this chapter merely provide a solid starting point and likely cover about 90% of the datasets you will encounter or collect. For the other 10% of cases, you might have to look further for more niche approaches to comparing groups. There is also more to know about these techniques from a theoretical and conceptual angle. However, as far as the computation in *R* is concerned, you should be able to tackle your research projects confidently.
+
+## Exercises {#sec-exercises-group-comparisons}
+
+Now that we have a solid understanding of group comparisons, let's put our knowledge to the test with the exercises provided below. Remember that you have need the `r4np` package installed to get started.
+
+```{r}
+#| label: exercises-group_comparisons
+#| eval: false
+
+# Option 1:
+learnr::run_tutorial("ex_group_comparisons", package = "r4np")
+```
