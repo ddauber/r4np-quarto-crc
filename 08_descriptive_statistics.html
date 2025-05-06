@@ -347,6 +347,7 @@ window.Quarto = {
   <li><a href="#sec-psych-package" id="toc-sec-psych-package" class="nav-link" data-scroll-target="#sec-psych-package"><span class="header-section-number">8.5.1</span> The <code>psych</code> package for descriptive statistics</a></li>
   <li><a href="#sec-skimr-package" id="toc-sec-skimr-package" class="nav-link" data-scroll-target="#sec-skimr-package"><span class="header-section-number">8.5.2</span> The <code>skimr</code> package for descriptive statistics</a></li>
   </ul></li>
+  <li><a href="#sec-exercises-descriptive-statistics" id="toc-sec-exercises-descriptive-statistics" class="nav-link" data-scroll-target="#sec-exercises-descriptive-statistics"><span class="header-section-number">8.6</span> Exercises</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/ddauber/r4np-quarto-crc/blob/main/08_descriptive_statistics.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/ddauber/r4np-quarto-crc/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
@@ -438,7 +439,7 @@ window.Quarto = {
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
 <span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"Country representation"</span>,              <span class="co"># Add a title</span></span>
 <span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>          <span class="at">subtitle =</span> <span class="st">"The EQLS 2011 dataset"</span>) <span class="sc">+</span>  <span class="co"># Add a sub-title</span></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">"country"</span>) <span class="sc">+</span>                          <span class="co"># Rename x-axis</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">"country"</span>) <span class="sc">+</span>                              <span class="co"># Rename x-axis</span></span>
 <span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">"frequency"</span>)                              <span class="co"># Rename y-axis</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
@@ -490,7 +491,7 @@ window.Quarto = {
 <span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Add titles for plot</span></span>
 <span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"Country representation"</span>,              <span class="co"># Add a title</span></span>
 <span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>          <span class="at">subtitle =</span> <span class="st">"The EQLS 2011 dataset"</span>) <span class="sc">+</span>  <span class="co"># Add a sub-title</span></span>
-<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">"country"</span>) <span class="sc">+</span>                          <span class="co"># Rename x-axis</span></span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">"country"</span>) <span class="sc">+</span>                              <span class="co"># Rename x-axis</span></span>
 <span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">"frequency"</span>)                              <span class="co"># Rename y-axis  </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
@@ -891,24 +892,25 @@ Figure&nbsp;8.1: Anatomy of a Boxplot
 <span id="cb38-13"><a href="#cb38-13" aria-hidden="true" tabindex="-1"></a><span class="co"># because there are multiple countries sharing</span></span>
 <span id="cb38-14"><a href="#cb38-14" aria-hidden="true" tabindex="-1"></a><span class="co"># the minimum score.</span></span>
 <span id="cb38-15"><a href="#cb38-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-16"><a href="#cb38-16" aria-hidden="true" tabindex="-1"></a>least_alcohol_as_string <span class="ot">&lt;-</span> <span class="fu">paste</span>(least_alcohol<span class="sc">$</span>country, <span class="at">collapse =</span> <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span>
-<span id="cb38-17"><a href="#cb38-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-18"><a href="#cb38-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Create the plot</span></span>
-<span id="cb38-19"><a href="#cb38-19" aria-hidden="true" tabindex="-1"></a>alcohol_2019 <span class="sc">|&gt;</span></span>
-<span id="cb38-20"><a href="#cb38-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> consumption)) <span class="sc">+</span></span>
-<span id="cb38-21"><a href="#cb38-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
-<span id="cb38-22"><a href="#cb38-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="st">"text"</span>,</span>
-<span id="cb38-23"><a href="#cb38-23" aria-hidden="true" tabindex="-1"></a>           <span class="at">label =</span> glue<span class="sc">::</span><span class="fu">glue</span>(<span class="st">"{most_alcohol$country}</span></span>
-<span id="cb38-24"><a href="#cb38-24" aria-hidden="true" tabindex="-1"></a><span class="st">                              ({max(alcohol_2019$consumption)} litres)"</span>),</span>
-<span id="cb38-25"><a href="#cb38-25" aria-hidden="true" tabindex="-1"></a>           <span class="at">x =</span> <span class="dv">16</span>,</span>
-<span id="cb38-26"><a href="#cb38-26" aria-hidden="true" tabindex="-1"></a>           <span class="at">y =</span> <span class="fl">0.05</span>,</span>
-<span id="cb38-27"><a href="#cb38-27" aria-hidden="true" tabindex="-1"></a>           <span class="at">size =</span> <span class="fl">2.5</span>) <span class="sc">+</span></span>
-<span id="cb38-28"><a href="#cb38-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="st">"text"</span>,</span>
-<span id="cb38-29"><a href="#cb38-29" aria-hidden="true" tabindex="-1"></a>           <span class="at">label =</span> glue<span class="sc">::</span><span class="fu">glue</span>(<span class="st">"{least_alcohol_as_string}</span></span>
-<span id="cb38-30"><a href="#cb38-30" aria-hidden="true" tabindex="-1"></a><span class="st">                              ({min(alcohol_2019$consumption)} litres)"</span>),</span>
-<span id="cb38-31"><a href="#cb38-31" aria-hidden="true" tabindex="-1"></a>           <span class="at">x =</span> <span class="dv">0</span>,</span>
-<span id="cb38-32"><a href="#cb38-32" aria-hidden="true" tabindex="-1"></a>           <span class="at">y =</span> <span class="fl">0.1</span>,</span>
-<span id="cb38-33"><a href="#cb38-33" aria-hidden="true" tabindex="-1"></a>           <span class="at">size =</span> <span class="fl">2.5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb38-16"><a href="#cb38-16" aria-hidden="true" tabindex="-1"></a>least_alcohol_as_string <span class="ot">&lt;-</span> <span class="fu">paste</span>(least_alcohol<span class="sc">$</span>country,</span>
+<span id="cb38-17"><a href="#cb38-17" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">collapse =</span> <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb38-18"><a href="#cb38-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-19"><a href="#cb38-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Create the plot</span></span>
+<span id="cb38-20"><a href="#cb38-20" aria-hidden="true" tabindex="-1"></a>alcohol_2019 <span class="sc">|&gt;</span></span>
+<span id="cb38-21"><a href="#cb38-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> consumption)) <span class="sc">+</span></span>
+<span id="cb38-22"><a href="#cb38-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
+<span id="cb38-23"><a href="#cb38-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="st">"text"</span>,</span>
+<span id="cb38-24"><a href="#cb38-24" aria-hidden="true" tabindex="-1"></a>           <span class="at">label =</span> glue<span class="sc">::</span><span class="fu">glue</span>(<span class="st">"{most_alcohol$country}</span></span>
+<span id="cb38-25"><a href="#cb38-25" aria-hidden="true" tabindex="-1"></a><span class="st">                              ({max(alcohol_2019$consumption)} L)"</span>),</span>
+<span id="cb38-26"><a href="#cb38-26" aria-hidden="true" tabindex="-1"></a>           <span class="at">x =</span> <span class="dv">16</span>,</span>
+<span id="cb38-27"><a href="#cb38-27" aria-hidden="true" tabindex="-1"></a>           <span class="at">y =</span> <span class="fl">0.05</span>,</span>
+<span id="cb38-28"><a href="#cb38-28" aria-hidden="true" tabindex="-1"></a>           <span class="at">size =</span> <span class="fl">2.5</span>) <span class="sc">+</span></span>
+<span id="cb38-29"><a href="#cb38-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="st">"text"</span>,</span>
+<span id="cb38-30"><a href="#cb38-30" aria-hidden="true" tabindex="-1"></a>           <span class="at">label =</span> glue<span class="sc">::</span><span class="fu">glue</span>(<span class="st">"{least_alcohol_as_string}</span></span>
+<span id="cb38-31"><a href="#cb38-31" aria-hidden="true" tabindex="-1"></a><span class="st">                              ({min(alcohol_2019$consumption)} L)"</span>),</span>
+<span id="cb38-32"><a href="#cb38-32" aria-hidden="true" tabindex="-1"></a>           <span class="at">x =</span> <span class="dv">0</span>,</span>
+<span id="cb38-33"><a href="#cb38-33" aria-hidden="true" tabindex="-1"></a>           <span class="at">y =</span> <span class="fl">0.1</span>,</span>
+<span id="cb38-34"><a href="#cb38-34" aria-hidden="true" tabindex="-1"></a>           <span class="at">size =</span> <span class="fl">2.5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -1103,7 +1105,7 @@ Figure&nbsp;8.3: Density plot vs normal distribution
 <span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="at">bw =</span> <span class="dv">18</span>) <span class="sc">+</span></span>
 <span id="cb46-4"><a href="#cb46-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"bw = 18"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div id="fig-density-vs-normal-bw-settings-eighteen" class="quarto-figure quarto-figure-center quarto-float anchored" width="672" alt="Density plot showing the distribution of consumption using two differently coloured lines for the same data. A red line represents a more classic normal distribution, while a black line with a much lower and flatter shape represents the same data but with a very wide binwidth of 18.">
+<div id="fig-density-vs-normal-bw-settings-eighteen" class="quarto-figure quarto-figure-center quarto-float anchored" alt="Density plot showing the distribution of consumption using two differently coloured lines for the same data. A red line represents a more classic normal distribution, while a black line with a much lower and flatter shape represents the same data but with a very wide binwidth of 18." width="672">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-density-vs-normal-bw-settings-eighteen-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="08_descriptive_statistics_files/figure-html/fig-density-vs-normal-bw-settings-eighteen-1.png" id="fig-density-vs-normal-bw-settings-eighteen" class="img-fluid figure-img" alt="Density plot showing the distribution of consumption using two differently coloured lines for the same data. A red line represents a more classic normal distribution, while a black line with a much lower and flatter shape represents the same data but with a very wide binwidth of 18." width="672">
@@ -1121,7 +1123,7 @@ Figure&nbsp;8.4
 <span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="at">bw =</span> <span class="dv">3</span>) <span class="sc">+</span></span>
 <span id="cb47-4"><a href="#cb47-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"bw = 3"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div id="fig-density-vs-normal-bw-settings-three" class="quarto-figure quarto-figure-center quarto-float anchored" width="672" alt="Density plot showing the distribution of consumption using two differently coloured lines for the same data. A red line represents a more classic normal distribution, while a black line with a much lower and flatter shape represents the same data but with a binwidth of 3.">
+<div id="fig-density-vs-normal-bw-settings-three" class="quarto-figure quarto-figure-center quarto-float anchored" alt="Density plot showing the distribution of consumption using two differently coloured lines for the same data. A red line represents a more classic normal distribution, while a black line with a much lower and flatter shape represents the same data but with a binwidth of 3." width="672">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-density-vs-normal-bw-settings-three-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="08_descriptive_statistics_files/figure-html/fig-density-vs-normal-bw-settings-three-1.png" id="fig-density-vs-normal-bw-settings-three" class="img-fluid figure-img" alt="Density plot showing the distribution of consumption using two differently coloured lines for the same data. A red line represents a more classic normal distribution, while a black line with a much lower and flatter shape represents the same data but with a binwidth of 3." width="672">
@@ -1144,7 +1146,7 @@ Figure&nbsp;8.5
 <span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a>             <span class="at">y =</span> <span class="dv">0</span>)) <span class="sc">+</span></span>
 <span id="cb48-4"><a href="#cb48-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_violin</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div id="fig-violin-plot" class="quarto-figure quarto-figure-center quarto-float anchored" width="672" alt="Violin plot displaying the distribution of consumption with density spread on both sides of a central axis. The shape shows two main density peaks around consumption values near 0 and 8, with a narrowing toward the upper end at around 15.">
+<div id="fig-violin-plot" class="quarto-figure quarto-figure-center quarto-float anchored" alt="Violin plot displaying the distribution of consumption with density spread on both sides of a central axis. The shape shows two main density peaks around consumption values near 0 and 8, with a narrowing toward the upper end at around 15." width="672">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-violin-plot-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="08_descriptive_statistics_files/figure-html/fig-violin-plot-1.png" id="fig-violin-plot" class="img-fluid figure-img" alt="Violin plot displaying the distribution of consumption with density spread on both sides of a central axis. The shape shows two main density peaks around consumption values near 0 and 8, with a narrowing toward the upper end at around 15." width="672">
@@ -1164,7 +1166,7 @@ Figure&nbsp;8.6
 <span id="cb49-4"><a href="#cb49-4" aria-hidden="true" tabindex="-1"></a>  see<span class="sc">::</span><span class="fu">geom_violinhalf</span>() <span class="sc">+</span></span>
 <span id="cb49-5"><a href="#cb49-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div id="fig-half-violin-plot" class="quarto-figure quarto-figure-center quarto-float anchored" width="672" alt="The same plot as before, but this time only one half of the violin shape is visible.">
+<div id="fig-half-violin-plot" class="quarto-figure quarto-figure-center quarto-float anchored" alt="The same plot as before, but this time only one half of the violin shape is visible." width="672">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-half-violin-plot-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="08_descriptive_statistics_files/figure-html/fig-half-violin-plot-1.png" id="fig-half-violin-plot" class="img-fluid figure-img" alt="The same plot as before, but this time only one half of the violin shape is visible." width="672">
@@ -1185,7 +1187,7 @@ Figure&nbsp;8.7
 <span id="cb50-4"><a href="#cb50-4" aria-hidden="true" tabindex="-1"></a>  ggforce<span class="sc">::</span><span class="fu">geom_sina</span>() <span class="sc">+</span></span>
 <span id="cb50-5"><a href="#cb50-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div id="fig-sina-plots" class="quarto-figure quarto-figure-center quarto-float anchored" width="672" alt="Plot with two layers of geometry: One layer which represents a classic violin plot and one layer which represents a dot plot and all the dots fall within the shaped of the violin geometry.">
+<div id="fig-sina-plots" class="quarto-figure quarto-figure-center quarto-float anchored" alt="Plot with two layers of geometry: One layer which represents a classic violin plot and one layer which represents a dot plot and all the dots fall within the shaped of the violin geometry." width="672">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-sina-plots-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="08_descriptive_statistics_files/figure-html/fig-sina-plots-1.png" id="fig-sina-plots" class="img-fluid figure-img" alt="Plot with two layers of geometry: One layer which represents a classic violin plot and one layer which represents a dot plot and all the dots fall within the shaped of the violin geometry." width="672">
@@ -1209,7 +1211,7 @@ Figure&nbsp;8.8
 <span id="cb51-8"><a href="#cb51-8" aria-hidden="true" tabindex="-1"></a>  see<span class="sc">::</span><span class="fu">theme_modern</span>() <span class="sc">+</span></span>
 <span id="cb51-9"><a href="#cb51-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div id="fig-rain-cloud-plot" class="quarto-figure quarto-figure-center quarto-float anchored" width="672" alt="A combination plot based on a half-violin plot at the top and a histogram underneath it created with individual dots to represent individual observations. This makes it look like the half-violin plot is a cloud and the histogram is rain.">
+<div id="fig-rain-cloud-plot" class="quarto-figure quarto-figure-center quarto-float anchored" alt="A combination plot based on a half-violin plot at the top and a histogram underneath it created with individual dots to represent individual observations. This makes it look like the half-violin plot is a cloud and the histogram is rain." width="672">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-rain-cloud-plot-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="08_descriptive_statistics_files/figure-html/fig-rain-cloud-plot-1.png" id="fig-rain-cloud-plot" class="img-fluid figure-img" alt="A combination plot based on a half-violin plot at the top and a histogram underneath it created with individual dots to represent individual observations. This makes it look like the half-violin plot is a cloud and the histogram is rain." width="672">
@@ -1267,15 +1269,17 @@ Figure&nbsp;8.9
 <span id="cb53-4"><a href="#cb53-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(country, consumption) <span class="sc">|&gt;</span></span>
 <span id="cb53-5"><a href="#cb53-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> country, <span class="at">y =</span> consumption)) <span class="sc">+</span></span>
 <span id="cb53-6"><a href="#cb53-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb53-7"><a href="#cb53-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="fu">aes</span>(<span class="at">yintercept =</span> alcohol_mean, <span class="at">col =</span> <span class="st">"red"</span>), <span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
-<span id="cb53-8"><a href="#cb53-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb53-9"><a href="#cb53-9" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Making the plot a bit more pretty</span></span>
-<span id="cb53-10"><a href="#cb53-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_blank</span>(),         <span class="co"># Removes country names</span></span>
-<span id="cb53-11"><a href="#cb53-11" aria-hidden="true" tabindex="-1"></a>        <span class="at">panel.grid.major =</span> <span class="fu">element_blank</span>(),    <span class="co"># Removes grid lines</span></span>
-<span id="cb53-12"><a href="#cb53-12" aria-hidden="true" tabindex="-1"></a>        <span class="at">panel.background =</span> <span class="fu">element_blank</span>()     <span class="co"># Turns background white</span></span>
-<span id="cb53-13"><a href="#cb53-13" aria-hidden="true" tabindex="-1"></a>        ) <span class="sc">+</span></span>
-<span id="cb53-14"><a href="#cb53-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">"consumption"</span>) <span class="sc">+</span></span>
-<span id="cb53-15"><a href="#cb53-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">"country"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb53-7"><a href="#cb53-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="fu">aes</span>(<span class="at">yintercept =</span> alcohol_mean,</span>
+<span id="cb53-8"><a href="#cb53-8" aria-hidden="true" tabindex="-1"></a>                 <span class="at">col =</span> <span class="st">"red"</span>),</span>
+<span id="cb53-9"><a href="#cb53-9" aria-hidden="true" tabindex="-1"></a>             <span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb53-10"><a href="#cb53-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-11"><a href="#cb53-11" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Making the plot a bit more pretty</span></span>
+<span id="cb53-12"><a href="#cb53-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_blank</span>(),         <span class="co"># Removes country names</span></span>
+<span id="cb53-13"><a href="#cb53-13" aria-hidden="true" tabindex="-1"></a>        <span class="at">panel.grid.major =</span> <span class="fu">element_blank</span>(),    <span class="co"># Removes grid lines</span></span>
+<span id="cb53-14"><a href="#cb53-14" aria-hidden="true" tabindex="-1"></a>        <span class="at">panel.background =</span> <span class="fu">element_blank</span>()     <span class="co"># Turns background white</span></span>
+<span id="cb53-15"><a href="#cb53-15" aria-hidden="true" tabindex="-1"></a>        ) <span class="sc">+</span></span>
+<span id="cb53-16"><a href="#cb53-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">"consumption"</span>) <span class="sc">+</span></span>
+<span id="cb53-17"><a href="#cb53-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">"country"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -1290,14 +1294,16 @@ Figure&nbsp;8.9
 <span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(country, consumption) <span class="sc">|&gt;</span></span>
 <span id="cb54-3"><a href="#cb54-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">reorder</span>(country, consumption), <span class="at">y =</span> consumption)) <span class="sc">+</span></span>
 <span id="cb54-4"><a href="#cb54-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">shape =</span> <span class="dv">124</span>) <span class="sc">+</span></span>
-<span id="cb54-5"><a href="#cb54-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="fu">aes</span>(<span class="at">yintercept =</span> alcohol_mean, <span class="at">col =</span> <span class="st">"red"</span>), <span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
-<span id="cb54-6"><a href="#cb54-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb54-7"><a href="#cb54-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_blank</span>(),</span>
-<span id="cb54-8"><a href="#cb54-8" aria-hidden="true" tabindex="-1"></a>        <span class="at">panel.grid.major =</span> <span class="fu">element_blank</span>(),</span>
-<span id="cb54-9"><a href="#cb54-9" aria-hidden="true" tabindex="-1"></a>        <span class="at">panel.background =</span> <span class="fu">element_blank</span>()</span>
-<span id="cb54-10"><a href="#cb54-10" aria-hidden="true" tabindex="-1"></a>        ) <span class="sc">+</span></span>
-<span id="cb54-11"><a href="#cb54-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">"consumption"</span>) <span class="sc">+</span></span>
-<span id="cb54-12"><a href="#cb54-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">"country"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb54-5"><a href="#cb54-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="fu">aes</span>(<span class="at">yintercept =</span> alcohol_mean,</span>
+<span id="cb54-6"><a href="#cb54-6" aria-hidden="true" tabindex="-1"></a>                 <span class="at">col =</span> <span class="st">"red"</span>),</span>
+<span id="cb54-7"><a href="#cb54-7" aria-hidden="true" tabindex="-1"></a>             <span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb54-8"><a href="#cb54-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb54-9"><a href="#cb54-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb54-10"><a href="#cb54-10" aria-hidden="true" tabindex="-1"></a>        <span class="at">panel.grid.major =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb54-11"><a href="#cb54-11" aria-hidden="true" tabindex="-1"></a>        <span class="at">panel.background =</span> <span class="fu">element_blank</span>()</span>
+<span id="cb54-12"><a href="#cb54-12" aria-hidden="true" tabindex="-1"></a>        ) <span class="sc">+</span></span>
+<span id="cb54-13"><a href="#cb54-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">"consumption"</span>) <span class="sc">+</span></span>
+<span id="cb54-14"><a href="#cb54-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">"country"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div id="fig-alcohol-consumption-deviation" class="quarto-figure quarto-figure-center quarto-float anchored" alt="A point plot showing ‘consumption’ values for various countries, arranged in ascending order. A red horizontal line at 5 marks a reference level across the plot. Consumption increases steadily, with a few outliers exceeding 15.">
 <figure class="quarto-float quarto-float-fig figure">
@@ -1379,9 +1385,17 @@ X1    1 188 5.41 3.96   4.97    5.23 4.9   0 16.99 16.99 0.33    -0.94 0.29</cod
 <p><img src="images/chapter_08_img/output_skim.png" class="img-fluid" alt="Screenshot of skimr output showing descriptive statistics sorted by variable type"></p>
 <p>In addition to providing descriptive statistics, <code>skim()</code> sorts the variables by data type and provides different descriptive statistics meaningful to each kind. Apart from that, the column <code>n_missing</code> can help spot missing data. Lastly, we also find a histogram in the last column for <code>numeric</code> data, which I find particularly useful.</p>
 <p>When just starting to work on a new dataset, the <code>psych</code> and the <code>skimr</code> package are solid starting points to get an overview of the main characteristics of your data, especially in larger datasets. On your <em>R</em> journey, you will encounter many other packages which provide useful functions like these.</p>
-
-
 </section>
+</section>
+<section id="sec-exercises-descriptive-statistics" class="level2" data-number="8.6">
+<h2 data-number="8.6" class="anchored" data-anchor-id="sec-exercises-descriptive-statistics"><span class="header-section-number">8.6</span> Exercises</h2>
+<p>Let’s apply your understanding of descriptive statistics. Run the code below to practice on some sample data. Make sure you have the <code>r4np</code> package installed.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb62"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Option 1:</span></span>
+<span id="cb62-2"><a href="#cb62-2" aria-hidden="true" tabindex="-1"></a>learnr<span class="sc">::</span><span class="fu">run_tutorial</span>(<span class="st">"ex_descriptive_statistics"</span>, <span class="at">package =</span> <span class="st">"r4np"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+
+
 </section>
 
 </main> <!-- /main -->

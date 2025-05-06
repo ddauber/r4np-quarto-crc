@@ -349,6 +349,7 @@ window.Quarto = {
   <li><a href="#sec-computing-power" id="toc-sec-computing-power" class="nav-link" data-scroll-target="#sec-computing-power"><span class="header-section-number">12.2</span> Computing power</a></li>
   <li><a href="#sec-plotting-power" id="toc-sec-plotting-power" class="nav-link" data-scroll-target="#sec-plotting-power"><span class="header-section-number">12.3</span> Plotting power</a></li>
   <li><a href="#concluding-remarks-about-power-analysis" id="toc-concluding-remarks-about-power-analysis" class="nav-link" data-scroll-target="#concluding-remarks-about-power-analysis"><span class="header-section-number">12.4</span> Concluding remarks about power analysis</a></li>
+  <li><a href="#sec-exercises-power-analysis" id="toc-sec-exercises-power-analysis" class="nav-link" data-scroll-target="#sec-exercises-power-analysis"><span class="header-section-number">12.5</span> Exercises</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/ddauber/r4np-quarto-crc/blob/main/12_power_analysis.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/ddauber/r4np-quarto-crc/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
@@ -374,9 +375,9 @@ window.Quarto = {
 </header>
 
 
-<p>The most frequently asked question by my students is: How much data do I have to collect? My answer is always the same: <em>‘It depends’</em>. From a student’s perspective, this must be one of the most frustrating answers. Usually, I follow this sentence up with something more helpful to guide students on their way. For example, there is a way to determine how large your sample has to be to detect specific relationships reliably. This procedure is called <em>power analysis</em>.</p>
+<p>The most frequently asked question by my students is: How much data do I have to collect? My answer is always the same: <em>It depends</em>. From a student’s perspective, this must be one of the most frustrating answers. Usually, I follow this sentence up with something more helpful to guide students on their way. For example, there is a way to determine how large your sample has to be to detect specific relationships reliably. This procedure is called <em>power analysis</em>.</p>
 <p>While <em>power analysis</em> can be performed before and after data collection, it seems rather pointless to do it afterwards when collecting more data is not only challenging but sometimes impossible. Thus, my explanations in this chapter will primarily focus on the question: How much data is enough to reliably detect relationships between variables?</p>
-<p><em>Power analysis</em> is something that applies to all kinds of tests, such as correlations (<a href="10_correlations.html" class="quarto-xref"><span>Chapter 10</span></a>), group comparisons (<a href="11_group_comparison.html" class="quarto-xref"><span>Chapter 11</span></a>) and regressions (<a href="13_regressions.html" class="quarto-xref"><span>Chapter 13</span></a>). Therefore, it is important to know about it. There is nothing worse than presenting a model or result that is utterly ‘underpowered’, i.e.&nbsp;the sample is not large enough to detect the desired relationship between variables reliably. In anticipation of your question about whether your analysis can be ‘overpowered’, the answer is ‘yes’. Usually, there are no particular statistical concerns about having an overpowered analysis - more power to you (#pun-intended). However, collecting too much data can be an ethical concern. If we consider time as a scarce resource, we should not collect more data than we need. Participants’ time is valuable, and being economical during data collection is crucial. We do not have to bother more people with our research than necessary because not everyone is as excited about our study as we are. Besides, if everyone conducts studies on many people, effects such as survey fatigue can set in, making it more difficult for others to carry out their research. Thus, being mindful of the required sample size is always important - I mean: essential.</p>
+<p><em>Power analysis</em> is something that applies to all kinds of tests, such as correlations (<a href="10_correlations.html" class="quarto-xref"><span>Chapter 10</span></a>), group comparisons (<a href="11_group_comparison.html" class="quarto-xref"><span>Chapter 11</span></a>) and regressions (<a href="13_regressions.html" class="quarto-xref"><span>Chapter 13</span></a>). Therefore, it is important to know about it. There is nothing worse than presenting a model or result that is utterly <em>underpowered</em>, i.e.&nbsp;the sample is not large enough to detect the desired relationship between variables reliably. In anticipation of your question about whether your analysis can be <em>overpowered</em>, the answer is <em>yes</em>. Usually, there are no particular statistical concerns about having an overpowered analysis - more power to you (#pun-intended). However, collecting too much data can be an ethical concern. If we consider time as a scarce resource, we should not collect more data than we need. Participants’ time is valuable, and being economical during data collection is crucial. We do not have to bother more people with our research than necessary because not everyone is as excited about our study as we are. Besides, if everyone conducts studies on many people, effects such as survey fatigue can set in, making it more difficult for others to carry out their research. Thus, being mindful of the required sample size is always important - I mean: essential.</p>
 <section id="sec-sec-ingredients-power-analysis" class="level2" data-number="12.1">
 <h2 data-number="12.1" class="anchored" data-anchor-id="sec-sec-ingredients-power-analysis"><span class="header-section-number">12.1</span> Ingredients to achieve the power you deserve</h2>
 <p>We already know that sample size matters, for example, to assume normality when there is none in your sample (see Central Limit Theorem in <a href="09_sources_of_bias.html#sec-normality" class="quarto-xref"><span>Section 9.4</span></a>). Also, we should not mistakenly assume that a relationship exists where there is none and vice versa. I am referring to so-called Type I and Type II errors (see <a href="#tbl-type-one-and-type-two-error" class="quarto-xref">Table&nbsp;<span>12.1</span></a>).</p>
@@ -422,18 +423,18 @@ Table&nbsp;12.1: Type I and Type II error defined
 </div>
 </figure>
 </div>
-<p>Power analysis aims to help us avoid type II errors and, therefore, power is defined as the opposite of it, i.e.&nbsp;<span class="math inline">\(1 - \beta\)</span>, i.e.&nbsp;a ‘true positive’. To perform such a power analysis, we need at least three of the following four ingredients:</p>
+<p>Power analysis aims to help us avoid type II errors and, therefore, power is defined as the opposite of it, i.e.&nbsp;<span class="math inline">\(1 - \beta\)</span>, i.e.&nbsp;a <em>true positive</em>. To perform such a power analysis, we need at least three of the following four ingredients:</p>
 <ul>
-<li><p>the power level we want to achieve, i.e.&nbsp;the probability that we find a <em>‘true positive’</em>,</p></li>
+<li><p>the power level we want to achieve, i.e.&nbsp;the probability that we find a <em>true positive</em>,</p></li>
 <li><p>the expected effect size (<span class="math inline">\(r\)</span>) we hope to find,</p></li>
 <li><p>the significance level we set for our test, i.e.&nbsp;how strict we are about deciding when a relationship is significant, and</p></li>
 <li><p>the sample size.</p></li>
 </ul>
-<p>As I mentioned earlier, it makes more sense to use a <em>power analysis</em> to determine the sample size. However, in the unfortunate event that you forgot to do so, at least you can find out whether your results are underpowered by providing the sample size you obtained. If you find that your study is underpowered, you are in serious trouble and dire need of more participants.</p>
+<p>As I mentioned earlier, it makes more sense to use a <em>power analysis</em> to determine the sample size. However, in the unfortunate event that you forgot to do so, at least you can find out whether your results are underpowered by providing the sample size you obtained. If your study is underpowered, you are in serious trouble and in dire need of more participants.</p>
 </section>
 <section id="sec-computing-power" class="level2" data-number="12.2">
 <h2 data-number="12.2" class="anchored" data-anchor-id="sec-computing-power"><span class="header-section-number">12.2</span> Computing power</h2>
-<p>So, how exactly can we compute the right sample size, and how do we find all the numbers for these ingredients without empirical data at our disposal? First, we need a function that can compute it because computing a power analysis manually is quite challenging. The package <code>pwr</code> was developed to do precisely that for different kinds of statistical tests. Table <a href="#tbl-power-analysis-pwr" class="quarto-xref">Table&nbsp;<span>12.2</span></a> provides an overview of functions needed to perform power analysis for various tests covered in this book.</p>
+<p>So, how exactly can we compute the right sample size, and how do we find all the numbers for these ingredients without empirical data at our disposal? First, we need a function that can compute it because computing a power analysis manually is quite challenging. The package <code>pwr</code> was developed to do precisely that for different kinds of statistical tests. Table <a href="#tbl-power-analysis-pwr" class="quarto-xref">Table&nbsp;<span>12.2</span></a> provides an overview of the functions needed to perform power analysis for various tests covered in this book.</p>
 <div id="tbl-power-analysis-pwr" class="quarto-float anchored">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-power-analysis-pwr-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -505,7 +506,7 @@ Observations: 307</code></pre>
 <ul>
 <li><p><em>Power</em>: <span class="citation" data-cites="cohen1988statistical">Cohen (<a href="references.html#ref-cohen1988statistical" role="doc-biblioref">1988</a>)</span> suggests that an acceptable rate of type II error is <span class="math inline">\(\beta = 0.2\)</span> (i.e.&nbsp;20%). Thus, we can define the expected power level as <span class="math inline">\(power = 1 - 0.2 = 0.8\)</span>.</p></li>
 <li><p><em>Significance level</em> (i.e.&nbsp;<span class="math inline">\(\alpha\)</span>): We can apply the traditional cut-off point of <code>0.05</code> (see also <a href="10_correlations.html#sec-significance" class="quarto-xref"><span>Section 10.3</span></a>).</p></li>
-<li><p><em>Effect size:</em> This value is the most difficult to judge but substantially affects your sample size. It is easier to detect big effects than smaller effects. Therefore, the smaller our <code>r</code>, the bigger our sample size has to be. We know from our correlation that the effect size is <code>0.67</code>, but what can you do to estimate your effect size if you do not have data available. Unfortunately, the only way to acquire an effect size is to either use simulated data or, as most frequently is the case, we need to refer to reference studies that looked at similar phenomena. I would always aim for slightly smaller effect sizes than expected, which means I need a larger sample. If the effect is bigger than expected, we will not find ourselves with an underpowered result. Thus, for our example, let’s assume we expect <span class="math inline">\(r = 0.6\)</span>.</p></li>
+<li><p><em>Effect size:</em> This value is the most difficult to judge but substantially affects your sample size. It is easier to detect big effects than smaller effects. Therefore, the smaller our <code>r</code>, the bigger our sample size has to be. We know from our correlation that the effect size is <code>0.67</code>, but what can you do to estimate your effect size if you do not have data available? Unfortunately, the only way to acquire an effect size is to either use simulated data or, as most frequently is the case, we need to refer to reference studies that looked at similar phenomena. I would always aim for slightly smaller effect sizes than expected, which means I need a larger sample. If the effect is bigger than expected, we will not find ourselves with an underpowered result. Thus, for our example, let’s assume we expect <span class="math inline">\(r = 0.6\)</span>.</p></li>
 </ul>
 <p>All there is left to do is insert these parameters into our function <code>pwr.r.test()</code>.</p>
 <div class="cell">
@@ -523,7 +524,7 @@ Observations: 307</code></pre>
     alternative = two.sided</code></pre>
 </div>
 </div>
-<p>To find the effect we are looking for, we only need <code>19</code> participants (we always round up!), and our dataset contains <code>307</code> observations. Thus, we are considerably overpowered for this type of analysis. What if we change the parameters slightly and expect <span class="math inline">\(r = 0.5\)</span> and increase increase our threshold of accepting a true relationship, i.e.&nbsp;<span class="math inline">\(p = 0.01\)</span>?</p>
+<p>To find the effect we are looking for, we only need <code>19</code> participants (we always round up!), and our dataset contains <code>307</code> observations. Thus, we are considerably overpowered for this type of analysis. What if we change the parameters slightly and expect <span class="math inline">\(r = 0.5\)</span> and increase our threshold of accepting a true relationship to <span class="math inline">\(p = 0.01\)</span>?</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>pwr<span class="sc">::</span><span class="fu">pwr.r.test</span>(<span class="at">r =</span> <span class="fl">0.5</span>,</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>                <span class="at">sig.level =</span> <span class="fl">0.01</span>,</span>
@@ -568,36 +569,25 @@ Observations: 307</code></pre>
 <span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>                           <span class="at">by =</span> <span class="fl">0.01</span>))</span>
 <span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="co"># We need to compute the sample size for each effect size level</span></span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="co"># power_df &lt;-</span></span>
-<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="co">#   power_df |&gt;</span></span>
-<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="co">#   rowwise() |&gt;</span></span>
-<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a><span class="co">#   mutate(n_0_01 =</span></span>
-<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a><span class="co">#            broom::tidy(pwr::pwr.r.test(r = r,</span></span>
-<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a><span class="co">#                                        sig.level = 0.01,</span></span>
-<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a><span class="co">#                                        power = 0.8)) |&gt;</span></span>
-<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a><span class="co">#            first(),</span></span>
-<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a><span class="co">#          n_0_05 =</span></span>
-<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a><span class="co">#            broom::tidy(pwr::pwr.r.test(r = r,</span></span>
-<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a><span class="co">#                                        sig.level = 0.05,</span></span>
-<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a><span class="co">#                                        power = 0.8)) |&gt;</span></span>
-<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a><span class="co">#            first())</span></span>
-<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a>power_df <span class="ot">&lt;-</span> </span>
-<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a>  power_df <span class="sc">|&gt;</span></span>
-<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rowwise</span>() <span class="sc">|&gt;</span></span>
-<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">n_0_01 =</span></span>
-<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a>           broom<span class="sc">::</span><span class="fu">tidy</span>(pwr<span class="sc">::</span><span class="fu">pwr.r.test</span>(<span class="at">r =</span> r,</span>
-<span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a>                            <span class="at">sig.level =</span> <span class="fl">0.01</span>,</span>
-<span id="cb9-27"><a href="#cb9-27" aria-hidden="true" tabindex="-1"></a>                            <span class="at">power =</span> <span class="fl">0.8</span>)</span>
-<span id="cb9-28"><a href="#cb9-28" aria-hidden="true" tabindex="-1"></a>           ),</span>
-<span id="cb9-29"><a href="#cb9-29" aria-hidden="true" tabindex="-1"></a>         <span class="at">n_0_05 =</span></span>
-<span id="cb9-30"><a href="#cb9-30" aria-hidden="true" tabindex="-1"></a>           broom<span class="sc">::</span><span class="fu">tidy</span>(pwr<span class="sc">::</span><span class="fu">pwr.r.test</span>(<span class="at">r =</span> r,</span>
-<span id="cb9-31"><a href="#cb9-31" aria-hidden="true" tabindex="-1"></a>                            <span class="at">sig.level =</span> <span class="fl">0.05</span>,</span>
-<span id="cb9-32"><a href="#cb9-32" aria-hidden="true" tabindex="-1"></a>                            <span class="at">power =</span> <span class="fl">0.8</span>)</span>
-<span id="cb9-33"><a href="#cb9-33" aria-hidden="true" tabindex="-1"></a>           )</span>
-<span id="cb9-34"><a href="#cb9-34" aria-hidden="true" tabindex="-1"></a>         )</span>
-<span id="cb9-35"><a href="#cb9-35" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-36"><a href="#cb9-36" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(power_df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>power_df <span class="ot">&lt;-</span> </span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>  power_df <span class="sc">|&gt;</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Perform any analytical step for each row separately</span></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rowwise</span>() <span class="sc">|&gt;</span></span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">n_0_01 =</span></span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>           broom<span class="sc">::</span><span class="fu">tidy</span>(pwr<span class="sc">::</span><span class="fu">pwr.r.test</span>(<span class="at">r =</span> r,</span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>                            <span class="at">sig.level =</span> <span class="fl">0.01</span>,</span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>                            <span class="at">power =</span> <span class="fl">0.8</span>)</span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>           ),</span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>         <span class="at">n_0_05 =</span></span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>           broom<span class="sc">::</span><span class="fu">tidy</span>(pwr<span class="sc">::</span><span class="fu">pwr.r.test</span>(<span class="at">r =</span> r,</span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a>                            <span class="at">sig.level =</span> <span class="fl">0.05</span>,</span>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a>                            <span class="at">power =</span> <span class="fl">0.8</span>)</span>
+<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a>           )</span>
+<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a>         )</span>
+<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(power_df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Rows: 81
 Columns: 3
@@ -629,19 +619,27 @@ $ n_0_05 &lt;tibble[,3]&gt; &lt;tbl_df[26 x 3]&gt;</code></pre>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="12_power_analysis_files/figure-html/power-plotting-required-sample-sizes-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="12_power_analysis_files/figure-html/power-plotting-required-sample-sizes-1.png" class="img-fluid figure-img" alt="This plot illustrates the required sample size 'n' for achieving statistical significance at two levels, p = 0.01 and p = 0.05, as a function of correlation coefficient r. The red line represents p = 0.01, and the blue line represents p = 0.05 with sample size decreasing as r increases." width="672"></p>
 </figure>
 </div>
 </div>
 </div>
 <p>The results reveal that the relationship between <code>n</code> and <code>r</code> is logarithmic and not linear. Thus, the smaller the effect size, the more difficult it is to reach reliable results.</p>
-<p>The <em>R</em> code to produce this plot features <code>broom::tidy()</code> and <code>first()</code>. The function <code>tidy()</code> from the <code>broom</code> package converts the result from <code>pwr.r.test()</code> from a list to a tibble, and the function <code>first()</code> picks the first entry in this tibble, i.e.&nbsp;our sample sizes. Don’t worry if this is confusing at this stage. We will return to <code>tidy()</code> in later chapters, where its use becomes more apparent.</p>
+<p>The <em>R</em> code to produce this plot features <code>broom::tidy()</code>. The function <code>tidy()</code> from the <code>broom</code> package converts the result from <code>pwr.r.test()</code> from a list to a tibble. Don’t worry if this is confusing at this stage. We will return to <code>tidy()</code> in later chapters, where its use becomes more apparent.</p>
 </section>
 <section id="concluding-remarks-about-power-analysis" class="level2" data-number="12.4">
 <h2 data-number="12.4" class="anchored" data-anchor-id="concluding-remarks-about-power-analysis"><span class="header-section-number">12.4</span> Concluding remarks about power analysis</h2>
 <p>Conducting a <em>power analysis</em> is fairly straightforward for the techniques we cover in this book. Therefore there is no excuse to skip this step in your research. The challenging part for conducting a <em>power analysis</em> in advance is the definition of your effect size. If you feel you cannot commit to a single effect size, specify a range, e.g.&nbsp;<span class="math inline">\(0.3 &lt; effect size &lt; 0.5\)</span>. This will provide you with a range for your sample size.</p>
 <p>For statistical tests like group comparisons (<a href="11_group_comparison.html" class="quarto-xref"><span>Chapter 11</span></a>) and regressions (<a href="13_regressions.html" class="quarto-xref"><span>Chapter 13</span></a>), the number of groups or variables also plays an important role. Usually, the more groups/variables are included in a test/model, the larger the sample has to be.</p>
-<p>As mentioned earlier, it is not wrong to collect <u>slightly</u> more data, but you need to be cautious not to waste ‘resources’. In other fields, like medical studies, it is absolutely critical to know how many patients should be given a drug to test its effectiveness. It would be unethical to administer a new drug to 300 people when 50 would be enough. This is especially true if the drug turns out to have an undesirable side effect. In Social Sciences, we are not often confronted with health-threatening experiments or studies. Still, being mindful of how research impacts others is essential. A <em>power analysis</em> can help to determine how you can carry out a reliable study without affecting others unnecessarily.</p>
+<p>As mentioned earlier, it is not wrong to collect <u>slightly</u> more data, but you need to be cautious not to waste ‘resources’. In other fields, like medical studies, it is absolutely critical to know how many patients should be given a drug to test its effectiveness. It would be unethical to administer a new drug to 300 people when 50 would be enough. This is especially true if the drug turns out to have an undesirable side effect. In Social Sciences, we are not often confronted with health-threatening experiments or studies. Still, being mindful of how research impacts others is essential. A <em>power analysis</em> can help to determine how you can carry out a reliable study without affecting others unnecessarily. You also have no excuse to say you did not know about it.</p>
+</section>
+<section id="sec-exercises-power-analysis" class="level2" data-number="12.5">
+<h2 data-number="12.5" class="anchored" data-anchor-id="sec-exercises-power-analysis"><span class="header-section-number">12.5</span> Exercises</h2>
+<p>With a foundation in power analysis, let’s try out the code below to solidify our understanding through hands-on practice. Ensure you have the <code>r4np</code> package installed to begin the exercises.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Option 1:</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>learnr<span class="sc">::</span><span class="fu">run_tutorial</span>(<span class="st">"ex_power_analysis"</span>, <span class="at">package =</span> <span class="st">"r4np"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">

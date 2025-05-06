@@ -354,6 +354,7 @@ window.Quarto = {
   <li><a href="#sec-correlations-can-be-spurious" id="toc-sec-correlations-can-be-spurious" class="nav-link" data-scroll-target="#sec-correlations-can-be-spurious"><span class="header-section-number">10.4.2</span> Correlations can be spurious</a></li>
   <li><a href="#sec-simpsons-paradox" id="toc-sec-simpsons-paradox" class="nav-link" data-scroll-target="#sec-simpsons-paradox"><span class="header-section-number">10.4.3</span> Simpson’s Paradox: When correlations betray you</a></li>
   </ul></li>
+  <li><a href="#sec-exercises-correlations" id="toc-sec-exercises-correlations" class="nav-link" data-scroll-target="#sec-exercises-correlations"><span class="header-section-number">10.5</span> Exercises</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/ddauber/r4np-quarto-crc/blob/main/10_correlations.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/ddauber/r4np-quarto-crc/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
@@ -386,48 +387,500 @@ window.Quarto = {
 <li><p>Is eating healthier related to other health factors, such as life expectancy, blood pressure and overweight/obesity?</p></li>
 </ul>
 <p>There are many different ways to compute the correlation, and it partially depends on the type of data you want to relate to each other. The <em>Pearson’s correlation</em> is, by far, the most frequently used correlation technique for normally distributed data. On the other hand, if data is not normally distributed, we can opt for the <em>Spearman’s rank</em> correlation. One could argue that the relationship between these two correlations is like the mean (Pearson) to the median (Spearman). Both approaches require numeric values to be computed correctly. If our data is ordinal or, worse, dichotomous (like a logical variable), we have to choose different options. <a href="#tbl-different-correlations" class="quarto-xref">Table&nbsp;<span>10.1</span></a> summarises different methods depending on the data type.</p>
-<div id="tbl-different-correlations" class="quarto-float anchored">
+<div class="cell">
+<div id="tbl-different-correlations" class="cell quarto-float anchored">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-different-correlations-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Table&nbsp;10.1: Different ways of computing correlations
 </figcaption>
 <div aria-describedby="tbl-different-correlations-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<table class="table">
-<colgroup>
-<col style="width: 50%">
-<col style="width: 50%">
-</colgroup>
+<div class="cell-output-display">
+<div id="hoyixdicwu" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#hoyixdicwu table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#hoyixdicwu thead, #hoyixdicwu tbody, #hoyixdicwu tfoot, #hoyixdicwu tr, #hoyixdicwu td, #hoyixdicwu th {
+  border-style: none;
+}
+
+#hoyixdicwu p {
+  margin: 0;
+  padding: 0;
+}
+
+#hoyixdicwu .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 12px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#hoyixdicwu .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#hoyixdicwu .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#hoyixdicwu .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#hoyixdicwu .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#hoyixdicwu .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#hoyixdicwu .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#hoyixdicwu .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 15px;
+  padding-bottom: 16px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#hoyixdicwu .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#hoyixdicwu .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#hoyixdicwu .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#hoyixdicwu .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#hoyixdicwu .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#hoyixdicwu .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#hoyixdicwu .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#hoyixdicwu .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#hoyixdicwu .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#hoyixdicwu .gt_row {
+  padding-top: 15px;
+  padding-bottom: 15px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#hoyixdicwu .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#hoyixdicwu .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#hoyixdicwu .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#hoyixdicwu .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#hoyixdicwu .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#hoyixdicwu .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#hoyixdicwu .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#hoyixdicwu .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#hoyixdicwu .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#hoyixdicwu .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#hoyixdicwu .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#hoyixdicwu .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#hoyixdicwu .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#hoyixdicwu .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#hoyixdicwu .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#hoyixdicwu .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#hoyixdicwu .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#hoyixdicwu .gt_left {
+  text-align: left;
+}
+
+#hoyixdicwu .gt_center {
+  text-align: center;
+}
+
+#hoyixdicwu .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#hoyixdicwu .gt_font_normal {
+  font-weight: normal;
+}
+
+#hoyixdicwu .gt_font_bold {
+  font-weight: bold;
+}
+
+#hoyixdicwu .gt_font_italic {
+  font-style: italic;
+}
+
+#hoyixdicwu .gt_super {
+  font-size: 65%;
+}
+
+#hoyixdicwu .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#hoyixdicwu .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#hoyixdicwu .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#hoyixdicwu .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#hoyixdicwu .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#hoyixdicwu .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#hoyixdicwu .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#hoyixdicwu .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#hoyixdicwu div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+
+<table class="gt_table do-not-create-environment cell table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
 <thead>
-<tr class="header">
-<th>Correlation</th>
-<th>Used when …</th>
+<tr class="header gt_col_headings">
+<th id="correlation" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" style="font-weight: bold" scope="col">Correlation</th>
+<th id="used_when" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" style="font-weight: bold" scope="col">Used when ...</th>
 </tr>
 </thead>
-<tbody>
+<tbody class="gt_table_body">
 <tr class="odd">
-<td><em>Pearson</em></td>
-<td>… variables are numeric and parametric</td>
+<td class="gt_row gt_left" headers="correlation" style="font-style: italic">Pearson</td>
+<td class="gt_row gt_left" headers="used_when">… variables are numeric and parametric</td>
 </tr>
 <tr class="even">
-<td><em>Spearman</em></td>
-<td>… variables are numeric and non-parametric</td>
+<td class="gt_row gt_left" headers="correlation" style="font-style: italic">Spearman</td>
+<td class="gt_row gt_left" headers="used_when">… variables are numeric and non-parametric</td>
 </tr>
 <tr class="odd">
-<td><em>Polychoric</em></td>
-<td>… investigating two ordinal variables</td>
+<td class="gt_row gt_left" headers="correlation" style="font-style: italic">Polychoric</td>
+<td class="gt_row gt_left" headers="used_when">… investigating two ordinal variables</td>
 </tr>
 <tr class="even">
-<td><em>Tetrachoric</em></td>
-<td>… both variables are dichotomous, e.g.&nbsp;‘yes/no’, ‘True/False’.</td>
+<td class="gt_row gt_left" headers="correlation" style="font-style: italic">Tetrachoric</td>
+<td class="gt_row gt_left" headers="used_when">… both variables are dichotomous, e.g., ‘yes/no’, ‘True/False’.</td>
 </tr>
 <tr class="odd">
-<td><em>Rank-biserial</em></td>
-<td>… one variable is dichotomous and the other variable is ordinal</td>
+<td class="gt_row gt_left" headers="correlation" style="font-style: italic">Rank-biserial</td>
+<td class="gt_row gt_left" headers="used_when">… one variable is dichotomous and the other variable is ordinal</td>
 </tr>
 </tbody>
 </table>
+
+</div>
+</div>
 </div>
 </figure>
+</div>
 </div>
 <p>There are many more variations of correlations, which you can explore on the <a href="https://easystats.github.io/correlation/articles/types.html" target="blank" title="website of the package">package’s website</a> we will use in this chapter: <code>correlation</code>. However, we will primarily focus on Pearson and Spearman because they are the most commonly used correlation types in academic publications to understand the relationship between two variables. In addition, we also look at <em>partial correlations,</em> which allow us to introduce a third variable into this mix.</p>
 <section id="sec-plotting-correlations" class="level2" data-number="10.1">
@@ -700,43 +1153,36 @@ Observations: 12</code></pre>
 <p>Let’s put all this information into practice and investigate our third research question, which asks whether eating healthy relates to other health factors such as life expectancy, blood pressure and overweight/obesity. While we could compute three correlations independently to find an answer to our question, it is much more common to include multiple variables simultaneously and look at the results conjointly.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>hie_2021 <span class="sc">|&gt;</span></span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(healthy_eating, life_expectancy, high_blood_pressure, overweight_and_obesity_in_adults) <span class="sc">|&gt;</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(healthy_eating, life_expectancy, high_blood_pressure) <span class="sc">|&gt;</span></span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">correlation</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
 <div class="cell-output cell-output-stdout">
-<pre><code># Correlation Matrix (pearson-method)
-
-Parameter1          |                       Parameter2 |     r |         95% CI | t(305) |         p
-----------------------------------------------------------------------------------------------------
-healthy_eating      |                  life_expectancy |  0.70 | [ 0.64,  0.75] |  17.14 | &lt; .001***
-healthy_eating      |              high_blood_pressure | -0.05 | [-0.16,  0.06] |  -0.85 | 0.395    
-healthy_eating      | overweight_and_obesity_in_adults | -0.45 | [-0.54, -0.36] |  -8.85 | &lt; .001***
-life_expectancy     |              high_blood_pressure | -0.08 | [-0.19,  0.03] |  -1.45 | 0.295    
-life_expectancy     | overweight_and_obesity_in_adults | -0.56 | [-0.63, -0.48] | -11.81 | &lt; .001***
-high_blood_pressure | overweight_and_obesity_in_adults |  0.10 | [-0.01,  0.21] |   1.76 | 0.237    
-
-p-value adjustment method: Holm (1979)
-Observations: 307</code></pre>
+<pre><code>Parameter1      |          Parameter2 |     r |         p
+---------------------------------------------------------
+healthy_eating  |     life_expectancy |  0.70 | &lt; .001***
+healthy_eating  | high_blood_pressure | -0.05 | 0.395    
+life_expectancy | high_blood_pressure | -0.08 | 0.295    </code></pre>
 </div>
 </div>
 <p>If you have seen correlation tables before, you might find that <code>correlation()</code> does not produce the classic table by default. If you want it to look like the tables in publications, which are more compact but offer less information, you can use the function <code>summary()</code>. Which one you use is entirely up to you (or your supervisor).</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>hie_2021 <span class="sc">|&gt;</span></span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(healthy_eating, life_expectancy, high_blood_pressure, overweight_and_obesity_in_adults) <span class="sc">|&gt;</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(healthy_eating, life_expectancy, high_blood_pressure) <span class="sc">|&gt;</span></span>
 <span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">correlation</span>() <span class="sc">|&gt;</span></span>
 <span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summary</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># Correlation Matrix (pearson-method)
 
-Parameter           | overweight_and_obesity_in_adults | high_blood_pressure | life_expectancy
-----------------------------------------------------------------------------------------------
-healthy_eating      |                         -0.45*** |               -0.05 |         0.70***
-life_expectancy     |                         -0.56*** |               -0.08 |                
-high_blood_pressure |                             0.10 |                     |                
+Parameter       | high_blood_pressure | life_expectancy
+-------------------------------------------------------
+healthy_eating  |               -0.05 |         0.70***
+life_expectancy |               -0.08 |                
 
 p-value adjustment method: Holm (1979)</code></pre>
 </div>
 </div>
-<p>This table provides a clear answer to our final question. While <code>healthy_eating</code> positively relates to <code>life_expectancy</code> (<span class="math inline">\(r = 0.70\)</span>, <span class="math inline">\(p &lt;0.001\)</span>) and negatively to <code>overweight_and_obesity_in_adults</code> (<span class="math inline">\(r = -0.45\)</span>, <span class="math inline">\(p &lt;0.001\)</span>), it does not correlate with <code>high_blood_pressure</code> (<span class="math inline">\(r = 0.05\)</span>, <span class="math inline">\(p &lt;0.395\)</span>). In the classic correlation table, you often see <code>*</code>. These stand for the different significant levels:</p>
+<p>This table provides a clear answer to our final question. While <code>healthy_eating</code> positively relates to <code>life_expectancy</code> (<span class="math inline">\(r = 0.70\)</span>, <span class="math inline">\(p &lt;0.001\)</span>) it does not correlate with <code>high_blood_pressure</code> (<span class="math inline">\(r = 0.05\)</span>, <span class="math inline">\(p &lt;0.395\)</span>). In the classic correlation table, you often see <code>*</code>. These stand for the different significant levels:</p>
 <ul>
 <li><p><code>*</code>, i.e.&nbsp;<span class="math inline">\(p &lt; 0.05\)</span></p></li>
 <li><p><code>**</code>, i.e.&nbsp;<span class="math inline">\(p &lt; 0.01\)</span></p></li>
@@ -758,34 +1204,31 @@ p-value adjustment method: Holm (1979)</code></pre>
 </section>
 <section id="sec-correlations-can-be-spurious" class="level3" data-number="10.4.2">
 <h3 data-number="10.4.2" class="anchored" data-anchor-id="sec-correlations-can-be-spurious"><span class="header-section-number">10.4.2</span> Correlations can be spurious</h3>
-<p>Just because we find a relationship between two variables does not necessarily mean that they are truly related. Instead, it might be possible that a third variable is the reason for the relationship. We call relationships between variables that are caused by a third variable <em>spurious correlations</em>. This third variable can either be part of our dataset or even something we have not measured at all. The latter case would make it impossible to investigate the relationship further. However, we can always test whether some of our variables affect the relationship between the two variables of interest. This can be done by using <em>partial correlations</em>. A <em>partial correlation</em> returns the relationship between two variables minus the relationship to a third variable. <a href="#fig-illustration-spurious-correlation" class="quarto-xref">Figure&nbsp;<span>10.2</span></a> depicts this visually. While <code>a</code> and <code>b</code> appear to be correlated, the correlation might only exist because they correlate with <code>x</code>.</p>
+<p>Just because we find a relationship between two variables does not necessarily mean that they are truly related. Instead, it might be possible that a third variable is the reason for the relationship. We call relationships between variables that are caused by a third variable <em>spurious correlations</em>. This third variable can either be part of our dataset or even something we have not measured at all. The latter case would make it impossible to investigate the relationship further. However, we can always test whether some of our variables affect the relationship between the two variables of interest. This can be done by using <em>partial correlations</em>. A <em>partial correlation</em> returns the relationship between two variables minus the relationship to a third variable. <a href="#fig-illustration-spurious-correlation" class="quarto-xref">Figure&nbsp;<span>10.2</span></a> depicts this visually. While <code>a</code> and <code>b</code> appear to be correlated, the correlation might only exist because they correlate with <code>x</code>. Thus, the relationship we might have computed between <code>a</code> and <code>b</code> does not actually exist and is an artefact from a relationship with a third variable. This third variable could also be one that is not part of our dataset. Consequently, we could never be sure whether the relationship between <code>a</code> and <code>b</code> is genuine.</p>
 <div id="fig-illustration-spurious-correlation" class="quarto-figure quarto-figure-center quarto-float anchored" alt="This figures illustrates a causal diagram with nodes (a, b, x). It shows a spurious relationship where the red circle (x) is the cause for changes in a and b. Thus, there is a dotted line between a and b as these variables are not directly related to each other.">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-illustration-spurious-correlation-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="./images/chapter_09_img/spurious-correlation.png" class="img-fluid figure-img" alt="This figures illustrates a causal diagram with nodes (a, b, x). It shows a spurious relationship where the red circle (x) is the cause for changes in a and b. Thus, there is a dotted line between a and b as these variables are not directly related to each other.">
+<img src="./images/chapter_09_img/spurious-correlation.png" class="img-fluid figure-img" alt="This figures illustrates a causal diagram with nodes (a, b, x). It shows a spurious relationship where the red circle (x) is the cause for changes in a and b. Thus, there is a dotted line between a and b as these variables are not directly related to each other." width="250">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-illustration-spurious-correlation-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;10.2: Illustration of a spurious correlation
 </figcaption>
 </figure>
 </div>
-<p>Let’s return to our first research questions. We found that <code>healthy_eating</code> is not related to <code>happiness</code>, but to <code>life_satisfaction</code>. <code>Life_satisfaction</code>, however, is related to <code>happiness</code>.</p>
+<p>Let’s return to our first research question. We found that <code>healthy_eating</code> is not related to <code>happiness</code>, but to <code>life_satisfaction</code>. <code>Life_satisfaction</code>, however, is related to <code>happiness</code>.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Correlation between variables</span></span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>hie_2021 <span class="sc">|&gt;</span></span>
 <span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(healthy_eating, happiness, life_satisfaction) <span class="sc">|&gt;</span></span>
 <span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">correlation</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
 <div class="cell-output cell-output-stdout">
-<pre><code># Correlation Matrix (pearson-method)
-
-Parameter1     |        Parameter2 |    r |        95% CI | t(305) |         p
-------------------------------------------------------------------------------
-healthy_eating |         happiness | 0.07 | [-0.04, 0.18] |   1.24 | 0.215    
-healthy_eating | life_satisfaction | 0.23 | [ 0.12, 0.33] |   4.05 | &lt; .001***
-happiness      | life_satisfaction | 0.67 | [ 0.60, 0.73] |  15.73 | &lt; .001***
-
-p-value adjustment method: Holm (1979)
-Observations: 307</code></pre>
+<pre><code>Parameter1     |        Parameter2 |    r |         p
+-----------------------------------------------------
+healthy_eating |         happiness | 0.07 | 0.215    
+healthy_eating | life_satisfaction | 0.23 | &lt; .001***
+happiness      | life_satisfaction | 0.67 | &lt; .001***</code></pre>
 </div>
 </div>
 <p>However, if we consider the impact of <code>life_satisfaction</code> on the relationship between <code>heathly_eating</code> and <code>happiness</code> when we compute the correlation, we retrieve a very different result.</p>
@@ -794,17 +1237,14 @@ Observations: 307</code></pre>
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>hie_2021 <span class="sc">|&gt;</span></span>
 <span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(healthy_eating, happiness, life_satisfaction) <span class="sc">|&gt;</span></span>
 <span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">correlation</span>(<span class="at">partial =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
 <div class="cell-output cell-output-stdout">
-<pre><code># Correlation Matrix (pearson-method)
-
-Parameter1     |        Parameter2 |     r |        95% CI | t(305) |         p
--------------------------------------------------------------------------------
-healthy_eating |         happiness | -0.11 | [-0.22, 0.00] |  -1.95 | 0.053    
-healthy_eating | life_satisfaction |  0.24 | [ 0.13, 0.34] |   4.33 | &lt; .001***
-happiness      | life_satisfaction |  0.67 | [ 0.61, 0.73] |  15.86 | &lt; .001***
-
-p-value adjustment method: Holm (1979)
-Observations: 307</code></pre>
+<pre><code>Parameter1     |        Parameter2 |     r |         p
+------------------------------------------------------
+healthy_eating |         happiness | -0.11 | 0.053    
+healthy_eating | life_satisfaction |  0.24 | &lt; .001***
+happiness      | life_satisfaction |  0.67 | &lt; .001***</code></pre>
 </div>
 </div>
 <p>Suddenly, <code>eating_healthy</code> and <code>happiness</code> show a slight negative correlation (<span class="math inline">\(r = -0.11\)</span>). In other words, by controlling for the effect of <code>life_satisfaction</code> on both variables, we reversed the relationship from positive to negative. You might wonder whether this implies that eating healthily makes us less happy. If we were to take this result superficiously, it would indicate exactly this. However, as mentioned before, when we look at correlations we have to consider not only <code>r</code> but also the p-value and the sample size. While sample size seems less problematic (<span class="math inline">\(n = 307\)</span>), the p-value is only <span class="math inline">\(p = 0.053\)</span>, which is just shy of the required minimum significance level of <code>0.05</code>. If we strictly applied the rules, this relationship would not be classified as <em>significant</em>. Thus, the relationship would not be strong enough to derive meaningful conclusions. Even if the p-value were slightly lower, the effect size would still be very small. No matter how we crunch the numbers, healthy eating just does not make us happier.</p>
@@ -889,6 +1329,15 @@ Observations: 100</code></pre>
 <p>The results have magically been inverted. Instead of a negative correlation, we now find a strong positive correlation among all groups. This result seems to make much more sense.</p>
 <p>When computing correlations, we need to be aware that subsets of our data might show different directions of correlations. Sometimes insignificant correlations might suddenly become significant. This is what the <em>Simpson’s paradox</em> postulates.</p>
 <p>If your study relies solely on correlations to detect relationships between variables, which it hopefully does not, it is essential to investigate whether the detected (or undetected) correlations exist. Of course, such an investigation can only be based on the data you obtained. The rest remains pure speculation. Nevertheless, correlations are beneficial to review the bilateral relationship of your variables. It is often used as a pre-test for regressions (see <a href="13_regressions.html" class="quarto-xref"><span>Chapter 13</span></a>) and similarly more advanced computations. As a technique to make inferences, correlations are a good starting point but should be complemented by other steps, if possible.</p>
+</section>
+</section>
+<section id="sec-exercises-correlations" class="level2" data-number="10.5">
+<h2 data-number="10.5" class="anchored" data-anchor-id="sec-exercises-correlations"><span class="header-section-number">10.5</span> Exercises</h2>
+<p>It is time to practice the newly acquired skills. As usual, use the code below to start the exercises for this chapter and make sure you have the <code>r4np</code> package installed before you start.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Option 1:</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>learnr<span class="sc">::</span><span class="fu">run_tutorial</span>(<span class="st">"ex_correlations"</span>, <span class="at">package =</span> <span class="st">"r4np"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
@@ -896,7 +1345,6 @@ Observations: 100</code></pre>
 Cohen, Jacob. 1988. <em>Statistical Power Analysis for the Behavioral Sciences New York</em>. <em>NY: Academic Press</em>.
 </div>
 </div>
-</section>
 </section>
 
 </main> <!-- /main -->

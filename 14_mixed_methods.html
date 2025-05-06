@@ -320,6 +320,7 @@ div.csl-indent {
   <li><a href="#stop-words-removing-noise-in-the-data" id="toc-stop-words-removing-noise-in-the-data" class="nav-link" data-scroll-target="#stop-words-removing-noise-in-the-data"><span class="header-section-number">14.2</span> Stop words: Removing noise in the data</a></li>
   <li><a href="#sec-n-grams" id="toc-sec-n-grams" class="nav-link" data-scroll-target="#sec-n-grams"><span class="header-section-number">14.3</span> N-grams: Exploring correlations of words</a></li>
   <li><a href="#exploring-more-mixed-methods-research-approaches-in-r" id="toc-exploring-more-mixed-methods-research-approaches-in-r" class="nav-link" data-scroll-target="#exploring-more-mixed-methods-research-approaches-in-r"><span class="header-section-number">14.4</span> Exploring more mixed-methods research approaches in <em>R</em></a></li>
+  <li><a href="#sec-exercises-mixed-methods" id="toc-sec-exercises-mixed-methods" class="nav-link" data-scroll-target="#sec-exercises-mixed-methods"><span class="header-section-number">14.5</span> Exercises</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/ddauber/r4np-quarto-crc/blob/main/14_mixed_methods.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/ddauber/r4np-quarto-crc/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
@@ -345,9 +346,9 @@ div.csl-indent {
 </header>
 
 
-<p>Conducting mixed-methods research is challenging for everyone. It requires an understanding of different methods and data types and particular knowledge in determining how one can mix different methods to improve the insights compared to a single method approach. This chapter looks at one possibility of conducting mixed-methods research in <em>R</em>. It is likely the most evident use of computational software for qualitative data.</p>
-<p>While I consider myself comfortable in qualitative and quantitative research paradigms, this chapter could be somewhat uncomfortable if you are used to only one or the other approach, i.e.&nbsp;only quantitative or only qualitative research. However, with advancements in big data science, it is impossible to code, for example, two million tweets qualitatively. Thus, the presented methodologies should not be considered in isolation from other forms of analysis. For some, they might serve as a screening tool to sift through large amounts of data and find those nuggets of most significant interest that deserve more in-depth analysis. For others, these tools constitute the primary research design to allow to generalise to a larger population. In short: the purpose of your research will dictate the approach.</p>
-<p>Analysing text quantitatively, though, is not new. The field of Corpus Analysis has been doing this for many years. If you happen to be a Corpus Analyst, then this section might be of particular interest.</p>
+<p>Conducting mixed-methods research is challenging for everyone. It requires an understanding of different methods and data types and particular knowledge in determining how one can mix different methods to improve the insights compared to a single-method approach. This chapter looks at one possibility of conducting mixed-methods research in <em>R</em>. It is likely the most evident use of computational software for qualitative data. However, there are many more options available and worth exploring.</p>
+<p>While I consider myself comfortable in qualitative and quantitative research paradigms, this chapter could be somewhat uncomfortable if you are used to only one or the other approach, i.e.&nbsp;only quantitative or only qualitative research. However, with advancements in big data science, it is impossible to manually code, for example, two million tweets qualitatively. Thus, the presented methodologies should not be considered in isolation from other forms of analysis. For some, they might serve as a screening tool to sift through large amounts of data and find those nuggets of most significant interest that deserve more in-depth analysis. For others, these tools constitute the primary research design to allow to generalise to a larger population. In short: the purpose of your research will dictate the approach.</p>
+<p>Analysing text quantitatively, though, is not new. The field of Corpus Analysis has been doing this for many years. If you happen to be a Corpus Analyst, then you will feel right at home.</p>
 <p>This chapter will cover two analytical approaches for textual data:</p>
 <ul>
 <li><p>Word frequencies, and</p></li>
@@ -359,7 +360,7 @@ div.csl-indent {
 <blockquote class="blockquote">
 <p>We (…) define the tidy text format as being <strong>a table with one-token-per-row.</strong> A token is a meaningful unit of text, such as a word, that we are interested in using for analysis, and tokenization is the process of splitting text into tokens.</p>
 </blockquote>
-<p>In other words, what used to be an ‘observation’ is now called a ‘token’. Therefore, a token is the smallest chosen unit of analysis. The term ‘word token’ can easily be confused with ‘word type’. The first one usually represents the instance of a ‘type’. Thus, the frequency of a word type is determined by the number of its tokens. For example, consider the following sentence, which consists of five tokens, but only four types:</p>
+<p>In other words, what used to be an <em>observation</em> is now called a <em>token</em>. Therefore, a token is the smallest chosen unit of analysis. The term <em>word token</em> can easily be confused with <em>word type</em>. The first one usually represents the instance of a <em>type</em>. Thus, the frequency of a word type is determined by the number of its tokens. For example, consider the following sentence, which consists of five tokens, but only four types:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>(sentence <span class="ot">&lt;-</span> <span class="st">"This car, is my car."</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -422,7 +423,7 @@ div.csl-indent {
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="14_mixed_methods_files/figure-html/visualise-word-freq-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="14_mixed_methods_files/figure-html/visualise-word-freq-1.png" class="img-fluid figure-img" alt="This bar chart represents the frequency of words in a sample dataset. The word 'car' appears most frequently with a count of 2, while 'is', 'my', and 'this' each appear once." width="672"></p>
 </figure>
 </div>
 </div>
@@ -453,7 +454,7 @@ div.csl-indent {
 # ℹ 1,139 more rows</code></pre>
 </div>
 </div>
-<p>It is important to acknowledge that there is no unified standard of what constitutes a stop word. The data frame <code>stop_words</code> covers many words, but in your research context, you might not even want to remove them. For example, if we aim to identify topics in a text, stop words would be equivalent to white noise, i.e.&nbsp;many of them are of no help to identify relevant topics. Instead, stop words would confound our analysis. For obvious reasons, stop words highly depend on the language of your data. Thus, what works for English will not work for German, Russian or Chinese. You will need a separate set of stop words for each language.</p>
+<p>It is important to acknowledge that there is no unified standard of what constitutes a stop word. The data frame <code>stop_words</code> covers many words, but in your research context, you might not even want to remove them. For example, if we aim to identify topics in a text, stop words would be equivalent to white noise, i.e.&nbsp;many of them are of no help to identify relevant topics. Instead, stop words would confound our analysis. For obvious reasons, stop words highly depend on the language of your data. Thus, what works for English will not work for German, Russian, Chinese or any other language. You will need a separate set of stop words for each language.</p>
 <p>The removal of stop words can be achieved with a function we already know: <code>anti-join()</code>. In other words, we want to subtract all words from <code>stop_words</code> from a given text. Let’s begin with the tokenization of our comments.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>comments_token <span class="ot">&lt;-</span></span>
@@ -492,13 +493,13 @@ div.csl-indent {
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="14_mixed_methods_files/figure-html/freq-words-before-stopwords-removal-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="14_mixed_methods_files/figure-html/freq-words-before-stopwords-removal-1.png" class="img-fluid figure-img" alt="A bar chart which shows the frequency of specific words, with 'other words' being the most frequent by a large margin. Following '“'other words', the most common terms are 'i', 'to', 'the', 'group', and 'my', each with significantly lower counts." width="672"></p>
 </figure>
 </div>
 </div>
 </div>
 <p>The result is somewhat disappointing. None of these words carries any particular meaning because they are all stop words, except for <code>group</code>. Thus, we must clean our data before conducting such an analysis.</p>
-<p>I also sneaked in a new function called <code>fct_lump_n()</code> from the <code>forcats</code> package. It creates a new factor level called <code>other words</code> and ‘lumps’ together all the other factor levels. You likely have seen plots before which show a category called ‘Other’. We usually apply this approach if we have many factor levels with very low frequencies. It would not be meaningful to plot 50 words as a barplot which only occurred once in our data. They are less important. Thus, it is sometimes meaningful to pool factor levels together. The function <code>fct_lump_n(word, 5)</code> returns the five most frequently occurring words and pools the other words together into a new category. There are many different ways to ‘lump’ factors. For a detailed explanation and showcase of all available alternatives, have a look at the <a href="https://forcats.tidyverse.org/reference/fct_lump.html" target="blank" title="forcats website">forcats website</a>.</p>
+<p>I also sneaked in a new function called <code>fct_lump_n()</code> from the <code>forcats</code> package. It creates a new factor level called <code>other words</code> and <em>lumps</em> together all the other factor levels. You likely have seen plots before which show a category called <em>Other</em>. We usually apply this approach if we have many factor levels with very low frequencies. It would not be meaningful to plot 50 words as a barplot which only occurred once in our data. They are less important. Thus, it is sometimes meaningful to pool factor levels together. The function <code>fct_lump_n(word, 5)</code> returns the five most frequently occurring words and pools the other words together into a new category. There are many different ways to ‘lump’ factors. For a detailed explanation and showcase of all available alternatives, have a look at the <a href="https://forcats.tidyverse.org/reference/fct_lump.html" target="blank" title="forcats website">forcats website</a>.</p>
 <p>In our next step, we have to remove stop words using the <code>stop_words</code> data frame and apply the function <code>anti_join()</code>.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>comments_no_sw <span class="ot">&lt;-</span> <span class="fu">anti_join</span>(comments_token, stop_words,</span>
@@ -534,7 +535,7 @@ div.csl-indent {
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="14_mixed_methods_files/figure-html/freq-after-stopwords-removal-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="14_mixed_methods_files/figure-html/freq-after-stopwords-removal-1.png" class="img-fluid figure-img" alt="This bar chart displays the frequency of specific words, with 'feel', 'cultural', and 'friends' being the most common. Other frequently used words include 'friendships', 'campus', 'events', and 'projects', indicating common themes likely related to social and academic experiences." width="672"></p>
 </figure>
 </div>
 </div>
@@ -555,7 +556,7 @@ div.csl-indent {
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="14_mixed_methods_files/figure-html/manually-remove-stopwords-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="14_mixed_methods_files/figure-html/manually-remove-stopwords-1.png" class="img-fluid figure-img" alt="This bar plot is the same as the previous one, but with the bar for 'i've' removed." width="672"></p>
 </figure>
 </div>
 </div>
@@ -589,12 +590,12 @@ div.csl-indent {
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="14_mixed_methods_files/figure-html/wordcloud-plain-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="14_mixed_methods_files/figure-html/wordcloud-plain-1.png" class="img-fluid figure-img" alt="A word cloud which highlights prominent words, with ‘feel’, ‘cultural’, ‘friends’, ‘friendships’, and ‘campus’ standing out. Other common terms include ‘events’, ‘projects’, ‘classmates’, and ‘community’, reflecting themes related to social interactions, cultural experiences, and campus life." width="672"></p>
 </figure>
 </div>
 </div>
 </div>
-<p>Our word cloud nicely summarises keywords that were particularly important, assuming we consider frequency of words an indicator of importance. Students seem to talk about their feelings, culture and friends/friendships. While this constitutes a good starting point for further analysis we would require more context about what was said, for example what kind of feelings were expressed. This is something we will explore more shortly. Before we advance to this stage, though, we can investigate which words were mostly associated with each <code>social_inclusion</code> scores, i.e.&nbsp;what words were most frequently used by students who scores a <code>1</code>, <code>2</code>, <code>3</code>, etc. In other words, each <code>social_inclusion</code> will become its own little group/sub-sample that we look at.</p>
+<p>Our word cloud nicely summarises keywords that were particularly important, assuming we consider frequency of words an indicator of importance. Students seem to talk about their feelings, culture and friends/friendships. While this constitutes a good starting point for further analysis we would require more context about what was said, for example what kind of feelings were expressed. This is something we will explore more shortly. Before we advance to this stage, though, we can investigate which words were mostly associated with each <code>social_inclusion</code> score, i.e.&nbsp;what words were most frequently used by students who scored a <code>1</code>, <code>2</code>, <code>3</code>, etc. In other words, each <code>social_inclusion</code> will become its own little group/sub-sample that we look at.</p>
 <p>We can still use <code>count()</code> but we have do approach this slightly differently:</p>
 <ol type="1">
 <li><p>We create the frequencies for each word with <code>count()</code> and include both variables, <code>social_inclusion</code> and <code>word</code>. This way, count will look for all combinations of the social inclusion scores and the word.</p></li>
@@ -629,7 +630,7 @@ div.csl-indent {
 </div>
 </div>
 <p>When you first look at this you might be slightly confused what it actually shows. It is best to think of <code>social_inclusion</code> as a grouping variable and not as a number anymore. For example, in group <code>10</code>, which refers to comments that scored very high on <code>social_inclusion</code>, <code>friendships</code> are mentioned <code>7</code> times, while <code>feel</code> and <code>friends</code> are mentioned <code>5</code> times. Similarly, in group <code>8</code>, <code>friends</code> and <code>friendships</code> are each mentioned <code>14</code> times. The frequency is very much affected by the size of each group, i.e.&nbsp;how many students scored a <code>10</code> or an <code>8</code>. Thus, comparing results across groups based on <code>n</code> is not wise. However, looking at words within each group we can get a sense of what made students score very high or low.</p>
-<p>We can visualise this data which will make it even clearer what the value of this analysis is. However, first we have to do some housekeeping since the meaning of our variables has changed. Our variable <code>social_inclusion</code> should now be a <code>factor</code>. Let’s transform it in the same way as we did at the very beginning of the book - going full circle.</p>
+<p>We can visualise this data and it will make become clearer what the value of this analysis is. However, first we have to do some housekeeping since the meaning of our variables has changed. Our variable <code>social_inclusion</code> should now be a <code>factor</code>. Let’s transform it in the same way as we did at the very beginning of the book - going full circle.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>comments_grouped <span class="ot">&lt;-</span></span>
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>  comments_grouped <span class="sc">|&gt;</span></span>
@@ -656,7 +657,7 @@ $ n                &lt;int&gt; 7, 5, 5, 3, 3, 14, 14, 6, 5, 5, 6, 4, 4, 4, 3, 3,
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="14_mixed_methods_files/figure-html/visualise-social-inclusion-groups-words-n-01-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="14_mixed_methods_files/figure-html/visualise-social-inclusion-groups-words-n-01-1.png" class="img-fluid figure-img" alt="This faceted bar chart displays word frequencies across different groups (1, 3, 5, 6, 7, 8, and 10) along the horizontal axis, labeled by count ‘n’. The words on the vertical axis vary in frequency within each group." width="672"></p>
 </figure>
 </div>
 </div>
@@ -674,7 +675,7 @@ $ n                &lt;int&gt; 7, 5, 5, 3, 3, 14, 14, 6, 5, 5, 6, 4, 4, 4, 3, 3,
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="14_mixed_methods_files/figure-html/visualise-social-inclusion-groups-words-n-02-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="14_mixed_methods_files/figure-html/visualise-social-inclusion-groups-words-n-02-1.png" class="img-fluid figure-img" alt="The same plot as the previous one, but this time thy categories on the y-axis can be read more easily, because each facet has its own y axis and does not share it across all facets as before." width="672"></p>
 </figure>
 </div>
 </div>
@@ -692,7 +693,7 @@ $ n                &lt;int&gt; 7, 5, 5, 3, 3, 14, 14, 6, 5, 5, 6, 4, 4, 4, 3, 3,
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="14_mixed_methods_files/figure-html/visualise-social-inclusion-groups-words-n-03-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="14_mixed_methods_files/figure-html/visualise-social-inclusion-groups-words-n-03-1.png" class="img-fluid figure-img" alt="This is the same bar plot as the previous one. However, some of the plots are now sorted by size of 'n'. This is not consistent, though." width="672"></p>
 </figure>
 </div>
 </div>
@@ -701,7 +702,7 @@ $ n                &lt;int&gt; 7, 5, 5, 3, 3, 14, 14, 6, 5, 5, 6, 4, 4, 4, 3, 3,
 <div class="cell">
 <div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>comments_grouped <span class="sc">|&gt;</span></span>
 <span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Reorder our data for for each group level ion social_inclusion</span></span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Reorder our data for for each group level of social_inclusion</span></span>
 <span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">word =</span> <span class="fu">reorder_within</span>(<span class="at">x =</span> word,</span>
 <span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>                               <span class="at">by=</span> n,</span>
 <span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>                               <span class="at">within =</span> social_inclusion)) <span class="sc">|&gt;</span></span>
@@ -721,7 +722,7 @@ $ n                &lt;int&gt; 7, 5, 5, 3, 3, 14, 14, 6, 5, 5, 6, 4, 4, 4, 3, 3,
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="14_mixed_methods_files/figure-html/visualise-social-inclusion-groups-words-n-04-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="14_mixed_methods_files/figure-html/visualise-social-inclusion-groups-words-n-04-1.png" class="img-fluid figure-img" alt="The final version of the bar plot which shows now words ordered by their frequency for each facet we look at. In addition, each group has its own colour to create a better contrast visually." width="672"></p>
 </figure>
 </div>
 </div>
@@ -786,7 +787,7 @@ $ n                &lt;int&gt; 7, 5, 5, 3, 3, 14, 14, 6, 5, 5, 6, 4, 4, 4, 3, 3,
 # ℹ 2,088 more rows</code></pre>
 </div>
 </div>
-<p>As before, the most frequent bigrams are those that contain stop words. Thus, we need to clean our data and remove them. This time, though, we face the challenge that the variable bigram has two words and not one. Thus, we cannot simply use <code>anti_join()</code> because the dataset <code>stop_words</code> only contains individual words, not pairs. To remove stop words successfully, we have to <code>separate()</code> the variable into two variables so that each word has its own column. The package <code>tidyr</code> makes this is an effortless task.</p>
+<p>As before, the most frequent bigrams are those that contain stop words. Thus, we need to clean our data and remove them. This time, though, we face the challenge that the variable <code>bigram</code> has two words and not one. Thus, we cannot simply use <code>anti_join()</code> because the dataset <code>stop_words</code> only contains individual words, not pairs. To remove stop words successfully, we have to <code>separate()</code> the variable into two variables so that each word has its own column. The package <code>tidyr</code> makes this an effortless task.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>bigram_split <span class="ot">&lt;-</span></span>
 <span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>  comments_bigram <span class="sc">|&gt;</span></span>
@@ -858,7 +859,7 @@ shorter object length</code></pre>
 2 Daniel</code></pre>
 </div>
 </div>
-<p>While this might be a nice little exercise, it is important to understand how <code>%in%</code> can help us remove stop words. Technically, we try to achieve the opposite, i.e.&nbsp;we want to keep the values in <code>word1</code> and <code>word2</code> that are not a word in <code>stop_words</code>. If we use the language of <code>dplyr</code>, we <code>filter()</code> based on whether a word in <code>bigram_split</code> is not <code>%in%</code> the data frame <code>stop_words</code>. Be aware that <code>%in%</code> requires a variable and not an entire data frame to work as we intend.</p>
+<p>While this might be a nice little exercise, it is important to understand how <code>%in%</code> can help us remove stop words. Technically, we try to achieve the opposite, i.e.&nbsp;we want to keep the values in <code>word1</code> and <code>word2</code> that are not a word in <code>stop_words</code>. If we use the language of <code>dplyr</code>, we <code>filter()</code> based on whether a word in <code>bigram_split</code> is not <code>%in%</code> the data frame <code>stop_words</code>. Be aware that <code>%in%</code> requires a variable and not an entire data frame to work as intended.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>bigram_cleaned <span class="ot">&lt;-</span></span>
 <span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>  bigram_split <span class="sc">|&gt;</span></span>
@@ -931,7 +932,7 @@ shorter object length</code></pre>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="14_mixed_methods_files/figure-html/ngrams-network-plot-step-one-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="14_mixed_methods_files/figure-html/ngrams-network-plot-step-one-1.png" class="img-fluid figure-img" alt="This graph visualizes a network structure, showing nodes (points) and edges (lines) connecting them. The dense cluster in the center suggests a high degree of connectivity among nodes, while the arc of nodes around the periphery shows connections that may be less integrated with the core." width="672"></p>
 </figure>
 </div>
 </div>
@@ -951,7 +952,7 @@ shorter object length</code></pre>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="14_mixed_methods_files/figure-html/ngrams-network-plot-step-two-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="14_mixed_methods_files/figure-html/ngrams-network-plot-step-two-1.png" class="img-fluid figure-img" alt="This network graph depicts a set of nodes connected by edges, with multiple smaller clusters scattered around. Unlike the dense, centralized networks, this structure shows more loosely connected and isolated clusters." width="672"></p>
 </figure>
 </div>
 </div>
@@ -970,7 +971,7 @@ shorter object length</code></pre>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="14_mixed_methods_files/figure-html/ngrams-network-plot-step-three-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="14_mixed_methods_files/figure-html/ngrams-network-plot-step-three-1.png" class="img-fluid figure-img" alt="This network graph showcases connections between different words, with edges colored based on the factor ‘n’ levels, representing frequencies of word combinations. The clustering indicates groupings of related words, reflecting how these terms are associated in the dataset. The improved layout makes individual terms more readable, and color-coded edges add visual clarity to distinguish relationships." width="672"></p>
 </figure>
 </div>
 </div>
@@ -991,13 +992,13 @@ shorter object length</code></pre>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="14_mixed_methods_files/figure-html/ngrams-network-plot-step-four-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="14_mixed_methods_files/figure-html/ngrams-network-plot-step-four-1.png" class="img-fluid figure-img" alt="The same plot as above, but with a different algothirm used to draw the layout. Clusters of words are now more distinctly separated from each other." width="672"></p>
 </figure>
 </div>
 </div>
 </div>
-<p>The final plot shows us how themes like <code>events</code>, <code>friendships</code>, and <code>feel</code> (i.e.&nbsp;‘feelings’) connect to other words. They constitute important topics that students talked about when describing their study experiences. While this type of analysis cannot fully replace manual analysis, it does offer unique insights into our data from a macro perspective without spending days analysing these comments.</p>
-<p>Our example is a simple analysis based on a relatively small ‘corpus’, i.e.&nbsp;a small dataset. However, the application of n-grams in larger datasets can reveal topic areas and links between them even more effectively. There are more approaches to exploring topics in large datasets, for example, <a href="https://www.tidytextmining.com/topicmodeling.html" target="blank" title="Topic Modeling">‘topic modelling’</a>, which are far more complex, but offer more sophisticated analytical insights.</p>
+<p>The final plot shows us how themes like <code>events</code>, <code>friendships</code>, and <code>feel</code> (i.e.&nbsp;<em>feelings</em>) connect to other words. They constitute important topics that students talked about when describing their study experiences. While this type of analysis cannot fully replace manual analysis, it does offer unique insights into our data from a macro perspective without spending days analysing these comments.</p>
+<p>Our example is a simple analysis based on a relatively small <em>corpus</em>, i.e.&nbsp;a small dataset. However, the application of n-grams in larger datasets can reveal topic areas and links between them even more effectively. There are more approaches to exploring topics in large datasets, for example, <a href="https://www.tidytextmining.com/topicmodeling.html" target="blank" title="Topic Modeling">‘topic modelling’</a>, which are far more complex, but offer more sophisticated analytical insights.</p>
 </section>
 <section id="exploring-more-mixed-methods-research-approaches-in-r" class="level2" data-number="14.4">
 <h2 data-number="14.4" class="anchored" data-anchor-id="exploring-more-mixed-methods-research-approaches-in-r"><span class="header-section-number">14.4</span> Exploring more mixed-methods research approaches in <em>R</em></h2>
@@ -1014,6 +1015,14 @@ shorter object length</code></pre>
 <li><p><a href="https://smltar.com" target="blank" title="Supervised Machine Learning for Text Analysis in R">Supervised Machine Learning for Text Analysis in R</a>: This book is the ideal follow-up resource if you worked your way through <span class="citation" data-cites="silge2017text">Silge and Robinson (<a href="references.html#ref-silge2017text" role="doc-biblioref">2017</a>)</span>. It introduces the foundations of natural language analysis and covers advanced text analysis methods such as regression, classification, and deep learning.</p></li>
 </ul>
 <p>I hope I managed to showcase the versatility of <em>R</em> to some degree in this chapter. Needless to say, there is also a lot I still have to learn, which makes using <em>R</em> exciting and, more than once, has inspired me to approach my data in unconventional ways.</p>
+</section>
+<section id="sec-exercises-mixed-methods" class="level2" data-number="14.5">
+<h2 data-number="14.5" class="anchored" data-anchor-id="sec-exercises-mixed-methods"><span class="header-section-number">14.5</span> Exercises</h2>
+<p>We almost reached the end of our journey. Let’s review what we have learned about Mixed Methods in <em>R</em>. Copy the code below to get started. The <code>r4np</code> package has to be installed to start the exercises.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Option 1:</span></span>
+<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a>learnr<span class="sc">::</span><span class="fu">run_tutorial</span>(<span class="st">"ex_mixed_methods"</span>, <span class="at">package =</span> <span class="st">"r4np"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
