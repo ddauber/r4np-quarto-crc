@@ -1,7 +1,8 @@
-# R4NP Book to be published by Routledge Chapman & Hall/CRC books
+# R4NP Book as published by Routledge Chapman & Hall/CRC
 
-This is the updated, but still work-in-progress, version of the book **R For Non-Programmers: A Guide for Social Scientists**.
+This is the first edition of **R For Non-Programmers**.
 
-The main difference to the current book will be updated content as well as the conversion from an RMarkdown to a Quarto book.
+🛒 Buy from [Routledge Chapman & Hall/CRC](https://www.routledge.com/R-for-Non-Programmers/Dauber/p/book/9781032780146?srsltid=AfmBOorgU5wK4WuQongYadBjB0V9QzObpDnYj0ZuAUwp17rSovuEJew3)
+🛒 Buy from [Amazon](https://www.amazon.co.uk/R-Non-Programmers-Daniel-Dauber/dp/1032781483)
 
-If you wish to read the current version of the book, you can do so [here](https://bookdown.org/daniel_dauber_io/r4np_book/).
+👨‍💻 Read the book online at [https://r4np.com](https://r4np.com).
