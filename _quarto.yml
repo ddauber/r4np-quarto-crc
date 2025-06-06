@@ -2,7 +2,7 @@ project:
   type: book
 
 book:
-  title: "R for Non-Programmers: A Guide for Social Scientists"
+  title: "R for Non-Programmers"
   output-file: "r4np-crc"
   author: "Daniel Dauber"
   date: "last-modified"
