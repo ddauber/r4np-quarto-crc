@@ -1,5 +1,8 @@
 project:
   type: book
+  
+execute:
+  freeze: auto
 
 book:
   title: "R for Non-Programmers"
@@ -32,6 +35,8 @@ book:
     - 18_epilogue.qmd
     - 99_appendix.qmd
     - references.qmd
+    
+  site-url: https://r4np.com
 
 
 bibliography: references.bib
