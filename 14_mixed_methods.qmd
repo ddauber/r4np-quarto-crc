@@ -595,6 +595,6 @@ We almost reached the end of our journey. Let's review what we have learned abou
 #| label: exercises-mixed-methods
 #| eval: false
 
-# Option 1:
+# Copy and paste this code into the console to start the exercises for Chapter 14
 learnr::run_tutorial("ex_mixed_methods", package = "r4np")
 ```

@@ -213,6 +213,6 @@ With a foundation in power analysis, let's try out the code below to solidify ou
 #| label: exercises-power-analysis
 #| eval: false
 
-# Option 1:
+# Copy and paste this code into the console to start the exercises for Chapter 12
 learnr::run_tutorial("ex_power_analysis", package = "r4np")
 ```

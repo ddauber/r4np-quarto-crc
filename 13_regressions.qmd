@@ -1631,6 +1631,6 @@ After such a long chapter it is time to recap what we learned. Use the code prov
 #| label: exercises-regressions
 #| eval: false
 
-# Option 1:
+# Copy and paste this code into the console to start the exercises for Chapter 13
 learnr::run_tutorial("ex_regressions", package = "r4np")
 ```

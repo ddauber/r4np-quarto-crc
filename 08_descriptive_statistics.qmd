@@ -949,6 +949,6 @@ Let’s apply your understanding of descriptive statistics. Run the code below t
 #| label: exercises-descriptive-statistics
 #| eval: false
 
-# Option 1:
+# Copy and paste this code into the console to start the exercises for Chapter 8
 learnr::run_tutorial("ex_descriptive_statistics", package = "r4np")
 ```

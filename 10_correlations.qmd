@@ -670,9 +670,9 @@ If your study relies solely on correlations to detect relationships between vari
 It is time to practice the newly acquired skills. As usual, use the code below to start the exercises for this chapter and make sure you have the `r4np` package installed before you start.
 
 ```{r}
-#| label: exercises-option-1
+#| label: exercises-correlations
 #| eval: false
 
-# Option 1:
+# Copy and paste this code into the console to start the exercises for Chapter 10
 learnr::run_tutorial("ex_correlations", package = "r4np")
 ```
