@@ -1094,7 +1094,9 @@ relative <-
 absolute_stacked + absolute_grouped + relative + plot_spacer()
 ```
 
-A more elegant and compact way of visualising frequencies across two or more categories are *mosaic plots*. These visualise relative frequencies for both variables in one plot. For example, consider the following mosaic plot created with the package `ggmosaic` and the function `geom_mosaic()`.
+A more elegant and compact way of visualising frequencies across two or more categories are *mosaic plots*. These visualise relative frequencies for both variables in one plot. For example, consider the following mosaic plot created with the package `ggmosaic2`[^11_group_comparison-3] and the function `geom_mosaic()`.
+
+[^11_group_comparison-3]: `ggmosaic2` is the continuation of the `ggmosaic` package, which is no longer available on CRAN. You can install it with `install.packages("ggmosaic2")`.
 
 ```{r}
 #| label: fig-mosaic-plot
@@ -1104,7 +1106,7 @@ A more elegant and compact way of visualising frequencies across two or more cat
 #| fig-cap: "A mosaic plot which visualises the relationship of two categorical variables."
 #| fig-alt: "This mosaic plot displays the distribution of satisfaction levels ('satisfied' and 'unsatisfied') across gender categories (female' and 'male'). The area of each rectangle is proportional to the count within each satisfaction and gender combination, with red representing females and teal representing males."
 
-library(ggmosaic)
+library(ggmosaic2)
 wvs_nona |>
   ggplot() +
   geom_mosaic(aes(x = product(satisfaction_bin, gender),
